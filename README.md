@@ -2,14 +2,14 @@
 <h1 align="center">PI - Ped1/2</h1>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./PED12/src/Imagens/icon-280x200.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/icones/icon-280x200.png" />
 </h1>
 
 Sobre
 =========
 <p align="center">O controle de gastos é uma atividade importante para o controle financeiro de uma pessoa, família ou empresa, sobretudo para ajudar na educação financeira. Além de proporcionar uma abstração para o usuário em termos financeiros, tem também a tarefa de facilitar o que para muitos é tedioso e complicado, contrinuindo para a facilitação do controle ou gerenciamento de gastos dos atores. Tendo em mãos todas as informações dos gastos, bem como, entradas, saídas, parcelas, etc. Tornar-se-á muito fácil para os atores, encontrar as principais despesas, e assim equilibrar melhor suas finanças.</p>
 
-<p align="center">Com esse pensamento, foi que nossa equipe desenvolveu essa aplicação de gerenciamento e controle de finanças. A equipe formada por: Alan Lopes, Davi Martins, Dirlia Vieira e Marlon Duarte. Desenvolve essa aplicação em Java como uso de SQL para banco de dados. Esse projeto faz parte da Disciplina de Projeto Integrador (I e II) do curso de Ciência da Computação ministrada pelo professor Me. Italo Ribeiro com orientações dos demais professores de áreas diretamente correlatas ao trabalho desenvolvido.</p>
+<p align="center">Com esse pensamento, foi que nossa equipe desenvolveu essa aplicação de gerenciamento e controle de finanças. A equipe formada por: Alan Lopes, Davi Martins, Dirlia Vieira e Marlon Duarte. Desenvolve essa aplicação em node e com o Sistema de gerenciamento de banco de dados objeto-relacional PostgreSQL. Esse projeto faz parte da Disciplina de Projeto Integrador (I, II e III) do curso de Ciência da Computação ministrada pelo professor Me. Italo Ribeiro(PI e PII) e pelo professor Me. Wellington Franco (PI III) com orientações dos demais professores de áreas diretamente correlatas ao trabalho desenvolvido.</p>
 
 <p align="center">ESTE TRABALHO AINDA ESTÁ EM DESENVOLVIMENTO E PODE CONTER INCONSISTÊNCIA NO FLUXO DE USO ! ! !</p>
 
@@ -73,25 +73,25 @@ Diagramas
 <h2 align="center">Diagramas ER do banco de dados.</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ER_Diagrams_DB/ER_all.gif" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/ER_all.gif" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Controllers</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Controllers.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/ClassDiagram_Controllers.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote DAO</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_DAO.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/ClassDiagram_DAO.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Model</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Model.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/ClassDiagram_Model.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Utilities</h2><br></br>
@@ -115,19 +115,19 @@ Diagramas
 <h2 align="center">Diagrama de Caso de Uso</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/UML_UseCase_ped12.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/UML_UseCase_ped12.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Estado (StateMachine) para situação de login</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/StateMachine_LOGIN.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/StateMachine_LOGIN.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Sequência para caso de Login e consulta de Despesas</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/SequenceDiagram_LOGIN.png" />
+  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./public/images/diagramas/SequenceDiagram_LOGIN.png" />
 </h1><br></br>
 
 Features
@@ -136,14 +136,14 @@ Features
 
 - [x] Bando de Dados
 - [x] Tela de Login
-- [x] Tela de Cadastro
-- [x] Tela de Cartao de Credito
-- [x] Tela de Cartao de Debito
-- [x] Tela de Despesas
-- [x] Tela de Receitas
+- [ ] Tela de Cadastro
+- [ ] Tela de Cartao de Credito
+- [ ] Tela de Cartao de Debito
+- [ ] Tela de Despesas
+- [ ] Tela de Receitas
 - [ ] Tabela de Consulta
-- [x] Categorias
-- [x] Cadastro de usuário
-- [x] Cadastro de cliente
+- [ ] Categorias
+- [ ] Cadastro de usuário
+- [ ] Cadastro de cliente
 - [ ] Cadastro de produtos
-- [ ] ...
+- [ ] Gráficos
