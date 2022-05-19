@@ -1,4 +1,4 @@
-import { postgresql } from "pg";
+import postgresql  from "pg";
 
 class Database{
 
