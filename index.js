@@ -45,10 +45,11 @@ server.get("/user_cadastro", async (req, res) => {
 server.post("/user_cadastro", async (req, res) => {
 	//verificar se o email já foi cadastrado
 	var email = req.body.logemail;
-	
-	//var userData = {email:req.body.logemail, password:  req.body.logpass}
+	req.body.logpass = btoa(req.body.logpass);
 
 	var insertUser = await userRepository.insertUser(req.body);
+
+	res.redirect("/");
 
 	
 });
