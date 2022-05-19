@@ -3,9 +3,10 @@ import { database } from "./db.js";
 
 class UserRepository {
 
-  async selectUser() {
+  async selectUser(email, password) {
       const bd = await database.connect();
-      const res = await bd.query('select * from "user";');
+      //console.log("select * from" + ' "user" '+ " WHERE login='" + email +"' AND senha='" + password + "';");
+      const res = await bd.query("select * from" + ' "user" '+ " WHERE login='" + email +"' AND senha='" + password + "';");
       return res.rows;
   }
 

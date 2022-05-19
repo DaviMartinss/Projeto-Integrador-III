@@ -12,42 +12,27 @@ const __dirname = path.dirname(__filename);
 
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
 server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso de arquivos estaticos
-server.set("views", path.join(__dirname + "/src/views")); //define a pasta de views
+server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
 
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
 
-	res.render('login', {test});
+	res.render('login', {test, erroLogin: false});
 });
 
 server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
+	var userData = {email:req.body.logemail, password:  req.body.logpass}
 
-	//var userData = {email:req.body.logmail, password: } req.body
+	var getUser = await userRepository.selectUser(userData.email, userData.password);
 
-
-
-	var getUser = await userRepository.selectUser();
-
-	console.log(getUser);
-
-	/*getUser.forEach((user) => {
-		//Verifica os dados no banco relacionados ao ID -> email
-		if(user == userData){
-			console.log("PODE LOGAR");
-		}
-	});
-
-
-	/*if (user) {
-		res.redirect("/loja");
-		// let veiculos = await veiculosRepository.getVeiculos();
-		// res.render("loja", { veiculos });
+	if (getUser[0] != undefined) {
+		res.render("login", { erroLogin: false });
 	} else {
-		res.render("singin", { erroLogin: true });
-	}*/
+		res.render("login", { erroLogin: true });
+	}
 });
 
 server.listen(3000, () => {
