@@ -73,69 +73,69 @@ Diagramas
 <h2 align="center">Diagramas ER do banco de dados.</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ER_Diagrams_DB/ER_all.gif" />
+  <img src="./Diagram/ER_Diagrams_DB/ER_all.gif" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Controllers</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Controllers.png" />
+  <img src="./Diagram/ClassDiagram_Controllers.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote DAO</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_DAO.png" />
+  <img src="./Diagram/ClassDiagram_DAO.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Model</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Model.png" />
+  <img src="./Diagram/ClassDiagram_Model.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Utilities</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Utilities.png" />
+  <img src="./Diagram/ClassDiagram_Utilities.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Ordenação</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Ordenacao.png" />
+  <img src="./Diagram/ClassDiagram_Ordenacao.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Classe do pacote Views</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/ClassDiagram_Views.png" />
+  <img src="./Diagram/ClassDiagram_Views.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Caso de Uso</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/UML_UseCase_ped12.png" />
+  <img src="./Diagram/UML_UseCase_ped12.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Estado (StateMachine) para situação de login e cadastro de despesa</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/StateMachine_LOGIN.png" />
+  <img src="./Diagram/StateMachine_LOGIN.png" />
 </h1><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/cadastroDespesaState.png" />
+  <img src="./Diagram/cadastroDespesaState.png" />
 </h1><br></br>
 
 <h2 align="center">Diagrama de Sequência para caso de Login, cadastro de despesa e consulta de Despesas</h2><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/SequenceDiagram_LOGIN.png" />
+  <img src="./Diagram/SequenceDiagram_LOGIN.png" />
 </h1><br></br>
 
 <h1 align="center">
-  <img alt="NextLevelWeek" title="#NextLevelWeek" src="./Diagram/cadastroDespesaSequence.png" />
+  <img src="./Diagram/cadastroDespesaSequence.png" />
 </h1><br></br>
 
 Features
