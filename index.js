@@ -25,9 +25,13 @@ server.get('/', (req, res) => {
 server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
 
-	var userData = req.body
+	//var userData = {email:req.body.logmail, password: } req.body
+
+
 
 	var getUser = await userRepository.selectUser();
+
+	console.log(getUser);
 
 	/*getUser.forEach((user) => {
 		//Verifica os dados no banco relacionados ao ID -> email

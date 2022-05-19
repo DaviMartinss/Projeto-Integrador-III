@@ -1,4 +1,8 @@
-import postgresql  from "pg";
+import pkg from 'pg';
+const { Pool } = pkg;
+
+
+//const { Client } = require('pg');
 
 class Database{
 
@@ -6,11 +10,11 @@ class Database{
       if (global.connection)
           return global.connection.connect();
 
-      const pool = new postgresql({
-          user: 'postgres',
+      const pool = new Pool({
+          user: 'seu usuario',
           host: '',
           database: 'bd_pedemeia',
-          password: 'senha do postgresql',
+          password: 'sua senha',
           port: 5432,
       });
 
