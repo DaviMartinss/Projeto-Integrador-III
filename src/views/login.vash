@@ -66,6 +66,8 @@
 			      	</div>
 		      	</div>
 	      	</div>
+
+          <p>@model.test</p>
 	    </div>
 	</div>
 <!-- partial -->
