@@ -35,6 +35,24 @@ server.post("/", async (req, res) => {
 	}
 });
 
+server.get("/user_cadastro", async (req, res) => {
+	
+	var email = req.body.logemail;
+	var insertUser = await userRepository.insertUser(req.body);
+	
+});
+
+server.post("/user_cadastro", async (req, res) => {
+	//verificar se o email já foi cadastrado
+	var email = req.body.logemail;
+	
+	//var userData = {email:req.body.logemail, password:  req.body.logpass}
+
+	var insertUser = await userRepository.insertUser(req.body);
+
+	
+});
+
 server.listen(3000, () => {
 	console.log(`Server is running on port 3000`);
 });
