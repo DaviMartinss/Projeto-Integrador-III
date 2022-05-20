@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # Conexão com POSTGREESQL
-repository/db.js*
+#repository/db.js*
