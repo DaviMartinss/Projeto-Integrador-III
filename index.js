@@ -9,6 +9,7 @@ const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+var emailUser = "";
 
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
 server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso de arquivos estaticos
@@ -25,6 +26,9 @@ server.get('/', (req, res) => {
 server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
 	var userData = {email:req.body.logemail, password:  req.body.logpass}
+
+
+	emailUser = userData.email; //atribui para a variavél global emailUser o email do usuário
 
 	var getUser = await userRepository.selectUser(userData.email, userData.password);
 
@@ -43,7 +47,7 @@ server.get("/user_cadastro", async (req, res) => {
 });
 
 server.post("/user_cadastro", async (req, res) => {
-	//verificar se o email já foi cadastrado
+	//verificar se o email já foi cadastrado (Falta fazer)
 	var email = req.body.logemail;
 	req.body.logpass = btoa(req.body.logpass);
 
@@ -51,7 +55,26 @@ server.post("/user_cadastro", async (req, res) => {
 
 	res.redirect("/");
 
-	
+});
+
+server.post("/user_update", async (req, res) => {
+
+	//atualizar dados do usuário (passo o email porque ele deve ser único)
+	await userRepository.updateUser(req.body, emailUser);
+
+	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
+
+});
+
+server.post("/user_delete", async (req, res) => {
+
+	//deletamos o usuário pelo o id
+	var user = await userRepository.getUserByEmail(emailUser);
+
+	await userRepository.updateUser(user.id_user);
+
+	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
+
 });
 
 server.listen(3000, () => {
