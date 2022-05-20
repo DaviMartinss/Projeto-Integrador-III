@@ -11,10 +11,10 @@ class Database{
           return global.connection.connect();
 
       const pool = new Pool({
-          user: 'alan',
+          user: 'seu user',
           host: '',
           database: 'bd_pedemeia',
-          password: 'alan123',
+          password: 'sua senha',
           port: 5432,
       });
 
