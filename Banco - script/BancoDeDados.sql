@@ -102,3 +102,12 @@ CREATE TABLE totais (
 	--caso seja alterado/deletado o valor do id_despesa, também será alterado/deletado a tupla de totais que
   	-- possui o id_despesa
 );
+
+-------------Alterando tabela user--------------
+ALTER TABLE "user" RENAME  login TO Email
+
+ALTER TABLE "user" RENAME  senha TO "password"
+
+ALTER TABLE "user" RENAME  nome TO nickname
+
+-------------FIM DE MODIFICAÇÕES--------------
