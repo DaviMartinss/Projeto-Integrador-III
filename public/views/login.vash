@@ -5,29 +5,14 @@
   <title>CodePen - Log In / Sign Up - pure css - #12</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
 <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <link rel="stylesheet" href="../styles/login.css">
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
-<a href="https://front.codes/" class="logo" target="_blank">
-		<img src="https://assets.codepen.io/1462889/fcy.png" alt="">
-	</a>
-
-  @{
-
-    if(model.erroLogin == false){
-      <script type="text/javascript">
-          alert("LOGIN DEU CERTO")
-      </script>
-    }else{
-      <script type="text/javascript">
-          alert("LOGIN DEU ERRADO")
-      </script>
-    }
-  }
-
-
 	<div class="section">
 		<div class="container">
 			<div class="row full-height justify-content-center">
@@ -63,8 +48,10 @@
 											<h4 class="mb-4 pb-3">Sign Up</h4>
 
 										<form action="/user_cadastro" method="post">
-
-											<div class="form-group">
+                      <div class="form-group">
+											     <img src="/images/avatar/avatar001.png" class="">
+											</div>
+											<div class="form-group mt-2">
 												<input type="text" name="logname" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
 												<i class="input-icon uil uil-user"></i>
 											</div>
@@ -75,6 +62,10 @@
 											<div class="form-group mt-2">
 												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
 												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+                      <div class="form-group mt-2">
+												<input type="file" name="image" class="form-style" id="logpass" autocomplete="off">
+
 											</div>
 											<input class="btn mt-4" type="submit">
 				      					</div>
@@ -92,6 +83,28 @@
 	</div>
 <!-- partial -->
   <script  src="../scripts/login.js"></script>
+  @{
+      if(model.erroLogin)
+      {
+        <script>
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
 
+          Toast.fire({
+            icon: "error",
+            title: "Não foi possível efetuar o login!",
+          });
+        </script>
+      }
+  }
 </body>
 </html>

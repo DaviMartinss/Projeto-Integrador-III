@@ -1,10 +1,11 @@
 import { database } from "./db.js";
 class UserRepository {
 
-  async selectUser(email, password) {
+  async selectUser(user) {
       const bd = await database.connect();
-      //console.log("select * from" + ' "user" '+ " WHERE login='" + email +"' AND senha='" + password + "';");
-      const res = await bd.query("select * from" + ' "user" '+ " WHERE Email='" + email +"' AND password='" + password + "';");
+      const sql = 'select * from "user" WHERE Email=$1 AND password=$2;';
+      const values = [user.email, user.password]
+      const res = await bd.query(sql,values);
       return res.rows;
   }
 
@@ -33,7 +34,7 @@ class UserRepository {
     const db = await database.connect();
     const sql = 'UPDATE "user" SET nickname=$1, Email=$2, password=$3 WHERE Email=$4';
     const values = [user.logname, user.logemail, user.logpass, email];
-    await db.query(sql, values); 
+    await db.query(sql, values);
   }
 
 //deleta usuário
@@ -41,7 +42,7 @@ class UserRepository {
     const db = await database.connect();
     const sql = 'DELETE FROM "user" WHERE id_user=$1';
     const values = [user_id];
-    await db.query(sql, values); 
+    await db.query(sql, values);
   }
 
 }

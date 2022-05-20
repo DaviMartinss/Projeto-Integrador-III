@@ -25,25 +25,24 @@ server.get('/', (req, res) => {
 
 server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
-	var userData = {email:req.body.logemail, password:  req.body.logpass}
-
+	var userData = {email:req.body.logemail, password: btoa(req.body.logpass)}
 
 	emailUser = userData.email; //atribui para a variavél global emailUser o email do usuário
 
-	var getUser = await userRepository.selectUser(userData.email, userData.password);
+	var getUser = await userRepository.selectUser(userData);
 
 	if (getUser[0] != undefined) {
-		res.render("login", { erroLogin: false });
+		res.render("index", { erroLogin: false });
 	} else {
 		res.render("login", { erroLogin: true });
 	}
 });
 
 server.get("/user_cadastro", async (req, res) => {
-	
+
 	var email = req.body.logemail;
 	var insertUser = await userRepository.insertUser(req.body);
-	
+
 });
 
 server.post("/user_cadastro", async (req, res) => {
