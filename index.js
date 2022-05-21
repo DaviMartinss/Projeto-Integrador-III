@@ -43,13 +43,7 @@ server.post("/", async (req, res) => {
 	}
 });
 
-server.get("/user_cadastro", async (req, res) => {
-
-	var email = req.body.logemail;
-	var insertUser = await userRepository.insertUser(req.body);
-
-});
-
+//cadastra usuário
 server.post("/user_cadastro", async (req, res) => {
 	//verificar se o email já foi cadastrado (Falta fazer)
 	var email = req.body.logemail;
@@ -59,7 +53,8 @@ server.post("/user_cadastro", async (req, res) => {
 
 });
 
-server.post("/user_update", async (req, res) => {
+//atualiza usuário
+server.put("/user_update", async (req, res) => {
 
 	//atualizar dados do usuário (passo o email porque ele deve ser único)
 	await userRepository.updateUser(req.body, emailUser);
@@ -67,23 +62,15 @@ server.post("/user_update", async (req, res) => {
 
 });
 
-server.post("/user_delete", async (req, res) => {
+//deleta usuário
+server.delete("/user_delete", async (req, res) => {
 
 	//deletamos o usuário pelo o id
 	var user = await userRepository.getUserByEmail(emailUser);
-	await userRepository.updateUser(user.id_user);
+	await userRepository.deleteUser(user.id_user);
 	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
 
 });
-
-/*server.post("/user_delete", async (req, res) => {
-
-	//deletamos o usuário pelo o id
-	var user = await userRepository.getUserByEmail(emailUser);
-	await userRepository.updateUser(user.id_user);
-	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
-
-});*/
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
