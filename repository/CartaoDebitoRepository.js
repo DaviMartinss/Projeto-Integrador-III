@@ -2,6 +2,31 @@ import { database } from "./db.js";
 
 class CartaoDebitoRepository{
 
+//pega uma lista de todos os cartões no Banco
+  async getCartaoList(userId) {
+
+      try
+      {
+        const db = await database.connect();
+
+        if(db != undefined )
+        {
+          const sql = 'select * from "cartao_debito" WHERE id_user=$1;';
+          const values = [userId];
+          const res = await db.query(sql,values);
+          return res.rows;
+        }
+        else
+        {
+          console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+          return undefined;
+        }
+      } catch (e) {
+        console.log(e);
+        return undefined;
+      }
+  }
+
 //cadastra um cartão de débito
   async insertCartao(cartao){
 

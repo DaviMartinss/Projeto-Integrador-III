@@ -97,6 +97,35 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "GetCartaoCreditoList",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cartaoList?Type=\"CC\"&UserId=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartaoList"
+									],
+									"query": [
+										{
+											"key": "Type",
+											"value": "\"CC\""
+										},
+										{
+											"key": "UserId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -182,6 +211,35 @@
 									"port": "3000",
 									"path": [
 										"cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GetCartaoDebitoList",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/cartaoList?Type=\"CD\"&UserId=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartaoList"
+									],
+									"query": [
+										{
+											"key": "Type",
+											"value": "\"CD\""
+										},
+										{
+											"key": "UserId",
+											"value": "1"
+										}
 									]
 								}
 							},

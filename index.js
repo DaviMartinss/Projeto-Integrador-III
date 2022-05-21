@@ -87,6 +87,37 @@ server.post("/user_delete", async (req, res) => {
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
+server.get("/cartaoList", async (req, res) => {
+
+	//Pega o tipo de cartões que será trazido como LISTA
+	let type = req.query.Type
+	let userId = req.query.UserId
+
+	//Tipo Lista para pegar todos os Cartões do Banco
+	var selectCartao;
+
+	if(type == "CC")
+	{
+		console.log("CC");
+		selectCartao = await cartaoCreditoRepository.getCartaoList(userId);
+	}
+	else
+	{
+		selectCartao = await cartaoDebitoRepository.getCartaoList(userId);
+	}
+
+	if(selectCartao != undefined)
+	{
+		console.log(selectCartao)
+	}
+	else
+	{
+		//redenrizar TELA DE CARTAO COM ALERTA DE ERRO
+		console.log("ERRO NO SELECT DE CARTOES");
+	}
+});
+
+
 server.post("/cartao", async (req, res) => {
 
 	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
