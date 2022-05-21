@@ -10,6 +10,7 @@ const __dirname = path.dirname(__filename);
 
 var emailUser = "";
 
+server.use(express.json())
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
 server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso de arquivos estaticos
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
@@ -69,7 +70,63 @@ server.post("/user_delete", async (req, res) => {
 
 });
 
-// ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
+/*server.post("/user_delete", async (req, res) => {
+
+	//deletamos o usuário pelo o id
+	var user = await userRepository.getUserByEmail(emailUser);
+	await userRepository.updateUser(user.id_user);
+	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
+
+});*/
+
+// ========================== CRUD DE CARTÕES =====================================================================
+
+server.post("/cartao_insert", (req, res) => {
+
+	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
+		 type = 0 , cartaoCredito
+		 type = 1 , cartaoDebito
+	*/
+
+	var cartao = req.body
+
+	console.log(cartao);
+
+	/*if(cartao.Type == 0)
+	{
+
+		console.log("CARTAO CREDITO");
+
+	}else
+	{
+		console.log("CARTAO DEBITO");
+	}*/
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 server.listen(3000, () => {
 	console.log(`Server is running on port 3000`);
