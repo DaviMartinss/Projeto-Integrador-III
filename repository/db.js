@@ -10,25 +10,37 @@ class Database{
       if (global.connection)
           return global.connection.connect();
 
+      let userName = 'USER';
+      let password = 'SENHA';
+
       const pool = new Pool({
-          user: 'alan',
+          user: userName,
           host: '',
           database: 'bd_pedemeia',
-          password: 'alan123',
+          password: password,
           port: 5432,
       });
 
-      //apenas testando a conexão
-      const user = await pool.connect();
-      console.log("Criou pool de conexões no PostgreSQL!");
+      if(userName != 'USER' && password != 'SENHA')
+      {
+        //apenas testando a conexão
+        const user = await pool.connect();
+        console.log("Criou pool de conexões no PostgreSQL!");
 
-      const res = await user.query('SELECT NOW()');
-      console.log(res.rows[0]);
-      user.release();
+        const res = await user.query('SELECT NOW()');
+        console.log(res.rows[0]);
+        user.release();
 
-      //guardando para usar sempre o mesmo
-      global.connection = pool;
-      return pool.connect();
+        //guardando para usar sempre o mesmo
+        global.connection = pool;
+        return pool.connect();
+      }
+      else
+      {
+          console.log("INFORME SUAS CREDENCIAIS NO BANCO");
+          return null;
+      }
+
   }
 }
 
