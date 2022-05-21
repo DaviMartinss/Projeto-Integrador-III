@@ -9,7 +9,7 @@ import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
-import { sendMail } from "./microservice/Email/sendEmail.js";
+import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -54,7 +54,7 @@ server.post("/user_cadastro", async (req, res) => {
 
 		req.body.logpass = md5(req.body.logpass); //criptografia md5
 		await userRepository.insertUser(req.body);
-		sendMail.run("seja bem-vindo", req.body.logemail);
+		sendMailBemVindo.run(req.body.logname, req.body.logemail);
 	}else{
 		console.log("Erro");
 	}

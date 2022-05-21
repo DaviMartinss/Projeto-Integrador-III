@@ -24,18 +24,32 @@ const transporter = nodemailer.createTransport({
 
 // //console.log(MSG_HTML);
 
-class SendMail {
-    async run(msg, email){ //nao tinha msg e email
+class SendMailBemVindo {
+    async run(user, email){
 
         //console.log("Em msg", msg, "em email", email);
         const mailSent = await transporter.sendMail({
-            text: "Olá,\nParece que você esqueceu a sua senha ou tem alguém tentando usar seu e-mail para cadastrar na LocaCar. Caso tenha sido você, segue a sua senha: \n\n\t\tSENHA: " + msg +"\n\nDo contrário, recomendamos urgentemente que altere sua senha para uma nova e mais segura, de preferência, alguma que possua maiúsculas, minúsculas, dígitos e caracteres especiais como: '#', '$', '%' por exemplo.",
-            subject: "ATENÇAO - Recuperação de Senha",
-            from: "LocaCar <testeufcweb@gmail.com>",
-            to: [email, email],
+            text: "Olá, " +user+". Seja bem-vindo ao nosso Sistema de controle financeiro.",
+            subject: "Seja Bem-Vindo ao pedemeia",
+            from: "Pedemeia <testeufcweb@gmail.com>",
+            to: [email],
+        });
+        console.log(mailSent);
+    }
+}
+
+class SendMail {
+    async run(msg, email){ 
+
+        const mailSent = await transporter.sendMail({
+            text: "Olá,\nParece que você esqueceu a sua senha do pedemeia. Caso tenha sido você, segue a sua senha: \n\n\t\tSENHA: " + msg +"\n\nDo contrário, recomendamos urgentemente que altere sua senha para uma nova e mais segura, de preferência, alguma que possua maiúsculas, minúsculas, dígitos e caracteres especiais como: '#', '$', '%' por exemplo.",
+            subject: "ATENÇÃO - Recuperação de Senha",
+            from: "Pedemeia <testeufcweb@gmail.com>",
+            to: [email],
         });
         console.log(mailSent);
     }
 }
 
 export const sendMail = new SendMail();
+export const sendMailBemVindo = new SendMailBemVindo();
