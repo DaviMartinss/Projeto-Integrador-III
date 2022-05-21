@@ -1,0 +1,38 @@
+{
+	"info": {
+		"_postman_id": "edd25f7a-9c21-4340-8790-199a14a3f65a",
+		"name": "pedemeia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cartão",
+			"item": [
+				{
+					"name": "Cartão de Crédito",
+					"item": []
+				},
+				{
+					"name": "Cartão de Débito",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "Despesa",
+			"item": []
+		},
+		{
+			"name": "Receita",
+			"item": []
+		},
+		{
+			"name": "Usuário",
+			"item": []
+		},
+		{
+			"name": "Categoria",
+			"item": []
+		}
+	]
+}
