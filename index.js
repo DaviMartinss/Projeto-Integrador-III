@@ -2,13 +2,14 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import md5 from "md5";
 
 //Repository IMPORTS
 import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
-
+import { sendMail } from "./microservice/Email/sendEmail.js";
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -45,12 +46,20 @@ server.post("/", async (req, res) => {
 
 //cadastra usuário
 server.post("/user_cadastro", async (req, res) => {
-	//verificar se o email já foi cadastrado (Falta fazer)
-	var email = req.body.logemail;
-	req.body.logpass = btoa(req.body.logpass);
-	var insertUser = await userRepository.insertUser(req.body);
-	res.redirect("/");
 
+	//verificar se o email já foi cadastrado
+	var userExiste = await userRepository.getUserByEmail(req.body.logemail);
+
+	if(userExiste == ''){
+
+		req.body.logpass = md5(req.body.logpass); //criptografia md5
+		await userRepository.insertUser(req.body);
+		sendMail.run("seja bem-vindo", req.body.logemail);
+	}else{
+		console.log("Erro");
+	}
+
+	res.redirect("/");
 });
 
 //atualiza usuário

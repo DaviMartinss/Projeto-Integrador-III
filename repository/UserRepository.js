@@ -12,12 +12,8 @@ class UserRepository {
   //pega o usuário pelo o email
   async getUserByEmail(email) {
     const bd = await database.connect();
-    const sql = await bd.query('SELECT * FROM "user" WHERE email=$1');
-    const values = [email];
-    await db.query(sql, values);
-
-    console.log(res.rows);
-
+    const sql = 'select * from "user" WHERE email=$1;';
+    const res = await bd.query(sql,[email]);
     return res.rows;
 }
 
