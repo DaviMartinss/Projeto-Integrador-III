@@ -10,11 +10,72 @@
 			"item": [
 				{
 					"name": "Cartão de Crédito",
-					"item": []
+					"item": [
+						{
+							"name": "GenerateCartãoCrédito",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\": 1,\n    \"NumCartao\": 5295408722831672,\n    \"DataFatura\": \"2022-01-01\",\n    \"Limite\": 2200.50,\n    \"Anuidade\": 2000.40,\n    \"Fatura\": 2000.33,\n    \"JurosAdicional\":2.50,\n    \"Type\": \"CC\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao_insert",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao_insert"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Cartão de Débito",
-					"item": []
+					"item": [
+						{
+							"name": "GenerateCartãoDébito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\": 1,\n    \"NumCartao\": 5295408722831690,\n    \"Saldo\": 2000.40,\n    \"CartaoPrincipal\": true,\n    \"Type\": \"CD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao_insert",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao_insert"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				}
 			]
 		},

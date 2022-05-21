@@ -1,8 +1,14 @@
-import { database } from "./repository/db.js";
+//Aplication IMPORTS
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+
+//Repository IMPORTS
+import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
+import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
+import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
+
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -81,28 +87,39 @@ server.post("/user_delete", async (req, res) => {
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
-server.post("/cartao_insert", (req, res) => {
+server.post("/cartao_insert", async (req, res) => {
 
 	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-		 type = 0 , cartaoCredito
-		 type = 1 , cartaoDebito
+		 type = "CC" , cartaoCredito
+		 type = "CD" , cartaoDebito
 	*/
 
-	var cartao = req.body
+	//Tipo booleano para saber se o insert teve sucesso
+	var insertCartao = false;
 
-	console.log(cartao);
+	//Recebe os dados do cartão de crédito
+	var cartaoData = req.body
 
-	/*if(cartao.Type == 0)
+	if(cartaoData.Type == "CC")
 	{
-
-		console.log("CARTAO CREDITO");
+		//INSERT Cartão de Crédito
+		insertCartao = await cartaoCreditoRepository.insertCartao(cartaoData);
 
 	}else
 	{
-		console.log("CARTAO DEBITO");
-	}*/
+		//INSERT Cartão de Débito
+		insertCartao = await cartaoDebitoRepository.insertCartao(cartaoData);
+	}
 
-
+	if(insertCartao)
+	{
+		//redenrizar TELA DE CARTAO DE CREDITO
+		console.log("CADASTROU");
+	}else
+	{
+		//redenrizar TELA DE CADASTRO DE CARTAO COM ALERTA DE ERRO
+		console.log("ERRO NO CADASTRO");
+	}
 });
 
 
