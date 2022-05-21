@@ -87,7 +87,7 @@ server.post("/user_delete", async (req, res) => {
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
-server.post("/cartao_insert", async (req, res) => {
+server.post("/cartao", async (req, res) => {
 
 	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
 		 type = "CC" , cartaoCredito
@@ -123,7 +123,7 @@ server.post("/cartao_insert", async (req, res) => {
 });
 
 
-server.post("/cartao_update", async (req, res) => {
+server.put("/cartao", async (req, res) => {
 
 	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
 		 type = "CC" , cartaoCredito
@@ -153,8 +153,43 @@ server.post("/cartao_update", async (req, res) => {
 		console.log("ATUALIZOU");
 	}else
 	{
-		//redenrizar TELA DE CADASTRO DE CARTAO COM ALERTA DE ERRO
+		//redenrizar TELA DE UPDATE DE CARTAO COM ALERTA DE ERRO
 		console.log("ERRO NA ATUALIZAÇÃO");
+	}
+});
+
+server.delete("/cartao", async (req, res) => {
+
+	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
+		 type = "CC" , cartaoCredito
+		 type = "CD" , cartaoDebito
+	*/
+
+	//Tipo booleano para saber se o DELETE teve sucesso
+	var deleteCartao = false;
+
+	//Recebe os dados do cartão de crédito
+	var cartaoData = req.body
+
+	if(cartaoData.Type == "CC")
+	{
+		//DELETE Cartão de Crédito
+		deleteCartao = await cartaoCreditoRepository.deleteCartao(cartaoData);
+
+	}else
+	{
+		//DELETE Cartão de Débito
+		deleteCartao = await cartaoDebitoRepository.deleteCartao(cartaoData);
+	}
+
+	if(deleteCartao)
+	{
+		//redenrizar TELA DE CARTAO DE CREDITO
+		console.log("APAGOU CARTAO");
+	}else
+	{
+		//redenrizar TELA DE CARTAO COM ALERTA DE ERRO
+		console.log("ERRO AO APAGAR CARTAO");
 	}
 });
 

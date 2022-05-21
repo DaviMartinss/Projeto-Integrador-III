@@ -29,27 +29,27 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/cartao_insert",
+									"raw": "http://localhost:3000/cartao",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
-										"cartao_insert"
+										"cartao"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "UpdateCartaoCredito",
+							"name": "UpdateCartãoCrédito",
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"UserId\": 1,\n    \"CartaoCreditoId\": 1,\n    \"NumCartao\": 5295408722831672,\n    \"DataFatura\": \"2022-01-01\",\n    \"Limite\": 1500.50,\n    \"Anuidade\": 1800.40,\n    \"Fatura\": 500.33,\n    \"JurosAdicional\":5.50,\n    \"Type\": \"CC\"\n}",
+									"raw": "{\n    \"UserId\": 1,\n    \"CartaoCreditoId\": 6,\n    \"NumCartao\": 5295408722831672,\n    \"DataFatura\": \"2022-02-22\",\n    \"Limite\": 1500.50,\n    \"Anuidade\": 1800.40,\n    \"Fatura\": 500.33,\n    \"JurosAdicional\":5.50,\n    \"Type\": \"CC\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -57,14 +57,42 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/cartao_update",
+									"raw": "http://localhost:3000/cartao",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
-										"cartao_update"
+										"cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCartãoCrédito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\": 1,\n    \"CartaoCreditoId\": 4,\n    \"Type\":\"CC\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao"
 									]
 								}
 							},
@@ -90,14 +118,14 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/cartao_insert",
+									"raw": "http://localhost:3000/cartao",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
-										"cartao_insert"
+										"cartao"
 									]
 								}
 							},
@@ -106,7 +134,7 @@
 						{
 							"name": "UpdateCartaoDebito",
 							"request": {
-								"method": "POST",
+								"method": "PUT",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -118,14 +146,42 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/cartao_update",
+									"raw": "http://localhost:3000/cartao",
 									"protocol": "http",
 									"host": [
 										"localhost"
 									],
 									"port": "3000",
 									"path": [
-										"cartao_update"
+										"cartao"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "DeleteCartãoDébito",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\":1,\n    \"CartaoDebitoId\": 2,\n    \"Type\": \"CD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao"
 									]
 								}
 							},
