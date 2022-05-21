@@ -80,7 +80,39 @@ server.delete("/user_delete", async (req, res) => {
 	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
 
 });
+// ========================== CRUD DE CATEGORIA =====================================================================
+//lista de categoria
+server.get("/categoria", async (req, res) => {
 
+	var categoria = await categoriaRepository.selectListCategoria();
+	console.log(categoria);
+
+});
+
+//cadastro da categoria
+server.post("/categoria", async (req, res) => {
+	
+	var user = await userRepository.getUserByEmail(emailUser);
+	//Em req.body tem que passar o nome da categoria
+	await categoriaRepository.insertCategoria(req.body, user.id_user); //cadastrando categoria
+
+});
+
+//atualiza categoria
+server.put("/categoria_update", async (req, res) => {
+	
+	var res = await categoriaRepository.updateCategoria(req.body, "categoria antiga"); // passa o nome da categoria a ser deletada
+	console.log(res);
+
+});
+
+//deleta categoria
+server.delete("/categoria_delete", async (req, res) => {
+	
+	var res = await categoriaRepository.deleteCategoria(req.body); // passa o nome da categoria a ser deletada
+	console.log(res);
+
+});
 // ========================== CRUD DE CARTÕES =====================================================================
 
 server.get("/cartaoList", async (req, res) => {
