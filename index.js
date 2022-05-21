@@ -4,7 +4,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { userRepository } from "./repository/UserRepository.js";
 
-
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,19 +15,18 @@ server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso d
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
 
+// ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
+
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
-
 	res.render('login', {test, erroLogin: false});
 });
 
 server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
 	var userData = {email:req.body.logemail, password: btoa(req.body.logpass)}
-
 	emailUser = userData.email; //atribui para a variavél global emailUser o email do usuário
-
 	var getUser = await userRepository.selectUser(userData);
 
 	if (getUser[0] != undefined) {
@@ -49,9 +47,7 @@ server.post("/user_cadastro", async (req, res) => {
 	//verificar se o email já foi cadastrado (Falta fazer)
 	var email = req.body.logemail;
 	req.body.logpass = btoa(req.body.logpass);
-
 	var insertUser = await userRepository.insertUser(req.body);
-
 	res.redirect("/");
 
 });
@@ -60,7 +56,6 @@ server.post("/user_update", async (req, res) => {
 
 	//atualizar dados do usuário (passo o email porque ele deve ser único)
 	await userRepository.updateUser(req.body, emailUser);
-
 	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
 
 });
@@ -69,12 +64,12 @@ server.post("/user_delete", async (req, res) => {
 
 	//deletamos o usuário pelo o id
 	var user = await userRepository.getUserByEmail(emailUser);
-
 	await userRepository.updateUser(user.id_user);
-
 	res.redirect("/"); //deve ser redirecionanda para a tela de dados do usuário
 
 });
+
+// ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
 
 server.listen(3000, () => {
 	console.log(`Server is running on port 3000`);
