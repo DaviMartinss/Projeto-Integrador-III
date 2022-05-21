@@ -25,20 +25,29 @@ class CartaoDebitoRepository{
 
 //update do cartão de crédito
   async updateCartao(cartao){
-    const db = await database.connect();
-    const sql = 'UPDATE "cartao_debito" SET'
-              + '('
-                  + 'num_cartao_debito,'
-                  + 'cartao_principal,'
-                  + 'saldo'
-              + ')'
-              +' WHERE id_cartao_debito=$6 AND id_user=$7';
-    const values = [cartao.NumCartao,
-                    cartao.CartaoPrincipal,
-                    cartao.Saldo,
-                    cartao.CartaoDebitoId,
-                    cartao.UserId];
-    await db.query(sql, values);
+    try
+    {
+      const db = await database.connect();
+      const sql = 'UPDATE "cartao_debito" SET '
+                //+ '('
+                    + 'num_cartao_debito=$1,'
+                    + 'cartao_principal=$2,'
+                    + 'saldo=$3 '
+                //+ ')'
+                +' WHERE id_cartao_debito=$4 AND id_user=$5';
+      const values = [cartao.NumCartao,
+                      cartao.CartaoPrincipal,
+                      cartao.Saldo,
+                      cartao.CartaoDebitoId,
+                      cartao.UserId];
+      await db.query(sql, values);
+
+      return true;
+
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
   }
 
 //deleta cartão de crédito

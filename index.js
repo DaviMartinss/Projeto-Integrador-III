@@ -123,6 +123,42 @@ server.post("/cartao_insert", async (req, res) => {
 });
 
 
+server.post("/cartao_update", async (req, res) => {
+
+	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
+		 type = "CC" , cartaoCredito
+		 type = "CD" , cartaoDebito
+	*/
+
+	//Tipo booleano para saber se o UPDATE teve sucesso
+	var updateCartao = false;
+
+	//Recebe os dados do cartão de crédito
+	var cartaoData = req.body
+
+	if(cartaoData.Type == "CC")
+	{
+		//UPDATE Cartão de Crédito
+		updateCartao = await cartaoCreditoRepository.updateCartao(cartaoData);
+
+	}else
+	{
+		//UPDATE Cartão de Débito
+		updateCartao = await cartaoDebitoRepository.updateCartao(cartaoData);
+	}
+
+	if(updateCartao)
+	{
+		//redenrizar TELA DE CARTAO DE CREDITO
+		console.log("ATUALIZOU");
+	}else
+	{
+		//redenrizar TELA DE CADASTRO DE CARTAO COM ALERTA DE ERRO
+		console.log("ERRO NA ATUALIZAÇÃO");
+	}
+});
+
+
 
 
 

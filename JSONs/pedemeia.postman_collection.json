@@ -41,6 +41,34 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "UpdateCartaoCredito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\": 1,\n    \"CartaoCreditoId\": 1,\n    \"NumCartao\": 5295408722831672,\n    \"DataFatura\": \"2022-01-01\",\n    \"Limite\": 1500.50,\n    \"Anuidade\": 1800.40,\n    \"Fatura\": 500.33,\n    \"JurosAdicional\":5.50,\n    \"Type\": \"CC\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao_update"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -70,6 +98,34 @@
 									"port": "3000",
 									"path": [
 										"cartao_insert"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UpdateCartaoDebito",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"UserId\": 1,\n    \"CartaoDebitoId\":1,\n    \"NumCartao\": 5295408722831690,\n    \"Saldo\": 5000.125,\n    \"CartaoPrincipal\": false,\n    \"Type\": \"CD\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/cartao_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"cartao_update"
 									]
 								}
 							},
