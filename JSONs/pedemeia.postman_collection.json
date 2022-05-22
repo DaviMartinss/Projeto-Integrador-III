@@ -267,7 +267,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"NickName\": \"Alan\",\n    \"Email\": \"alan@alan1.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
+							"raw": "{\n    \"NickName\": \"Alan\",\n    \"Email\": \"alan@alan134.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -295,7 +295,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 1,\n    \"NickName\": \"Davi\",\n    \"Email\": \"alan@alan12.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
+							"raw": "{\n    \"UserId\": 5,\n    \"NickName\": \"Jose\",\n    \"Email\": \"alan@alan12.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -323,7 +323,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 4\n}",
+							"raw": "{\n    \"UserId\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -367,7 +367,111 @@
 		},
 		{
 			"name": "Categoria",
-			"item": []
+			"item": [
+				{
+					"name": "GenerateCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UserId\": 5,\n    \"Categoria\": \"Telefone\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateCategoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UserId\": 5,\n    \"CategoriaId\": 2,\n    \"Categoria\": \"WIFI\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategoria",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UserId\": 1,\n    \"CategoriaId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/categoria",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoriaList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/categoriaList",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"categoriaList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }

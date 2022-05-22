@@ -8,13 +8,14 @@ import aes256 from "aes256";
 var key = 'bf3c199c2470cb477d907b1e0917c17b';
 var cipher = aes256.createCipher(key);
 //Ex:
-	//	cipher.encrypt(req.body.logpass)
-	//	var decryptedSenha = cipher.decrypt("senha");
+	//	cipher.encrypt("senha")
+	//	cipher.decrypt("senha");
 
 
 //Repository IMPORTS
 import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
+import { categoriaRepository } from "./repository/CategoriaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
@@ -155,35 +156,89 @@ server.delete("/usuario", async (req, res) => {
 });
 // ========================== CRUD DE CATEGORIA =====================================================================
 //lista de categoria
-server.get("/categoria", async (req, res) => {
+server.get("/categoriaList", async (req, res) => {
 
-	var categoria = await categoriaRepository.selectListCategoria();
-	console.log(categoria);
+	var categoriaList = await categoriaRepository.getCategoriaList();
+
+	res.send(categoriaList)
 
 });
 
 //cadastro da categoria
 server.post("/categoria", async (req, res) => {
 
-	var user = await userRepository.getUser(emailUser);
-	//Em req.body tem que passar o nome da categoria
-	await categoriaRepository.insertCategoria(req.body, user.id_user); //cadastrando categoria
+	var categoriaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//categoriaData.UserId = userId
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertCategoria;
+
+	insertCategoria = await categoriaRepository.insertCategoria(categoriaData); //cadastrando categoria
+
+	if(insertCategoria)
+	{
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA CADASTRADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI CADASTRADA");
+	}
 
 });
 
 //atualiza categoria
-server.put("/categoria_update", async (req, res) => {
+server.put("/categoria", async (req, res) => {
 
-	var res = await categoriaRepository.updateCategoria(req.body, "categoria antiga"); // passa o nome da categoria a ser deletada
-	console.log(res);
+	var categoriaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//categoriaData.UserId = userId
+
+	//verifica se o update ocorreu com sucesso!
+	var updateCategoria;
+
+	updateCategoria = await categoriaRepository.updateCategoria(categoriaData);
+
+	if(updateCategoria)
+	{
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA ATUALIZADA");
+	}
+	else
+	{
+		//deve redirecionar para página de atualização de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI ATUALIZADA");
+	}
 
 });
 
 //deleta categoria
-server.delete("/categoria_delete", async (req, res) => {
+server.delete("/categoria", async (req, res) => {
 
-	var res = await categoriaRepository.deleteCategoria(req.body); // passa o nome da categoria a ser deletada
-	console.log(res);
+	var categoriaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//categoriaData.UserId = userId
+
+	//verifica se o update ocorreu com sucesso!
+	var deleteCategoria;
+
+	deleteCategoria = await categoriaRepository.deleteCategoria(categoriaData);
+
+	if(deleteCategoria)
+	{
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA DELETADA");
+	}
+	else
+	{
+		//deve redirecionar para página de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI DELETADA");
+	}
 
 });
 
