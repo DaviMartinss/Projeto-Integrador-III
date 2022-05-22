@@ -118,15 +118,14 @@ server.delete("/categoria_delete", async (req, res) => {
 server.get("/cartaoList", async (req, res) => {
 
 	//Pega o tipo de cartões que será trazido como LISTA
-	let type = req.query.Type
-	let userId = req.query.UserId
+	let type = req.query.Type;
+	let userId = req.query.UserId;
 
 	//Tipo Lista para pegar todos os Cartões do Banco
 	var selectCartao;
 
 	if(type == "CC")
 	{
-		console.log("CC");
 		selectCartao = await cartaoCreditoRepository.getCartaoList(userId);
 	}
 	else
@@ -134,15 +133,9 @@ server.get("/cartaoList", async (req, res) => {
 		selectCartao = await cartaoDebitoRepository.getCartaoList(userId);
 	}
 
-	if(selectCartao != undefined)
-	{
-		console.log(selectCartao)
-	}
-	else
-	{
-		//redenrizar TELA DE CARTAO COM ALERTA DE ERRO
-		console.log("ERRO NO SELECT DE CARTOES");
-	}
+	//ENVIA A LISTA DE VOLTA PARA PÁGINA
+	res.send(selectCartao);
+
 });
 
 

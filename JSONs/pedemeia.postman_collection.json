@@ -104,7 +104,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:3000/cartaoList?Type=\"CC\"&UserId=1",
+									"raw": "http://localhost:3000/cartaoList?Type=CC&UserId=1",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -116,7 +116,7 @@
 									"query": [
 										{
 											"key": "Type",
-											"value": "\"CC\""
+											"value": "CC"
 										},
 										{
 											"key": "UserId",
