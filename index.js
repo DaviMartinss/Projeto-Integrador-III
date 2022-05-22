@@ -4,6 +4,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
+//Variavel global responsável pela seção do usuário
+var userId;
+
 //Encriptografia
 var key = 'bf3c199c2470cb477d907b1e0917c17b';
 var cipher = aes256.createCipher(key);
@@ -11,20 +14,23 @@ var cipher = aes256.createCipher(key);
 	//	cipher.encrypt("senha")
 	//	cipher.decrypt("senha");
 
-
 //Repository IMPORTS
 import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
+import { receitaRepository } from "./repository/ReceitaRepository.js";
 import { categoriaRepository } from "./repository/CategoriaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
+
+//Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
+
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-var userId;
+
 
 server.use(express.json())
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
@@ -154,11 +160,13 @@ server.delete("/usuario", async (req, res) => {
 	}
 
 });
+
 // ========================== CRUD DE CATEGORIA =====================================================================
+
 //lista de categoria
 server.get("/categoriaList", async (req, res) => {
 
-	var categoriaList = await categoriaRepository.getCategoriaList();
+	var categoriaList = await categoriaRepository.getCategoriaList(req.query.UserId);
 
 	res.send(categoriaList)
 
@@ -313,7 +321,6 @@ server.post("/cartao", async (req, res) => {
 	}
 });
 
-
 server.put("/cartao", async (req, res) => {
 
 	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
@@ -406,9 +413,96 @@ server.delete("/cartao", async (req, res) => {
 	}
 });
 
+// ========================== CRUD DE RECEITAS =====================================================================
 
+//lista de receitas
+server.get("/receitaList", async (req, res) => {
 
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//receitaData.UserId = userId
 
+	var receitaList = await receitaRepository.getReceitaList(req.query.UserId);
+	res.send(receitaList)
+
+});
+
+//cadastro da receita
+server.post("/receita", async (req, res) => {
+
+	var receitaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//receitaData.UserId = userId
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertReceita;
+
+	insertReceita = await receitaRepository.insertReceita(receitaData); //cadastrando receita
+
+	if(insertReceita)
+	{
+		//deve redirecionar para página de receita
+		console.log("RECEITA CADASTRADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de receita com alerta de erro
+		console.log("RECEITA NÃO FOI CADASTRADA");
+	}
+
+});
+
+//atualiza receita
+server.put("/receita", async (req, res) => {
+
+	var receitaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//receitaData.UserId = userId
+
+	//verifica se o update ocorreu com sucesso!
+	var updateReceita;
+
+	updateReceita = await receitaRepository.updateReceita(receitaData);
+
+	if(updateReceita)
+	{
+		//deve redirecionar para página de receita
+		console.log("RECEITA ATUALIZADA");
+	}
+	else
+	{
+		//deve redirecionar para página de atualização de receita com alerta de erro
+		console.log("RECEITA NÃO FOI ATUALIZADA");
+	}
+
+});
+
+//deleta categoria
+server.delete("/receita", async (req, res) => {
+
+	var receitaData = req.body
+
+	//Descomentar quando tiver o front funcionando para o usuário logar
+	//categoriaData.UserId = userId
+
+	//verifica se o update ocorreu com sucesso!
+	var deleteReceita;
+
+	deleteReceita = await receitaRepository.deleteReceita(receitaData);
+
+	if(deleteReceita)
+	{
+		//deve redirecionar para página de receita
+		console.log("RECEITA DELETADA");
+	}
+	else
+	{
+		//deve redirecionar para página de receita com alerta de erro
+		console.log("RECEITA NÃO FOI DELETADA");
+	}
+
+});
 
 
 
