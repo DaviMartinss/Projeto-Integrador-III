@@ -2,8 +2,11 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import md5 from "md5";
+import aes256 from "aes256";
 
+var key = 'bf3c199c2470cb477d907b1e0917c17b';
+
+//var decryptedPlainText = cipher.decrypt(encryptedPlainText);
 //Repository IMPORTS
 import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
@@ -37,6 +40,8 @@ server.post("/", async (req, res) => {
 	emailUser = userData.email; //atribui para a variavél global emailUser o email do usuário
 	var getUser = await userRepository.selectUser(userData);
 
+	var decryptedSenha = cipher.decrypt("senha");
+	
 	if (getUser[0] != undefined) {
 		res.render("index", { erroLogin: false });
 	} else {
@@ -52,7 +57,11 @@ server.post("/user_cadastro", async (req, res) => {
 
 	if(userExiste == ''){
 
-		req.body.logpass = md5(req.body.logpass); //criptografia md5
+		//var buffer = Buffer.from(req.body.logpass);
+		var cipher = aes256.createCipher(key);
+		req.body.logpass = cipher.encrypt(req.body.logpass);
+		console.log("senha crip: "+req.body.logpass);
+
 		await userRepository.insertUser(req.body);
 		sendMailBemVindo.run(req.body.logname, req.body.logemail);
 	}else{
