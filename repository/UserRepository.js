@@ -10,7 +10,7 @@ class UserRepository {
 
         if(db != undefined )
         {
-          const sql = 'select * from "user" WHERE Email=$1 AND password=$2;';
+          const sql = 'select * from "User" WHERE Email=$1 AND PassWord=$2;';
           const values = [user.email, user.password]
           const user = await db.query(sql,values);
           return user;
@@ -37,7 +37,7 @@ class UserRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from "user";';
+        const sql = 'select * from "User";';
         const res = await db.query(sql);
         return res.rows;
       }
@@ -63,7 +63,7 @@ class UserRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from "user" WHERE email=$1;';
+        const sql = 'select * from "User" WHERE Email=$1;';
         const res = await db.query(sql,[email]);
         return res.rows;
       }
@@ -89,7 +89,7 @@ class UserRepository {
 
       if(db != undefined)
       {
-        const sql = 'INSERT INTO "user" (nickname, Email, password) VALUES ($1,$2,$3);';
+        const sql = 'INSERT INTO "User" (NickName, Email, PassWord) VALUES ($1,$2,$3);';
         const values = [user.NickName, user.Email, user.Password];
         await db.query(sql, values);
 
@@ -117,7 +117,7 @@ class UserRepository {
 
        if(db != undefined)
        {
-         const sql = 'UPDATE "user" SET nickname=$1, Email=$2, password=$3 WHERE id_user=$4';
+         const sql = 'UPDATE "User" SET NickName=$1, Email=$2, PassWord=$3 WHERE UserId=$4';
          const values = [user.NickName, user.Email, user.Password, user.UserId];
          await db.query(sql, values);
 
@@ -145,7 +145,7 @@ class UserRepository {
 
       if(db != undefined)
       {
-        const sql = 'DELETE FROM "user" WHERE id_user=$1';
+        const sql = 'DELETE FROM "User" WHERE UserId=$1';
         const values = [user_id];
         await db.query(sql, values);
 
