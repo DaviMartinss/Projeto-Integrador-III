@@ -2,7 +2,7 @@
 
 CREATE TABLE "User" (
 UserId SERIAL PRIMARY KEY NOT NULL,
-NickName varchar(60) NOT NULL,
+NickName VARCHAR(60) NOT NULL,
 Email VARCHAR(60) NOT NULL,
 PassWord VARCHAR(60) NOT NULL,
 Avatar VARCHAR(200) DEFAULT NULL
@@ -10,14 +10,14 @@ Avatar VARCHAR(200) DEFAULT NULL
 
 -------------Criando tabela categoria---------------
 
-CREATE TABLE "Categoria" ( 
+CREATE TABLE "Categoria" (
 	CategoriaId SERIAL PRIMARY KEY NOT NULL,
  	Categoria VARCHAR(50) NOT NULL,
     UserId INTEGER NOT NULL,
  	CONSTRAINT FK_USER FOREIGN kEY(UserId) REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE
 
   --caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla de categoria que
-  -- possui o UserId do usuário 
+  -- possui o UserId do usuário
 );
 
 
@@ -36,7 +36,7 @@ CREATE TABLE CartaoCredito (
 	CONSTRAINT FK_USER FOREIGN kEY(UserId) REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE
 
   --caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla de cartão de crédito que
-  -- possui o id_user do usuário 
+  -- possui o id_user do usuário
 );
 
 
@@ -50,24 +50,24 @@ CREATE TABLE CartaoDebito (
 	CONSTRAINT FK_USER FOREIGN kEY(UserId) REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE
 
   --caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla de cartão de débito que
-  -- possui o id_user do usuário 
+  -- possui o id_user do usuário
 );
 
 -------------Criando tabela de receitas---------------
 CREATE TABLE Receita (
 	ReceitaId SERIAL PRIMARY KEY NOT NULL,
-	FonteReceita INTEGER NOT NULL,
+	CategoriaId INTEGER NOT NULL,
 	DataReceita DATE NOT NULL,
 	FormaAlocacao VARCHAR(60) NOT NULL,
 	ValorReceita FLOAT NOT NULL,
 	SeRepete BOOLEAN DEFAULT NULL,
 	UserId INTEGER NOT NULL,
 	CONSTRAINT FK_USER FOREIGN kEY(UserId) REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_CATEGORIA FOREIGN kEY(fonte_receita) REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_CATEGORIA FOREIGN kEY(CategoriaId) REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
 
   	--caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla de receita que
-  	-- possui o id_user do usuário 
-	
+  	-- possui o id_user do usuário
+
 	--caso seja alterado/deletado o valor do id_categoria, também será alterado/deletado a tupla de receita que
   	-- possui o id_categoria de categoria
 );
@@ -75,18 +75,18 @@ CREATE TABLE Receita (
 
 CREATE TABLE Despesa (
 	DespesaId SERIAL PRIMARY KEY NOT NULL,
-	Categoria INTEGER NOT NULL,
+	CategoriaId INTEGER NOT NULL,
 	DataDespesa DATE NOT NULL,
 	TipoDespesa BOOLEAN NOT NULL,
 	NumParcelas INT NULL,
 	Status BOOLEAN NOT NULL,
 	UserId INTEGER NOT NULL,
 	CONSTRAINT FK_USER FOREIGN kEY(UserId) REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_CATEGORIA FOREIGN kEY(Categoria) REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_CATEGORIA FOREIGN kEY(CategoriaId) REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
 
   	--caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla da despesa que
-  	-- possui o id_user do usuário 
-	
+  	-- possui o id_user do usuário
+
 	--caso seja alterado/deletado o valor do id_categoria, também será alterado/deletado a tupla da despesa que
   	-- possui o id_categoria de categoria
 );
@@ -104,11 +104,11 @@ CREATE TABLE Total (
 	CONSTRAINT FK_DESPESA FOREIGN kEY(DespesaId) REFERENCES "Despesa" ON DELETE CASCADE ON UPDATE CASCADE
 
   	--caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla de totais que
-  	-- possui o id_user do usuário 
-	
+  	-- possui o id_user do usuário
+
 	--caso seja alterado/deletado o valor do id_receita, também será alterado/deletado a tupla de totais que
   	-- possui o id_receita
-	
+
 	--caso seja alterado/deletado o valor do id_despesa, também será alterado/deletado a tupla de totais que
   	-- possui o id_despesa
 );
