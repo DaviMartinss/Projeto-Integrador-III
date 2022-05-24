@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
     <!-- Core CSS - Include with every page -->
-    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="assets/css/style.css" rel="stylesheet" />
-      <link href="assets/css/main-style.css" rel="stylesheet" />
+    <link href="../styles/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../styles/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../styles/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+  <link href="../styles/assets/css/style.css" rel="stylesheet" />
+      <link href="../styles/assets/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
-    <link href="assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="../styles/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 </head>
 
@@ -31,7 +31,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/img/logo.png" alt="" />
+                    <img src="../styles/assets/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->
@@ -383,7 +383,7 @@
         <!--  page-wrapper -->
         <div id="page-wrapper">
 
-            
+
             <div class="row">
                  <!--  page header -->
                 <div class="col-lg-12">
@@ -814,7 +814,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                         </div>
                     </div>
                     <!--End Advanced Tables -->
@@ -843,19 +843,19 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -886,19 +886,19 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -931,19 +931,19 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -975,19 +975,19 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1020,19 +1020,19 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1044,11 +1044,11 @@
                 <div class="col-lg-6">
                      <!--    Context Classes  -->
                     <div class="panel panel-default">
-                       
+
                         <div class="panel-heading">
                             Context Classes
                         </div>
-                        
+
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table">
@@ -1065,25 +1065,25 @@
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
-                                            <td>@mdo</td>
+                                            <td>amdo</td>
                                         </tr>
                                         <tr class="info">
                                             <td>2</td>
                                             <td>Jacob</td>
                                             <td>Thornton</td>
-                                            <td>@fat</td>
+                                            <td>afat</td>
                                         </tr>
                                         <tr class="warning">
                                             <td>3</td>
                                             <td>Larry</td>
                                             <td>the Bird</td>
-                                            <td>@twitter</td>
+                                            <td>atwitter</td>
                                         </tr>
                                         <tr class="danger">
                                             <td>4</td>
                                             <td>John</td>
                                             <td>Smith</td>
-                                            <td>@jsmith</td>
+                                            <td>ajsmith</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1100,14 +1100,14 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/plugins/pace/pace.js"></script>
-    <script src="assets/scripts/siminta.js"></script>
+    <script src="../scripts/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="../scripts/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../scripts/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../scripts/assets/plugins/pace/pace.js"></script>
+    <script src="../scripts/assets/scripts/siminta.js"></script>
     <!-- Page-Level Plugin Scripts-->
-    <script src="assets/plugins/dataTables/jquery.dataTables.js"></script>
-    <script src="assets/plugins/dataTables/dataTables.bootstrap.js"></script>
+    <script src="../scripts/assets/plugins/dataTables/jquery.dataTables.js"></script>
+    <script src="../scripts/assets/plugins/dataTables/dataTables.bootstrap.js"></script>
     <script>
         $(document).ready(function () {
             $('#dataTables-example').dataTable();

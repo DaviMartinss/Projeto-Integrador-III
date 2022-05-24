@@ -298,6 +298,18 @@
                         </ul>
                         <!-- second-level-items -->
                     </li>
+                    <li>
+                        <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Cartões<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="/cartaoCredito">Cartão de Crédito</a>
+                            </li>
+                            <li>
+                                <a href="/cartaoDebito">Cartão de Débito</a>
+                            </li>
+                        </ul>
+                        <!-- second-level-items -->
+                    </li>
                      <li>
                         <a href="timeline.html"><i class="fa fa-flask fa-fw"></i>Timeline</a>
                     </li>
@@ -306,6 +318,15 @@
                     </li>
                     <li>
                         <a href="forms.html"><i class="fa fa-edit fa-fw"></i>Forms</a>
+                    </li>
+                    <li>
+                        <a href="/receita"><i class="fa fa-edit fa-fw"></i>Receitas</a>
+                    </li>
+                    <li>
+                        <a href="/despesa"><i class="fa fa-edit fa-fw"></i>Despesas</a>
+                    </li>
+                    <li>
+                        <a href="/categoria"><i class="fa fa-edit fa-fw"></i>Categorias</a>
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-wrench fa-fw"></i>UI Elements<span class="fa arrow"></span></a>
@@ -409,7 +430,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="alert alert-success text-center">
-                        <i class="fa  fa-beer fa-3x"></i>&nbsp;<b>27 % </b>Profit Recorded in This Month  
+                        <i class="fa  fa-beer fa-3x"></i>&nbsp;<b>27 % </b>Profit Recorded in This Month
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -797,7 +818,7 @@
             </div>
 
 
-         
+
 
 
         </div>

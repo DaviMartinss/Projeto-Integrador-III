@@ -38,6 +38,49 @@ server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso d
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
 
+
+//Para testes e n ter que ficar logando no sistema direto essa rota manda direto para TELAS OBJETIVAS
+
+server.get('/home', (req, res) => {
+
+	res.render("home", { erroLogin: false });
+});
+
+server.get('/receita', (req, res) => {
+
+	res.render("receita", { erroLogin: false });
+});
+
+server.get('/despesa', (req, res) => {
+
+	res.render("despesa", { erroLogin: false });
+});
+
+server.get('/cartaoCredito', (req, res) => {
+
+	res.render("cartaoCredito", { erroLogin: false });
+});
+
+server.get('/cartaoDebito', (req, res) => {
+
+	res.render("cartaoDebito", { erroLogin: false });
+});
+
+server.get('/categoria', (req, res) => {
+
+	res.render("categoria", { erroLogin: false });
+});
+
+server.get('/forms', (req, res) => {
+
+	res.render("forms", { erroLogin: false });
+});
+
+server.get('/tables', (req, res) => {
+
+	res.render("tables", { erroLogin: false });
+});
+
 // ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
 
 server.get('/', (req, res) => {
@@ -55,7 +98,7 @@ server.post("/", async (req, res) => {
 
 	if (getUser != undefined) {
 		userId = getUser.id_user;
-		res.render("index", { erroLogin: false });
+		res.render("home", { erroLogin: false });
 	} else {
 		res.render("login", { erroLogin: true });
 	}

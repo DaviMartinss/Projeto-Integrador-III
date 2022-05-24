@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
     <!-- Core CSS - Include with every page -->
-    <link href="assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
-    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-   <link href="assets/css/style.css" rel="stylesheet" />
-      <link href="assets/css/main-style.css" rel="stylesheet" />
+    <link href="../styles/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="../styles/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="../styles/assets/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
+   <link href="../styles/assets/css/style.css" rel="stylesheet" />
+      <link href="../styles/assets/css/main-style.css" rel="stylesheet" />
 
 
 
@@ -30,7 +30,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/img/logo.png" alt="" />
+                    <img src="../styles/assets/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->
@@ -583,11 +583,11 @@
     <!-- end wrapper -->
 
     <!-- Core Scripts - Include with every page -->
-    <script src="assets/plugins/jquery-1.10.2.js"></script>
-    <script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
-    <script src="assets/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="assets/plugins/pace/pace.js"></script>
-    <script src="assets/scripts/siminta.js"></script>
+    <script src="../scripts/assets/plugins/jquery-1.10.2.js"></script>
+    <script src="../scripts/assets/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="../scripts/assets/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="../scripts/assets/plugins/pace/pace.js"></script>
+    <script src="../scripts/assets/scripts/siminta.js"></script>
 
 </body>
 
