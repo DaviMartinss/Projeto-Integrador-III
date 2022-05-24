@@ -1,11 +1,11 @@
 -------------Criando tabela User---------------
 
 CREATE TABLE "User" (
-UserId SERIAL PRIMARY KEY NOT NULL,
-NickName VARCHAR(60) NOT NULL,
-Email VARCHAR(60) NOT NULL,
-PassWord VARCHAR(60) NOT NULL,
-Avatar VARCHAR(200) DEFAULT NULL
+	UserId SERIAL PRIMARY KEY NOT NULL,
+	NickName VARCHAR(60) NOT NULL,
+	Email VARCHAR(60) NOT NULL,
+	PassWord VARCHAR(60) NOT NULL,
+	Avatar VARCHAR(200) DEFAULT NULL
 );
 
 -------------Criando tabela categoria---------------
@@ -20,7 +20,6 @@ CREATE TABLE "Categoria" (
   -- possui o UserId do usuário
 );
 
-
 -------------Criando tabela cartão de crédito---------------
 
 CREATE TABLE CartaoCredito (
@@ -28,7 +27,7 @@ CREATE TABLE CartaoCredito (
 	NumCC BIGINT NOT NULL,
 	DataFatura DATE NOT NULL,
 	Limite FLOAT NOT NULL,
-  Credito FLOAT NOT NULL,
+  	Credito FLOAT NOT NULL,
 	Anuidade FLOAT NOT NULL,
 	Fatura FLOAT NOT NULL,
 	JurosAdicional FLOAT default NULL,
