@@ -11,7 +11,7 @@ class CartaoDebitoRepository{
 
         if(db != undefined )
         {
-          const sql = 'select * from "cartao_debito" WHERE id_user=$1;';
+          const sql = 'select * from "CartaoDebito" WHERE "UserId"=$1;';
           const values = [userId];
           const res = await db.query(sql,values);
           return res.rows;
@@ -36,18 +36,20 @@ class CartaoDebitoRepository{
 
       if(db != undefined)
       {
-        const sql = 'INSERT INTO "cartao_debito"'
+        const sql = 'INSERT INTO "CartaoDebito"'
                   + '('
-                      + 'id_user,'
-                      + 'num_cartao_debito,'
-                      + 'cartao_principal,'
-                      + 'saldo'
+                      + "UserId,"
+                      + "NumCD,"
+                      + "CartaoPrincipal,"
+                      + "Saldo,"
+                      + "Bandeira"
                   + ')'
-                  + 'VALUES ($1,$2,$3,$4);';
+                  + 'VALUES ($1,$2,$3,$4,$5);';
         const values = [cartao.UserId,
                         cartao.NumCartao,
                         cartao.CartaoPrincipal,
-                        cartao.Saldo];
+                        cartao.Saldo,
+                        cartao.Bandeira];
         await db.query(sql, values);
 
         return true;
@@ -73,18 +75,17 @@ class CartaoDebitoRepository{
 
       if(db != undefined)
       {
-        const sql = 'UPDATE "cartao_debito" SET '
-                  //+ '('
-                      + 'num_cartao_debito=$1,'
-                      + 'cartao_principal=$2,'
-                      + 'saldo=$3 '
-                  //+ ')'
-                  +' WHERE id_cartao_debito=$4 AND id_user=$5';
+        const sql = 'UPDATE "CartaoDebito" SET '
+                      + "NumCD=$1,"
+                      + "CartaoPrincipal=$2,"
+                      + "Saldo=$3,"
+                      + "Bandeira=$4"
+                  +' WHERE "CartaoDebitoId"=$5';
         const values = [cartao.NumCartao,
                         cartao.CartaoPrincipal,
                         cartao.Saldo,
-                        cartao.CartaoDebitoId,
-                        cartao.UserId];
+                        cartao.Bandeira,
+                        cartao.CartaoDebitoId];
         await db.query(sql, values);
 
         return true;
@@ -109,8 +110,8 @@ class CartaoDebitoRepository{
 
       if(db != undefined)
       {
-        const sql = 'DELETE FROM "cartao_debito" WHERE id_cartao_debito=$1 AND id_user=$2';
-        const values = [cartao.CartaoDebitoId, cartao.UserId];
+        const sql = 'DELETE FROM "CartaoDebito" WHERE "CartaoDebitoId"=$1';
+        const values = [cartao.CartaoDebitoId];
         await db.query(sql, values);
 
         return true;
