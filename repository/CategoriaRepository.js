@@ -10,9 +10,8 @@ class CategoriaRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from categoria WHERE id_user=$1';
+        const sql = 'select * from "Categoria" WHERE "UserId"=$1';
         const res = await db.query(sql, [userId]);
-        //console.log(res.rows);
         return res.rows;
       }
       else
@@ -38,7 +37,7 @@ class CategoriaRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from categoria WHERE categoria=$1;';
+        const sql = 'select * from "Categoria" WHERE "Categoria"=$1;';
         const res = await db.query(sql,[categoria.Categoria]);
         return res.rows;
       }
@@ -64,7 +63,7 @@ class CategoriaRepository {
 
       if(db != undefined)
       {
-        const sql = 'INSERT INTO categoria (categoria, id_user) VALUES ($1,$2);';
+        const sql = 'INSERT INTO "Categoria" ("Categoria", "UserId") VALUES ($1,$2);';
         const values = [categoria.Categoria, categoria.UserId];
         await db.query(sql, values);
 
@@ -93,8 +92,8 @@ class CategoriaRepository {
 
        if(db != undefined)
        {
-         const sql = 'UPDATE categoria SET categoria=$1 WHERE id_categoria=$2 AND id_user=$3;';
-         const values = [categoria.Categoria, categoria.CategoriaId, categoria.UserId];
+         const sql = 'UPDATE "Categoria" SET "Categoria"=$1 WHERE "CategoriaId"=$2;';
+         const values = [categoria.Categoria, categoria.CategoriaId];
          await db.query(sql, values);
 
          return true;
@@ -121,8 +120,8 @@ class CategoriaRepository {
 
       if(db != undefined)
       {
-        const sql = 'DELETE FROM categoria WHERE id_categoria=$1 AND id_user=$2';
-        const values = [categoria.CategoriaId, categoria.UserId];
+        const sql = 'DELETE FROM "Categoria" WHERE "CategoriaId"=$1';
+        const values = [categoria.CategoriaId];
         const res = await db.query(sql, values);
         return res.rows;
 
