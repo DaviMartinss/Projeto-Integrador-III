@@ -427,6 +427,7 @@
                                             <th>Id</th>
                                             <th>Data</th>
                                             <th>Saldo</th>
+                                            <th>Bandeira</th>
                                             <th>Ação</th>
                                         </tr>
                                     </thead>

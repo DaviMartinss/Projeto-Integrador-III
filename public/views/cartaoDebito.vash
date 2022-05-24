@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Ped1/2 | Home</title>
     <!-- Core CSS - Include with every page -->
     <link href="../styles/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../styles/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
@@ -425,16 +425,18 @@
                                     <thead>
                                         <tr>
                                             <th>Id</th>
-                                            <th>Data</th>
+                                            <th>Nº do Cartão</th>
                                             <th>Saldo</th>
+                                            <th>Bandeira</th>
                                             <th>Ação</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX">
                                             <td>1</td>
-                                            <td>01/01/2022</td>
+                                            <td>121231231231232312</td>
                                             <td>R$1200.00</td>
+                                            <td>MASTERCARD</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>
@@ -442,8 +444,9 @@
                                         </tr>
                                         <tr class="gradeX">
                                             <td>2</td>
-                                            <td>02/02/2022</td>
+                                            <td>435353223434234234</td>
                                             <td>R$1300.00</td>
+                                            <td>VISA</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>
@@ -451,8 +454,9 @@
                                         </tr>
                                         <tr class="gradeX">
                                             <td>3</td>
-                                            <td>03/03/2022</td>
+                                            <td>4665676768768898231</td>
                                             <td>R$1500.00</td>
+                                            <td>BB</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>

@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootsrtap Free Admin Template - SIMINTA | Admin Dashboad Template</title>
+    <title>Ped1/2 | Home</title>
     <!-- Core CSS - Include with every page -->
     <link href="../styles/assets/plugins/bootstrap/bootstrap.css" rel="stylesheet" />
     <link href="../styles/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="../styles/plugins/pace/pace-theme-big-counter.css" rel="stylesheet" />
-  <link href="../styles/assets/css/style.css" rel="stylesheet" />
-      <link href="../styles/assets/css/main-style.css" rel="stylesheet" />
+    <link href="../styles/assets/css/style.css" rel="stylesheet" />
+    <link href="../styles/assets/css/main-style.css" rel="stylesheet" />
 
     <!-- Page-Level CSS -->
     <link href="../styles/assets/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
 
 </head>
-
 <body>
     <!--  wrapper -->
     <div id="wrapper">
@@ -31,7 +29,7 @@
                   <span class="icon-bar"></span>
               </button>
               <a class="navbar-brand" href="index.html">
-                  <img src="assets/img/logo.png" alt="" />
+                  <img src="../images/assets/img/logo.png" alt="" />
               </a>
           </div>
           <!-- end navbar-header -->
@@ -426,15 +424,27 @@
                                         <tr>
                                             <th>Id</th>
                                             <th>Data</th>
-                                            <th>Saldo</th>
-                                            <th>Ação</th>
+                                            <th>Forma de Pagamento</th>
+                                            <th>Status</th>
+                                            <th>Valor</th>
+                                            <th>Nº do Cartão</th>
+                                            <th>Categoria</th>
+                                            <th>Nº Parcelas</th>
+                                            <th>Descrição</th>
+                                            <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="gradeX">
                                             <td>1</td>
                                             <td>01/01/2022</td>
+                                            <td>DINHEIRO</td>
+                                            <td>PAGO</td>
                                             <td>R$1200.00</td>
+                                            <td>-</td>
+                                            <td>WIFI</td>
+                                            <td>0</td>
+                                            <td>MEXENDO NO WIFI</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>
@@ -443,7 +453,13 @@
                                         <tr class="gradeX">
                                             <td>2</td>
                                             <td>02/02/2022</td>
-                                            <td>R$1300.00</td>
+                                            <td>CRÉDITO</td>
+                                            <td>NÃO PAGO</td>
+                                            <td>R$2200.00</td>
+                                            <td>131231231231231231</td>
+                                            <td>CARRO</td>
+                                            <td>36</td>
+                                            <td>COMPRANDO PANPA</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>
@@ -452,7 +468,13 @@
                                         <tr class="gradeX">
                                             <td>3</td>
                                             <td>03/03/2022</td>
-                                            <td>R$1500.00</td>
+                                            <td>DÉBITO</td>
+                                            <td>PAGO</td>
+                                            <td>R$5000.00</td>
+                                            <td>-</td>
+                                            <td>IFONE</td>
+                                            <td>0</td>
+                                            <td>COMPRANDO CEL DA NOVINHA</td>
                                             <td>
                                               <button type="button" class="">Editar</button>
                                               <button type="button" class="">Excluir</button>
@@ -460,18 +482,15 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <button type="button" class="">Cadastrar Receita</button>
+                                <button type="button" class="">Cadastrar Despesa</button>
                             </div>
-
                         </div>
                     </div>
                     <!--End Advanced Tables -->
                 </div>
             </div>
-
         </div>
         <!-- end page-wrapper -->
-
     </div>
     <!-- end wrapper -->
 
