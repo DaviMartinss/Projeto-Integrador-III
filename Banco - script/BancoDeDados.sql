@@ -74,14 +74,20 @@ CREATE TABLE "Receita" (
 
 CREATE TABLE "Despesa" (
 	"DespesaId" SERIAL PRIMARY KEY NOT NULL,
-	"CategoriaId" INTEGER NOT NULL,
-	"DataDespesa" DATE NOT NULL,
-	"TipoDespesa" INT NOT NULL,
+	"Valor" FLOAT NOT NULL,
+	"Data" DATE NOT NULL,
+	"Descricao" VARCHAR(60) NOT NULL,
+	"FormaDePagamento" SMALLINT NOT NULL,
 	"NumParcelas" INT NULL,
 	"Status" BOOLEAN NOT NULL,
+	"NumCC" BIGINT DEFAULT NULL,
+	"NumCD" BIGINT DEFAULT NULL,
+	"CategoriaId" INTEGER NOT NULL,
 	"UserId" INTEGER NOT NULL,
+	"ReceitaId" INTEGER NOT NULL,
 	CONSTRAINT FK_USER FOREIGN kEY("UserId") REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_CATEGORIA FOREIGN kEY("CategoriaId") REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT FK_CATEGORIA FOREIGN kEY("CategoriaId") REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_RECEITA FOREIGN kEY("ReceitaId") REFERENCES "Receita" ON DELETE CASCADE ON UPDATE CASCADE
 
   	--caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla da despesa que
   	-- possui o id_user do usuário
