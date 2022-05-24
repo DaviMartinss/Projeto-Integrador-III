@@ -22,7 +22,7 @@ CREATE TABLE "Categoria" (
 
 -------------Criando tabela cartão de crédito---------------
 
-CREATE TABLE CartaoCredito (
+CREATE TABLE "CartaoCredito" (
 	CartaoCreditoId SERIAL PRIMARY KEY NOT NULL,
 	NumCC BIGINT NOT NULL,
 	DataFatura DATE NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE CartaoCredito (
 
 
 -------------Criando tabela cartão de débito---------------
-CREATE TABLE CartaoDebito (
+CREATE TABLE "CartaoDebito" (
 	CartaoDebitoId SERIAL PRIMARY KEY NOT NULL,
 	NumCD BIGINT NOT NULL,
 	CartaoPrincipal BOOLEAN NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE CartaoDebito (
 );
 
 -------------Criando tabela de receitas---------------
-CREATE TABLE Receita (
+CREATE TABLE "Receita" (
 	ReceitaId SERIAL PRIMARY KEY NOT NULL,
 	CategoriaId INTEGER NOT NULL,
 	DataReceita DATE NOT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE Receita (
 );
 
 
-CREATE TABLE Despesa (
+CREATE TABLE "Despesa" (
 	DespesaId SERIAL PRIMARY KEY NOT NULL,
 	CategoriaId INTEGER NOT NULL,
 	DataDespesa DATE NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE Despesa (
   	-- possui o id_categoria de categoria
 );
 
-CREATE TABLE Total (
+CREATE TABLE "Total" (
 	TotalId SERIAL PRIMARY KEY NOT NULL,
 	TotalReceita FLOAT NOT NULL,
 	TotalDespesa FLOAT NOT NULL,
