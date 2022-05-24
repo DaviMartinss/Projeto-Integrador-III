@@ -20,7 +20,6 @@ CREATE TABLE "Categoria" (
   -- possui o UserId do usuário
 );
 
-
 -------------Criando tabela cartão de crédito---------------
 
 CREATE TABLE CartaoCredito (
