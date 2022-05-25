@@ -86,20 +86,32 @@ server.get('/tables', (req, res) => {
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
+	userId = undefined;
 	res.render('login', {test, erroLogin: false});
 });
 
 server.post("/", async (req, res) => {
 
 	//verificar se o usuario é válido
-	var userData = {email:req.body.logemail, password: cipher.encrypt(req.body.logpass)}
+	var userData = {Email:req.body.logemail, Password: cipher.encrypt(req.body.logpass)}
 
-	var getUser = await userRepository.getUser(userData);
+	//pega a lista de usuario para verificar email e senha validos
+	//isso devido a criptografia ser gerada para senha é sempre diferente
+	var getUserList = await userRepository.getUserList();
 
-	if (getUser != undefined) {
-		userId = getUser.id_user;
+	getUserList.forEach( user => {
+
+		if(userData.Email == user.Email && cipher.decrypt(userData.Password) == cipher.decrypt(user.PassWord))
+			userId = user.UserId;
+
+	});
+
+	if(userId != undefined)
+	{
 		res.render("home", { erroLogin: false });
-	} else {
+	}
+	else
+	{
 		res.render("login", { erroLogin: true });
 	}
 });

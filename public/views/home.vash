@@ -11,7 +11,7 @@
     <link href="../styles/assets/css/style.css" rel="stylesheet" />
     <link href="../styles/assets/css/main-style.css" rel="stylesheet" />
     <!-- Page-Level CSS -->
-    <link href="assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="../styles/assets/plugins/morris/morris-0.4.3.min.css" rel="stylesheet" />
    </head>
 <body>
     <!--  wrapper -->
@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="index.html">
-                    <img src="assets/img/logo.png" alt="" />
+                    <img src="../styles/assets/img/logo.png" alt="" />
                 </a>
             </div>
             <!-- end navbar-header -->

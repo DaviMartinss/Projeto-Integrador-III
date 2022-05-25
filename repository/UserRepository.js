@@ -22,7 +22,7 @@ class UserRepository {
         }
 
       } catch (e) {
-
+        console.log("lalalal");
         console.log(e);
         return undefined;
       }
