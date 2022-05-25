@@ -45,16 +45,18 @@ class CartaoCreditoRepository{
                       + "Fatura,"
                       + "Limite,"
                       + "Anuidade,"
-                      + "JurosAdicional"
+                      + "JurosAdicional,"
+                      + "Bandeira"
                   + ')'
-                  + 'VALUES ($1,$2,$3,$4,$5,$6,$7);';
+                  + 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
         const values = [cartao.UserId,
                         cartao.NumCartao,
                         cartao.DataFatura,
                         cartao.Fatura,
                         cartao.Limite,
                         cartao.Anuidade,
-                        cartao.JurosAdicional];
+                        cartao.JurosAdicional,
+                        cartao.Bandeira];
         await db.query(sql, values);
 
         return true;
@@ -86,14 +88,16 @@ class CartaoCreditoRepository{
                       + "Fatura=$3,"
                       + "Limite=$4,"
                       + "Anuidade=$5,"
-                      + "JurosAdicional=$6"
-                  +' WHERE "CartaoCreditoId"=$7';
+                      + "JurosAdicional=$6,"
+                      + "Bandeira=$7"
+                  +' WHERE "CartaoCreditoId"=$8';
         const values = [cartao.NumCartao,
                         cartao.DataFatura,
                         cartao.Fatura,
                         cartao.Limite,
                         cartao.Anuidade,
                         cartao.JurosAdicional,
+                        cartao.Bandeira,
                         cartao.CartaoCreditoId];
 
         await db.query(sql, values);

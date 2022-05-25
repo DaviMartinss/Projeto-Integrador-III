@@ -34,7 +34,7 @@ class ReceitaRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from "receitas" WHERE id_user=$1;';
+        const sql = 'select * from "Receita" WHERE "UserId"=$1;';
         const res = await db.query(sql, [userId]);
         return res.rows;
       }
@@ -51,9 +51,7 @@ class ReceitaRepository {
     }
   }
 
-
-
-//cadastra um usuário
+//cadastra uma receita
   async insertReceita(receita){
 
     try {
@@ -62,14 +60,14 @@ class ReceitaRepository {
 
       if(db != undefined)
       {
-        const sql = 'INSERT INTO "receitas" '
+        const sql = 'INSERT INTO "Receita" '
                   + '('
-                    + ' fonte_receita,'
-                    + ' data_receita,'
-                    + ' forma_de_alocacao,'
-                    + ' valor_receita,'
-                    + ' se_repete,'
-                    + ' id_user'
+                    + "CategoriaId,"
+                    + "Data,"
+                    + "FormaAlocacao,"
+                    + "Valor,"
+                    + "SeRepete,"
+                    + "UserId"
                   + ')'
                   + ' VALUES ($1,$2,$3,$4,$5,$6);';
 
@@ -106,21 +104,20 @@ class ReceitaRepository {
 
        if(db != undefined)
        {
-         const sql = 'UPDATE "receitas" SET '
-                     + ' fonte_receita=$1,'
-                     + ' data_receita=$2,'
-                     + ' forma_de_alocacao=$3,'
-                     + ' valor_receita=$4,'
-                     + ' se_repete=$5'
-                   + 'WHERE id_receita=$6 AND id_user=$7';
+         const sql = 'UPDATE "Receita" SET '
+                     + "CategoriaId=$1,"
+                     + "Data=$2,"
+                     + "FormaAlocacao=$3,"
+                     + "Valor=$4,"
+                     + "SeRepete=$5"
+                     + 'WHERE "ReceitaId"=$6';
 
          const values = [receita.CategoriaId,
                          receita.Data,
                          receita.FormaLocacao,
                          receita.Valor,
                          receita.SeRepete,
-                         receita.ReceitaId,
-                         receita.UserId];
+                         receita.ReceitaId];
 
          await db.query(sql, values);
 
@@ -148,8 +145,8 @@ class ReceitaRepository {
 
       if(db != undefined)
       {
-        const sql = 'DELETE FROM "receitas" WHERE id_receita=$1 AND id_user=$2';
-        const values = [receita.ReceitaId, receita.UserId];
+        const sql = 'DELETE FROM "Receita" WHERE "ReceitaId"=$1';
+        const values = [receita.ReceitaId];
         await db.query(sql, values);
 
         return true;
