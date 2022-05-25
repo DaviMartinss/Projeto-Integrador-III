@@ -136,14 +136,9 @@ server.post("/usuario", async (req, res) => {
 
 	if(userExiste == ''){
 
-		//var buffer = Buffer.from(req.body.logpass);
-
-		//req.body.logpass = cipher.encrypt(req.body.logpass);
-		//console.log("senha crip: "+req.body.logpass);
-
 		var userData = req.body
 
-		userData.Password = cipher.encrypt(userData.Password); //criptografia md5
+		userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
 
 		insertUser = await userRepository.insertUser(userData);
 
@@ -214,6 +209,31 @@ server.delete("/usuario", async (req, res) => {
 		console.log("ERRO AO DELETAR O USUÁRIO");
 	}
 
+});
+
+server.post("/changePassword", async (req, res) => {
+
+	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
+
+	req.body.Password = cipher.encrypt(req.body.Password); //criptografia aes256
+
+	//Caso não tenha o UserId, usar o da variável global
+	userChangePassword = await userRepository.updatePassword(req.body);
+
+	if(userChangePassword){
+		console.log("Usuário deletado com sucesso");
+		
+		//pegar os dados do usuário logado pelo o Id
+		user = await userRepository.getUserById(userId);
+
+		sendMail.run(req.body.NickName, user.Email);
+		res.redirect("/");
+
+		//redefina para a pagina desejada
+	}else{
+		console.log("Falha ao atualizar a senha");
+		//redefina para a pagina desejada
+	}
 });
 
 // ========================== CRUD DE CATEGORIA =====================================================================

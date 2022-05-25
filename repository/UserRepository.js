@@ -22,12 +22,37 @@ class UserRepository {
         }
 
       } catch (e) {
-        console.log("lalalal");
         console.log(e);
         return undefined;
       }
   }
 
+  // retorna o usuário logado
+
+  async getUserById(userId) {
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined )
+      {
+        const sql = 'select * from "User" WHERE "UserId"=$1;';
+        const values = [userId]
+        const user = await db.query(sql,values);
+        return user;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+
+    } catch (e) {
+      console.log(e);
+      return undefined;
+    }
+}
   //pega uma lista de usuários
   async getUserList() {
 
@@ -135,6 +160,34 @@ class UserRepository {
        return false;
      }
   }
+
+//Update senha
+async updatePassword(user){
+
+  try {
+
+    const db = await database.connect();
+
+    if(db != undefined)
+    {
+      const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
+      const values = [user.Password, user.UserId];
+      await db.query(sql, values);
+
+      return true;
+    }
+    else
+    {
+      console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+      return false;
+    }
+
+  } catch (ex) {
+
+    console.log(ex);
+    return false;
+  }
+}
 
 //deleta usuário
   async deleteUser(user_id){
