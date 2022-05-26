@@ -119,3 +119,6 @@ CREATE TABLE "Total" (
 	--caso seja alterado/deletado o valor do id_despesa, também será alterado/deletado a tupla de totais que
   	-- possui o id_despesa
 );
+
+--Adicionando poupança em total
+alter table "Total" add column "Poupanca" FLOAT DEFAULT NULL
