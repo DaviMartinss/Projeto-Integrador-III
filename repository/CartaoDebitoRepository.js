@@ -3,7 +3,7 @@ import { database } from "./db.js";
 class CartaoDebitoRepository{
 
 //pega uma lista de todos os cartões no Banco
-  async getCartaoList(userId) {
+  async getCartaoList(user) {
 
       try
       {
@@ -12,7 +12,7 @@ class CartaoDebitoRepository{
         if(db != undefined )
         {
           const sql = 'select * from "CartaoDebito" WHERE "UserId"=$1;';
-          const values = [userId];
+          const values = [user.UserId];
           const res = await db.query(sql,values);
           return res.rows;
         }

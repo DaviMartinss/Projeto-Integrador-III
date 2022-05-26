@@ -2,7 +2,7 @@ import { database } from "./db.js";
 
 class CategoriaRepository {
 
-  async getCategoriaList(userId) {
+  async getCategoriaList(user) {
 
     try {
 
@@ -11,7 +11,7 @@ class CategoriaRepository {
       if(db != undefined )
       {
         const sql = 'select * from "Categoria" WHERE "UserId"=$1';
-        const res = await db.query(sql, [userId]);
+        const res = await db.query(sql, [user.UserId]);
         return res.rows;
       }
       else

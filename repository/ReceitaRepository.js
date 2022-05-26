@@ -26,7 +26,7 @@ class ReceitaRepository {
   }
 
   //pega uma lista de receitas
-  async getReceitaList(userId) {
+  async getReceitaList(user) {
 
     try {
 
@@ -35,7 +35,7 @@ class ReceitaRepository {
       if(db != undefined )
       {
         const sql = 'select * from "Receita" WHERE "UserId"=$1;';
-        const res = await db.query(sql, [userId]);
+        const res = await db.query(sql, [user.UserId]);
         return res.rows;
       }
       else

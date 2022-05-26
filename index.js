@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
 //Variavel global responsável pela seção do usuário
-var userId;
+var user;
 
 //Encriptografia
 var key = 'bf3c199c2470cb477d907b1e0917c17b';
@@ -86,7 +86,7 @@ server.get('/tables', (req, res) => {
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
-	userId = undefined;
+	user = undefined;
 	res.render('login', {test, erroLogin: false});
 });
 
@@ -102,11 +102,11 @@ server.post("/", async (req, res) => {
 	getUserList.forEach( user => {
 
 		if(userData.Email == user.Email && cipher.decrypt(userData.Password) == cipher.decrypt(user.PassWord))
-			userId = user.UserId;
+			user = user;
 
 	});
 
-	if(userId != undefined)
+	if(user != undefined)
 	{
 		res.render("home", { erroLogin: false });
 	}
@@ -164,7 +164,7 @@ server.put("/usuario", async (req, res) => {
 	var userData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//userData.UserId = userId
+	//userData.UserId = user.UserId
 
 	userData.Password = cipher.encrypt(userData.Password); //criptografia md5
 
@@ -190,13 +190,13 @@ server.put("/usuario", async (req, res) => {
 server.delete("/usuario", async (req, res) => {
 
 	//Comentar esse código abaixo quando front tiver funcional
-	userId = req.body.UserId;
+	user = req.body.UserId;
 
 	//verifica se o delete ocorreu com sucesso!
 	var deleteUser;
 
 	//deletamos o usuário pelo o id
-	deleteUser = await userRepository.deleteUser(userId);
+	deleteUser = await userRepository.deleteUser(user);
 
 	if(deleteUser)
 	{
@@ -253,7 +253,7 @@ server.post("/categoria", async (req, res) => {
 	var categoriaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = userId
+	//categoriaData.UserId = user.UserId
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCategoria;
@@ -279,7 +279,7 @@ server.put("/categoria", async (req, res) => {
 	var categoriaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = userId
+	//categoriaData.UserId = user.UserId
 
 	//verifica se o update ocorreu com sucesso!
 	var updateCategoria;
@@ -305,7 +305,7 @@ server.delete("/categoria", async (req, res) => {
 	var categoriaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = userId
+	//categoriaData.UserId = user.UserId
 
 	//verifica se o update ocorreu com sucesso!
 	var deleteCategoria;
@@ -331,18 +331,18 @@ server.get("/cartaoList", async (req, res) => {
 
 	//Pega o tipo de cartões que será trazido como LISTA
 	let type = req.query.Type;
-	let userId = req.query.UserId;
+	let user = req.query.UserId;
 
 	//Tipo Lista para pegar todos os Cartões do Banco
 	var selectCartao;
 
 	if(type == "CC")
 	{
-		selectCartao = await cartaoCreditoRepository.getCartaoList(userId);
+		selectCartao = await cartaoCreditoRepository.getCartaoList(user);
 	}
 	else
 	{
-		selectCartao = await cartaoDebitoRepository.getCartaoList(userId);
+		selectCartao = await cartaoDebitoRepository.getCartaoList(user);
 	}
 
 	//ENVIA A LISTA DE VOLTA PARA PÁGINA
@@ -494,7 +494,7 @@ server.delete("/cartao", async (req, res) => {
 server.get("/receitaList", async (req, res) => {
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = userId
+	//receitaData.UserId = user.UserId
 
 	var receitaList = await receitaRepository.getReceitaList(req.query.UserId);
 	res.send(receitaList)
@@ -507,7 +507,7 @@ server.post("/receita", async (req, res) => {
 	var receitaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = userId
+	//receitaData.UserId = user.UserId
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertReceita;
@@ -533,7 +533,7 @@ server.put("/receita", async (req, res) => {
 	var receitaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = userId
+	//receitaData.UserId = user.UserId
 
 	//verifica se o update ocorreu com sucesso!
 	var updateReceita;
@@ -559,7 +559,7 @@ server.delete("/receita", async (req, res) => {
 	var receitaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = userId
+	//categoriaData.UserId = user.UserId
 
 	//verifica se o update ocorreu com sucesso!
 	var deleteReceita;
