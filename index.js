@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
 //Variavel global responsável pela seção do usuário
-var user;
+var user = undefined;
 
 //Encriptografia
 var key = 'bf3c199c2470cb477d907b1e0917c17b';
@@ -99,10 +99,10 @@ server.post("/", async (req, res) => {
 	//isso devido a criptografia ser gerada para senha é sempre diferente
 	var getUserList = await userRepository.getUserList();
 
-	getUserList.forEach( user => {
+	getUserList.forEach( userLista => {
 
-		if(userData.Email == user.Email && cipher.decrypt(userData.Password) == cipher.decrypt(user.PassWord))
-			user = user;
+		if(userData.Email == userLista.Email && cipher.decrypt(userData.Password) == cipher.decrypt(userLista.PassWord))
+			user = userLista;
 
 	});
 
@@ -222,7 +222,7 @@ server.post("/changePassword", async (req, res) => {
 
 	if(userChangePassword){
 		console.log("Usuário deletado com sucesso");
-		
+
 		//pegar os dados do usuário logado pelo o Id
 		user = await userRepository.getUserById(userId);
 
