@@ -95,7 +95,7 @@ server.post("/", async (req, res) => {
 	console.log(req.body);
 
 	//verificar se o usuario é válido
-	var userData = {Email:req.body.logemail, Password: cipher.encrypt(req.body.logpass)}
+	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
 	//pega a lista de usuario para verificar email e senha validos
 	//isso devido a criptografia ser gerada para senha é sempre diferente
@@ -103,14 +103,8 @@ server.post("/", async (req, res) => {
 
 	getUserList.forEach( userLista => {
 
-<<<<<<< Updated upstream
-		if(userData.Email == userLista.Email && cipher.decrypt(userData.Password) == cipher.decrypt(userLista.PassWord))
+		if(userData.Email == userLista.Email && userData.Password == cipher.decrypt(userLista.PassWord))
 			user = userLista;
-=======
-		if(userData.Email == user.Email && cipher.decrypt(userData.Password) == cipher.decrypt(user.PassWord))
-			user = user;
-			console.log("ACEITO ! ! !");
->>>>>>> Stashed changes
 
 	});
 
@@ -132,21 +126,8 @@ server.get("/signup", (req, res) => {
 	res.render("signup");
 });
 
-server.get("/login", (req, res) => {
-	res.render("/");
-});
-
-//verifica usuários no banco , essa rota e para auxilio de testes
-server.get("/usuarioList", async (req, res) => {
-
-	var getUserList = await userRepository.getUserList();
-
-	res.send(getUserList);
-
-});
-
-//cadastra usuário
-server.post("/usuario", async (req, res) => {
+server.post("/signup",  async(req, res) => {
+	console.log(req.body);
 
 	//verificar se o email já foi cadastrado
 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
@@ -176,7 +157,73 @@ server.post("/usuario", async (req, res) => {
 	}else{
 		console.log("Email já foi cadastrado por outro usuário!");
 	}
+
 });
+
+server.get("/login", (req, res) => {
+	res.render("/");
+});
+
+server.get("/reset-password", (req, res) => {
+	res.render("reset-password");
+});
+
+server.post("/reset-password", async(req, res) => {
+	console.log(req.body);
+
+	var getUserList = await userRepository.getUserList();
+
+	getUserList.forEach( userLista => {
+
+		if(userLista.Email == req.body.Email)
+			console.log(userLista.PassWord);
+			sendMail.run(cipher.decrypt(userLista.PassWord), req.body.Email);
+	});
+
+});
+
+//verifica usuários no banco , essa rota e para auxilio de testes
+server.get("/usuarioList", async (req, res) => {
+
+	var getUserList = await userRepository.getUserList();
+
+	res.send(getUserList);
+
+});
+
+//cadastra usuário
+//LEGADO -> usar signup
+// server.post("/usuario", async (req, res) => {
+
+// 	//verificar se o email já foi cadastrado
+// 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
+
+// 	//verifica se o insert ocorreu com sucesso!
+// 	var insertUser;
+
+// 	if(userExiste == ''){
+
+// 		var userData = req.body
+
+// 		userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
+
+// 		insertUser = await userRepository.insertUser(userData);
+
+// 		if(insertUser)
+// 		{
+// 			sendMailBemVindo.run(userData.NickName, userData.Email);
+// 			res.redirect("/");
+// 		}
+// 		else
+// 		{
+// 			console.log("ERRO NO CADASTRO DO USUÁRIO");
+// 			res.render("login", { erroLogin: true });
+// 		}
+
+// 	}else{
+// 		console.log("Email já foi cadastrado por outro usuário!");
+// 	}
+// });
 
 //atualiza usuário
 server.put("/usuario", async (req, res) => {

@@ -48,7 +48,7 @@
 									</div><!--//col-6-->
 									<div class="col-6">
 										<div class="forgot-password text-end">
-											<a href="reset-password.html">Recuperar senha?</a>
+											<a href="reset-password">Recuperar senha?</a>
 										</div>
 									</div><!--//col-6-->
 								</div><!--//extra-->
