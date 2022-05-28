@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>PedeMeia - Log In / Sign Up</title>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<link rel="stylesheet" href="../styles/login.css">
+
+</head>
+<body>
+	<div class="section">
+		<div class="container">
+			<div class="row full-height justify-content-center">
+				<div class="col-12 text-center align-self-center py-5">
+					<div class="section pb-5 pt-5 pt-sm-2 text-center">
+						<h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+			          	<input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+			          	<label for="reg-log"></label>
+						<div class="card-3d-wrap mx-auto">
+							<div class="card-3d-wrapper">
+								<div class="card-front">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Log In</h4>
+                      <form action="/" method="post">
+											<div class="form-group">
+												<input type="" name="logemail" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" name="logpass" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+											<input class="btn mt-4" type="submit">
+                    </form>
+                            				<p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
+				      					</div>
+			      					</div>
+			      				</div>
+								<div class="card-back">
+									<div class="center-wrap">
+										<div class="section text-center">
+											<h4 class="mb-4 pb-3">Sign Up</h4>
+
+										<form action="/usuario" method="post">
+                      <div class="form-group">
+											     <img src="/images/avatar/avatar001.png" class="">
+											</div>
+											<div class="form-group mt-2">
+												<input type="text" name="NickName" class="form-style" placeholder="Your Full Name" id="logname" autocomplete="off">
+												<i class="input-icon uil uil-user"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="email" name="Email" class="form-style" placeholder="Your Email" id="logemail" autocomplete="off">
+												<i class="input-icon uil uil-at"></i>
+											</div>
+											<div class="form-group mt-2">
+												<input type="password" name="Password" class="form-style" placeholder="Your Password" id="logpass" autocomplete="off">
+												<i class="input-icon uil uil-lock-alt"></i>
+											</div>
+                      <div class="form-group mt-2">
+												<input type="file" name="Avatar" class="form-style" id="logpass" autocomplete="off">
+
+											</div>
+											<input class="btn mt-4" type="submit">
+				      					</div>
+									</form>
+			      					</div>
+			      				</div>
+			      			</div>
+			      		</div>
+			      	</div>
+		      	</div>
+	      	</div>
+
+          <p>@model.test</p>
+	    </div>
+	</div>
+<!-- partial -->
+  <script  src="../scripts/login.js"></script>
+  @{
+      if(model.erroLogin)
+      {
+        <script>
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener("mouseenter", Swal.stopTimer);
+              toast.addEventListener("mouseleave", Swal.resumeTimer);
+            },
+          });
+
+          Toast.fire({
+            icon: "error",
+            title: "Não foi possível efetuar o login!",
+          });
+        </script>
+      }
+  }
+</body>
+</html>

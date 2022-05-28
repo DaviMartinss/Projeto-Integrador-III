@@ -92,6 +92,8 @@ server.get('/', (req, res) => {
 
 server.post("/", async (req, res) => {
 
+	console.log(req.body);
+
 	//verificar se o usuario é válido
 	var userData = {Email:req.body.logemail, Password: cipher.encrypt(req.body.logpass)}
 
@@ -101,19 +103,37 @@ server.post("/", async (req, res) => {
 
 	getUserList.forEach( userLista => {
 
+<<<<<<< Updated upstream
 		if(userData.Email == userLista.Email && cipher.decrypt(userData.Password) == cipher.decrypt(userLista.PassWord))
 			user = userLista;
+=======
+		if(userData.Email == user.Email && cipher.decrypt(userData.Password) == cipher.decrypt(user.PassWord))
+			user = user;
+			console.log("ACEITO ! ! !");
+>>>>>>> Stashed changes
 
 	});
 
+	console.log(userData);
+
+	console.log("valor de user", user);
+
 	if(user != undefined)
 	{
-		res.render("home", { erroLogin: false });
+		res.render("index", { erroLogin: false });
 	}
 	else
 	{
 		res.render("login", { erroLogin: true });
 	}
+});
+
+server.get("/signup", (req, res) => {
+	res.render("signup");
+});
+
+server.get("/login", (req, res) => {
+	res.render("/");
 });
 
 //verifica usuários no banco , essa rota e para auxilio de testes
