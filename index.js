@@ -114,7 +114,7 @@ server.post("/", async (req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("index", { erroLogin: false });
+		res.render("home", { erroLogin: false });
 	}
 	else
 	{
@@ -162,6 +162,10 @@ server.post("/signup",  async(req, res) => {
 
 server.get("/login", (req, res) => {
 	res.render("/");
+});
+
+server.get("/home", (req, res) => {
+	res.render("home");
 });
 
 server.get("/reset-password", (req, res) => {
@@ -251,6 +255,10 @@ server.put("/usuario", async (req, res) => {
 		console.log("ERRO NA ATUALIZAÇÃO");
 	}
 
+});
+
+server.get("/account", (req, res) => {
+	res.render("account");
 });
 
 //deleta usuário
