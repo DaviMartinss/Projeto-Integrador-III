@@ -14,7 +14,7 @@ var cipher = aes256.createCipher(key);
 	//	cipher.encrypt("senha")
 	//	cipher.decrypt("senha");
 
-//Repository IMPORTS
+//Repository IMPORTS - SERA REMOVIDO AO IMPLEMENTAR OS CONTROLLERS
 import { database } from "./repository/db.js";
 import { userRepository } from "./repository/UserRepository.js";
 import { receitaRepository } from "./repository/ReceitaRepository.js";
@@ -25,12 +25,9 @@ import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 
-
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-
 
 server.use(express.json())
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
@@ -38,8 +35,7 @@ server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso d
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
 
-
-//Para testes e n ter que ficar logando no sistema direto essa rota manda direto para TELAS OBJETIVAS
+//Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
 
 server.get('/home', (req, res) => {
 
@@ -86,13 +82,13 @@ server.get('/tables', (req, res) => {
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
-	user = undefined;
+	user = undefined; //Caso o user volte para tela de inicio a constante global é redefinida ou seja, fecha e "sessão"
 	res.render('login', {test, erroLogin: false});
 });
 
 server.post("/", async (req, res) => {
 
-	console.log(req.body);
+	//console.log(req.body);
 
 	//verificar se o usuario é válido
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
@@ -108,9 +104,8 @@ server.post("/", async (req, res) => {
 
 	});
 
-	console.log(userData);
-
-	console.log("valor de user", user);
+	//console.log(userData);
+	//console.log("valor de user", user);
 
 	if(user != undefined)
 	{
@@ -127,7 +122,7 @@ server.get("/signup", (req, res) => {
 });
 
 server.post("/signup",  async(req, res) => {
-	console.log(req.body);
+	//console.log(req.body);
 
 	//verificar se o email já foi cadastrado
 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
@@ -135,7 +130,7 @@ server.post("/signup",  async(req, res) => {
 	//verifica se o insert ocorreu com sucesso!
 	var insertUser;
 
-	if(userExiste == ''){
+	if(userExiste == undefined){
 
 		var userData = req.body
 
@@ -164,15 +159,26 @@ server.get("/login", (req, res) => {
 	res.render("/");
 });
 
-server.get("/home", (req, res) => {
-	res.render("home");
-});
-
 server.get("/reset-password", (req, res) => {
 	res.render("reset-password");
 });
 
 server.post("/reset-password", async(req, res) => {
+	//console.log(req.body);
+
+	var userExiste = await userRepository.getUserByEmail(req.body.Email);
+
+	if(userExiste != undefined)
+	{
+		sendMail.run(cipher.decrypt(userLista.PassWord), req.body.Email);
+	}
+	else {
+		console.log("Email não foi cadastrado por um usuário no sistema!");
+	}
+});
+
+//LEGADO -> MELHORIA ACIMA
+/*server.post("/reset-password", async(req, res) => {
 	console.log(req.body);
 
 	var getUserList = await userRepository.getUserList();
@@ -180,11 +186,13 @@ server.post("/reset-password", async(req, res) => {
 	getUserList.forEach( userLista => {
 
 		if(userLista.Email == req.body.Email)
-			console.log(userLista.PassWord);
+		{
+			//console.log(userLista.PassWord);
 			sendMail.run(cipher.decrypt(userLista.PassWord), req.body.Email);
+		}
 	});
 
-});
+});*/
 
 //verifica usuários no banco , essa rota e para auxilio de testes
 server.get("/usuarioList", async (req, res) => {
@@ -195,47 +203,17 @@ server.get("/usuarioList", async (req, res) => {
 
 });
 
-//cadastra usuário
-//LEGADO -> usar signup
-// server.post("/usuario", async (req, res) => {
-
-// 	//verificar se o email já foi cadastrado
-// 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
-
-// 	//verifica se o insert ocorreu com sucesso!
-// 	var insertUser;
-
-// 	if(userExiste == ''){
-
-// 		var userData = req.body
-
-// 		userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
-
-// 		insertUser = await userRepository.insertUser(userData);
-
-// 		if(insertUser)
-// 		{
-// 			sendMailBemVindo.run(userData.NickName, userData.Email);
-// 			res.redirect("/");
-// 		}
-// 		else
-// 		{
-// 			console.log("ERRO NO CADASTRO DO USUÁRIO");
-// 			res.render("login", { erroLogin: true });
-// 		}
-
-// 	}else{
-// 		console.log("Email já foi cadastrado por outro usuário!");
-// 	}
-// });
 
 //atualiza usuário
 server.put("/usuario", async (req, res) => {
 
 	var userData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//userData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(userData.UserId == undefined){
+		userData.UserId = user.UserId
+	}
 
 	userData.Password = cipher.encrypt(userData.Password); //criptografia md5
 
@@ -327,8 +305,11 @@ server.post("/categoria", async (req, res) => {
 
 	var categoriaData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData.UserId = user.UserId
+	}
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCategoria;
@@ -353,8 +334,11 @@ server.put("/categoria", async (req, res) => {
 
 	var categoriaData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData.UserId = user.UserId
+	}
 
 	//verifica se o update ocorreu com sucesso!
 	var updateCategoria;
@@ -379,8 +363,11 @@ server.delete("/categoria", async (req, res) => {
 
 	var categoriaData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData.UserId = user.UserId
+	}
 
 	//verifica se o update ocorreu com sucesso!
 	var deleteCategoria;
@@ -406,7 +393,12 @@ server.get("/cartaoList", async (req, res) => {
 
 	//Pega o tipo de cartões que será trazido como LISTA
 	let type = req.query.Type;
-	let user = req.query.UserId;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(req.query.UserId != undefined){
+		user.UserId = req.query.UserId
+	}
 
 	//Tipo Lista para pegar todos os Cartões do Banco
 	var selectCartao;
@@ -438,6 +430,12 @@ server.post("/cartao", async (req, res) => {
 
 	//Recebe os dados do cartão de crédito
 	var cartaoData = req.body
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(cartaoData.UserId == undefined){
+		cartaoData.UserId = user.UserId
+	}
 
 	if(cartaoData.Type == "CC")
 	{
@@ -483,6 +481,12 @@ server.put("/cartao", async (req, res) => {
 
 	//Recebe os dados do cartão de crédito
 	var cartaoData = req.body
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(cartaoData.UserId == undefined){
+		cartaoData.UserId = user.UserId
+	}
 
 	if(cartaoData.Type == "CC")
 	{
@@ -531,6 +535,12 @@ server.delete("/cartao", async (req, res) => {
 	//Recebe os dados do cartão de crédito
 	var cartaoData = req.body
 
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(cartaoData.UserId == undefined){
+		cartaoData.UserId = user.UserId
+	}
+
 	if(cartaoData.Type == "CC")
 	{
 		//DELETE Cartão de Crédito
@@ -568,10 +578,13 @@ server.delete("/cartao", async (req, res) => {
 //lista de receitas
 server.get("/receitaList", async (req, res) => {
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(req.query.UserId != undefined){
+		user.UserId = req.query.UserId;
+	}
 
-	var receitaList = await receitaRepository.getReceitaList(req.query.UserId);
+	var receitaList = await receitaRepository.getReceitaList(user.UserId);
 	res.send(receitaList)
 
 });
@@ -581,8 +594,11 @@ server.post("/receita", async (req, res) => {
 
 	var receitaData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData.UserId = user.UserId;
+	}
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertReceita;
@@ -607,8 +623,11 @@ server.put("/receita", async (req, res) => {
 
 	var receitaData = req.body
 
-	//Descomentar quando tiver o front funcionando para o usuário logar
-	//receitaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData.UserId = user.UserId;
+	}
 
 	//verifica se o update ocorreu com sucesso!
 	var updateReceita;
@@ -634,7 +653,11 @@ server.delete("/receita", async (req, res) => {
 	var receitaData = req.body
 
 	//Descomentar quando tiver o front funcionando para o usuário logar
-	//categoriaData.UserId = user.UserId
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData.UserId = user.UserId;
+	}
 
 	//verifica se o update ocorreu com sucesso!
 	var deleteReceita;
@@ -653,24 +676,6 @@ server.delete("/receita", async (req, res) => {
 	}
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 server.listen(3000, () => {
