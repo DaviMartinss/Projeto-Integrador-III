@@ -116,7 +116,7 @@ class UserController {
   async GenerateUser(userData) {
 
     try{
-      
+
       userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
 
       //verificar se o email já foi cadastrado
@@ -141,7 +141,93 @@ class UserController {
 
       }else{
         console.log("Email já foi cadastrado por outro usuário!");
+        return false;
       }
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
+  //ATUALIZA O USUARIO
+  async UpdateUser(userData) {
+
+    try{
+
+      userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
+
+      //verifica se o update ocorreu com sucesso!
+    	var updateUser;
+
+    	updateUser = await userRepository.updateUser(userData);
+
+    	if(updateUser)
+    	{
+    		console.log("USUÁRIO ATUALIZADO");
+        return true;
+    	}
+    	else
+    	{
+    		console.log("ERRO NA ATUALIZAÇÃO");
+        return false;
+    	}
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
+  //DELETA O USUARIO
+  async DeleteUser(userId) {
+
+    try{
+
+      //verifica se o delete ocorreu com sucesso!
+    	var deleteUser = await userRepository.deleteUser(userId);
+
+    	if(deleteUser)
+    	{
+    		console.log("USUÁRIO DELETADO");
+    		return true;
+    	}
+    	else
+    	{
+    		console.log("ERRO AO DELETAR O USUÁRIO");
+        return false;
+    	}
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
+  //ATUALIZA A SENHA DO USUARIO
+  async UpdatePassword(userData) {
+
+    try{
+
+      var userChangePassword = await userRepository.updatePassword(userData);
+
+    	if(userChangePassword){
+    		console.log("Atualizado a senha com sucesso!");
+
+    		//pegar os dados do usuário logado pelo o Id
+    		const user = await userRepository.getUserById(userData.UserId);
+
+        //console.log(user);
+
+        return user;
+
+    	}else{
+    		console.log("Falha ao atualizar a senha");
+    		return undefined;
+    	}
 
     }catch(e){
 

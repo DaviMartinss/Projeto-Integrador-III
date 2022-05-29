@@ -110,7 +110,7 @@ server.post("/", async (req, res) => {
 	}
 });
 
-// //ROTA DE LOGIN DO USUÁRIO
+// LEGADO -> //ROTA DE LOGIN DO USUÁRIO
 // server.post("/", async (req, res) => {
 //
 // 	//console.log(req.body);
@@ -252,7 +252,7 @@ server.get("/usuarioList", async (req, res) => {
 });
 
 
-//atualiza usuário
+//ROTA ATUALIZA O USUÁRIO
 server.put("/usuario", async (req, res) => {
 
 	var userData = req.body
@@ -263,71 +263,102 @@ server.put("/usuario", async (req, res) => {
 		userData.UserId = user.UserId
 	}
 
-	userData.Password = cipher.encrypt(userData.Password); //criptografia md5
-
 	//verifica se o update ocorreu com sucesso!
-	var updateUser;
-
-	updateUser = await userRepository.updateUser(userData);
+	var updateUser = await userController.UpdateUser(userData);
 
 	if(updateUser)
 	{
 		//deve redirecionar para página de informações do usuário
-		console.log("USUÁRIO ATUALIZADO");
+		//console.log("USUÁRIO ATUALIZADO");
 	}
 	else
 	{
 		//deve redirecionar para página de informações do usuário com o alerta ERRO
-		console.log("ERRO NA ATUALIZAÇÃO");
+		//console.log("ERRO NA ATUALIZAÇÃO");
 	}
 
 });
+
+// LEGADO -> //atualiza usuário
+// server.put("/usuario", async (req, res) => {
+//
+// 	var userData = req.body
+//
+// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
+// 	//Via interface irá entrar e passar o UserId
+// 	if(userData.UserId == undefined){
+// 		userData.UserId = user.UserId
+// 	}
+//
+// 	userData.Password = cipher.encrypt(userData.Password); //criptografia md5
+//
+// 	//verifica se o update ocorreu com sucesso!
+// 	var updateUser;
+//
+// 	updateUser = await userRepository.updateUser(userData);
+//
+// 	if(updateUser)
+// 	{
+// 		//deve redirecionar para página de informações do usuário
+// 		console.log("USUÁRIO ATUALIZADO");
+// 	}
+// 	else
+// 	{
+// 		//deve redirecionar para página de informações do usuário com o alerta ERRO
+// 		console.log("ERRO NA ATUALIZAÇÃO");
+// 	}
+//
+// });
 
 server.get("/account", (req, res) => {
 	res.render("account");
 });
 
-//deleta usuário
+//ROTA DELETA O USUÁRIO
 server.delete("/usuario", async (req, res) => {
 
-	//Comentar esse código abaixo quando front tiver funcional
-	user = req.body.UserId;
+	if(req.body.UserId != undefined)
+		user = req.body
 
 	//verifica se o delete ocorreu com sucesso!
-	var deleteUser;
-
-	//deletamos o usuário pelo o id
-	deleteUser = await userRepository.deleteUser(user);
+	var deleteUser = await userController.DeleteUser(user.UserId);
 
 	if(deleteUser)
 	{
-		console.log("USUÁRIO DELETADO");
+		//console.log("USUÁRIO DELETADO");
 		res.redirect("/");
 	}
 	else
 	{
 		//deve redirecionar para página de informações do usuário com o alerta ERRO
-		console.log("ERRO AO DELETAR O USUÁRIO");
+		//console.log("ERRO AO DELETAR O USUÁRIO");
 	}
 
 });
+
 
 server.post("/changePassword", async (req, res) => {
 
 	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
 
-	req.body.Password = cipher.encrypt(req.body.Password); //criptografia aes256
+	//Esse if serve para caso for usar JSON
+	if(req.body.UserId != undefined)
+	{
+		user = {UserId: req.body.UserId, Password:cipher.encrypt(req.body.Password) };
+	}
+	else
+	{
+		user = {UserId: user.UserId, Password:cipher.encrypt(req.body.Password) };
+	}
 
 	//Caso não tenha o UserId, usar o da variável global
-	userChangePassword = await userRepository.updatePassword(req.body);
+	var userChangePassword = await userController.UpdatePassword(user);
 
-	if(userChangePassword){
-		console.log("Usuário deletado com sucesso");
+	//console.log(userChangePassword);
 
-		//pegar os dados do usuário logado pelo o Id
-		user = await userRepository.getUserById(userId);
+	if(userChangePassword != undefined){
 
-		sendMail.run(req.body.NickName, user.Email);
+		sendMail.run(userChangePassword.NickName, userChangePassword.Email);
 		res.redirect("/");
 
 		//redefina para a pagina desejada
@@ -336,6 +367,31 @@ server.post("/changePassword", async (req, res) => {
 		//redefina para a pagina desejada
 	}
 });
+
+// server.post("/changePassword", async (req, res) => {
+//
+// 	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
+//
+// 	req.body.Password = cipher.encrypt(req.body.Password); //criptografia aes256
+//
+// 	//Caso não tenha o UserId, usar o da variável global
+// 	userChangePassword = await userRepository.updatePassword(req.body);
+//
+// 	if(userChangePassword){
+// 		console.log("Usuário deletado com sucesso");
+//
+// 		//pegar os dados do usuário logado pelo o Id
+// 		user = await userRepository.getUserById(userId);
+//
+// 		sendMail.run(req.body.NickName, user.Email);
+// 		res.redirect("/");
+//
+// 		//redefina para a pagina desejada
+// 	}else{
+// 		console.log("Falha ao atualizar a senha");
+// 		//redefina para a pagina desejada
+// 	}
+// });
 
 // ========================== CRUD DE CATEGORIA =====================================================================
 

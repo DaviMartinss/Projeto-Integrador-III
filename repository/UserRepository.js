@@ -35,12 +35,14 @@ class UserRepository {
 
       const db = await database.connect();
 
+      //console.log(userId);
+
       if(db != undefined )
       {
         const sql = 'select * from "User" WHERE "UserId"=$1;';
         const values = [userId]
-        const user = await db.query(sql,values);
-        return user;
+        const res = await db.query(sql,values);
+        return res.rows[0];
       }
       else
       {
@@ -192,7 +194,7 @@ async updatePassword(user){
 }
 
 //deleta usuário
-  async deleteUser(user_id){
+  async deleteUser(userId){
 
     try {
 
@@ -201,7 +203,7 @@ async updatePassword(user){
       if(db != undefined)
       {
         const sql = 'DELETE FROM "User" WHERE "UserId"=$1';
-        const values = [user_id];
+        const values = [userId];
         await db.query(sql, values);
 
         return true;
