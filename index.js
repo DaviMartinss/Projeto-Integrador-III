@@ -22,6 +22,11 @@ import { categoriaRepository } from "./repository/CategoriaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
 
+
+//Controlers IMPORTS
+import { userController } from "./controllers/UserController.js";
+
+
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 
@@ -79,6 +84,7 @@ server.get('/tables', (req, res) => {
 
 // ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
 
+//ROTA DE LOGIN DO USUÁRIO
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
@@ -86,26 +92,13 @@ server.get('/', (req, res) => {
 	res.render('login', {test, erroLogin: false});
 });
 
+//ROTA DE LOGIN DO USUÁRIO
 server.post("/", async (req, res) => {
-
-	//console.log(req.body);
 
 	//verificar se o usuario é válido
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
-	//pega a lista de usuario para verificar email e senha validos
-	//isso devido a criptografia ser gerada para senha é sempre diferente
-	var getUserList = await userRepository.getUserList();
-
-	getUserList.forEach( userLista => {
-
-		if(userData.Email == userLista.Email && userData.Password == cipher.decrypt(userLista.PassWord))
-			user = userLista;
-
-	});
-
-	//console.log(userData);
-	//console.log("valor de user", user);
+  user = await userController.getUser(userData);
 
 	if(user != undefined)
 	{
@@ -117,43 +110,98 @@ server.post("/", async (req, res) => {
 	}
 });
 
+// //ROTA DE LOGIN DO USUÁRIO
+// server.post("/", async (req, res) => {
+//
+// 	//console.log(req.body);
+//
+// 	//verificar se o usuario é válido
+// 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
+//
+// 	//pega a lista de usuario para verificar email e senha validos
+// 	//isso devido a criptografia ser gerada para senha é sempre diferente
+// 	var getUserList = await userRepository.getUserList();
+//
+// 	getUserList.forEach( userLista => {
+//
+// 		if(userData.Email == userLista.Email && userData.Password == cipher.decrypt(userLista.PassWord))
+// 			user = userLista;
+//
+// 	});
+//
+// 	//console.log(userData);
+// 	//console.log("valor de user", user);
+//
+// 	if(user != undefined)
+// 	{
+// 		res.render("home", { erroLogin: false });
+// 	}
+// 	else
+// 	{
+// 		res.render("login", { erroLogin: true });
+// 	}
+// });
+
+//ROTA DE CADASTRO DO USUÁRIO
 server.get("/signup", (req, res) => {
 	res.render("signup");
 });
 
+//ROTA DE CADASTRO DO USUÁRIO - ATT UTILIZANDO CONTROLLER
 server.post("/signup",  async(req, res) => {
-	//console.log(req.body);
 
-	//verificar se o email já foi cadastrado
-	var userExiste = await userRepository.getUserByEmail(req.body.Email);
+	var userData = req.body
 
 	//verifica se o insert ocorreu com sucesso!
-	var insertUser;
+	var insertUser = await userController.GenerateUser(userData);
 
-	if(userExiste == undefined){
-
-		var userData = req.body
-
-		userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
-
-		insertUser = await userRepository.insertUser(userData);
-
-		if(insertUser)
-		{
-			sendMailBemVindo.run(userData.NickName, userData.Email);
-			res.redirect("/");
-		}
-		else
-		{
-			console.log("ERRO NO CADASTRO DO USUÁRIO");
-			res.render("login", { erroLogin: true });
-		}
-
-	}else{
-		console.log("Email já foi cadastrado por outro usuário!");
+	if(insertUser)
+	{
+		sendMailBemVindo.run(userData.NickName, userData.Email);
+		res.redirect("/");
+	}
+	else
+	{
+		res.render("login", { erroLogin: true });
 	}
 
 });
+
+
+//LEGADO PARA USAR CONTROLLERS
+	// server.post("/signup",  async(req, res) => {
+	// //console.log(req.body);
+	//
+	// //verificar se o email já foi cadastrado
+	// var userExiste = await userRepository.getUserByEmail(req.body.Email);
+	//
+	// //verifica se o insert ocorreu com sucesso!
+	// var insertUser;
+	//
+	// if(userExiste == undefined){
+	//
+	// 	var userData = req.body
+	//
+	// 	userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
+	//
+	// 	insertUser = await userRepository.insertUser(userData);
+	//
+	// 	if(insertUser)
+	// 	{
+	// 		sendMailBemVindo.run(userData.NickName, userData.Email);
+	// 		res.redirect("/");
+	// 	}
+	// 	else
+	// 	{
+	// 		console.log("ERRO NO CADASTRO DO USUÁRIO");
+	// 		res.render("login", { erroLogin: true });
+	// 	}
+	//
+	// }else{
+	// 	console.log("Email já foi cadastrado por outro usuário!");
+	// }
+	//
+	// });
 
 server.get("/login", (req, res) => {
 	res.render("/");

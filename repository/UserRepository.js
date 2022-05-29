@@ -86,11 +86,13 @@ class UserRepository {
 
       const db = await database.connect();
 
+      //console.log(email);
+
       if(db != undefined )
       {
-        const sql = 'select * from "User" WHERE "Email"=$1;';
+        const sql = 'SELECT * FROM "User" WHERE "Email"=$1;';
         const res = await db.query(sql,[email]);
-        return res;
+        return res.rows;
       }
       else
       {
@@ -122,7 +124,7 @@ class UserRepository {
       }
       else
       {
-        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        //console.log("ERRO NA CONEXÃO COM POSTGREESQL");
         return false;
       }
 
