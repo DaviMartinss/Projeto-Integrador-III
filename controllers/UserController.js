@@ -13,7 +13,7 @@ class UserController {
   }
 
   //pega USER PELO EMAIL E SENHA
-  async getUser(userData) {
+  async GetUserByEmailAndSenha(userData) {
 
     try{
       var user = undefined;
@@ -44,11 +44,11 @@ class UserController {
   }
 
   //PEGA O USER PELO ID
-  async getUserById(userId) {
+  async GetUserById(userId) {
 
     try{
 
-      var user = await getUserById(userId);
+      var user = await userRepository.getUserById(userId);
 
       if(user != undefined)
       {
@@ -67,11 +67,11 @@ class UserController {
   }
 
   //PEGA TODOS OS USERS E TRAS NA LISTA
-  async getUserList() {
+  async GetUserList() {
 
     try{
 
-      var userList = await getUserList();
+      var userList = await userRepository.getUserList();
 
       if(userList != undefined)
       {
@@ -90,7 +90,7 @@ class UserController {
   }
 
   //PEGA TODOS OS USERS E TRAS NA LISTA
-  async getUserByEmail(email) {
+  async GetUserByEmail(email) {
 
     try{
 
@@ -130,14 +130,9 @@ class UserController {
         insertUser = await userRepository.insertUser(userData);
 
         if(insertUser)
-        {
           return true;
-        }
         else
-        {
-          console.log("ERRO NO CADASTRO DO USUÁRIO");
           return false;
-        }
 
       }else{
         console.log("Email já foi cadastrado por outro usuário!");
@@ -164,15 +159,9 @@ class UserController {
     	updateUser = await userRepository.updateUser(userData);
 
     	if(updateUser)
-    	{
-    		console.log("USUÁRIO ATUALIZADO");
         return true;
-    	}
     	else
-    	{
-    		console.log("ERRO NA ATUALIZAÇÃO");
         return false;
-    	}
 
     }catch(e){
 
@@ -190,15 +179,9 @@ class UserController {
     	var deleteUser = await userRepository.deleteUser(userId);
 
     	if(deleteUser)
-    	{
-    		console.log("USUÁRIO DELETADO");
     		return true;
-    	}
     	else
-    	{
-    		console.log("ERRO AO DELETAR O USUÁRIO");
         return false;
-    	}
 
     }catch(e){
 

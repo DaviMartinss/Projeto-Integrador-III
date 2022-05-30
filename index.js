@@ -16,15 +16,13 @@ var cipher = aes256.createCipher(key);
 
 //Repository IMPORTS - SERA REMOVIDO AO IMPLEMENTAR OS CONTROLLERS
 import { database } from "./repository/db.js";
-import { userRepository } from "./repository/UserRepository.js";
 import { receitaRepository } from "./repository/ReceitaRepository.js";
-import { categoriaRepository } from "./repository/CategoriaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
 
-
 //Controlers IMPORTS
 import { userController } from "./controllers/UserController.js";
+import { categoriaController } from "./controllers/CategoriaController.js";
 
 
 //Services IMPORTS
@@ -88,7 +86,7 @@ server.get('/tables', (req, res) => {
 server.get('/', (req, res) => {
 
 	let test = 'TESTANDO'
-	user = undefined; //Caso o user volte para tela de inicio a constante global é redefinida ou seja, fecha e "sessão"
+	user = undefined; //Caso o user volte para tela de inicio a constante global é redefinida, ou seja, fecha e "sessão"
 	res.render('login', {test, erroLogin: false});
 });
 
@@ -98,7 +96,7 @@ server.post("/", async (req, res) => {
 	//verificar se o usuario é válido
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
-  user = await userController.getUser(userData);
+  user = await userController.GetUserByEmailAndSenha(userData);
 
 	if(user != undefined)
 	{
@@ -110,44 +108,12 @@ server.post("/", async (req, res) => {
 	}
 });
 
-// LEGADO -> //ROTA DE LOGIN DO USUÁRIO
-// server.post("/", async (req, res) => {
-//
-// 	//console.log(req.body);
-//
-// 	//verificar se o usuario é válido
-// 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
-//
-// 	//pega a lista de usuario para verificar email e senha validos
-// 	//isso devido a criptografia ser gerada para senha é sempre diferente
-// 	var getUserList = await userRepository.getUserList();
-//
-// 	getUserList.forEach( userLista => {
-//
-// 		if(userData.Email == userLista.Email && userData.Password == cipher.decrypt(userLista.PassWord))
-// 			user = userLista;
-//
-// 	});
-//
-// 	//console.log(userData);
-// 	//console.log("valor de user", user);
-//
-// 	if(user != undefined)
-// 	{
-// 		res.render("home", { erroLogin: false });
-// 	}
-// 	else
-// 	{
-// 		res.render("login", { erroLogin: true });
-// 	}
-// });
-
 //ROTA DE CADASTRO DO USUÁRIO
 server.get("/signup", (req, res) => {
 	res.render("signup");
 });
 
-//ROTA DE CADASTRO DO USUÁRIO - ATT UTILIZANDO CONTROLLER
+//ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
 
 	var userData = req.body
@@ -167,46 +133,6 @@ server.post("/signup",  async(req, res) => {
 
 });
 
-
-//LEGADO PARA USAR CONTROLLERS
-	// server.post("/signup",  async(req, res) => {
-	// //console.log(req.body);
-	//
-	// //verificar se o email já foi cadastrado
-	// var userExiste = await userRepository.getUserByEmail(req.body.Email);
-	//
-	// //verifica se o insert ocorreu com sucesso!
-	// var insertUser;
-	//
-	// if(userExiste == undefined){
-	//
-	// 	var userData = req.body
-	//
-	// 	userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
-	//
-	// 	insertUser = await userRepository.insertUser(userData);
-	//
-	// 	if(insertUser)
-	// 	{
-	// 		sendMailBemVindo.run(userData.NickName, userData.Email);
-	// 		res.redirect("/");
-	// 	}
-	// 	else
-	// 	{
-	// 		console.log("ERRO NO CADASTRO DO USUÁRIO");
-	// 		res.render("login", { erroLogin: true });
-	// 	}
-	//
-	// }else{
-	// 	console.log("Email já foi cadastrado por outro usuário!");
-	// }
-	//
-	// });
-
-server.get("/login", (req, res) => {
-	res.render("/");
-});
-
 server.get("/reset-password", (req, res) => {
 	res.render("reset-password");
 });
@@ -214,7 +140,7 @@ server.get("/reset-password", (req, res) => {
 server.post("/reset-password", async(req, res) => {
 	//console.log(req.body);
 
-	var userExiste = await userRepository.getUserByEmail(req.body.Email);
+	var userExiste = await userRepository.GetUserByEmail(req.body.Email);
 
 	if(userExiste != undefined)
 	{
@@ -225,27 +151,11 @@ server.post("/reset-password", async(req, res) => {
 	}
 });
 
-//LEGADO -> MELHORIA ACIMA
-/*server.post("/reset-password", async(req, res) => {
-	console.log(req.body);
-
-	var getUserList = await userRepository.getUserList();
-
-	getUserList.forEach( userLista => {
-
-		if(userLista.Email == req.body.Email)
-		{
-			//console.log(userLista.PassWord);
-			sendMail.run(cipher.decrypt(userLista.PassWord), req.body.Email);
-		}
-	});
-
-});*/
 
 //verifica usuários no banco , essa rota e para auxilio de testes
 server.get("/usuarioList", async (req, res) => {
 
-	var getUserList = await userRepository.getUserList();
+	var getUserList = await userController.GetUserList();
 
 	res.send(getUserList);
 
@@ -279,36 +189,6 @@ server.put("/usuario", async (req, res) => {
 
 });
 
-// LEGADO -> //atualiza usuário
-// server.put("/usuario", async (req, res) => {
-//
-// 	var userData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(userData.UserId == undefined){
-// 		userData.UserId = user.UserId
-// 	}
-//
-// 	userData.Password = cipher.encrypt(userData.Password); //criptografia md5
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var updateUser;
-//
-// 	updateUser = await userRepository.updateUser(userData);
-//
-// 	if(updateUser)
-// 	{
-// 		//deve redirecionar para página de informações do usuário
-// 		console.log("USUÁRIO ATUALIZADO");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de informações do usuário com o alerta ERRO
-// 		console.log("ERRO NA ATUALIZAÇÃO");
-// 	}
-//
-// });
 
 server.get("/account", (req, res) => {
 	res.render("account");
@@ -336,7 +216,7 @@ server.delete("/usuario", async (req, res) => {
 
 });
 
-
+//ROTA ATUALIZA SENHA DO USUÁRIO
 server.post("/changePassword", async (req, res) => {
 
 	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
@@ -368,37 +248,18 @@ server.post("/changePassword", async (req, res) => {
 	}
 });
 
-// server.post("/changePassword", async (req, res) => {
-//
-// 	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
-//
-// 	req.body.Password = cipher.encrypt(req.body.Password); //criptografia aes256
-//
-// 	//Caso não tenha o UserId, usar o da variável global
-// 	userChangePassword = await userRepository.updatePassword(req.body);
-//
-// 	if(userChangePassword){
-// 		console.log("Usuário deletado com sucesso");
-//
-// 		//pegar os dados do usuário logado pelo o Id
-// 		user = await userRepository.getUserById(userId);
-//
-// 		sendMail.run(req.body.NickName, user.Email);
-// 		res.redirect("/");
-//
-// 		//redefina para a pagina desejada
-// 	}else{
-// 		console.log("Falha ao atualizar a senha");
-// 		//redefina para a pagina desejada
-// 	}
-// });
-
 // ========================== CRUD DE CATEGORIA =====================================================================
 
 //lista de categoria
 server.get("/categoriaList", async (req, res) => {
 
-	var categoriaList = await categoriaRepository.getCategoriaList(req.query.UserId);
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(req.query.UserId != undefined){
+		 user = {UserId:req.query.UserId}
+	}
+
+	var categoriaList = await categoriaController.GetCategoriaList(user);
 
 	res.send(categoriaList)
 
@@ -416,9 +277,7 @@ server.post("/categoria", async (req, res) => {
 	}
 
 	//verifica se o insert ocorreu com sucesso!
-	var insertCategoria;
-
-	insertCategoria = await categoriaRepository.insertCategoria(categoriaData); //cadastrando categoria
+	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
 
 	if(insertCategoria)
 	{
@@ -445,9 +304,7 @@ server.put("/categoria", async (req, res) => {
 	}
 
 	//verifica se o update ocorreu com sucesso!
-	var updateCategoria;
-
-	updateCategoria = await categoriaRepository.updateCategoria(categoriaData);
+	var updateCategoria = await categoriaController.UpdateCategoria(categoriaData);
 
 	if(updateCategoria)
 	{
@@ -474,9 +331,7 @@ server.delete("/categoria", async (req, res) => {
 	}
 
 	//verifica se o update ocorreu com sucesso!
-	var deleteCategoria;
-
-	deleteCategoria = await categoriaRepository.deleteCategoria(categoriaData);
+	var deleteCategoria = await categoriaController.DeleteCategoria(categoriaData);
 
 	if(deleteCategoria)
 	{
