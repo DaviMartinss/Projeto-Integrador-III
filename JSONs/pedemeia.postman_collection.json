@@ -291,7 +291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\":1,\n    \"ReceitaId\":1,\n    \"CategoriaId\":1,\n    \"Data\":\"2022-01-01\",\n    \"FormaLocacao\": \"DINHEIRO\",\n    \"Valor\": 5000.34,\n    \"SeRepete\": false\n}",
+							"raw": "{\n    \"UserId\":5,\n    \"ReceitaId\":1,\n    \"CategoriaId\":3,\n    \"Data\":\"2023-03-03\",\n    \"FormaLocacao\": \"DINHEIRO\",\n    \"Valor\": 5000.34,\n    \"SeRepete\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,7 +319,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\":1,\n    \"ReceitaId\":1\n}",
+							"raw": "{\n    \"UserId\":5,\n    \"ReceitaId\":1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -377,7 +377,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"NickName\": \"Alan\",\n    \"Email\": \"alan@alan134.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
+							"raw": "{\n    \"NickName\": \"Jobs\",\n    \"Email\": \"jobs@jobs.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -385,14 +385,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/usuario",
+							"raw": "http://localhost:3000/signup",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"usuario"
+								"signup"
 							]
 						}
 					},
@@ -405,7 +405,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 5,\n    \"NickName\": \"Jose\",\n    \"Email\": \"alan@alan12.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
+							"raw": "{\n    \"UserId\": 6,\n    \"NickName\": \"Estev\",\n    \"Email\": \"jobs@jobs.com\",\n    \"Password\": \"123\",\n    \"Img\": \"\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -433,7 +433,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 2\n}",
+							"raw": "{\n    \"UserId\": 5\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -472,6 +472,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "ChangePassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"UserId\": 4,\n    \"Password\": \"abcd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/changePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"changePassword"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -485,7 +513,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 5,\n    \"Categoria\": \"Telefone\"\n}",
+							"raw": "{\n    \"UserId\": 4,\n    \"Categoria\": \"Luz\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -513,7 +541,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 5,\n    \"CategoriaId\": 2,\n    \"Categoria\": \"WIFI\"\n}",
+							"raw": "{\n    \"UserId\": 4,\n    \"CategoriaId\": 1,\n    \"Categoria\": \"WIFI\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -541,7 +569,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"UserId\": 1,\n    \"CategoriaId\": 1\n}",
+							"raw": "{\n    \"UserId\": 4,\n    \"CategoriaId\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -568,7 +596,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/categoriaList?UserId=5",
+							"raw": "http://localhost:3000/categoriaList?UserId=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -580,7 +608,7 @@
 							"query": [
 								{
 									"key": "UserId",
-									"value": "5"
+									"value": "4"
 								}
 							]
 						}
