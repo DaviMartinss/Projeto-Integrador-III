@@ -23,7 +23,7 @@ import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js
 //Controlers IMPORTS
 import { userController } from "./controllers/UserController.js";
 import { categoriaController } from "./controllers/CategoriaController.js";
-
+import { cartaoController} from "./controllers/CartaoController.js"
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
@@ -56,8 +56,8 @@ server.get('/despesa', (req, res) => {
 });
 
 server.get('/cartaoCredito', (req, res) => {
-
-	res.render("cartaoCredito", { erroLogin: false });
+	
+	res.render("credito", { erroLogin: false });
 });
 
 server.get('/cartaoDebito', (req, res) => {
@@ -348,188 +348,44 @@ server.delete("/categoria", async (req, res) => {
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
-server.get("/cartaoList", async (req, res) => {
+server.get("/ListCardByType", async (req, res) => {
 
-	//Pega o tipo de cartões que será trazido como LISTA
-	let type = req.query.Type;
+	
 
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(req.query.UserId != undefined){
-		user.UserId = req.query.UserId
-	}
+});
 
-	//Tipo Lista para pegar todos os Cartões do Banco
-	var selectCartao;
+//cadastra cartaão
+server.post("/cartao", async (req, res) => {
 
-	if(type == "CC")
+	//var userData = req.body
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertCartao = await cartaoController.insertCartao(req.body);
+
+	if(insertCartao)
 	{
-		selectCartao = await cartaoCreditoRepository.getCartaoList(user);
+		console.log("cartão salvo com sucesso");
+		res.redirect("/"); //mandar para a tela que deseja
 	}
 	else
 	{
-		selectCartao = await cartaoDebitoRepository.getCartaoList(user);
+		console.log("Falha ao cadastrar o cartão");
+		res.render("login", { erroLogin: true });//manda para a tela que deseja
 	}
-
-	//ENVIA A LISTA DE VOLTA PARA PÁGINA
-	res.send(selectCartao);
-
+	
 });
 
 
-server.post("/cartao", async (req, res) => {
-
-	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-		 type = "CC" , cartaoCredito
-		 type = "CD" , cartaoDebito
-	*/
-
-	//Tipo booleano para saber se o insert teve sucesso
-	var insertCartao = false;
-
-	//Recebe os dados do cartão de crédito
-	var cartaoData = req.body
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(cartaoData.UserId == undefined){
-		cartaoData.UserId = user.UserId
-	}
-
-	if(cartaoData.Type == "CC")
-	{
-		//INSERT Cartão de Crédito
-		insertCartao = await cartaoCreditoRepository.insertCartao(cartaoData);
-
-		if(insertCartao)
-		{
-			//redenrizar TELA DE CARTAO DE CREDITO
-			console.log("CADASTROU");
-		}else
-		{
-			//redenrizar TELA DE CADASTRO DE CARTAO CREDITO COM ALERTA DE ERRO
-			console.log("ERRO NO CADASTRO");
-		}
-
-	}else
-	{
-		//INSERT Cartão de Débito
-		insertCartao = await cartaoDebitoRepository.insertCartao(cartaoData);
-
-		if(insertCartao)
-		{
-			//redenrizar TELA DE CARTAO DE DEBITO
-			console.log("CADASTROU");
-		}else
-		{
-			//redenrizar TELA DE CADASTRO DE CARTAO DEBITO COM ALERTA DE ERRO
-			console.log("ERRO NO CADASTRO");
-		}
-	}
-});
 
 server.put("/cartao", async (req, res) => {
 
-	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-		 type = "CC" , cartaoCredito
-		 type = "CD" , cartaoDebito
-	*/
-
-	//Tipo booleano para saber se o UPDATE teve sucesso
-	var updateCartao = false;
-
-	//Recebe os dados do cartão de crédito
-	var cartaoData = req.body
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(cartaoData.UserId == undefined){
-		cartaoData.UserId = user.UserId
-	}
-
-	if(cartaoData.Type == "CC")
-	{
-		//UPDATE Cartão de Crédito
-		updateCartao = await cartaoCreditoRepository.updateCartao(cartaoData);
-
-		if(updateCartao)
-		{
-			//redenrizar TELA DE CARTAO DE CREDITO
-			console.log("ATUALIZOU");
-		}else
-		{
-			//redenrizar TELA DE UPDATE DE CARTAO CREDITO COM ALERTA DE ERRO
-			console.log("ERRO NA ATUALIZAÇÃO");
-		}
-
-	}else
-	{
-		//UPDATE Cartão de Débito
-		updateCartao = await cartaoDebitoRepository.updateCartao(cartaoData);
-
-		if(updateCartao)
-		{
-			//redenrizar TELA DE CARTAO DE DEBITO
-			console.log("ATUALIZOU");
-		}else
-		{
-			//redenrizar TELA DE UPDATE DE CARTAO DEBITO COM ALERTA DE ERRO
-			console.log("ERRO NA ATUALIZAÇÃO");
-		}
-	}
 
 
 });
 
 server.delete("/cartao", async (req, res) => {
 
-	/* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-		 type = "CC" , cartaoCredito
-		 type = "CD" , cartaoDebito
-	*/
-
-	//Tipo booleano para saber se o DELETE teve sucesso
-	var deleteCartao = false;
-
-	//Recebe os dados do cartão de crédito
-	var cartaoData = req.body
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(cartaoData.UserId == undefined){
-		cartaoData.UserId = user.UserId
-	}
-
-	if(cartaoData.Type == "CC")
-	{
-		//DELETE Cartão de Crédito
-		deleteCartao = await cartaoCreditoRepository.deleteCartao(cartaoData);
-
-		if(deleteCartao)
-		{
-			//redenrizar TELA DE CARTAO DE CREDITO
-			console.log("APAGOU CARTAO");
-		}else
-		{
-			//redenrizar TELA DE CARTAO CREDITO COM ALERTA DE ERRO
-			console.log("ERRO AO APAGAR CARTAO");
-		}
-
-	}else
-	{
-		//DELETE Cartão de Débito
-		deleteCartao = await cartaoDebitoRepository.deleteCartao(cartaoData);
-
-		if(deleteCartao)
-		{
-			//redenrizar TELA DE CARTAO DE DEBITO
-			console.log("APAGOU CARTAO");
-		}else
-		{
-			//redenrizar TELA DE CARTAO DEBITO COM ALERTA DE ERRO
-			console.log("ERRO AO APAGAR CARTAO");
-		}
-	}
+	
 });
 
 // ========================== CRUD DE RECEITAS =====================================================================

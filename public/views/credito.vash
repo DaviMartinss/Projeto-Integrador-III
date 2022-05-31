@@ -231,7 +231,7 @@
 
 						<li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-					        <a class="nav-link" href="ccredito">
+					        <a class="nav-link" href="cartaoCredito">
 						        <span class="nav-icon">
 						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 	  <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
@@ -327,7 +327,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class=""></i><strong>Data da Fatura</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
@@ -342,7 +342,7 @@
 							    </div><!--//item-->
 							    <div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Limite</strong></div>
 									        	<div class="item-data">colocar dados do banco</div> <!--Pode colocar no placeholder-->
@@ -357,7 +357,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Anuidade</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
@@ -372,7 +372,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Valor da Fatura</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
@@ -420,7 +420,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Data da Fatura</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
@@ -435,7 +435,7 @@
 							    </div><!--//item-->
 							    <div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Limite</strong></div>
 									        	<div class="item-data">colocar dados do banco</div> <!--Pode colocar no placeholder-->
@@ -450,7 +450,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Anuidade</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
@@ -465,7 +465,7 @@
 							    </div><!--//item-->
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    <form action="/ccredito" method="post">
+									    <form action="/cartaoCredito" method="post">
 											<div class="col-auto">
 										    	<div class="item-label"><i class="fab me-2"></i><strong>Valor da Fatura</strong></div>
 									        	<div class="item-data">colocar dados do banco</div>
