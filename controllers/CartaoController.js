@@ -1,7 +1,7 @@
 //import { userRepository } from "../repository/UserRepository.js";
 
-import { cartaoCreditoController } from "./CartaoCreditoController";
-import { cartaoDebitoController } from "./CartaoDebitoController";
+import { cartaoCreditoController } from "./CartaoCreditoController.js";
+import { cartaoDebitoController } from "./CartaoDebitoController.js";
 
 class CartaoController {
 
