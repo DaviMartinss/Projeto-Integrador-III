@@ -146,6 +146,67 @@ class UserController {
     }
   }
 
+  //ATUALIZA O USUARIO POR INPUT
+  async UpdateUserByInput(userData) {
+
+    try{
+
+      var updateUser;
+
+      //console.log(userData.hasOwnProperty("NickName"));
+      //console.log(Object.keys(userData));
+
+      switch (Object.keys(userData)[0]) {
+
+        case 'NickName':
+
+          updateUser = await userRepository.updateUserNickName(userData);
+
+          break;
+
+        case 'Email':
+
+          updateUser = await userRepository.updateUserEmail(userData);
+
+          break;
+
+        case 'Password':
+
+          console.log("ENTROU AQUI");
+
+          userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
+          
+          updateUser = await userRepository.updateUserPassword(userData);
+
+          break;
+
+        case userData.Img != undefined:
+
+          //IMPLEMENTAR
+          break;
+
+        default:
+          console.log("Opção de update do USER INCORRETA OU DESCONHECIDA!");
+      }
+
+    	if(updateUser)
+      {
+        console.log("ATT USER");
+        return true;
+      }
+    	else
+      {
+        console.log("ERRO ATT USER");
+        return false;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
   //ATUALIZA O USUARIO
   async UpdateUser(userData) {
 

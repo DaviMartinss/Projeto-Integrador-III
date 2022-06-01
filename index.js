@@ -98,6 +98,8 @@ server.post("/", async (req, res) => {
 
   user = await userController.GetUserByEmailAndSenha(userData);
 
+	//console.log(user);
+
 	if(user != undefined)
 	{
 		res.render("home", { erroLogin: false });
@@ -190,12 +192,74 @@ server.put("/usuario", async (req, res) => {
 });
 
 
-server.get("/account", (req, res) => {
-	res.render("account");
+server.get("/account", async (req, res) => {
+
+		var userData = await userController.GetUserById(user.UserId);
+
+		userData.PassWord = cipher.decrypt(user.PassWord);
+
+		res.render("account", {userData});
+
+});
+
+
+server.post("/account", async (req, res) => {
+
+		var userData = req.body
+
+		//Assim irá funcionar passando UserId via JSON ou usando a interface
+		//Via interface irá entrar e passar o UserId
+		if(userData.UserId == undefined){
+			userData.UserId = user.UserId
+		}
+
+		//verifica se o update ocorreu com sucesso!
+		var updateUser = await userController.UpdateUserByInput(userData);
+
+		if(updateUser)
+		{
+			//console.log(user.UserId);
+			//ATT CONSTANTE GLOBAL COM DADOS ATT
+			user = await userController.GetUserById(user.UserId);
+
+			res.redirect('/account');
+			//deve redirecionar para página de informações do usuário
+			//console.log("USUÁRIO ATUALIZADO");
+		}
+		else
+		{
+			//deve redirecionar para página de informações do usuário com o alerta ERRO
+			//console.log("ERRO NA ATUALIZAÇÃO");
+		}
+
+});
+
+//ROTA DELETA O USUÁRIO
+server.get("/deleteUser", async (req, res) => {
+	
+	if(req.body.UserId != undefined)
+		user = req.body
+
+	//verifica se o delete ocorreu com sucesso!
+	var deleteUser = await userController.DeleteUser(user.UserId);
+
+	if(deleteUser)
+	{
+		//console.log("USUÁRIO DELETADO");
+		res.redirect("/");
+	}
+	else
+	{
+		//deve redirecionar para página de informações do usuário com o alerta ERRO
+		//console.log("ERRO AO DELETAR O USUÁRIO");
+	}
+
 });
 
 //ROTA DELETA O USUÁRIO
 server.delete("/usuario", async (req, res) => {
+
+	console.log("ENTROU NA ROTA");
 
 	if(req.body.UserId != undefined)
 		user = req.body

@@ -165,6 +165,94 @@ class UserRepository {
      }
   }
 
+//UPDATE INPUT USER ============================================================================
+
+  //update do nome do user
+  async updateUserNickName(user){
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined)
+      {
+        const sql = 'UPDATE "User" SET "NickName"=$1 WHERE "UserId"=$2';
+        const values = [user.NickName, user.UserId];
+        await db.query(sql, values);
+
+        return true;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return false;
+      }
+
+    } catch (ex) {
+
+      console.log(ex);
+      return false;
+    }
+  }
+
+  //update do email do user
+  async updateUserEmail(user){
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined)
+      {
+        const sql = 'UPDATE "User" SET "Email"=$1 WHERE "UserId"=$2';
+        const values = [user.Email, user.UserId];
+        await db.query(sql, values);
+
+        return true;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return false;
+      }
+
+    } catch (ex) {
+
+      console.log(ex);
+      return false;
+    }
+  }
+
+  //update do password do user
+  async updateUserPassword(user){
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined)
+      {
+        const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
+        const values = [user.Password, user.UserId];
+        await db.query(sql, values);
+
+        return true;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return false;
+      }
+
+    } catch (ex) {
+
+      console.log(ex);
+      return false;
+    }
+  }
+
+ //============================================================================
+
 //Update senha
 async updatePassword(user){
 
