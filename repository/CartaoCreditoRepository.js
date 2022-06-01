@@ -12,7 +12,7 @@ class CartaoCreditoRepository{
         if(db != undefined )
         {
           const sql = 'select * from "CartaoCredito" WHERE "UserId"=$1;';
-          const values = [user.UserId];
+          const values = [user];
           const res = await db.query(sql,values);
           return res.rows;
         }

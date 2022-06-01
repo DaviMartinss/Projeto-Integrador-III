@@ -27,6 +27,7 @@ import { cartaoController} from "./controllers/CartaoController.js"
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
+import { cartaoCreditoController } from "./controllers/CartaoCreditoController.js";
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -55,9 +56,11 @@ server.get('/despesa', (req, res) => {
 	res.render("despesa", { erroLogin: false });
 });
 
-server.get('/cartaoCredito', (req, res) => {
+server.get('/cartaoCredito', async (req, res) => {
 	
-	res.render("credito", { erroLogin: false });
+	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
+
+	res.render("credito", { listCartaoCredito });
 });
 
 server.get('/cartaoDebito', (req, res) => {
