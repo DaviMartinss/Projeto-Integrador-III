@@ -118,6 +118,26 @@ server.get("/signup", (req, res) => {
 	res.render("signup");
 });
 
+server.get("/categorias", (req, res) => {
+	res.render("categorias");
+});
+
+server.get("/receitas", (req, res) => {
+	res.render("receitas");
+});
+
+server.get("/despesas", (req, res) => {
+	res.render("despesas");
+});
+
+server.get("/cdebito", (req, res) => {
+	res.render("debito");
+});
+
+server.get("/ccredito", (req, res) => {
+	res.render("credito");
+});
+
 //ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
 

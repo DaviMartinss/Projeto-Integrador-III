@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Ped1/2</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -147,7 +147,7 @@
 								<li><a class="dropdown-item" href="account">Conta</a></li>
 								<li><a class="dropdown-item" href="settings">Ajustes</a></li>
 								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="login">Log Out</a></li>
+								<li><a class="dropdown-item" href="/">Log Out</a></li>
 							</ul>
 			            </div><!--//app-user-dropdown-->
 		            </div><!--//app-utilities-->
@@ -410,16 +410,14 @@
 						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
 	                </div><!--//col-->
+					<div class="app-card-body px-4 w-100">
+          				<a href="/deleteUser"><button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff">Deletar Conta</button></a>
+					</div>
                 </div><!--//row-->
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 
-      <div class="app-card-body px-4 w-100">
-
-          <a href="/deleteUser"><button type="button" class="btn-sm app-btn-secondary">Deletar Conta</button></a>
-
-
-      </div>
+      
 
 	    <footer class="app-footer">
 		    <div class="container text-center py-3">
