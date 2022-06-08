@@ -28,6 +28,7 @@ import { cartaoController} from "./controllers/CartaoController.js"
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 import { cartaoCreditoController } from "./controllers/CartaoCreditoController.js";
+import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js";
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
