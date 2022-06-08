@@ -142,6 +142,12 @@ server.get("/ccredito", async (req, res) => {
 	res.render("credito", { listCartaoCredito });
 });
 
+server.get("/debitoCadastra", async (req, res) => {
+	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+	res.render("credito", { listCartaoCredito });
+});
+
 //ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
 
