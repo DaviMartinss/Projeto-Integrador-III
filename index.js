@@ -137,7 +137,7 @@ server.get("/cdebito", (req, res) => {
 });
 
 server.get("/ccredito", async (req, res) => {
-	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
+	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
 
 	res.render("credito", { listCartaoCredito });
 });
