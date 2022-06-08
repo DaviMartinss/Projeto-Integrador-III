@@ -172,10 +172,8 @@ class UserController {
 
         case 'Password':
 
-          console.log("ENTROU AQUI");
-
           userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
-          
+
           updateUser = await userRepository.updateUserPassword(userData);
 
           break;

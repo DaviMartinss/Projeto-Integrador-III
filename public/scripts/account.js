@@ -1,11 +1,21 @@
 
-
-alert("lala");
-
-
-function test(){
-  lala
+function confirmar() {
+  Swal.fire({
+    title: "Você tem certeza?",
+    text: `Você não poderá reverter isso!`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sim, excluir!",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (result.value) {
+      window.location.href = '/deleteUser';
+    }
+  });
 }
+
 
 // const submite = document.getElementById("submitSenha");
 //

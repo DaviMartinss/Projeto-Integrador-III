@@ -200,6 +200,8 @@ server.get("/account", async (req, res) => {
 
 });
 
+
+//ATT INFOS DO USER 
 server.post("/account", async (req, res) => {
 
 		var userData = req.body
@@ -306,9 +308,6 @@ server.post("/signup",  async(req, res) => {
 	}
 
 });
-
-
-
 
 // ========================== CRUD DE CATEGORIA =====================================================================
 
