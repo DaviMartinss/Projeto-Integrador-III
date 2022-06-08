@@ -133,7 +133,8 @@ server.get("/despesas", (req, res) => {
 });
 
 server.get("/cdebito", (req, res) => {
-	res.render("debito");
+	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoByUserId(user.UserId);
+	res.render("debito", {listCartaoDebito});
 });
 
 server.get("/ccredito", async (req, res) => {
