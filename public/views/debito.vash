@@ -347,8 +347,11 @@
 														<td class="cell">@cartaoDebito.NumCD</td>
 														<td class="cell">@cartaoDebito.Bandeira</td>		
 														<td class="cell">@cartaoDebito.Saldo</td>
-														<td class="cell"><a class="btn-sm app-btn-secondary" href="debitoCadastra">Atualizar</a></td>
-													<td class="cell"><a class="btn-sm app-btn-secondary" href="debitoCadastra">Deletar</a></td>		
+														<td class="cell">
+															<a class="btn-sm app-btn-secondary" href="debitoCadastra">Atualizar</a>
+															<a class="btn-sm app-btn-secondary" href="debitoCadastra">Deletar</a>
+														</td>
+															
 													</tr>
 													
 												});
