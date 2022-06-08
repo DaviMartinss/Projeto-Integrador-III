@@ -27,7 +27,7 @@ CREATE TABLE "CartaoCredito" (
 	"NumCC" BIGINT NOT NULL,
 	"DataFatura" DATE NOT NULL,
 	"Limite" FLOAT NOT NULL,
-  	"Credito" FLOAT NOT NULL,
+  "Credito" FLOAT NOT NULL,
 	"Anuidade" FLOAT NOT NULL,
 	"Fatura" FLOAT NOT NULL,
 	"JurosAdicional" FLOAT default NULL,

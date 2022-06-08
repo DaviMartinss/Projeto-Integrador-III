@@ -35,24 +35,28 @@ class CartaoCreditoRepository{
     {
       const db = await database.connect();
 
+      //console.log(cartao);
+
       if(db != undefined)
       {
         const sql = 'INSERT INTO "CartaoCredito"'
                   + '('
-                      + "UserId,"
-                      + "NumCC,"
-                      + "DataFatura,"
-                      + "Fatura,"
-                      + "Limite,"
-                      + "Anuidade,"
-                      + "JurosAdicional,"
-                      + "Bandeira"
+                      + '"UserId",'
+                      + '"NumCC",'
+                      + '"DataFatura",'
+                      + '"Fatura",'
+                      + '"Limite",'
+                      + '"Credito",'
+                      + '"Anuidade",'
+                      + '"JurosAdicional",'
+                      + '"Bandeira"'
                   + ')'
-                  + 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
+                  + 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
         const values = [cartao.UserId,
                         cartao.NumCartao,
                         cartao.DataFatura,
                         cartao.Fatura,
+                        cartao.Limite,
                         cartao.Limite,
                         cartao.Anuidade,
                         cartao.JurosAdicional,
@@ -68,7 +72,7 @@ class CartaoCreditoRepository{
       }
 
     } catch (e) {
-      console.log(ex);
+      console.log(e);
       return false;
     }
   }

@@ -3,9 +3,9 @@ import { cartaoCreditoRepository } from "../repository/CartaoCreditoRepository.j
 class CartaoCreditoController {
 
     constructor() { }
-    
+
     //Retorna todos os cartões de crédito do usuário
-    async GetCartaoCreditoByUserId(userId) {
+    async GetCartaoCreditoListByUserId(userId) {
 
         try {
 
@@ -31,9 +31,7 @@ class CartaoCreditoController {
 
         try {
 
-            var insertCartaoCredito;
-
-            insertCartaoCredito = await cartaoCreditoRepository.insertCartao(cartaoCredito);
+            var insertCartaoCredito = await cartaoCreditoRepository.insertCartao(cartaoCredito);
 
             if (insertCartaoCredito)
                 return true;

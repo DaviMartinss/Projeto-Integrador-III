@@ -17,13 +17,13 @@ class CartaoController {
             var selectCartao;
 
             if (type == "CC") {
-                selectCartao = await cartaoCreditoController.GetCartaoCreditoByUserId(cartao.UserId);
+                selectCartao = await cartaoCreditoController.GetCartaoCreditoListByUserId(cartao.UserId);
             }
             else {
                 selectCartao = await cartaoDebitoController.GetCartaoDebitoByUserId(cartao.UserId);
             }
 
-            res.send(selectCartao);
+            return selectCartao;
         } catch (e) {
             console.log(e);
             return false;
@@ -43,12 +43,6 @@ class CartaoController {
             //Tipo booleano para saber se o insert teve sucesso
             var insertCartao = false;
 
-            //Assim irá funcionar passando UserId via JSON ou usando a interface
-            //Via interface irá entrar e passar o UserId
-            if (cartaoData.UserId == undefined) {
-                cartaoData.UserId = user.UserId
-            }
-
             if (cartaoData.Type == "CC") {
                 //INSERT Cartão de Crédito
                 insertCartao = await cartaoCreditoController.InsertCartao(cartaoData);
@@ -56,9 +50,11 @@ class CartaoController {
                 if (insertCartao) {
                     //redenrizar TELA DE CARTAO DE CREDITO
                     console.log("CADASTROU");
+                    return true;
                 } else {
                     //redenrizar TELA DE CADASTRO DE CARTAO CREDITO COM ALERTA DE ERRO
                     console.log("ERRO NO CADASTRO");
+                    return false;
                 }
 
             } else {
@@ -68,9 +64,11 @@ class CartaoController {
                 if (insertCartao) {
                     //redenrizar TELA DE CARTAO DE DEBITO
                     console.log("CADASTROU");
+                    return true;
                 } else {
                     //redenrizar TELA DE CADASTRO DE CARTAO DEBITO COM ALERTA DE ERRO
                     console.log("ERRO NO CADASTRO");
+                    return false;
                 }
             }
 

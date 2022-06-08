@@ -38,11 +38,11 @@ class CartaoDebitoRepository{
       {
         const sql = 'INSERT INTO "CartaoDebito"'
                   + '('
-                      + "UserId,"
-                      + "NumCD,"
-                      + "CartaoPrincipal,"
-                      + "Saldo,"
-                      + "Bandeira"
+                      + '"UserId",'
+                      + '"NumCD",'
+                      + '"CartaoPrincipal",'
+                      + '"Saldo",'
+                      + '"Bandeira"'
                   + ')'
                   + 'VALUES ($1,$2,$3,$4,$5);';
         const values = [cartao.UserId,
