@@ -302,6 +302,7 @@
 
 								    <select class="form-select w-auto" >
 										  <option selected value="option-1">Todos</option>
+										  <option value="option-1">N° Cartão de Crédito</option>
 										  <option value="option-2">Data da Fatura</option>
 										  <option value="option-3">Limite</option>
 										  <option value="option-4">Anuidade</option>

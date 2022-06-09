@@ -147,11 +147,8 @@
 								<li><a class="dropdown-item" href="account.html">Account</a></li>
 								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
 								<li><hr class="dropdown-divider"></li>
-<<<<<<< Updated upstream
-								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
-=======
+
 								<li><a class="dropdown-item" href="/">Log Out</a></li>
->>>>>>> Stashed changes
 							</ul>
 			            </div><!--//app-user-dropdown--> 
 		            </div><!--//app-utilities-->
@@ -294,7 +291,7 @@
 					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
 					                    </div>
 					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                        <button type="submit" class="btn app-btn-secondary">Pesquisar</button>
 					                    </div>
 					                </form>
 					                
@@ -302,7 +299,7 @@
 							    <div class="col-auto">
 								    
 								    <select class="form-select w-auto" >
-										  <option selected value="option-1">All</option>
+										  <option selected value="option-1">Todos</option>
 										  <option value="option-2">N° Cartão de Débito</option>
 										  <option value="option-3">Saldo</option>
 										  <option value="option-4">Bandeira</option>
@@ -322,7 +319,6 @@
 			    
 			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
 				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todos os Cartões</a>
-				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Deletados</a>
 				</nav>
 				
 				<div class="tab-content" id="orders-table-tab-content">
@@ -380,51 +376,10 @@
 							</ul>
 						</nav><!--//app-pagination-->
 			        </div><!--//tab-pane-->
-			        
-			        <div class="tab-pane fade" id="orders-paid" role="tabpanel" aria-labelledby="orders-paid-tab">
-					    <div class="app-card app-card-orders-table mb-5">
-						    <div class="app-card-body">
-							    <div class="table-responsive">
-								    
-							        <table class="table mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Order</th>
-												<th class="cell">N° Cartão de Débito</th>
-												<th class="cell">Bandeira</th>
-												<th class="cell">Saldo</th>
-											</tr>
-										</thead>
-										<tbody>
-
-											@for(i = 0; i< 2; i++){
-												<tr>
-													<td class="cell">#1</td>
-													<td class="cell"><span class="truncate">123456789</span></td>
-													<td class="cell">teste</td>
-													<td class="cell"><span>19.99</span><span class="note">2:16 PM</span></td>
-												</tr>
-											}
-										</tbody>
-									</table>
-						        </div><!--//table-responsive-->
-						    </div><!--//app-card-body-->		
-						</div><!--//app-card-->
-			        </div><!--//tab-pane-->
 				</div><!--//tab-content-->
-				
-				
-			    
+
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
-	    
-	    <footer class="app-footer">
-		    <div class="container text-center py-3">
-		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-            <small class="copyright">Designed with <i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-		       
-		    </div>
-	    </footer><!--//app-footer-->
 	    
     </div><!--//app-wrapper-->    					
 
