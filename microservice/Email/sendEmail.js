@@ -2,28 +2,19 @@ import nodemailer from "nodemailer";
 // const nodemailer = require("nodemailer");
 import smtp from "./smtp.js";
 import SMTP_CONFIG from "./smtp.js";
-// const SMTP_CONFIG = require("./smtp.js");
-
-//console.log(SMTP_CONFIG);
 
 const transporter = nodemailer.createTransport({
     host: SMTP_CONFIG.host,
     port: SMTP_CONFIG.port,
-    secure: false,
+    secure: true,
     auth: {
         user:SMTP_CONFIG.user,
         pass: SMTP_CONFIG.pass,
     },
-    tls:{
+    tls: {
         rejectUnauthorized: false,
-    },
+      },
 });
-
-// //var MSG_HTML = "senhadousuário123"
-// //var email = "eletromarlon@gmail.com"
-
-// //console.log(MSG_HTML);
-
 class SendMailBemVindo {
     async run(user, email){
 
@@ -35,6 +26,7 @@ class SendMailBemVindo {
             to: [email],
         });
         console.log(mailSent);
+        
     }
 }
 
