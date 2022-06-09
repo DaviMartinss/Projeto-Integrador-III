@@ -282,7 +282,7 @@
 
 			    <div class="row g-3 mb-4 align-items-center justify-content-between">
 				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Cartões de Débito</h1>
+			            <h1 class="app-page-title mb-0">Cartões de Crédito</h1>
 				    </div>
 				    <div class="col-auto">
 					     <div class="page-utilities">
@@ -328,7 +328,7 @@
 				    				    
 				</nav>
 
-				<div class="tab-content" id="orders-table-tab-content">
+					<div class="tab-content" id="orders-table-tab-content">
 			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
 					    <div class="app-card app-card-orders-table shadow-sm mb-5">
 						    <div class="app-card-body">
@@ -343,12 +343,14 @@
 												<th class="cell">Fatura</th>
 												<th class="cell">JurosAdicional</th>
                         						<th class="cell">Bandeira</th>
-												<th class="cell"></th>
+												<th class="cell">Ações</th>
 											</tr>
 										</thead>
 										<tbody>
+											
+									@{
 
-                         @model.listCartaoCredito.forEach(cartao => {
+										model.listCartaoCredito.forEach(cartao => {
 
                           <tr>
                             <td class="cell">@cartao.NumCC</td>
@@ -358,17 +360,24 @@
                             <td class="cell">@cartao.Fatura</td>
                             <td class="cell">@cartao.JurosAdicional</td>
                             <td class="cell">@cartao.Bandeira</td>
-                            <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
+                            <td class="cell">
+								<a class="btn-sm app-btn-secondary" href="debitoCadastra">Atualizar</a>
+								<a class="btn-sm app-btn-secondary" href="debitoCadastra">Deletar</a>
+							</td>
                           </tr>
 
                         });
-
+									}
+											
+		
 										</tbody>
 									</table>
 						        </div><!--//table-responsive-->
-
-						    </div><!--//app-card-body-->
+						    </div><!--//app-card-body-->		
 						</div><!--//app-card-->
+
+
+
 						<nav class="app-pagination">
 							<ul class="pagination justify-content-center">
 								<li class="page-item disabled">
@@ -382,10 +391,12 @@
 								</li>
 							</ul>
 						</nav><!--//app-pagination-->
-
 			        </div><!--//tab-pane-->
-
 				</div><!--//tab-content-->
+				
+
+
+				
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
     </div><!--//app-wrapper-->
