@@ -19,6 +19,7 @@ import { database } from "./repository/db.js";
 import { receitaRepository } from "./repository/ReceitaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
+import { userRepository } from "./repository/UserRepository.js";
 
 //Controlers IMPORTS
 import { userController } from "./controllers/UserController.js";
@@ -177,11 +178,12 @@ server.get("/reset-password", (req, res) => {
 server.post("/reset-password", async(req, res) => {
 	//console.log(req.body);
 
-	var userExiste = await userRepository.GetUserByEmail(req.body.Email);
+	var userExiste = await userRepository.getUserByEmail(req.body.Email);
 
 	if(userExiste != undefined)
 	{
-		sendMail.run(cipher.decrypt(userLista.PassWord), req.body.Email);
+		sendMail.run(cipher.decrypt(userExiste.PassWord), req.body.Email);
+		res.redirect('/');
 	}
 	else {
 		console.log("Email não foi cadastrado por um usuário no sistema!");

@@ -125,7 +125,7 @@ class UserController {
       //verifica se o insert ocorreu com sucesso!
       var insertUser;
 
-      if(userExiste[0] == undefined){
+      if(userExiste == undefined){
 
         insertUser = await userRepository.insertUser(userData);
 

@@ -147,7 +147,11 @@
 								<li><a class="dropdown-item" href="account.html">Account</a></li>
 								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
 								<li><hr class="dropdown-divider"></li>
+<<<<<<< Updated upstream
 								<li><a class="dropdown-item" href="login.html">Log Out</a></li>
+=======
+								<li><a class="dropdown-item" href="/">Log Out</a></li>
+>>>>>>> Stashed changes
 							</ul>
 			            </div><!--//app-user-dropdown-->
 		            </div><!--//app-utilities-->
@@ -160,9 +164,15 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
+<<<<<<< Updated upstream
 		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">PORTAL</span></a>
 
 		        </div><!--//app-branding-->
+=======
+		            <a class="app-logo" href="home"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">Ped1/2</span></a>
+	
+		        </div><!--//app-branding-->  
+>>>>>>> Stashed changes
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
 

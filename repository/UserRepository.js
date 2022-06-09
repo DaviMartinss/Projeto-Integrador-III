@@ -94,7 +94,7 @@ class UserRepository {
       {
         const sql = 'SELECT * FROM "User" WHERE "Email"=$1;';
         const res = await db.query(sql,[email]);
-        return res.rows;
+        return res.rows[0];
       }
       else
       {

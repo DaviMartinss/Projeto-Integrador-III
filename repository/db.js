@@ -10,8 +10,8 @@ class Database{
       if (global.connection)
           return global.connection.connect();
 
-      let userName = 'USER';
-      let password = 'SENHA';
+      let userName = 'postgres';
+      let password = 'Abc.123*';
 
       const pool = new Pool({
           user: userName,

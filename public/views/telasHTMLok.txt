@@ -2,4 +2,9 @@ login
 singup
 404
 reset pass
+ccredito
+cdebito
+despesas
+receitas
+
 
