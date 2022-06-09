@@ -42,17 +42,9 @@
 								<label class="sr-only" for="signup-password">Password</label>
 								<input id="signup-password" name="Password" type="password" class="form-control signup-password" placeholder="Sua senha" required="required">
 							</div>
-							<div class="extra mb-3">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" value="" id="RememberPassword">
-									<label class="form-check-label" for="RememberPassword">
-									I agree to Ped1/2 <a href="#" class="app-link">Terms of Service</a> and <a href="#" class="app-link">Privacy Policy</a>.
-									</label>
-								</div>
-							</div><!--//extra-->
 							
 							<div class="text-center">
-								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Sign Up</button>
+								<button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Cadastrar</button>
 							</div>
 						</form><!--//auth-form-->
 						
