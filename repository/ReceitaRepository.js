@@ -62,12 +62,12 @@ class ReceitaRepository {
       {
         const sql = 'INSERT INTO "Receita" '
                   + '('
-                    + "CategoriaId,"
-                    + "Data,"
-                    + "FormaAlocacao,"
-                    + "Valor,"
-                    + "SeRepete,"
-                    + "UserId"
+                    + '"CategoriaId",'
+                    + '"Data",'
+                    + '"FormaAlocacao",'
+                    + '"Valor",'
+                    + '"SeRepete",'
+                    + '"UserId"'
                   + ')'
                   + ' VALUES ($1,$2,$3,$4,$5,$6);';
 
@@ -105,11 +105,11 @@ class ReceitaRepository {
        if(db != undefined)
        {
          const sql = 'UPDATE "Receita" SET '
-                     + "CategoriaId=$1,"
-                     + "Data=$2,"
-                     + "FormaAlocacao=$3,"
-                     + "Valor=$4,"
-                     + "SeRepete=$5"
+                     + '"CategoriaId"=$1,'
+                     + '"Data"=$2,'
+                     + '"FormaAlocacao"=$3,'
+                     + '"Valor"=$4,'
+                     + '"SeRepete"=$5'
                      + 'WHERE "ReceitaId"=$6';
 
          const values = [receita.CategoriaId,

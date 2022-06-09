@@ -87,13 +87,13 @@ class CartaoCreditoRepository{
       if(db != undefined)
       {
         const sql = 'UPDATE "CartaoCredito" SET '
-                      + "NumCC=$1,"
-                      + "DataFatura=$2,"
-                      + "Fatura=$3,"
-                      + "Limite=$4,"
-                      + "Anuidade=$5,"
-                      + "JurosAdicional=$6,"
-                      + "Bandeira=$7"
+                      + '"NumCC"=$1,'
+                      + '"DataFatura"=$2,'
+                      + '"Fatura"=$3,'
+                      + '"Limite"=$4,' //FALTA ATT O CREDITO
+                      + '"Anuidade"=$5,'
+                      + '"JurosAdicional"=$6,'
+                      + '"Bandeira"=$7'
                   +' WHERE "CartaoCreditoId"=$8';
         const values = [cartao.NumCartao,
                         cartao.DataFatura,
