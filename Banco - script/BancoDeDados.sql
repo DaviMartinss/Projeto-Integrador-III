@@ -120,5 +120,13 @@ CREATE TABLE "Total" (
   	-- possui o id_despesa
 );
 
+CREATE TABLE "SendEmail" (
+	"SendEmailId" SERIAL PRIMARY KEY NOT NULL,
+	"Password" VARCHAR(60) NOT NULL,
+	"UserId" INTEGER NOT NULL,
+	CONSTRAINT FK_USER FOREIGN kEY("UserId") REFERENCES "User" 
+);
+
+
 --Adicionando poupança em total
 alter table "Total" add column "Poupanca" FLOAT DEFAULT NULL
