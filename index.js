@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
+
 //Variavel global responsável pela seção do usuário
 var user = undefined;
 
@@ -35,7 +36,7 @@ const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-server.use(express.json())
+server.use(express.json()) //habilita o uso de JSONS
 server.use(express.urlencoded({ extended: true })); //habilita o uso do post dentro das rotas
 server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso de arquivos estaticos
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
@@ -122,8 +123,11 @@ server.get("/signup", (req, res) => {
 	res.render("signup");
 });
 
-server.get("/categorias", (req, res) => {
-	res.render("categorias");
+server.get("/categorias", async (req, res) => {
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	res.render("categorias", {listaCategoria});
 });
 
 server.get("/receitas", (req, res) => {
@@ -161,7 +165,6 @@ server.post("/signup",  async(req, res) => {
 
 	if(insertUser)
 	{
-		sendMailBemVindo.run(userData.NickName, userData.Email);
 		res.redirect("/");
 	}
 	else
@@ -211,7 +214,7 @@ server.get("/account", async (req, res) => {
 });
 
 
-//ATT INFOS DO USER 
+//ATT INFOS DO USER
 server.post("/account", async (req, res) => {
 
 		var userData = req.body
@@ -321,9 +324,34 @@ server.post("/signup",  async(req, res) => {
 
 // ========================== CRUD DE CATEGORIA =====================================================================
 
+server.post("/categoriaCAD", async (req, res) => {
 
+	var categoriaData = req.body;
 
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData = {UserId: user.UserId, Categoria:req.body.Categoria}
+	}
 
+	//console.log(req.body);
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
+
+	if(insertCategoria)
+	{
+		res.redirect('/categorias');
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA CADASTRADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI CADASTRADA");
+	}
+
+});
 
 // ========================== CRUD DE CARTÕES =====================================================================
 
@@ -346,9 +374,10 @@ server.post("/cartao", async (req, res) => {
 
 	var cartaoData = req.body
 
-	if(cartaoData.UserId == undefined){
-		cartaoData.UserId = user.UserId
-	}
+ 	//FAZER CORREÇÕES
+	// if(cartaoData.UserId == undefined){
+	// 	cartaoData.UserId = user.UserId
+	// }
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCartao = await cartaoController.InsertCartao(cartaoData);

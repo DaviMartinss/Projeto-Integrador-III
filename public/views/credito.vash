@@ -161,10 +161,10 @@
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-
 		            <a class="app-logo" href="home"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">Ped1/2</span></a>
-	
-		        </div><!--//app-branding-->  
+
+		        </div><!--//app-branding-->
+
 
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
@@ -325,7 +325,7 @@
 
 			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
 				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todos os cartões</a>
-				    				    
+
 				</nav>
 
 					<div class="tab-content" id="orders-table-tab-content">
@@ -347,7 +347,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											
+
 									@{
 
 										model.listCartaoCredito.forEach(cartao => {
@@ -368,12 +368,12 @@
 
                         });
 									}
-											
-		
+
+
 										</tbody>
 									</table>
 						        </div><!--//table-responsive-->
-						    </div><!--//app-card-body-->		
+						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
 
 
@@ -393,10 +393,10 @@
 						</nav><!--//app-pagination-->
 			        </div><!--//tab-pane-->
 				</div><!--//tab-content-->
-				
 
 
-				
+
+
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
     </div><!--//app-wrapper-->
