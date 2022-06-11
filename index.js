@@ -5,16 +5,6 @@ import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
 
-//Variavel global responsável pela seção do usuário
-var user = undefined;
-
-//Encriptografia
-var key = 'bf3c199c2470cb477d907b1e0917c17b';
-var cipher = aes256.createCipher(key);
-//Ex:
-	//	cipher.encrypt("senha")
-	//	cipher.decrypt("senha");
-
 //Repository IMPORTS - SERA REMOVIDO AO IMPLEMENTAR OS CONTROLLERS
 import { database } from "./repository/db.js";
 import { receitaRepository } from "./repository/ReceitaRepository.js";
@@ -32,6 +22,22 @@ import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 import { cartaoCreditoController } from "./controllers/CartaoCreditoController.js";
 import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js";
 
+//Upload de arquivos
+import multer from "multer";
+
+//Variavel global responsável pela seção do usuário
+var user = undefined;
+
+//Variavel de resgate do nome do avatar salvo no storage
+var avatarName = '';
+
+//Encriptografia
+var key = 'bf3c199c2470cb477d907b1e0917c17b';
+var cipher = aes256.createCipher(key);
+//Ex:
+	//	cipher.encrypt("senha")
+	//	cipher.decrypt("senha");
+
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,6 +47,25 @@ server.use(express.urlencoded({ extended: true })); //habilita o uso do post den
 server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso de arquivos estaticos
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
+
+const storage = multer.diskStorage({
+	destination: function(req, file, cb){
+		cb(null, "public/avatar/");
+	},
+	filename: function(req, file, cb){
+		avatarName = Date.now() + user.NickName + path.extname(file.originalname);
+		cb(null, avatarName);
+		
+	}
+})
+
+const upload = multer({
+	storage,
+	fileFilter: (req, file, cb) => {
+		const aceito = ['image/jpg', 'image/jpeg', 'image/png'];
+		cb(null, aceito.includes(file.mimetype));
+		}
+});
 
 //Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
 
