@@ -96,8 +96,16 @@ server.get('/cadastraCartaoC', async(req, res) => {
 	res.render("cadastraCartaoC");
 });
 
+server.get('/atualizaCartaoC', async (req, res) => {
+	res.render("atualizaCartaoC")
+});
+
 server.get('/cadastraCartaoD', async(req, res) => {
 	res.render("cadastraCartaoD");
+});
+
+server.get('/atuatizaCartaoD', async(req, res) => {
+	res.render("atualizaCartaoD");
 });
 
 server.get('/cartaoDebito', (req, res) => {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
 <head>
-    <title>Pé de meia - Ped1/2</title>
+    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -9,22 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
-    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
 
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
-    <!-- App CSS -->
+    <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
-</head>
+</head> 
 
-<body class="app">
-    <header class="app-header fixed-top">
-        <div class="app-header-inner">
+<body class="app">   	
+    <header class="app-header fixed-top">	   	            
+        <div class="app-header-inner">  
 	        <div class="container-fluid py-2">
-		        <div class="app-header-content">
+		        <div class="app-header-content"> 
 		            <div class="row justify-content-between align-items-center">
 
 				    <div class="col-auto">
@@ -36,14 +36,14 @@
 			            <i class="search-mobile-trigger-icon fas fa-search"></i>
 			        </div><!--//col-->
 		            <div class="app-search-box col">
-		                <form class="app-search-form">
+		                <form class="app-search-form">   
 							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button> 
 				        </form>
 		            </div><!--//app-search-box-->
 
 		            <div class="app-utilities col-auto">
-			            <div class="app-utility-item app-notifications-dropdown dropdown">
+			            <div class="app-utility-item app-notifications-dropdown dropdown">    
 				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,13 +64,13 @@
 										       <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info">
+										        <div class="info"> 
 											        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 											        <div class="meta"> 2 hrs ago</div>
 										        </div>
-									        </div><!--//col-->
+									        </div><!--//col--> 
 								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
 							       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
@@ -83,13 +83,13 @@
 										        </div>
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info">
+										        <div class="info"> 
 											        <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
 											        <div class="meta"> 1 day ago</div>
 										        </div>
 									        </div><!--//col-->
 								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
 							       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
@@ -101,13 +101,13 @@
 										        </div>
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info">
+										        <div class="info"> 
 											        <div class="desc">Your report is ready. Proin venenatis interdum est.</div>
 											        <div class="meta"> 3 days ago</div>
 										        </div>
 									        </div><!--//col-->
 								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
 							       <div class="item p-3">
 								        <div class="row gx-2 justify-content-between align-items-center">
@@ -115,21 +115,21 @@
 										       <img class="profile-image" src="assets/images/profiles/profile-2.png" alt="">
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info">
+										        <div class="info"> 
 											        <div class="desc">James sent you a new message.</div>
 											        <div class="meta"> 7 days ago</div>
 										        </div>
-									        </div><!--//col-->
+									        </div><!--//col--> 
 								        </div><!--//row-->
-								        <a class="link-mask" href="notifications.html"></a>
+								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
 						        </div><!--//dropdown-menu-content-->
 
 						        <div class="dropdown-menu-footer p-2 text-center">
-							        <a href="notifications.html">View all</a>
+							        <a href="#">View all</a>
 						        </div>
 
-							</div><!--//dropdown-menu-->
+							</div><!--//dropdown-menu-->					        
 				        </div><!--//app-utility-item-->
 			            <div class="app-utility-item">
 				            <a href="settings.html" title="Settings">
@@ -144,32 +144,28 @@
 			            <div class="app-utility-item app-user-dropdown dropdown">
 				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="assets/images/user.png" alt="user profile"></a>
 				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-								<li><a class="dropdown-item" href="account.html">Account</a></li>
-								<li><a class="dropdown-item" href="settings.html">Settings</a></li>
+								<li><a class="dropdown-item" href="account">Conta</a></li>
+								<li><a class="dropdown-item" href="settings">Ajustes</a></li>
 								<li><hr class="dropdown-divider"></li>
-
-								<li><a class="dropdown-item" href="/">Log Out</a></li>
+								<li><a class="dropdown-item" href="login">Log Out</a></li>
 							</ul>
-			            </div><!--//app-user-dropdown-->
+			            </div><!--//app-user-dropdown--> 
 		            </div><!--//app-utilities-->
 		        </div><!--//row-->
 	            </div><!--//app-header-content-->
 	        </div><!--//container-fluid-->
         </div><!--//app-header-inner-->
-        <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden">
+        <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden"> 
 	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
-		            <a class="app-logo" href="home"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">Ped1/2</span></a>
+		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">PORTAL</span></a>
 
-		        </div><!--//app-branding-->
-
-
+		        </div><!--//app-branding-->  
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
-
-					   <li class="nav-item">
+					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link active" href="home">
 						        <span class="nav-icon">
@@ -232,6 +228,7 @@
 		                         <span class="nav-link-text">Cartão de Debito</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
+
 						<li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link" href="ccredito">
@@ -244,6 +241,7 @@
 		                         <span class="nav-link-text">Cartão de Crédito</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
+
 					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link" href="resumos">
@@ -255,6 +253,7 @@
 		                         <span class="nav-link-text">Resumos</span>
 					        </a><!--//nav-link-->
 					    </li><!--//nav-item-->
+
 					    <li class="nav-item">
 					        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					        <a class="nav-link" href="help.html">
@@ -266,11 +265,27 @@
 						         </span>
 		                         <span class="nav-link-text">Help</span>
 					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->
-
+					    </li><!--//nav-item-->					    
 				    </ul><!--//app-menu-->
 			    </nav><!--//app-nav-->
-
+			    <div class="app-sidepanel-footer">
+				    <nav class="app-nav app-nav-footer">
+					    <ul class="app-menu footer-menu list-unstyled">
+						    <li class="nav-item">
+						        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+						        <a class="nav-link" href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">
+							        <span class="nav-icon">
+							            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+	  <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+	</svg>
+							        </span>
+			                        <span class="nav-link-text">Download</span>
+						        </a><!--//nav-link-->
+						    </li><!--//nav-item-->
+					    </ul><!--//footer-menu-->
+				    </nav>
+			    </div><!--//app-sidepanel-footer-->
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
@@ -280,135 +295,180 @@
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
 
-			    <div class="row g-3 mb-4 align-items-center justify-content-between">
-				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Cartões de Crédito</h1>
-				    </div>
-				    <div class="col-auto">
-					     <div class="page-utilities">
-						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
-							    <div class="col-auto">
-								    <form class="table-search-form row gx-1 align-items-center">
-					                    <div class="col-auto">
-					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
-					                    </div>
-					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Pesquisar</button>
-					                    </div>
-					                </form>
+			    <h1 class="app-page-title">Atualizar Cartão de Crédito</h1>
+                
+	                <div class="col-12 col-lg-6">
 
-							    </div><!--//col-->
-							    <div class="col-auto">
-
-								    <select class="form-select w-auto" >
-										  <option selected value="option-1">Todos</option>
-										  <option value="option-1">N° Cartão de Crédito</option>
-										  <option value="option-2">Data da Fatura</option>
-										  <option value="option-3">Limite</option>
-										  <option value="option-4">Anuidade</option>
-										  <option value="option-4">Fatura</option>
-										  <option value="option-4">Juro adicional</option>
-										  <option value="option-4">Bandeira</option>
-
-									</select>
-							    </div>
-							    <div class="col-auto">
-								    <a class="btn app-btn-secondary" href="cadastraCartaoC">
-									    Novo Cartão de Crédito
-									</a>
-							    </div>
-						    </div><!--//row-->
-					    </div><!--//table-utilities-->
-				    </div><!--//col-auto-->
-			    </div><!--//row-->
+					<form action="/cartao" method="post">
 
 
-			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todos os cartões</a>
+		                <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+						    <div class="app-card-header p-3 border-bottom-0">
+						        <div class="row align-items-center gx-3">
+							        <div class="col-auto">
+								        <div class="app-icon-holder">
+										    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+  <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+</svg>
+									    </div><!--//icon-holder-->
 
-				</nav>
+							        </div><!--//col-->
+							        <div class="col-auto">
+								        <h4 class="app-card-title">Dados do Cartão</h4>
+							        </div><!--//col-->
+						        </div><!--//row-->
+						    </div><!--//app-card-header-->
+						    <div class="app-card-body px-4 w-100">
 
-					<div class="tab-content" id="orders-table-tab-content">
-			        <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-					    <div class="app-card app-card-orders-table shadow-sm mb-5">
-						    <div class="app-card-body">
-							    <div class="table-responsive">
-							        <table class="table app-table-hover mb-0 text-left">
-										<thead>
-											<tr>
-												<th class="cell">Nº Cartão</th>
-												<th class="cell">Data Fatura</th>
-												<th class="cell">Limite</th>
-												<th class="cell">Anuidade</th>
-												<th class="cell">Fatura</th>
-												<th class="cell">JurosAdicional</th>
-                        						<th class="cell">Bandeira</th>
-												<th class="cell">Ações</th>
-											</tr>
-										</thead>
-										<tbody>
-
-									@{
-
-										model.listCartaoCredito.forEach(cartao => {
-
-                          <tr>
-                            <td class="cell">@cartao.NumCC</td>
-                            <td class="cell">@cartao.DataFatura</td>
-                            <td class="cell">@cartao.Credito</td>
-                            <td class="cell">@cartao.Anuidade</td>
-                            <td class="cell">@cartao.Fatura</td>
-                            <td class="cell">@cartao.JurosAdicional</td>
-                            <td class="cell">@cartao.Bandeira</td>
-                            <td class="cell">
-								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC">Atualizar</a>
-								<a class="btn-sm app-btn-secondary" href="debitoCadastra">Deletar</a>
-							</td>
-                          </tr>
-
-                        });
-									}
+							    <div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    <div class="col-auto">
+										    <div class="item-label"><i class="fab fa-cc-visa me-2"></i><strong>N° do Cartão de Crédito</strong></div>
+									        
+									    </div><!--//col-->
+								    </div><!--//row-->
+									<div class="col text-end">
+										    	<!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
+												<input name="numeroCC" type="text" class="form-control" placeholder="Número do Cartão de Crédito">
+												
+									    	</div><!--//col-->
+							    </div><!--//item-->
+								
+							    <div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+											<div class="col-auto">
+										    	<div class="item-label"><i class="fab me-2"></i><strong>Data da Fatura</strong></div>	
+									    	</div><!--//col-->
+								    </div><!--//row-->
+									<div class="col text-end">
+										<input name="DataFatura" type="date" class="form-control" placeholder="Data da Fatura">
+									</div><!--//col-->	
+							    </div><!--//item-->
 
 
-										</tbody>
-									</table>
-						        </div><!--//table-responsive-->
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Limite</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="limite" type="text" class="form-control" placeholder="Limite">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+								
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Crédito</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="crédito" type="text" class="form-control" placeholder="Crédito">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Anuidade</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="anuidade" type="text" class="form-control" placeholder="Anuidade">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Fatura</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="fatura" type="text" class="form-control" placeholder="Fatura">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Juros Adicional</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="jurosAdicional" type="text" class="form-control" placeholder="Juros Adicional">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+
+								<div class="item border-bottom py-3">
+								    <div class="row justify-content-between align-items-center">
+									    
+										<div class="col-auto">
+										    <div class="item-label"><i class="fab me-2"></i><strong>Bandeira</strong></div>	
+									    </div><!--//col-->
+									    		
+								    </div><!--//row-->
+
+									<div class="col text-end">
+										<input name="bandeira" type="text" class="form-control" placeholder="Bandeira">
+												
+									</div><!--//col-->
+							    </div><!--//item-->
+
+								<div class="item border-bottom py-3">
+									<button type="submit" class="btn-sm app-btn-secondary">Atualizar</button>
+								</div>
+								
 						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
+						
+					</form>
 
 
-
-						<nav class="app-pagination">
-							<ul class="pagination justify-content-center">
-								<li class="page-item disabled">
-									<a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-							    </li>
-								<li class="page-item active"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item">
-								    <a class="page-link" href="#">Next</a>
-								</li>
-							</ul>
-						</nav><!--//app-pagination-->
-			        </div><!--//tab-pane-->
-				</div><!--//tab-content-->
-
-
-
+	                </div>
 
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
-    </div><!--//app-wrapper-->
+
+	    <footer class="app-footer">
+		    <div class="container text-center py-3">
+		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright"><i style="color: #fb866a;"></i><a class="app-link" target="_blank"></a></small>
+
+		    </div>
+	    </footer><!--//app-footer-->
+
+    </div><!--//app-wrapper-->    					
 
 
-    <!-- Javascript -->
+    <!-- Javascript -->          
     <script src="assets/plugins/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
 
     <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script>
+    <script src="assets/js/app.js"></script> 
 
 </body>
-</html>
+</html> 
