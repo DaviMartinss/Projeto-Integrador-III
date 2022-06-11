@@ -92,6 +92,13 @@ server.get('/cartaoCredito', async (req, res) => {
 
 });
 
+server.get('/cadastraCartaoC', async(req, res) => {
+	res.render("cadastraCartaoC");
+});
+
+server.get('/cadastraCartaoD', async(req, res) => {
+	res.render("cadastraCartaoD");
+});
 
 server.get('/cartaoDebito', (req, res) => {
 
@@ -548,6 +555,8 @@ server.post("/cartao", async (req, res) => {
 	// if(cartaoData.UserId == undefined){
 	// 	cartaoData.UserId = user.UserId
 	// }
+	console.log("Bateu");
+	console.log(cartaoData);
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCartao = await cartaoController.InsertCartao(cartaoData);
