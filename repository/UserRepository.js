@@ -118,8 +118,8 @@ class UserRepository {
       console.log("user: "+user);
       if(db != undefined)
       {
-        const sql = 'INSERT INTO "User" ("NickName", "Email", "PassWord") VALUES ($1,$2,$3);';
-        const values = [user.NickName, user.Email, user.Password];
+        const sql = 'INSERT INTO "User" ("NickName", "Email", "PassWord", "Avatar") VALUES ($1,$2,$3, $4);';
+        const values = [user.NickName, user.Email, user.Password, user.Avatar];
         await db.query(sql, values);
 
         return true;
@@ -234,6 +234,33 @@ class UserRepository {
       {
         const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
         const values = [user.Password, user.UserId];
+        await db.query(sql, values);
+
+        return true;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return false;
+      }
+
+    } catch (ex) {
+
+      console.log(ex);
+      return false;
+    }
+  }
+
+  async updateUserAvatar(user){
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined)
+      {
+        const sql = 'UPDATE "User" SET "Avatar"=$1 WHERE "UserId"=$2';
+        const values = [user.Avatar, user.UserId];
         await db.query(sql, values);
 
         return true;

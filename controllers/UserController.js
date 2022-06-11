@@ -178,10 +178,12 @@ class UserController {
 
           break;
 
-        case userData.Img != undefined:
+          case 'Avatar':
 
-          //IMPLEMENTAR
-          break;
+            updateUser = await userRepository.updateUserAvatar(userData);
+  
+            //IMPLEMENTAR
+            break;
 
         default:
           console.log("Opção de update do USER INCORRETA OU DESCONHECIDA!");

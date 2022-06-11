@@ -55,7 +55,6 @@ const storage = multer.diskStorage({
 	filename: function(req, file, cb){
 		avatarName = Date.now() + user.NickName + path.extname(file.originalname);
 		cb(null, avatarName);
-		
 	}
 })
 
@@ -185,6 +184,7 @@ server.post("/signup",  async(req, res) => {
 
 	var userData = req.body
 
+	userData.Avatar = "avatar/default.png";
 	//verifica se o insert ocorreu com sucesso!
 	var insertUser = await userController.GenerateUser(userData);
 
@@ -325,8 +325,6 @@ server.post("/changePassword", async (req, res) => {
 	}
 });
 
-
-
 //ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
 
@@ -337,13 +335,75 @@ server.post("/signup",  async(req, res) => {
 
 	if(insertUser)
 	{
-		sendMailBemVindo.run(userData.NickName, userData.Email);
+		//sendMailBemVindo.run(userData.NickName, userData.Email);
 		res.redirect("/");
 	}
 	else
 	{
 		res.render("login", { erroLogin: true });
 	}
+
+});
+
+async function teste(avatar){
+	var userData = avatar;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(userData.UserId == undefined){
+		userData.UserId = user.UserId
+	}
+
+	//verifica se o update ocorreu com sucesso!
+	var updateUser = await userController.UpdateUserByInput(userData);
+
+	if(updateUser){
+		//console.log(user.UserId);
+		//ATT CONSTANTE GLOBAL COM DADOS ATT
+		user = await userController.GetUserById(user.UserId);
+
+		return true;
+		//deve redirecionar para página de informações do usuário
+		//console.log("USUÁRIO ATUALIZADO");
+	}
+	else{
+		return false;
+	}
+}
+
+//Alteração de avatar. 
+server.post("/alterAvatar", upload.single("image"), (req, res) => {
+	
+	var tipos = ['jpeg', 'jpg', 'png'];
+
+	//avatarName definido na linha 52
+	var avaName = {"Avatar": "avatar/" + avatarName};
+
+	var userData = avaName;
+
+	console.log(userData);
+
+	if ((avatarName.includes(tipos[0])) || (avatarName.includes(tipos[1])) || (avatarName.includes(tipos[2]))){
+		console.log("imagem valida");
+		
+		//chamar a funcao aqui
+		let confirmacao = teste(userData);
+		
+		if (confirmacao){
+			res.redirect("account");
+		}
+	} else {
+		var userData = user;
+		userData.PassWord = cipher.decrypt(user.PassWord);
+		userData.class = "alert alert-danger";
+		userData.alert = "Apenas arquivos no formato JPG, JPEG ou PNG!"
+		//console.log(temp);
+		res.render("account", {userData});
+	}
+		
+	res.redirect("home");
+
+	avatarName = ''
 
 });
 

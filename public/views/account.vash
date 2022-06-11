@@ -302,6 +302,9 @@
 		    <div class="container-xl">
 
 			    <h1 class="app-page-title">My Account</h1>
+				<div class="@model.userData.class" role="alert">
+					@model.userData.alert
+				</div>
                 <div class="row gy-4">
 	                <div class="col-12 col-lg-6">
 		                <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
@@ -325,10 +328,16 @@
 								    <div class="row justify-content-between align-items-center">
 									    <div class="col-auto">
 										    <div class="item-label mb-2"><strong>Photo</strong></div>
-										    <div class="item-data"><img class="profile-image" src="assets/images/user.png" alt=""></div>
+										    <div class="item-data"><img class="profile-image" src="@model.userData.Avatar" alt=""></div>
 									    </div><!--//col-->
 									    <div class="col text-end">
-										    <a class="btn-sm app-btn-secondary" href="#">Change</a>
+											<form action="/alterAvatar" method="post" enctype="multipart/form-data">
+												<div class="form-group">
+													<label for="exampleFormControlFile1">Escolher Imagem</label>
+													<input name="image" type="file" class="btn-sm app-btn-secondary form-control-file" id="exampleFormControlFile1">
+													<button class="btn-sm app-btn-secondary">Change</button>
+												</div>
+											</form>
 									    </div><!--//col-->
 								    </div><!--//row-->
 							    </div><!--//item-->
@@ -417,7 +426,16 @@
 						</div><!--//app-card-->
 	                </div><!--//col-->
 					<div class="app-card-body px-4 w-100">
-          				<a href="/deleteUser"><button type="button" onclick="confirmar()" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onclick="confirmar()">Deletar Conta</button></a>
+          				<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="alert()" >Deletar Conta</button>
+						<script>
+						function alert() {
+							var teste = window.confirm();
+							console.log(teste);
+							if (teste == true){
+								window.location.href = "http://localhost:3000/deleteUser";
+							}
+						}
+						</script>
 					</div>
                 </div><!--//row-->
 		    </div><!--//container-fluid-->
