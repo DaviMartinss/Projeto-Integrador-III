@@ -16,6 +16,7 @@ import { userRepository } from "./repository/UserRepository.js";
 import { userController } from "./controllers/UserController.js";
 import { categoriaController } from "./controllers/CategoriaController.js";
 import { cartaoController} from "./controllers/CartaoController.js"
+import { sendEmailController} from "./controllers/SendEmailController.js";
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
@@ -126,11 +127,12 @@ server.get('/', (req, res) => {
 server.post("/", async (req, res) => {
 
 	//verificar se o usuario é válido
+	console.log("Senha que chega: "+req.body.logpass);
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
-  user = await userController.GetUserByEmailAndSenha(userData);
+  	user = await userController.GetUserByEmailAndSenha(userData);
 
-	//console.log(user);
+	//console.log("Senha do usuário: "+userData.Password);
 
 	if(user != undefined)
 	{
@@ -204,19 +206,40 @@ server.get("/reset-password", (req, res) => {
 });
 
 server.post("/reset-password", async(req, res) => {
-	//console.log(req.body);
+	
 
 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
 
 	if(userExiste != undefined)
 	{
-		sendMail.run(cipher.decrypt(userExiste.PassWord), req.body.Email);
-		res.redirect('/');
+
+		// gerando senha aleatória
+		var min = Math.ceil(10000000);
+		var max = Math.floor(99999999);
+		var novaSenha = Math.floor(Math.random() * (max - min + 1)) + min;
+		// fim da função
+		
+		var dados = {newPassword: novaSenha, userId: userExiste.UserId}
+
+		var salvaSenha = await sendEmailController.SavePassword(dados);
+
+		if(salvaSenha){
+			
+			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
+			userController.UpdatePassword(Novosdados);
+
+			sendMail.run(novaSenha, req.body.Email);
+			res.redirect('/');
+		}else{
+			console.log("Erro ao salvar nova senha");
+		}
+		
 	}
 	else {
 		console.log("Email não foi cadastrado por um usuário no sistema!");
 	}
 });
+
 
 
 //verifica usuários no banco , essa rota e para auxilio de testes

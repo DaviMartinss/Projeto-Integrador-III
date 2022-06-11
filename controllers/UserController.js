@@ -20,7 +20,6 @@ class UserController {
       var getUserList = await userRepository.getUserList();
 
     	getUserList.forEach( userLista => {
-
     		if(userData.Email == userLista.Email && userData.Password == cipher.decrypt(userLista.PassWord))
     			 user = userLista;
 
@@ -252,19 +251,19 @@ class UserController {
   }
 
   //ATUALIZA A SENHA DO USUARIO
-  async UpdatePassword(userData) {
+  async UpdatePassword(dados) {
 
     try{
-
-      var userChangePassword = await userRepository.updatePassword(userData);
+      
+      dados.newPassword = cipher.encrypt(dados.newPassword + '');
+      
+      var userChangePassword = await userRepository.updatePassword(dados);
 
     	if(userChangePassword){
     		console.log("Atualizado a senha com sucesso!");
 
     		//pegar os dados do usuário logado pelo o Id
-    		const user = await userRepository.getUserById(userData.UserId);
-
-        //console.log(user);
+    		const user = await userRepository.getUserById(dados.UserId);
 
         return user;
 

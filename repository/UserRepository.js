@@ -281,8 +281,8 @@ class UserRepository {
  //============================================================================
 
 //Update senha
-async updatePassword(user){
-
+async updatePassword(dados){
+  
   try {
 
     const db = await database.connect();
@@ -290,7 +290,7 @@ async updatePassword(user){
     if(db != undefined)
     {
       const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
-      const values = [user.Password, user.UserId];
+      const values = [dados.newPassword, dados.userId];
       await db.query(sql, values);
 
       return true;
@@ -307,6 +307,7 @@ async updatePassword(user){
     return false;
   }
 }
+
 
 //deleta usuário
   async deleteUser(userId){
