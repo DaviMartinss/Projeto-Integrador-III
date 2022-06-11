@@ -179,6 +179,7 @@ server.get("/despesas", (req, res) => {
 	res.render("despesas");
 });
 
+
 server.get("/cdebito", async (req, res) => {
 	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoByUserId(user.UserId);
 	res.render("debito", {listCartaoDebito});
@@ -195,6 +196,7 @@ server.get("/debitoCadastra", async (req, res) => {
 
 	res.render("credito", { listCartaoCredito });
 });
+
 
 //ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
@@ -559,20 +561,15 @@ server.post("/cartao", async (req, res) => {
 
 	var cartaoData = req.body
 
- 	//FAZER CORREÇÕES
-	// if(cartaoData.UserId == undefined){
-	// 	cartaoData.UserId = user.UserId
-	// }
-	console.log("Bateu");
-	console.log(cartaoData);
-
+	var Insertdados = {UserId: user.UserId, cartaoData}
+	//console.log(Insertdados);
 	//verifica se o insert ocorreu com sucesso!
-	var insertCartao = await cartaoController.InsertCartao(cartaoData);
+	var insertCartao = await cartaoController.InsertCartao(Insertdados);
 
 	if(insertCartao)
 	{
-		console.log("cartão salvo com sucesso");
-		res.redirect("/"); //mandar para a tela que deseja
+		res.redirect('/');  //manda para a tela que quiser
+		
 	}
 	else
 	{

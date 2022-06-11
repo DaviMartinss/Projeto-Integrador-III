@@ -32,19 +32,15 @@ class CartaoController {
 
     //cadastra cartão de crédito ou débito
     async InsertCartao(cartaoData) {
-
+        console.log(cartaoData);
         try {
-
-            /* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-         type = "CC" , cartaoCredito
-         type = "CD" , cartaoDebito
-        */
 
             //Tipo booleano para saber se o insert teve sucesso
             var insertCartao = false;
 
-            if (cartaoData.Type == "CC") {
+            if (cartaoData.cartaoData.Type == 'CC') {
                 //INSERT Cartão de Crédito
+                
                 insertCartao = await cartaoCreditoController.InsertCartao(cartaoData);
 
                 if (insertCartao) {

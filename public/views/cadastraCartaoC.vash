@@ -300,8 +300,10 @@
 	                <div class="col-12 col-lg-6">
 
 					<form action="/cartao" method="post">
-
-
+						
+						<input name="Type" id="Type" type="text" value="CC">
+						
+						
 		                <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
 						    <div class="app-card-header p-3 border-bottom-0">
 						        <div class="row align-items-center gx-3">
@@ -330,7 +332,7 @@
 								    </div><!--//row-->
 									<div class="col text-end">
 										    	<!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
-												<input name="numeroCC" type="text" class="form-control" placeholder="Número do Cartão de Crédito">
+												<input name="NumCartao" type="text" class="form-control" placeholder="Número do Cartão de Crédito">
 												
 									    	</div><!--//col-->
 							    </div><!--//item-->
@@ -357,7 +359,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="limite" type="text" class="form-control" placeholder="Limite">
+										<input name="Limite" type="text" class="form-control" placeholder="Limite">
 												
 									</div><!--//col-->
 							    </div><!--//item-->
@@ -372,7 +374,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="crédito" type="text" class="form-control" placeholder="Crédito">
+										<input name="Credito" type="text" class="form-control" placeholder="Crédito">
 												
 									</div><!--//col-->
 							    </div><!--//item-->
@@ -387,7 +389,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="anuidade" type="text" class="form-control" placeholder="Anuidade">
+										<input name="Anuidade" type="text" class="form-control" placeholder="Anuidade">
 												
 									</div><!--//col-->
 							    </div><!--//item-->
@@ -402,7 +404,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="fatura" type="text" class="form-control" placeholder="Fatura">
+										<input name="Fatura" type="text" class="form-control" placeholder="Fatura">
 												
 									</div><!--//col-->
 							    </div><!--//item-->
@@ -417,7 +419,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="jurosAdicional" type="text" class="form-control" placeholder="Juros Adicional">
+										<input name="JurosAdicional" type="text" class="form-control" placeholder="Juros Adicional">
 												
 									</div><!--//col-->
 							    </div><!--//item-->
@@ -432,7 +434,7 @@
 								    </div><!--//row-->
 
 									<div class="col text-end">
-										<input name="bandeira" type="text" class="form-control" placeholder="Bandeira">
+										<input name="Bandeira" type="text" class="form-control" placeholder="Bandeira">
 												
 									</div><!--//col-->
 							    </div><!--//item-->

@@ -39,6 +39,7 @@ class CartaoCreditoRepository{
 
       if(db != undefined)
       {
+        console.log("numCartao: "+ cartao.cartaoData.NumCartao);
         const sql = 'INSERT INTO "CartaoCredito"'
                   + '('
                       + '"UserId",'
@@ -53,14 +54,14 @@ class CartaoCreditoRepository{
                   + ')'
                   + 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
         const values = [cartao.UserId,
-                        cartao.NumCartao,
-                        cartao.DataFatura,
-                        cartao.Fatura,
-                        cartao.Limite,
-                        cartao.Limite,
-                        cartao.Anuidade,
-                        cartao.JurosAdicional,
-                        cartao.Bandeira];
+                        cartao.cartaoData.NumCartao,
+                        cartao.cartaoData.DataFatura,
+                        cartao.cartaoData.Fatura,
+                        cartao.cartaoData.Limite,
+                        cartao.cartaoData.Limite,
+                        cartao.cartaoData.Anuidade,
+                        cartao.cartaoData.JurosAdicional,
+                        cartao.cartaoData.Bandeira];
         await db.query(sql, values);
 
         return true;
