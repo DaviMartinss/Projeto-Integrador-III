@@ -309,7 +309,7 @@
 
 			    <div class="row g-3 mb-4 align-items-center justify-content-between">
 				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Cartões de Débito</h1>
+			            <h1 class="app-page-title mb-0">Categoria</h1>
 				    </div>
 				    <div class="col-auto">
 					     <div class="page-utilities">
@@ -372,14 +372,27 @@
 										</thead>
 										<tbody>
 
-                         @model.listaCategoria.forEach(categoria => {
+                      @{
 
-                          <tr>
-                            <td class="cell">@categoria.Categoria</td>
-                            <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
-                          </tr>
+                        model.listaCategoria.forEach(categoria => {
 
-                        });
+                          var cat = JSON.stringify(@categoria);
+
+                         <tr>
+                           <td class="cell">@categoria.Categoria</td>
+                           <td class="cell">
+                             <a class="btn-sm app-btn-secondary" onclick="atualizar(@cat)">
+                             Editar
+                           </a>
+                           </td>
+                           <td class="cell"><a class="btn-sm app-btn-secondary" href="/categoriaDEL?CategoriaId=@categoria.CategoriaId">
+                             Deletar</a></td>
+                         </tr>
+
+                       });
+                      }
+
+
 
 										</tbody>
 									</table>
@@ -564,12 +577,44 @@
                 <label>Categoria:</label>
                   <input type="text" id="Categoria" name="Categoria" />
 
-                <button type="submit" class="btn app-btn-secondary">
+                <button type="submit" id="btCadastrar" class="btn app-btn-secondary" style="display:none">
                   Cadastrar
                 </button>
               </form>
-
             </div>
+
+          </div><!--//app-card-footer-->
+
+          <div class="app-card-footer p-4 mt-auto">
+
+            <div id="cadastro" style="display:none">
+
+              <form action="/categoriaCAD" method="post">
+
+                <label>Categoria:</label>
+                  <input type="text"  name="Categoria" />
+
+                <button type="submit" id="btCadastrar" class="btn app-btn-secondary" style="display:none">
+                  Cadastrar
+                </button>
+              </form>
+            </div>
+
+
+             <div id="atualiza" style="display:none">
+
+               <form action="/categoriaUP" method="post">
+
+                 <input type="text" id="categoriaId" name="CategoriaId" hidden/>
+
+                 <label>Categoria:</label>
+                  <input type="text" id="categoria" name="Categoria" />
+
+                 <button type="submit" id="btAtualizar" class="btn app-btn-secondary" style="display:none">
+                   Atualizar
+                 </button>
+               </form>
+             </div>
 
           </div><!--//app-card-footer-->
       </div><!--//app-card-->

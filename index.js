@@ -353,6 +353,68 @@ server.post("/categoriaCAD", async (req, res) => {
 
 });
 
+server.get("/categoriaDEL", async (req, res) => {
+
+	var categoriaData = req.query
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData = {UserId: user.UserId, CategoriaId:req.query.CategoriaId}
+	}
+
+	//verifica se o update ocorreu com sucesso!
+	var deleteCategoria = await categoriaController.DeleteCategoria(categoriaData);
+
+	if(deleteCategoria)
+	{
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA DELETADA");
+		res.redirect("/categorias")
+	}
+	else
+	{
+		//deve redirecionar para página de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI DELETADA");
+	}
+
+});
+
+server.post("/categoriaUP", async (req, res) => {
+
+	var categoriaData = req.body;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData = {
+										 	UserId: user.UserId,
+										 	Categoria:req.body.Categoria,
+										 	CategoriaId:req.body.CategoriaId
+									   }
+	}
+
+	//console.log(req.body);
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertCategoria = await categoriaController.UpdateCategoria(categoriaData); //cadastrando categoria
+
+	if(insertCategoria)
+	{
+		res.redirect('/categorias');
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA ATUALIZADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI ATUALIZADA");
+	}
+
+
+});
+
+
 // ========================== CRUD DE CARTÕES =====================================================================
 
 server.get("/cartaoListByType", async (req, res) => {
@@ -544,7 +606,7 @@ server.listen(3000, () => {
 //
 // });
 //
-// //deleta categoria
+// //deleta receita
 // server.delete("/receita", async (req, res) => {
 //
 // 	var receitaData = req.body
