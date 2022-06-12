@@ -562,19 +562,20 @@ server.post("/cartao", async (req, res) => {
 	var cartaoData = req.body
 
 	var Insertdados = {UserId: user.UserId, cartaoData}
-	//console.log(Insertdados);
-	//verifica se o insert ocorreu com sucesso!
 	var insertCartao = await cartaoController.InsertCartao(Insertdados);
 
-	if(insertCartao)
+
+	if(insertCartao && Insertdados.cartaoData.Type == 'CC')
 	{
-		res.redirect('/');  //manda para a tela que quiser
+		res.redirect('/ccredito');  
 		
+	}else if (insertCartao && Insertdados.cartaoData.Type == 'CD'){
+		res.redirect('/cdebito');
 	}
 	else
 	{
 		console.log("Falha ao cadastrar o cartão");
-		res.render("login", { erroLogin: true });//manda para a tela que deseja
+		res.render("login", { erroLogin: true }); //manda para a tela que deseja
 	}
 
 });

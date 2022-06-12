@@ -46,10 +46,10 @@ class CartaoDebitoRepository{
                   + ')'
                   + 'VALUES ($1,$2,$3,$4,$5);';
         const values = [cartao.UserId,
-                        cartao.NumCartao,
-                        cartao.CartaoPrincipal,
-                        cartao.Saldo,
-                        cartao.Bandeira];
+                        cartao.cartaoData.NumCartao,
+                        false,
+                        cartao.cartaoData.Saldo,
+                        cartao.cartaoData.Bandeira];
         await db.query(sql, values);
 
         return true;

@@ -45,7 +45,7 @@ class CartaoController {
 
                 if (insertCartao) {
                     //redenrizar TELA DE CARTAO DE CREDITO
-                    console.log("CADASTROU");
+                    
                     return true;
                 } else {
                     //redenrizar TELA DE CADASTRO DE CARTAO CREDITO COM ALERTA DE ERRO
@@ -59,7 +59,6 @@ class CartaoController {
 
                 if (insertCartao) {
                     //redenrizar TELA DE CARTAO DE DEBITO
-                    console.log("CADASTROU");
                     return true;
                 } else {
                     //redenrizar TELA DE CADASTRO DE CARTAO DEBITO COM ALERTA DE ERRO
@@ -78,11 +77,6 @@ class CartaoController {
     //Atualiza um cartão de crédio ou débito
     async UpdateCartao(cartaoData) {
         try {
-
-            /* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-             type = "CC" , cartaoCredito
-             type = "CD" , cartaoDebito
-        */
 
             //Tipo booleano para saber se o UPDATE teve sucesso
             var updateCartao = false;
@@ -128,11 +122,6 @@ class CartaoController {
     //Deleta um cartão de crédito ou débito
     async DeleteCartao(cartaoData) {
         try {
-
-            /* TYPE do cartão referente o tipo se CartãoCrédito ou CartãoDébito
-         type = "CC" , cartaoCredito
-         type = "CD" , cartaoDebito
-    */
 
             //Tipo booleano para saber se o DELETE teve sucesso
             var deleteCartao = false;
