@@ -70,62 +70,60 @@ const upload = multer({
 //Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
 
 server.get('/home', (req, res) => {
-
-	res.render("home", { erroLogin: false });
+	res.render("home", { erroLogin: false, user });
 });
 
 server.get('/receita', (req, res) => {
-
-	res.render("receita", { erroLogin: false });
+	res.render("receita", { erroLogin: false, user });
 });
 
 server.get('/despesa', (req, res) => {
 
-	res.render("despesa", { erroLogin: false });
+	res.render("despesa", { erroLogin: false, user });
 });
 
 server.get('/cartaoCredito', async (req, res) => {
 
 	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
 
-	res.render("credito", { listCartaoCredito });
+	res.render("credito", { listCartaoCredito, user });
 
 });
 
 server.get('/cadastraCartaoC', async(req, res) => {
-	res.render("cadastraCartaoC");
+	res.render("cadastraCartaoC", {user});
 });
 
 server.get('/atualizaCartaoC', async (req, res) => {
-	res.render("atualizaCartaoC")
+	res.render("atualizaCartaoC", {user})
 });
 
 server.get('/cadastraCartaoD', async(req, res) => {
-	res.render("cadastraCartaoD");
+	res.render("cadastraCartaoD", {user});
 });
 
 server.get('/atuatizaCartaoD', async(req, res) => {
-	res.render("atualizaCartaoD");
+	res.render("atualizaCartaoD", {user});
 });
 
 server.get('/cartaoDebito', (req, res) => {
 
-	res.render("cartaoDebito", { erroLogin: false });
+	res.render("cartaoDebito", { erroLogin: false, user });
 });
 
 server.get('/categoria', (req, res) => {
 
-	res.render("categoria", { erroLogin: false });
+	res.render("categoria", { erroLogin: false, user });
 });
 
 server.get('/forms', (req, res) => {
 
-	res.render("forms", { erroLogin: false });
+	res.render("forms", { erroLogin: false, user });
 });
 
 server.get('/tables', (req, res) => {
 
-	res.render("tables", { erroLogin: false });
+	res.render("tables", { erroLogin: false, user });
 });
 
 // ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
@@ -151,7 +149,7 @@ server.post("/", async (req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("home", { erroLogin: false });
+		res.render("home", { erroLogin: false , user});
 	}
 	else
 	{
@@ -168,33 +166,33 @@ server.get("/categorias", async (req, res) => {
 
 	var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-	res.render("categorias", {listaCategoria});
+	res.render("categorias", {listaCategoria, user});
 });
 
 server.get("/receitas", (req, res) => {
-	res.render("receitas");
+	res.render("receitas", {user});
 });
 
 server.get("/despesas", (req, res) => {
-	res.render("despesas");
+	res.render("despesas", {user});
 });
 
 
 server.get("/cdebito", async (req, res) => {
 	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoByUserId(user.UserId);
-	res.render("debito", {listCartaoDebito});
+	res.render("debito", {listCartaoDebito, user});
 });
 
 server.get("/ccredito", async (req, res) => {
 	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
 
-	res.render("credito", { listCartaoCredito });
+	res.render("credito", { listCartaoCredito, user });
 });
 
 server.get("/debitoCadastra", async (req, res) => {
 	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
 
-	res.render("credito", { listCartaoCredito });
+	res.render("credito", { listCartaoCredito, user });
 });
 
 
@@ -430,7 +428,7 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 		let confirmacao = teste(userData);
 		
 		if (confirmacao){
-			res.redirect("account");
+			res.redirect("/account");
 		}
 	} else {
 		var userData = user;
@@ -441,7 +439,7 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 		res.render("account", {userData});
 	}
 		
-	res.redirect("home");
+	res.redirect("/home");
 
 	avatarName = ''
 
