@@ -70,6 +70,7 @@ const upload = multer({
 
 //Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
 
+
 server.get('/home', (req, res) => {
 	res.render("home", { erroLogin: false, user });
 });
@@ -397,7 +398,6 @@ async function teste(avatar){
 		//console.log(user.UserId);
 		//ATT CONSTANTE GLOBAL COM DADOS ATT
 		user = await userController.GetUserById(user.UserId);
-
 		return true;
 		//deve redirecionar para página de informações do usuário
 		//console.log("USUÁRIO ATUALIZADO");
@@ -426,23 +426,18 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 		let confirmacao = teste(userData);
 
 		if (confirmacao){
+			console.log(userData);
 			res.redirect("/account");
 		}
 	} else {
 		var userData = user;
-		userData.PassWord = cipher.decrypt(user.PassWord);
+		//userData.PassWord = cipher.decrypt(user.PassWord);
 		userData.class = "alert alert-danger";
 		userData.alert = "Apenas arquivos no formato JPG, JPEG ou PNG!"
-		//console.log(temp);
 		res.render("account", {userData});
 	}
-<<<<<<< Updated upstream
 
 	res.redirect("/home");
-=======
-
-	res.redirect("home");
->>>>>>> Stashed changes
 
 	avatarName = ''
 
