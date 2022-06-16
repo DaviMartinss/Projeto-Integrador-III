@@ -88,11 +88,6 @@ class CategoriaController {
       return false;
     }
   }
-
-
-
-
-
 }
 
 

@@ -34,7 +34,7 @@ class ReceitaRepository {
 
       if(db != undefined )
       {
-        const sql = 'select * from "Receita" WHERE "UserId"=$1;';
+        const sql = 'SELECT * FROM "Receita" WHERE "UserId"=$1;';
         const res = await db.query(sql, [user.UserId]);
         return res.rows;
       }
@@ -73,7 +73,7 @@ class ReceitaRepository {
 
         const values = [receita.CategoriaId,
                         receita.Data,
-                        receita.FormaLocacao,
+                        receita.FormaAlocacao,
                         receita.Valor,
                         receita.SeRepete,
                         receita.UserId];

@@ -15,13 +15,14 @@ import { userRepository } from "./repository/UserRepository.js";
 //Controlers IMPORTS
 import { userController } from "./controllers/UserController.js";
 import { categoriaController } from "./controllers/CategoriaController.js";
-import { cartaoController} from "./controllers/CartaoController.js"
+import { cartaoController} from "./controllers/CartaoController.js";
+import { cartaoCreditoController } from "./controllers/CartaoCreditoController.js";
+import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js";
 import { sendEmailController} from "./controllers/SendEmailController.js";
+import { receitaController } from "./controllers/ReceitaController.js";
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
-import { cartaoCreditoController } from "./controllers/CartaoCreditoController.js";
-import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js";
 
 //Upload de arquivos
 import multer from "multer";
@@ -169,9 +170,6 @@ server.get("/categorias", async (req, res) => {
 	res.render("categorias", {listaCategoria, user});
 });
 
-server.get("/receitas", (req, res) => {
-	res.render("receitas", {user});
-});
 
 server.get("/despesas", (req, res) => {
 	res.render("despesas", {user});
@@ -221,7 +219,7 @@ server.get("/reset-password", (req, res) => {
 });
 
 server.post("/reset-password", async(req, res) => {
-	
+
 
 	var userExiste = await userRepository.getUserByEmail(req.body.Email);
 
@@ -233,13 +231,13 @@ server.post("/reset-password", async(req, res) => {
 		var max = Math.floor(99999999);
 		var novaSenha = Math.floor(Math.random() * (max - min + 1)) + min;
 		// fim da função
-		
+
 		var dados = {newPassword: novaSenha, userId: userExiste.UserId}
 
 		var salvaSenha = await sendEmailController.SavePassword(dados);
 
 		if(salvaSenha){
-			
+
 			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
 			userController.UpdatePassword(Novosdados);
 
@@ -248,7 +246,7 @@ server.post("/reset-password", async(req, res) => {
 		}else{
 			console.log("Erro ao salvar nova senha");
 		}
-		
+
 	}
 	else {
 		console.log("Email não foi cadastrado por um usuário no sistema!");
@@ -409,9 +407,9 @@ async function teste(avatar){
 	}
 }
 
-//Alteração de avatar. 
+//Alteração de avatar.
 server.post("/alterAvatar", upload.single("image"), (req, res) => {
-	
+
 	var tipos = ['jpeg', 'jpg', 'png'];
 
 	//avatarName definido na linha 52
@@ -423,10 +421,10 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 
 	if ((avatarName.includes(tipos[0])) || (avatarName.includes(tipos[1])) || (avatarName.includes(tipos[2]))){
 		console.log("imagem valida");
-		
+
 		//chamar a funcao aqui
 		let confirmacao = teste(userData);
-		
+
 		if (confirmacao){
 			res.redirect("/account");
 		}
@@ -438,8 +436,13 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 		//console.log(temp);
 		res.render("account", {userData});
 	}
-		
+<<<<<<< Updated upstream
+
 	res.redirect("/home");
+=======
+
+	res.redirect("home");
+>>>>>>> Stashed changes
 
 	avatarName = ''
 
@@ -565,8 +568,8 @@ server.post("/cartao", async (req, res) => {
 
 	if(insertCartao && Insertdados.cartaoData.Type == 'CC')
 	{
-		res.redirect('/ccredito');  
-		
+		res.redirect('/ccredito');
+
 	}else if (insertCartao && Insertdados.cartaoData.Type == 'CD'){
 		res.redirect('/cdebito');
 	}
@@ -592,6 +595,121 @@ server.delete("/cartao", async (req, res) => {
 });
 
 // ========================== CRUD DE RECEITAS =====================================================================
+
+server.get("/receitas", async (req, res) => {
+
+	var listaReceita = await receitaController.GetReceitaList(user);
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	res.render("receitas", {listaReceita, listaCategoria});
+});
+
+server.post("/receitaCAD", async (req, res) => {
+
+	var receitaData = req.body;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData = {
+									 UserId: user.UserId,
+									 Data: new Date(req.body.Data),
+									 FormaAlocacao: req.body.FormaAlocacao,
+									 CategoriaId: parseInt(req.body.CategoriaId),
+									 Valor: parseFloat(req.body.Valor),
+									 SeRepete: (req.body.SeRepete == 'on' ? true : false)
+								  }
+	}
+
+	//console.log(receitaData);
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertReceita = await receitaController.GenerateReceita(receitaData); //cadastrando receita
+
+	if(insertReceita)
+	{
+		// var listaReceita = await receitaController.GetReceitaList(user);
+		// var listaCategoria = await categoriaController.GetCategoriaList(user);
+		//
+		// res.render("receitas", {listaReceita, listaCategoria});
+
+		res.redirect('/receitas');
+
+		console.log("RECEITA CADASTRADA");
+	}
+	else
+	{
+
+		console.log("RECEITA NÃO FOI CADASTRADA");
+	}
+
+});
+
+server.get("/receitaDEL", async (req, res) => {
+
+	var receitaData = req.query
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData = {UserId: user.UserId, ReceitaId:req.query.ReceitaId}
+	}
+
+	//verifica se o delete ocorreu com sucesso!
+	var deleteReceita = await receitaController.DeleteReceita(receitaData);
+
+	if(deleteReceita)
+	{
+		//deve redirecionar para página de RECEITA
+		console.log("RECEITA DELETADA");
+		res.redirect("/receitas")
+	}
+	else
+	{
+		//deve redirecionar para página de RECEITA com alerta de erro
+		console.log("RECEITA NÃO FOI DELETADA");
+	}
+
+});
+
+server.post("/categoriaUP", async (req, res) => {
+
+	var categoriaData = req.body;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData = {
+										 	UserId: user.UserId,
+										 	Categoria:req.body.Categoria,
+										 	CategoriaId:req.body.CategoriaId
+									   }
+	}
+
+	//console.log(req.body);
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertCategoria = await categoriaController.UpdateCategoria(categoriaData); //cadastrando categoria
+
+	if(insertCategoria)
+	{
+		res.redirect('/categorias');
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA ATUALIZADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI ATUALIZADA");
+	}
+
+
+});
+
+
+
+
+
 
 server.listen(3000, () => {
 	console.log(`Server is running on port 3000`);
