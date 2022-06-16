@@ -596,7 +596,7 @@ server.get("/receitas", async (req, res) => {
 	var listaReceita = await receitaController.GetReceitaList(user);
 	var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-	res.render("receitas", {listaReceita, listaCategoria});
+	res.render("receitas", {listaReceita, listaCategoria, user});
 });
 
 server.post("/receitaCAD", async (req, res) => {
