@@ -584,8 +584,33 @@ server.put("/cartao", async (req, res) => {
 
 });
 
-server.delete("/cartao", async (req, res) => {
 
+server.get("/deleteCartao", async (req, res) => {
+
+	var cartao = req.query;
+	var cartaoData = {numCartao: cartao.numCartao, Type: cartao.Type}
+	
+	var deleteCartao = await cartaoController.DeleteCartao(cartaoData);
+
+	if(deleteCartao && cartaoData.Type == 'CC')
+	{
+		//mostrar mensagem de sucesso
+		res.redirect('/ccredito');
+	}
+	else if(deleteCartao && cartaoData.Type == 'CD')
+	{
+		//mostrar mensagem de sucesso
+		res.redirect('/cdebito');
+
+	}else if(!deleteCartao && cartaoData.Type == 'CC'){
+		//mostrar mensagem de erro
+		console.log("Falha ao deletar o cartão de crédito");
+		res.redirect('/ccredito');
+	}else{
+		//mostrar mensagem de erro
+		console.log("Falha ao deletar o cartão de Débito");
+		res.redirect('/cdebito');
+	}
 
 });
 
@@ -709,261 +734,3 @@ server.post("/categoriaUP", async (req, res) => {
 server.listen(3000, () => {
 	console.log(`Server is running on port 3000`);
 });
-
-
-// ROTAS FUTURAS AO USAR AJAX - PI 4
-
-//USER
-
-// //ROTA ATUALIZA O USUÁRIO
-// server.put("/usuario", async (req, res) => {
-//
-// 	var userData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(userData.UserId == undefined){
-// 		userData.UserId = user.UserId
-// 	}
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var updateUser = await userController.UpdateUser(userData);
-//
-// 	if(updateUser)
-// 	{
-// 		//deve redirecionar para página de informações do usuário
-// 		//console.log("USUÁRIO ATUALIZADO");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de informações do usuário com o alerta ERRO
-// 		//console.log("ERRO NA ATUALIZAÇÃO");
-// 	}
-//
-// });
-//
-// //ROTA DELETA O USUÁRIO
-// server.delete("/usuario", async (req, res) => {
-//
-// 	console.log("ENTROU NA ROTA");
-//
-// 	if(req.body.UserId != undefined)
-// 		user = req.body
-//
-// 	//verifica se o delete ocorreu com sucesso!
-// 	var deleteUser = await userController.DeleteUser(user.UserId);
-//
-// 	if(deleteUser)
-// 	{
-// 		//console.log("USUÁRIO DELETADO");
-// 		res.redirect("/");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de informações do usuário com o alerta ERRO
-// 		//console.log("ERRO AO DELETAR O USUÁRIO");
-// 	}
-//
-// });
-
-//RECEITA
-
-// //lista de receitas
-// server.get("/receitaList", async (req, res) => {
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(req.query.UserId != undefined){
-// 		user.UserId = req.query.UserId;
-// 	}
-//
-// 	var receitaList = await receitaRepository.getReceitaList(user.UserId);
-// 	res.send(receitaList)
-//
-// });
-//
-// //cadastro da receita
-// server.post("/receita", async (req, res) => {
-//
-// 	var receitaData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(receitaData.UserId == undefined){
-// 		receitaData.UserId = user.UserId;
-// 	}
-//
-// 	//verifica se o insert ocorreu com sucesso!
-// 	var insertReceita;
-//
-// 	insertReceita = await receitaRepository.insertReceita(receitaData); //cadastrando receita
-//
-// 	if(insertReceita)
-// 	{
-// 		//deve redirecionar para página de receita
-// 		console.log("RECEITA CADASTRADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de cadastro de receita com alerta de erro
-// 		console.log("RECEITA NÃO FOI CADASTRADA");
-// 	}
-//
-// });
-//
-// //atualiza receita
-// server.put("/receita", async (req, res) => {
-//
-// 	var receitaData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(receitaData.UserId == undefined){
-// 		receitaData.UserId = user.UserId;
-// 	}
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var updateReceita;
-//
-// 	updateReceita = await receitaRepository.updateReceita(receitaData);
-//
-// 	if(updateReceita)
-// 	{
-// 		//deve redirecionar para página de receita
-// 		console.log("RECEITA ATUALIZADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de atualização de receita com alerta de erro
-// 		console.log("RECEITA NÃO FOI ATUALIZADA");
-// 	}
-//
-// });
-//
-// //deleta receita
-// server.delete("/receita", async (req, res) => {
-//
-// 	var receitaData = req.body
-//
-// 	//Descomentar quando tiver o front funcionando para o usuário logar
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(receitaData.UserId == undefined){
-// 		receitaData.UserId = user.UserId;
-// 	}
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var deleteReceita;
-//
-// 	deleteReceita = await receitaRepository.deleteReceita(receitaData);
-//
-// 	if(deleteReceita)
-// 	{
-// 		//deve redirecionar para página de receita
-// 		console.log("RECEITA DELETADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de receita com alerta de erro
-// 		console.log("RECEITA NÃO FOI DELETADA");
-// 	}
-//
-// });
-
-//CATEGORIA
-
-// //lista de categoria
-// server.get("/categoriaList", async (req, res) => {
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(req.query.UserId != undefined){
-// 		 user = {UserId:req.query.UserId}
-// 	}
-//
-// 	var categoriaList = await categoriaController.GetCategoriaList(user);
-//
-// 	res.send(categoriaList)
-//
-// });
-//
-// //cadastro da categoria
-// server.post("/categoria", async (req, res) => {
-//
-// 	var categoriaData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(categoriaData.UserId == undefined){
-// 		categoriaData.UserId = user.UserId
-// 	}
-//
-// 	//verifica se o insert ocorreu com sucesso!
-// 	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
-//
-// 	if(insertCategoria)
-// 	{
-// 		//deve redirecionar para página de categoria
-// 		console.log("CATEGORIA CADASTRADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de cadastro de categoria com alerta de erro
-// 		console.log("CATEGORIA NÃO FOI CADASTRADA");
-// 	}
-//
-// });
-//
-// //atualiza categoria
-// server.put("/categoria", async (req, res) => {
-//
-// 	var categoriaData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(categoriaData.UserId == undefined){
-// 		categoriaData.UserId = user.UserId
-// 	}
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var updateCategoria = await categoriaController.UpdateCategoria(categoriaData);
-//
-// 	if(updateCategoria)
-// 	{
-// 		//deve redirecionar para página de categoria
-// 		console.log("CATEGORIA ATUALIZADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de atualização de categoria com alerta de erro
-// 		console.log("CATEGORIA NÃO FOI ATUALIZADA");
-// 	}
-//
-// });
-//
-// //deleta categoria
-// server.delete("/categoria", async (req, res) => {
-//
-// 	var categoriaData = req.body
-//
-// 	//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 	//Via interface irá entrar e passar o UserId
-// 	if(categoriaData.UserId == undefined){
-// 		categoriaData.UserId = user.UserId
-// 	}
-//
-// 	//verifica se o update ocorreu com sucesso!
-// 	var deleteCategoria = await categoriaController.DeleteCategoria(categoriaData);
-//
-// 	if(deleteCategoria)
-// 	{
-// 		//deve redirecionar para página de categoria
-// 		console.log("CATEGORIA DELETADA");
-// 	}
-// 	else
-// 	{
-// 		//deve redirecionar para página de categoria com alerta de erro
-// 		console.log("CATEGORIA NÃO FOI DELETADA");
-// 	}
-//
-// });

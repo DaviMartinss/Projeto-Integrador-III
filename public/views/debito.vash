@@ -248,7 +248,7 @@
 															<td class="cell">@cartaoDebito.Saldo</td>
 															<td class="cell">
 																<a class="btn-sm app-btn-secondary" href="atuatizaCartaoD">Atualizar</a>
-																<a class="btn-sm app-btn-secondary" href="debitoCadastra">Deletar</a>
+																<a class="btn-sm app-btn-secondary" href="/deleteCartao?numCartao=@cartaoDebito.NumCD&Type=CD">Deletar</a>
 															</td>
 														
 													</tr>

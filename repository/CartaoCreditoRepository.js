@@ -130,8 +130,8 @@ class CartaoCreditoRepository{
 
       if(db != undefined)
       {
-        const sql = 'DELETE FROM "CartaoCredito" WHERE "CartaoCreditoId"=$1';
-        const values = [cartao.CartaoCreditoId];
+        const sql = 'DELETE FROM "CartaoCredito" WHERE "NumCC"=$1';
+        const values = [cartao.numCartao];
         await db.query(sql, values);
 
         return true;

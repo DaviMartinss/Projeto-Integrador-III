@@ -120,38 +120,31 @@ class CartaoController {
     }
 
     //Deleta um cartão de crédito ou débito
-    async DeleteCartao(cartaoData) {
+    async DeleteCartao(cartao) {
         try {
 
-            //Tipo booleano para saber se o DELETE teve sucesso
             var deleteCartao = false;
-
-            if (cartaoData.UserId == undefined) {
-                cartaoData.UserId = user.UserId
-            }
-
-            if (cartaoData.Type == "CC") {
-                //DELETE Cartão de Crédito
-                deleteCartao = await cartaoCreditoController.DeleteCartao(cartaoData);
+            
+            if (cartao.Type == 'CC') {
+            
+                deleteCartao = await cartaoCreditoController.DeleteCartao(cartao);
 
                 if (deleteCartao) {
-                    //redenrizar TELA DE CARTAO DE CREDITO
-                    console.log("Cartão de Crédito deletado com sucesso");
+                    return true;
+                    
                 } else {
-                    //redenrizar TELA DE CARTAO CREDITO COM ALERTA DE ERRO
-                    console.log("Falha ao deletar o Cartão de Crédito");
+                    return false;
+                    
                 }
 
             } else {
-                //DELETE Cartão de Débito
-                deleteCartao = await cartaoDebitoController.DeleteCartao(cartaoData);
+                
+                deleteCartao = await cartaoDebitoController.DeleteCartao(cartao);
 
                 if (deleteCartao) {
-                    //redenrizar TELA DE CARTAO DE DEBITO
-                    console.log("Cartão de Débito deletado com sucesso");
+                    return true;
                 } else {
-                    //redenrizar TELA DE CARTAO DEBITO COM ALERTA DE ERRO
-                    console.log("Falha ao deletar o Cartão de Débito");
+                    return false;
                 }
             }
 
