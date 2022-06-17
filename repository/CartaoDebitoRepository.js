@@ -8,13 +8,15 @@ class CartaoDebitoRepository{
       try
       {
         const db = await database.connect();
-
+        
         if(db != undefined )
         {
           const sql = 'select * from "CartaoDebito" WHERE "UserId"=$1;';
           const values = [user];
           const res = await db.query(sql,values);
+          db.release();
           return res.rows;
+          
         }
         else
         {
@@ -51,7 +53,7 @@ class CartaoDebitoRepository{
                         cartao.cartaoData.Saldo,
                         cartao.cartaoData.Bandeira];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -87,7 +89,7 @@ class CartaoDebitoRepository{
                         cartao.Bandeira,
                         cartao.CartaoDebitoId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -113,7 +115,7 @@ class CartaoDebitoRepository{
         const sql = 'DELETE FROM "CartaoDebito" WHERE "NumCD"=$1';
         const values = [cartao.numCartao];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
