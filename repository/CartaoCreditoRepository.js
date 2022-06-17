@@ -14,6 +14,7 @@ class CartaoCreditoRepository{
           const sql = 'select * from "CartaoCredito" WHERE "UserId"=$1;';
           const values = [user];
           const res = await db.query(sql,values);
+          db.release();
           return res.rows;
         }
         else
@@ -34,8 +35,6 @@ class CartaoCreditoRepository{
     try
     {
       const db = await database.connect();
-
-      //console.log(cartao);
 
       if(db != undefined)
       {
@@ -63,7 +62,7 @@ class CartaoCreditoRepository{
                         cartao.cartaoData.JurosAdicional,
                         cartao.cartaoData.Bandeira];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -106,7 +105,7 @@ class CartaoCreditoRepository{
                         cartao.CartaoCreditoId];
 
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -133,7 +132,7 @@ class CartaoCreditoRepository{
         const sql = 'DELETE FROM "CartaoCredito" WHERE "NumCC"=$1';
         const values = [cartao.numCartao];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
