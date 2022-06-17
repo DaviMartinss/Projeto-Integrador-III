@@ -14,21 +14,11 @@
 
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
-
+	 <script src="../scripts/cartaoCredito.js"></script>
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
-	<script>
-		function alert(numCartao, type) {
-			var teste = window.confirm("Tem certeza que deseja deletar o Cartão? "+ numCartao + " Type: "+type);
-			if (teste == true){
-				console.log("Entra aqui na func");
-				window.location.href = "http://localhost:3000/Delcartao?NumCartao=numCartao?Type=type";
-				
-				
-			}
-		}
-	</script>
+	
 
 </head>
 
@@ -276,7 +266,8 @@
                             <td class="cell">@cartao.Bandeira</td>
                             <td class="cell">
 								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC">Atualizar</a>
-								<a class="btn-sm app-btn-secondary" href="/deleteCartao?numCartao=@cartao.NumCC&Type=CC">Deletar</a>
+								
+								<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartao.NumCC)" >Deletar</button>
 								
 							</td>
                           </tr>

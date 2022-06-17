@@ -14,7 +14,8 @@
     
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
-    
+    <script src="../scripts/cartaoDebito.js"></script>
+
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
@@ -248,7 +249,7 @@
 															<td class="cell">@cartaoDebito.Saldo</td>
 															<td class="cell">
 																<a class="btn-sm app-btn-secondary" href="atuatizaCartaoD">Atualizar</a>
-																<a class="btn-sm app-btn-secondary" href="/deleteCartao?numCartao=@cartaoDebito.NumCD&Type=CD">Deletar</a>
+																<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartaoDebito.NumCD)" >Deletar</button>
 															</td>
 														
 													</tr>
