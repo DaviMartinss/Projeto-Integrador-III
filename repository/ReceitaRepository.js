@@ -36,6 +36,7 @@ class ReceitaRepository {
       {
         const sql = 'SELECT * FROM "Receita" WHERE "UserId"=$1;';
         const res = await db.query(sql, [user.UserId]);
+        db.release();
         return res.rows;
       }
       else
@@ -79,7 +80,7 @@ class ReceitaRepository {
                         receita.UserId];
 
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -120,7 +121,7 @@ class ReceitaRepository {
                          receita.ReceitaId];
 
          await db.query(sql, values);
-
+         db.release();
          return true;
        }
        else
@@ -148,7 +149,7 @@ class ReceitaRepository {
         const sql = 'DELETE FROM "Receita" WHERE "ReceitaId"=$1';
         const values = [receita.ReceitaId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else

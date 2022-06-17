@@ -13,6 +13,7 @@ class UserRepository {
           const sql = 'select * from "User" WHERE "Email"=$1 AND "PassWord"=$2;';
           const values = [user.email, user.password]
           const user = await db.query(sql,values);
+          db.release();
           return user;
         }
         else
@@ -42,6 +43,7 @@ class UserRepository {
         const sql = 'select * from "User" WHERE "UserId"=$1;';
         const values = [userId]
         const res = await db.query(sql,values);
+        db.release();
         return res.rows[0];
       }
       else
@@ -66,6 +68,7 @@ class UserRepository {
       {
         const sql = 'select * from "User";';
         const res = await db.query(sql);
+        db.release();
         return res.rows;
       }
       else
@@ -88,12 +91,11 @@ class UserRepository {
 
       const db = await database.connect();
 
-      //console.log(email);
-
       if(db != undefined )
       {
         const sql = 'SELECT * FROM "User" WHERE "Email"=$1;';
         const res = await db.query(sql,[email]);
+        db.release();
         return res.rows[0];
       }
       else
@@ -121,7 +123,7 @@ class UserRepository {
         const sql = 'INSERT INTO "User" ("NickName", "Email", "PassWord", "Avatar") VALUES ($1,$2,$3, $4);';
         const values = [user.NickName, user.Email, user.Password, user.Avatar];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -149,7 +151,7 @@ class UserRepository {
          const sql = 'UPDATE "User" SET "NickName"=$1, "Email"=$2, "PassWord"=$3 WHERE "UserId"=$4';
          const values = [user.NickName, user.Email, user.Password, user.UserId];
          await db.query(sql, values);
-
+         db.release();
          return true;
        }
        else
@@ -179,7 +181,7 @@ class UserRepository {
         const sql = 'UPDATE "User" SET "NickName"=$1 WHERE "UserId"=$2';
         const values = [user.NickName, user.UserId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -207,7 +209,7 @@ class UserRepository {
         const sql = 'UPDATE "User" SET "Email"=$1 WHERE "UserId"=$2';
         const values = [user.Email, user.UserId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -235,7 +237,7 @@ class UserRepository {
         const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
         const values = [user.Password, user.UserId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -262,7 +264,7 @@ class UserRepository {
         const sql = 'UPDATE "User" SET "Avatar"=$1 WHERE "UserId"=$2';
         const values = [user.Avatar, user.UserId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -292,7 +294,7 @@ async updatePassword(dados){
       const sql = 'UPDATE "User" SET "PassWord"=$1 WHERE "UserId"=$2';
       const values = [dados.newPassword, dados.userId];
       await db.query(sql, values);
-
+      db.release();
       return true;
     }
     else
@@ -321,7 +323,7 @@ async updatePassword(dados){
         const sql = 'DELETE FROM "User" WHERE "UserId"=$1';
         const values = [userId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else

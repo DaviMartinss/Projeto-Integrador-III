@@ -14,6 +14,7 @@ class DespesaRepository {
             const sql = 'SELECT * FROM "Despesa" WHERE "UserId"=$1;';
             const values = [userId]
             const despesas = await db.query(sql,values);
+            db.release();
             return despesas;
         }
         else
@@ -67,7 +68,7 @@ class DespesaRepository {
                         despesa.ReceitaId];
 
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
@@ -118,7 +119,7 @@ class DespesaRepository {
                         despesa.DespesaId];
 
          await db.query(sql, values);
-
+         db.release();
          return true;
        }
        else
@@ -146,7 +147,7 @@ class DespesaRepository {
         const sql = 'DELETE FROM "Despesa" WHERE "DespesaId"=$1';
         const values = [despesaId];
         await db.query(sql, values);
-
+        db.release();
         return true;
       }
       else
