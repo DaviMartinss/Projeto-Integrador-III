@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Pé de meia - Ped1/2</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -9,22 +9,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-    <link rel="shortcut icon" href="favicon.ico"> 
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
 
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
 
-    <!-- App CSS -->  
+    <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
-</head> 
+</head>
 
-<body class="app">   	
-    <header class="app-header fixed-top">	   	            
-        <div class="app-header-inner">  
+<body class="app">
+    <header class="app-header fixed-top">
+        <div class="app-header-inner">
 	        <div class="container-fluid py-2">
-		        <div class="app-header-content"> 
+		        <div class="app-header-content">
 		            <div class="row justify-content-between align-items-center">
 
 				    <div class="col-auto">
@@ -36,14 +37,14 @@
 			            <i class="search-mobile-trigger-icon fas fa-search"></i>
 			        </div><!--//col-->
 		            <div class="app-search-box col">
-		                <form class="app-search-form">   
+		                <form class="app-search-form">
 							<input type="text" placeholder="Search..." name="search" class="form-control search-input">
-							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button> 
+							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
 				        </form>
 		            </div><!--//app-search-box-->
 
 		            <div class="app-utilities col-auto">
-			            <div class="app-utility-item app-notifications-dropdown dropdown">    
+			            <div class="app-utility-item app-notifications-dropdown dropdown">
 				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
 					            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 					            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bell icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,11 +65,11 @@
 										       <img class="profile-image" src="assets/images/profiles/profile-1.png" alt="">
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info"> 
+										        <div class="info">
 											        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
 											        <div class="meta"> 2 hrs ago</div>
 										        </div>
-									        </div><!--//col--> 
+									        </div><!--//col-->
 								        </div><!--//row-->
 								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
@@ -83,7 +84,7 @@
 										        </div>
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info"> 
+										        <div class="info">
 											        <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
 											        <div class="meta"> 1 day ago</div>
 										        </div>
@@ -101,7 +102,7 @@
 										        </div>
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info"> 
+										        <div class="info">
 											        <div class="desc">Your report is ready. Proin venenatis interdum est.</div>
 											        <div class="meta"> 3 days ago</div>
 										        </div>
@@ -115,11 +116,11 @@
 										       <img class="profile-image" src="assets/images/profiles/profile-2.png" alt="">
 									        </div><!--//col-->
 									        <div class="col">
-										        <div class="info"> 
+										        <div class="info">
 											        <div class="desc">James sent you a new message.</div>
 											        <div class="meta"> 7 days ago</div>
 										        </div>
-									        </div><!--//col--> 
+									        </div><!--//col-->
 								        </div><!--//row-->
 								        <a class="link-mask" href="#"></a>
 							       </div><!--//item-->
@@ -129,7 +130,7 @@
 							        <a href="#">View all</a>
 						        </div>
 
-							</div><!--//dropdown-menu-->					        
+							</div><!--//dropdown-menu-->
 				        </div><!--//app-utility-item-->
 			            <div class="app-utility-item">
 				            <a href="settings.html" title="Settings">
@@ -149,20 +150,20 @@
 								<li><hr class="dropdown-divider"></li>
 								<li><a class="dropdown-item" href="login">Log Out</a></li>
 							</ul>
-			            </div><!--//app-user-dropdown--> 
+			            </div><!--//app-user-dropdown-->
 		            </div><!--//app-utilities-->
 		        </div><!--//row-->
 	            </div><!--//app-header-content-->
 	        </div><!--//container-fluid-->
         </div><!--//app-header-inner-->
-        <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden"> 
+        <div id="app-sidepanel" class="app-sidepanel sidepanel-hidden">
 	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
 	        <div class="sidepanel-inner d-flex flex-column">
 		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
 		        <div class="app-branding">
 		            <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">PORTAL</span></a>
 
-		        </div><!--//app-branding-->  
+		        </div><!--//app-branding-->
 			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
 				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
 					    <li class="nav-item">
@@ -265,7 +266,7 @@
 						         </span>
 		                         <span class="nav-link-text">Help</span>
 					        </a><!--//nav-link-->
-					    </li><!--//nav-item-->					    
+					    </li><!--//nav-item-->
 				    </ul><!--//app-menu-->
 			    </nav><!--//app-nav-->
 			    <div class="app-sidepanel-footer">
@@ -296,7 +297,7 @@
 		    <div class="container-xl">
 
 			    <h1 class="app-page-title">Cadastrar Cartão de Débito</h1>
-                
+
 	                <div class="col-12 col-lg-6">
 
 					<form action="/cartao" method="post">
@@ -326,51 +327,51 @@
 								    <div class="row justify-content-between align-items-center">
 									    <div class="col-auto">
 										    <div class="item-label"><i class="fab fa-cc-visa me-2"></i><strong>N° do Cartão de Débito</strong></div>
-									        
+
 									    </div><!--//col-->
 								    </div><!--//row-->
 									<div class="col text-end">
 										    	<!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
 												<input name="NumCartao" type="text" class="form-control" placeholder="Número do Cartão de Débito">
-												
+
 									    	</div><!--//col-->
 							    </div><!--//item-->
-								
+
 							    <div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
 											<div class="col-auto">
-										    	<div class="item-label"><i class="fab me-2"></i><strong>Saldo</strong></div>	
+										    	<div class="item-label"><i class="fab me-2"></i><strong>Saldo</strong></div>
 									    	</div><!--//col-->
 								    </div><!--//row-->
 									<div class="col text-end">
 										<input name="Saldo" type="text" class="form-control" placeholder="Saldo">
-									</div><!--//col-->	
+									</div><!--//col-->
 							    </div><!--//item-->
 
 
 								<div class="item border-bottom py-3">
 								    <div class="row justify-content-between align-items-center">
-									    
+
 										<div class="col-auto">
-										    <div class="item-label"><i class="fab me-2"></i><strong>Bandeira</strong></div>	
+										    <div class="item-label"><i class="fab me-2"></i><strong>Bandeira</strong></div>
 									    </div><!--//col-->
-									    		
+
 								    </div><!--//row-->
 
 									<div class="col text-end">
 										<input name="Bandeira" type="text" class="form-control" placeholder="Bandeira">
-												
+
 									</div><!--//col-->
 							    </div><!--//item-->
-								
+
 
 								<div class="item border-bottom py-3">
 									<button type="submit" class="btn-sm app-btn-secondary">Cadastrar</button>
 								</div>
-								
+
 						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
-						
+
 					</form>
 
 
@@ -380,8 +381,8 @@
 
 
 
-					
-               
+
+
 
 
 
@@ -400,15 +401,15 @@
 		    </div>
 	    </footer><!--//app-footer-->
 
-    </div><!--//app-wrapper-->    					
+    </div><!--//app-wrapper-->
 
 
-    <!-- Javascript -->          
+    <!-- Javascript -->
     <script src="assets/plugins/popper.min.js"></script>
-    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Page Specific JS -->
-    <script src="assets/js/app.js"></script> 
+    <script src="assets/js/app.js"></script>
 
 </body>
-</html> 
+</html>

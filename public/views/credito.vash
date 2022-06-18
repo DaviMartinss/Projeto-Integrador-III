@@ -17,6 +17,7 @@
 	 <script src="../scripts/cartaoCredito.js"></script>
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
 	<script>
 		function alert(numCartao, type) {
@@ -279,14 +280,7 @@
                             <td class="cell">@cartao.Bandeira</td>
                             <td class="cell">
 								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC">Atualizar</a>
-<<<<<<< Updated upstream
-
 								<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartao.NumCC)" >Deletar</button>
-
-=======
-								<a class="btn-sm app-btn-secondary" href="/deleteCartao?numCartao=@cartao.NumCC&Type=CC">Deletar</a>
-
->>>>>>> Stashed changes
 							</td>
                           </tr>
 

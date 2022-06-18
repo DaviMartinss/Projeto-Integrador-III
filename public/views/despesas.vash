@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Ped1/2</title>
+    <title>Pé de meia - Ped1/2</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -17,6 +17,7 @@
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
 </head>
 
@@ -204,7 +205,7 @@
 		    </div><!--//container-fluid-->
 	    </div><!--//app-content-->
 
-      
+
 
 	    <footer class="app-footer">
 		    <div class="container text-center py-3">

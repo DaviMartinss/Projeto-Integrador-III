@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Portal - Bootstrap 5 Admin Dashboard Template For Developers</title>
+    <title>Pé de meia - Ped1/2</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -17,6 +17,7 @@
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
 </head>
 
