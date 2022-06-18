@@ -378,7 +378,7 @@
                               <!--//row-->
                               <div class="col text-end">
                                  <!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
-                                 <input name="numCartao" type="text" class="form-control" value="@model.cartaoCredito.NumCC">
+                                 <input name="numCartao" type="text" class="form-control" value="@model.cartaoCredito.NumCC" readonly>
                                 
                               </div>
                               <!--//col-->
