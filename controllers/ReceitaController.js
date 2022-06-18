@@ -28,6 +28,28 @@ class ReceitaController {
     }
   }
 
+  async GetReceitaById(receitaId) {
+
+    try{
+
+      var receita = await receitaRepository.getReceitaById(receitaId);
+
+      if(receita != undefined)
+      {
+        return receita;
+      }
+      else {
+        console.log("NENHUMA RECEITA CADASTRADA!");
+        return undefined;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   async GenerateReceita(receitaData) {
 
     try{

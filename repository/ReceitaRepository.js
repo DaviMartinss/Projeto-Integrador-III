@@ -2,7 +2,7 @@ import { database } from "./db.js";
 
 class ReceitaRepository {
 
-  async getReceita(receita) {
+  async getReceitaById(receitaId) {
 
       try {
 
@@ -10,7 +10,10 @@ class ReceitaRepository {
 
         if(db != undefined )
         {
-          //IMPLEMENTE CASO SEJA NECESSÁRIO
+          const sql = 'SELECT * FROM "Receita" WHERE "ReceitaId"=$1;';
+          const res = await db.query(sql, [receitaId]);
+          db.release();
+          return res.rows[0];
         }
         else
         {

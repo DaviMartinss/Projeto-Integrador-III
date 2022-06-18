@@ -589,7 +589,7 @@ server.get("/deleteCartao", async (req, res) => {
 
 	var cartao = req.query;
 	var cartaoData = {numCartao: cartao.numCartao, Type: cartao.Type}
-	
+
 	var deleteCartao = await cartaoController.DeleteCartao(cartaoData);
 
 	if(deleteCartao && cartaoData.Type == 'CC')
@@ -622,6 +622,14 @@ server.get("/receitas", async (req, res) => {
 	var listaCategoria = await categoriaController.GetCategoriaList(user);
 
 	res.render("receitas", {listaReceita, listaCategoria, user});
+});
+
+
+server.get('/receitaCAD', async(req, res) => {
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	res.render("cadastraReceita", {user, listaCategoria});
 });
 
 server.post("/receitaCAD", async (req, res) => {
@@ -692,38 +700,53 @@ server.get("/receitaDEL", async (req, res) => {
 
 });
 
-server.post("/categoriaUP", async (req, res) => {
 
-	var categoriaData = req.body;
+server.get('/receitaUP', async(req, res) => {
+
+	var receitaId = req.query.ReceitaId;
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	var receita = await receitaController.GetReceitaById(receitaId)
+
+	//console.log(receita);
+
+	res.render("atualizaReceita", {user, listaCategoria, receita});
+});
+
+server.post("/receitaUP", async (req, res) => {
+
+	var receitaData = req.body;
 
 	//Assim irá funcionar passando UserId via JSON ou usando a interface
 	//Via interface irá entrar e passar o UserId
-	if(categoriaData.UserId == undefined){
-		categoriaData = {
-										 	UserId: user.UserId,
-										 	Categoria:req.body.Categoria,
-										 	CategoriaId:req.body.CategoriaId
-									   }
+	if(receitaData.UserId == undefined){
+		receitaData = {
+									 UserId: user.UserId,
+									 Data: new Date(req.body.Data),
+									 FormaAlocacao: req.body.FormaAlocacao,
+									 CategoriaId: parseInt(req.body.CategoriaId),
+									 Valor: parseFloat(req.body.Valor),
+									 SeRepete: (req.body.SeRepete == 'on' ? true : false)
+								  }
 	}
 
 	//console.log(req.body);
 
-	//verifica se o insert ocorreu com sucesso!
-	var insertCategoria = await categoriaController.UpdateCategoria(categoriaData); //cadastrando categoria
+	//verifica se o update ocorreu com sucesso!
+	var updateReceita = await receitaController.UpdateReceita(receitaData);
 
-	if(insertCategoria)
+	if(updateReceita)
 	{
-		res.redirect('/categorias');
+		res.redirect('/receitas');
 		//deve redirecionar para página de categoria
-		console.log("CATEGORIA ATUALIZADA");
+		console.log("RECEITA ATUALIZADA");
 	}
 	else
 	{
 		//deve redirecionar para página de cadastro de categoria com alerta de erro
-		console.log("CATEGORIA NÃO FOI ATUALIZADA");
+		console.log("RECEITA NÃO FOI ATUALIZADA");
 	}
-
-
 });
 
 

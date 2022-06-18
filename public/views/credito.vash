@@ -18,7 +18,17 @@
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
 
-	
+	<script>
+		function alert(numCartao, type) {
+			var teste = window.confirm("Tem certeza que deseja deletar o Cartão? "+ numCartao + " Type: "+type);
+			if (teste == true){
+				console.log("Entra aqui na func");
+				window.location.href = "http://localhost:3000/Delcartao?NumCartao=numCartao?Type=type";
+
+
+			}
+		}
+	</script>
 
 </head>
 
@@ -252,13 +262,16 @@
 										</thead>
 										<tbody>
 
-									@{
 
-										model.listCartaoCredito.forEach(cartao => {
+										@model.listCartaoCredito.forEach(cartao => {
+
+                      let data = (cartao.DataFatura.getDate()+1).toString().padStart(2, '0') + "/" +
+                             (cartao.DataFatura.getMonth()+1).toString().padStart(2, '0') + "/" +
+                              cartao.DataFatura.getFullYear();
 
                           <tr>
                             <td class="cell">@cartao.NumCC</td>
-                            <td class="cell">@cartao.DataFatura</td>
+                            <td class="cell">@data</td>
                             <td class="cell">@cartao.Credito</td>
                             <td class="cell">@cartao.Anuidade</td>
                             <td class="cell">@cartao.Fatura</td>
@@ -266,14 +279,19 @@
                             <td class="cell">@cartao.Bandeira</td>
                             <td class="cell">
 								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC">Atualizar</a>
-								
+<<<<<<< Updated upstream
+
 								<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartao.NumCC)" >Deletar</button>
-								
+
+=======
+								<a class="btn-sm app-btn-secondary" href="/deleteCartao?numCartao=@cartao.NumCC&Type=CC">Deletar</a>
+
+>>>>>>> Stashed changes
 							</td>
                           </tr>
 
-                        });
-									}
+                  });
+
 
 
 										</tbody>
