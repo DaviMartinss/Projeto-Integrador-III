@@ -19,18 +19,6 @@
     <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 
-	<script>
-		function alert(numCartao, type) {
-			var teste = window.confirm("Tem certeza que deseja deletar o Cartão? "+ numCartao + " Type: "+type);
-			if (teste == true){
-				console.log("Entra aqui na func");
-				window.location.href = "http://localhost:3000/Delcartao?NumCartao=numCartao?Type=type";
-
-
-			}
-		}
-	</script>
-
 </head>
 
 <body class="app">

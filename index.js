@@ -588,7 +588,7 @@ server.put("/cartao", async (req, res) => {
 server.get("/deleteCartao", async (req, res) => {
 
 	var cartao = req.query;
-	var cartaoData = {numCartao: cartao.numCartao, Type: cartao.Type}
+	var cartaoData = {numCartao: cartao.NumCartao, Type: cartao.Type}
 
 	var deleteCartao = await cartaoController.DeleteCartao(cartaoData);
 
