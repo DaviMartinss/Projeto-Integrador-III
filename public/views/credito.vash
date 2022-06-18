@@ -242,6 +242,7 @@
 												<th class="cell">Nº Cartão</th>
 												<th class="cell">Data Fatura</th>
 												<th class="cell">Limite</th>
+												<th class="cell">Crédito</th>
 												<th class="cell">Anuidade</th>
 												<th class="cell">Fatura</th>
 												<th class="cell">JurosAdicional</th>
@@ -261,13 +262,15 @@
                           <tr>
                             <td class="cell">@cartao.NumCC</td>
                             <td class="cell">@data</td>
+							<td class="cell">@cartao.Limite</td>
                             <td class="cell">@cartao.Credito</td>
                             <td class="cell">@cartao.Anuidade</td>
                             <td class="cell">@cartao.Fatura</td>
                             <td class="cell">@cartao.JurosAdicional</td>
                             <td class="cell">@cartao.Bandeira</td>
                             <td class="cell">
-								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC">Atualizar</a>
+								<a class="btn-sm app-btn-secondary" href="atualizaCartaoC?CartaoCreditoId=@cartao.CartaoCreditoId">Atualizar</a>
+								
 								<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartao.NumCC)" >Deletar</button>
 							</td>
                           </tr>

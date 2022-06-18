@@ -249,7 +249,7 @@
 															<td class="cell">@cartaoDebito.Bandeira</td>
 															<td class="cell">@cartaoDebito.Saldo</td>
 															<td class="cell">
-																<a class="btn-sm app-btn-secondary" href="atuatizaCartaoD">Atualizar</a>
+																<a class="btn-sm app-btn-secondary" href="atuatizaCartaoD?CartaoDebito=@cartaoDebito.CartaoDebitoId">Atualizar</a>
 																<button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirmar(@cartaoDebito.NumCD)" >Deletar</button>
 															</td>
 

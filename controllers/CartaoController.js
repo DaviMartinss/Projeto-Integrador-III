@@ -7,6 +7,30 @@ class CartaoController {
 
     constructor() { }
 
+    // retorna um cartão pelo o Id
+    async getCartaoById(cartao) {
+
+        try {
+
+            var type = cartao.Type;
+
+            var selectCartao;
+
+            if (type == "CC") {
+                selectCartao = await cartaoCreditoController.GetCartaoCreditoById(cartao.CartaoCreditoId);
+            }
+            else {
+                selectCartao = await cartaoDebitoController.GetCartaoDebitoByUserId(cartao.UserId);
+            }
+
+            return selectCartao;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+
     //retorna uma lista de cratão de créedito ou débito
     async getCartaoByType(cartao) {
 

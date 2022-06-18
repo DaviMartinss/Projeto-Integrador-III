@@ -97,7 +97,11 @@ server.get('/cadastraCartaoC', async(req, res) => {
 });
 
 server.get('/atualizaCartaoC', async (req, res) => {
-	res.render("atualizaCartaoC", {user})
+
+	
+	var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
+	
+	res.render("atualizaCartaoC", {cartaoCredito, user});
 });
 
 server.get('/cadastraCartaoD', async(req, res) => {
@@ -105,7 +109,8 @@ server.get('/cadastraCartaoD', async(req, res) => {
 });
 
 server.get('/atuatizaCartaoD', async(req, res) => {
-	res.render("atualizaCartaoD", {user});
+	var cartaoDebito = await cartaoDebitoController.GetCartaoDebitoById(req.query.CartaoDebito);
+	res.render("atualizaCartaoD", {cartaoDebito, user});
 });
 
 server.get('/cartaoDebito', (req, res) => {

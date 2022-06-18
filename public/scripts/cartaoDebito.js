@@ -3,5 +3,4 @@ function confirmar(numCD){
     if(alert){
         window.location.href = "http://localhost:3000/deleteCartao?NumCartao="+numCD+"&Type=CD";
     }
-
 }

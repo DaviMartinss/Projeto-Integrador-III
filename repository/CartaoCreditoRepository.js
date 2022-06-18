@@ -2,6 +2,34 @@ import { database } from "./db.js";
 
 class CartaoCreditoRepository{
 
+
+  //Retorna um cartão de Crédito o Id
+  async getCartaoById(cartaoId) {
+
+    try
+    {
+      const db = await database.connect();
+
+      if(db != undefined )
+      {
+        const sql = 'select * from "CartaoCredito" WHERE "CartaoCreditoId"=$1;';
+        const values = [cartaoId];
+        const res = await db.query(sql,values);
+        db.release();
+        return res.rows[0];
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+    } catch (e) {
+      console.log(e);
+      return undefined;
+    }
+
+}
+
 //pega uma lista de todos os cartões no Banco
   async getCartaoList(user) {
 

@@ -4,6 +4,20 @@ class CartaoCreditoController {
 
     constructor() { }
 
+    //Retorna apenas um cartão pelo o Id
+    async GetCartaoCreditoById(cartaoId) {
+
+        try {
+            
+            return await cartaoCreditoRepository.getCartaoById(cartaoId);
+
+        } catch (e) {
+
+            console.log(e);
+            return undefined;
+        }
+    }
+
     //Retorna todos os cartões de crédito do usuário
     async GetCartaoCreditoListByUserId(userId) {
 
