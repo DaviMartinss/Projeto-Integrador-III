@@ -127,17 +127,15 @@ class CartaoDebitoRepository{
   async updateCartao(cartao){
     try
     {
-      console.log("O id é: "+cartao.Id);
       const db = await database.connect();
       
       if(db != undefined)
       {
         const sql = 'UPDATE "CartaoDebito" SET '
-                      + '"NumCD"=$1,'
-                      + '"Saldo"=$2,'
-                      + '"Bandeira"=$3'
-                  +' WHERE "CartaoDebitoId"=$4';
-        const values = [cartao.cartaoData.numCartao,
+                      + '"Saldo"=$1,'
+                      + '"Bandeira"=$2'
+                  +' WHERE "CartaoDebitoId"=$3';
+        const values = [
                         cartao.cartaoData.SaldoCD,
                         cartao.cartaoData.BandeiraCD,
                         cartao.Id];

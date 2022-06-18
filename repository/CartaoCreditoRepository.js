@@ -136,23 +136,20 @@ class CartaoCreditoRepository{
 
     try
     {
-      console.log("O limite do cartão é: "+cartao.cartaoData.Limite);
-      console.log("O número do cartão é: "+cartao.cartaoData.numCartao);
       const db = await database.connect();
 
       if(db != undefined)
       {
         const sql = 'UPDATE "CartaoCredito" SET '
-                      + '"NumCC"=$1,'
-                      + '"DataFatura"=$2,'
-                      + '"Fatura"=$3,'
-                      + '"Credito"=$4,'
-                      + '"Limite"=$5,' 
-                      + '"Anuidade"=$6,'
-                      + '"JurosAdicional"=$7,'
-                      + '"Bandeira"=$8'
-                  +' WHERE "CartaoCreditoId"=$9';
-        const values = [cartao.cartaoData.numCartao,
+                      + '"DataFatura"=$1,'
+                      + '"Fatura"=$2,'
+                      + '"Credito"=$3,'
+                      + '"Limite"=$4,' 
+                      + '"Anuidade"=$5,'
+                      + '"JurosAdicional"=$6,'
+                      + '"Bandeira"=$7'
+                  +' WHERE "CartaoCreditoId"=$8';
+        const values = [
                         cartao.cartaoData.DataFatura,
                         cartao.cartaoData.Fatura,
                         cartao.cartaoData.Credito,

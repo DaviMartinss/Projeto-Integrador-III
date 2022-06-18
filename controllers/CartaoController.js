@@ -20,7 +20,7 @@ class CartaoController {
                 selectCartao = await cartaoCreditoController.GetCartaoCreditoByNum(cartao.NumCartao);
             }
             else {
-                console.log("Entrou aqui para selecionar: "+cartao.NumCartao);
+                
                 selectCartao = await cartaoDebitoController.GetCartaoDebitoByNum(cartao.NumCartao);
             }
 
