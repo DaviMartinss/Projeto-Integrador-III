@@ -341,7 +341,7 @@
             <div class="container-xl">
                <h1 class="app-page-title">Atualiza Cartão de Débito</h1>
                <div class="col-12 col-lg-6">
-                  <form action="/cartao" method="post">
+                  <form action="/Updatecartao?Type=CD" method="post">
 
                      <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
                         <div class="app-card-header p-3 border-bottom-0">
@@ -375,7 +375,7 @@
                               <!--//row-->
                               <div class="col text-end">
                                  <!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
-                                 <input name="numeroCD" type="text" class="form-control" value="@model.cartaoDebito.NumCD">
+                                 <input name="numCartao" type="text" class="form-control" value="@model.cartaoDebito.NumCD">
                               </div>
                               <!--//col-->
                            </div>
@@ -389,7 +389,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="saldoCD" type="text" class="form-control" value="@model.cartaoDebito.Saldo">
+                                 <input name="SaldoCD" type="text" class="form-control" value="@model.cartaoDebito.Saldo">
                               </div>
                               <!--//col-->
                            </div>
@@ -403,7 +403,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="bandeiraCD" type="text" class="form-control" value="@model.cartaoDebito.Bandeira">
+                                 <input name="BandeiraCD" type="text" class="form-control" value="@model.cartaoDebito.Bandeira">
                               </div>
                               <!--//col-->
                            </div>

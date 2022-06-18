@@ -2,6 +2,33 @@ import { database } from "./db.js";
 
 class CartaoDebitoRepository{
 
+  //Retorna um cartão de Crédito o número
+   async getCartaoByNum(numCartao) {
+
+    try
+    {
+      const db = await database.connect();
+
+      if(db != undefined )
+      {
+        const sql = 'select "CartaoDebitoId" as "CartaoId" from "CartaoDebito" WHERE "NumCD"=$1;';
+        const values = [numCartao];
+        const res = await db.query(sql,values);
+        db.release();
+        return res.rows[0];
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+    } catch (e) {
+      console.log(e);
+      return undefined;
+    }
+
+}
+
    //Retorna um cartão de Crédito o Id
    async getCartaoById(cartaoId) {
 
@@ -100,21 +127,20 @@ class CartaoDebitoRepository{
   async updateCartao(cartao){
     try
     {
+      console.log("O id é: "+cartao.Id);
       const db = await database.connect();
-
+      
       if(db != undefined)
       {
         const sql = 'UPDATE "CartaoDebito" SET '
-                      + "NumCD=$1,"
-                      + "CartaoPrincipal=$2,"
-                      + "Saldo=$3,"
-                      + "Bandeira=$4"
-                  +' WHERE "CartaoDebitoId"=$5';
-        const values = [cartao.NumCartao,
-                        cartao.CartaoPrincipal,
-                        cartao.Saldo,
-                        cartao.Bandeira,
-                        cartao.CartaoDebitoId];
+                      + '"NumCD"=$1,'
+                      + '"Saldo"=$2,'
+                      + '"Bandeira"=$3'
+                  +' WHERE "CartaoDebitoId"=$4';
+        const values = [cartao.cartaoData.numCartao,
+                        cartao.cartaoData.SaldoCD,
+                        cartao.cartaoData.BandeiraCD,
+                        cartao.Id];
         await db.query(sql, values);
         db.release();
         return true;

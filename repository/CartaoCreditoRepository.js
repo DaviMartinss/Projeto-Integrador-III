@@ -2,6 +2,32 @@ import { database } from "./db.js";
 
 class CartaoCreditoRepository{
 
+  //Retorna um cartão de crédito pelo o número
+  async getCartaoByNum(numCartao) {
+
+    try
+    {
+      const db = await database.connect();
+
+      if(db != undefined )
+      {
+        const sql = 'select "CartaoCreditoId" as "CartaoId" from "CartaoCredito" WHERE "NumCC"=$1;';
+        const values = [numCartao];
+        const res = await db.query(sql,values);
+        db.release();
+        return res.rows[0];
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+    } catch (e) {
+      console.log(e);
+      return undefined;
+    }
+
+}
 
   //Retorna um cartão de Crédito o Id
   async getCartaoById(cartaoId) {
@@ -110,6 +136,8 @@ class CartaoCreditoRepository{
 
     try
     {
+      console.log("O limite do cartão é: "+cartao.cartaoData.Limite);
+      console.log("O número do cartão é: "+cartao.cartaoData.numCartao);
       const db = await database.connect();
 
       if(db != undefined)
@@ -118,19 +146,21 @@ class CartaoCreditoRepository{
                       + '"NumCC"=$1,'
                       + '"DataFatura"=$2,'
                       + '"Fatura"=$3,'
-                      + '"Limite"=$4,' //FALTA ATT O CREDITO
-                      + '"Anuidade"=$5,'
-                      + '"JurosAdicional"=$6,'
-                      + '"Bandeira"=$7'
-                  +' WHERE "CartaoCreditoId"=$8';
-        const values = [cartao.NumCartao,
-                        cartao.DataFatura,
-                        cartao.Fatura,
-                        cartao.Limite,
-                        cartao.Anuidade,
-                        cartao.JurosAdicional,
-                        cartao.Bandeira,
-                        cartao.CartaoCreditoId];
+                      + '"Credito"=$4,'
+                      + '"Limite"=$5,' 
+                      + '"Anuidade"=$6,'
+                      + '"JurosAdicional"=$7,'
+                      + '"Bandeira"=$8'
+                  +' WHERE "CartaoCreditoId"=$9';
+        const values = [cartao.cartaoData.numCartao,
+                        cartao.cartaoData.DataFatura,
+                        cartao.cartaoData.Fatura,
+                        cartao.cartaoData.Credito,
+                        cartao.cartaoData.Limite,
+                        cartao.cartaoData.Anuidade,
+                        cartao.cartaoData.JurosAdicional,
+                        cartao.cartaoData.Bandeira,
+                        cartao.Id];
 
         await db.query(sql, values);
         db.release();

@@ -7,6 +7,31 @@ class CartaoController {
 
     constructor() { }
 
+    //pega o id pelo o número
+    async getCartaoByNum(cartao) {
+
+        try {
+
+            var type = cartao.Type;
+
+            var selectCartao;
+
+            if (type == "CC") {
+                selectCartao = await cartaoCreditoController.GetCartaoCreditoByNum(cartao.NumCartao);
+            }
+            else {
+                console.log("Entrou aqui para selecionar: "+cartao.NumCartao);
+                selectCartao = await cartaoDebitoController.GetCartaoDebitoByNum(cartao.NumCartao);
+            }
+
+            return selectCartao;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    }
+
+
     // retorna um cartão pelo o Id
     async getCartaoById(cartao) {
 
@@ -102,25 +127,16 @@ class CartaoController {
     async UpdateCartao(cartaoData) {
         try {
 
-            //Tipo booleano para saber se o UPDATE teve sucesso
             var updateCartao = false;
-
-            //Assim irá funcionar passando UserId via JSON ou usando a interface
-            //Via interface irá entrar e passar o UserId
-            if (cartaoData.UserId == undefined) {
-                cartaoData.UserId = user.UserId
-            }
 
             if (cartaoData.Type == "CC") {
                 //UPDATE Cartão de Crédito
                 updateCartao = await cartaoCreditoController.UpdateCartao(cartaoData);
 
                 if (updateCartao) {
-                    //redenrizar TELA DE CARTAO DE CREDITO
-                    console.log("Cartão de Crédito atualizado com sucesso");
+                    return true;
                 } else {
-                    //redenrizar TELA DE UPDATE DE CARTAO CREDITO COM ALERTA DE ERRO
-                    console.log("Falha ao atualizar o Cartão de Crédito");
+                   return false;
                 }
 
             } else {
@@ -128,11 +144,9 @@ class CartaoController {
                 updateCartao = await cartaoDebitoController.UpdateCartao(cartaoData);
 
                 if (updateCartao) {
-                    //redenrizar TELA DE CARTAO DE DEBITO
-                    console.log("Cartão de Crédito atualizado com sucesso");
+                    return true;
                 } else {
-                    //redenrizar TELA DE UPDATE DE CARTAO DEBITO COM ALERTA DE ERRO
-                    console.log("Falha ao atualizar o Cartão de Crédito");
+                   return false;
                 }
             }
 

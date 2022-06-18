@@ -26,6 +26,7 @@ import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
 
 //Upload de arquivos
 import multer from "multer";
+import { Console } from "console";
 
 //Variavel global responsável pela seção do usuário
 var user = undefined;
@@ -581,14 +582,32 @@ server.post("/cartao", async (req, res) => {
 
 });
 
+//atualiza Cartão 
+server.post("/Updatecartao", async(req, res) => {
 
+	// pega o id do cartão
+	var cartaoDadosId = {NumCartao: req.body.numCartao, Type: req.query.Type}
 
-server.put("/cartao", async (req, res) => {
+	var cartaoId = await cartaoController.getCartaoByNum(cartaoDadosId);
 
+	var cartao = {cartaoData: req.body, Type: req.query.Type, Id: cartaoId.CartaoId}
 
+	var UpdateCartao = await cartaoController.UpdateCartao(cartao);
+
+	if(UpdateCartao && cartao.Type == 'CC')
+	{
+		res.redirect('/ccredito');
+
+	}else if (UpdateCartao &&  cartao.Type == 'CD'){
+		res.redirect('/cdebito');
+	}
+	else
+	{
+		console.log("Falha ao Atualizar o cartão");
+		res.render("login", { erroLogin: true }); //manda para a tela que deseja
+	}
 
 });
-
 
 server.get("/deleteCartao", async (req, res) => {
 

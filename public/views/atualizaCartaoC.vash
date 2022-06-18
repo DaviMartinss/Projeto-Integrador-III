@@ -343,7 +343,7 @@
                <div class="col-12 col-lg-6">
                   
                   
-                  <form action="/cartao" method="post">
+                  <form action="/Updatecartao?Type=CC" method="post">
                      <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
                         <div class="app-card-header p-3 border-bottom-0">
                            <div class="row align-items-center gx-3">
@@ -378,7 +378,7 @@
                               <!--//row-->
                               <div class="col text-end">
                                  <!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
-                                 <input name="numeroCC" type="text" class="form-control" value="@model.cartaoCredito.NumCC">
+                                 <input name="numCartao" type="text" class="form-control" value="@model.cartaoCredito.NumCC">
                                 
                               </div>
                               <!--//col-->
@@ -399,7 +399,7 @@
                                     (model.cartaoCredito.DataFatura.getMonth()+1).toString().padStart(2, '0') + "-" +
                                     (model.cartaoCredito.DataFatura.getDate()+1).toString().padStart(2, '0');
                                  }
-                                 <input name="DataFatura" type="date" class="form-control" value="@data">s
+                                 <input name="DataFatura" type="date" class="form-control" value="@data">
                               </div>
                               <!--//col-->
                            </div>
@@ -413,7 +413,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="limite" type="text" class="form-control" value="@model.cartaoCredito.Limite">
+                                 <input name="Limite" type="text" class="form-control" value="@model.cartaoCredito.Limite">
                               </div>
                               <!--//col-->
                            </div>
@@ -427,7 +427,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="crédito" type="text" class="form-control" value="@model.cartaoCredito.Credito">
+                                 <input name="Credito" type="text" class="form-control" value="@model.cartaoCredito.Credito">
                               </div>
                               <!--//col-->
                            </div>
@@ -441,7 +441,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="anuidade" type="text" class="form-control" value="@model.cartaoCredito.Anuidade">
+                                 <input name="Anuidade" type="text" class="form-control" value="@model.cartaoCredito.Anuidade">
                               </div>
                               <!--//col-->
                            </div>
@@ -455,7 +455,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="fatura" type="text" class="form-control" value="@model.cartaoCredito.Fatura">
+                                 <input name="Fatura" type="text" class="form-control" value="@model.cartaoCredito.Fatura">
                               </div>
                               <!--//col-->
                            </div>
@@ -469,7 +469,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="jurosAdicional" type="text" class="form-control" value="@model.cartaoCredito.JurosAdicional">
+                                 <input name="JurosAdicional" type="text" class="form-control" value="@model.cartaoCredito.JurosAdicional">
                               </div>
                               <!--//col-->
                            </div>
@@ -483,7 +483,7 @@
                               </div>
                               <!--//row-->
                               <div class="col text-end">
-                                 <input name="bandeira" type="text" class="form-control" value="@model.cartaoCredito.Bandeira">
+                                 <input name="Bandeira" type="text" class="form-control" value="@model.cartaoCredito.Bandeira">
                               </div>
                               <!--//col-->
                            </div>

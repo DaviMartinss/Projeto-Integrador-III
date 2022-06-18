@@ -4,6 +4,21 @@ class CartaoDebitoController {
 
     constructor() { }
     
+    //Retorna apenas um cartão de Débito pelo o número
+
+    async GetCartaoDebitoByNum(numCartao) {
+
+        try {
+            
+            return await cartaoDebitoRepository.getCartaoByNum(numCartao);
+
+        } catch (e) {
+
+            console.log(e);
+            return undefined;
+        }
+    }
+
     //Retorna apenas um cartão pelo o Id
     async GetCartaoDebitoById(cartaoId) {
 
@@ -64,11 +79,11 @@ class CartaoDebitoController {
     async UpdateCartao(cartaoDebito) {
         try {
 
-            var updateCartaoDebito;
+            var updateCartaoDebito = false;
 
             updateCartaoDebito = await cartaoDebitoRepository.updateCartao(cartaoDebito);
 
-            if (updateCartaoCredito)
+            if (updateCartaoDebito)
                 return true;
             else
                 return false;
