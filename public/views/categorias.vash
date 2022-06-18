@@ -199,8 +199,6 @@
 
 	    <div class="app-content pt-3 p-md-3 p-lg-4">
 		    <div class="container-xl">
-
-			    <h1 class="app-page-title">Categorias</h1>
                 <div class="row gy-4">
 	                <!--Colocar aqui os dados da parte de categoria - podemser copiados de outras telas-->
                 </div><!--//row-->
@@ -223,7 +221,7 @@
 					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
 					                    </div>
 					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                        <button type="submit" class="btn app-btn-secondary">Pesquisar</button>
 					                    </div>
 					                </form>
 
@@ -231,10 +229,8 @@
 							    <div class="col-auto">
 
 								    <select class="form-select w-auto" >
-										  <option selected value="option-1">All</option>
-										  <option value="option-2">This week</option>
-										  <option value="option-3">This month</option>
-										  <option value="option-4">Last 3 months</option>
+										  <option selected value="option-1">Todas as Categorias</option>
+										  <option value="option-2">Nome</option>
 
 									</select>
 							    </div>
@@ -254,10 +250,8 @@
 
 
 			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
-				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">All</a>
-				    <a class="flex-sm-fill text-sm-center nav-link"  id="orders-paid-tab" data-bs-toggle="tab" href="#orders-paid" role="tab" aria-controls="orders-paid" aria-selected="false">Paid</a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-pending-tab" data-bs-toggle="tab" href="#orders-pending" role="tab" aria-controls="orders-pending" aria-selected="false">Pending</a>
-				    <a class="flex-sm-fill text-sm-center nav-link" id="orders-cancelled-tab" data-bs-toggle="tab" href="#orders-cancelled" role="tab" aria-controls="orders-cancelled" aria-selected="false">Cancelled</a>
+				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todas as Categorias</a>
+				    
 				</nav>
 
 
@@ -270,6 +264,7 @@
 										<thead>
 											<tr>
 												<th class="cell">Categoria</th>
+												<th class="cell">Ações</th>
 												<th class="cell"></th>
 											</tr>
 										</thead>
@@ -284,12 +279,9 @@
                          <tr>
                            <td class="cell">@categoria.Categoria</td>
                            <td class="cell">
-                             <a class="btn-sm app-btn-secondary" onclick="atualizar(@cat)">
-                             Editar
-                           </a>
+                             	<a class="btn-sm app-btn-secondary" onclick="atualizar(@cat)">Editar</a>
+						   		<a class="btn-sm app-btn-secondary" href="/categoriaDEL?CategoriaId=@categoria.CategoriaId">Deletar</a>
                            </td>
-                           <td class="cell"><a class="btn-sm app-btn-secondary" href="/categoriaDEL?CategoriaId=@categoria.CategoriaId">
-                             Deletar</a></td>
                          </tr>
 
                        });
