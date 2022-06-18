@@ -97,14 +97,14 @@
     </div><!--//row-->
 
 
-    //Exibe mensagem de erro do Login
+    <!--Exibe mensagem de erro do Login-->
     @{
 
       if(model.erroLogin)
       {
         <script>
     		    erroLogin();
-    		</script>
+    	</script>
       }
     }
 
