@@ -81,39 +81,17 @@ class CartaoController {
 
     //cadastra cartão de crédito ou débito
     async InsertCartao(cartaoData) {
-        console.log(cartaoData);
+        
         try {
 
-            //Tipo booleano para saber se o insert teve sucesso
-            var insertCartao = false;
-
-            if (cartaoData.cartaoData.Type == 'CC') {
-                //INSERT Cartão de Crédito
+            if (cartaoData.Type == 'CC') {
                 
-                insertCartao = await cartaoCreditoController.InsertCartao(cartaoData);
-
-                if (insertCartao) {
-                    //redenrizar TELA DE CARTAO DE CREDITO
-                    
-                    return true;
-                } else {
-                    //redenrizar TELA DE CADASTRO DE CARTAO CREDITO COM ALERTA DE ERRO
-                    console.log("ERRO NO CADASTRO");
-                    return false;
-                }
-
+                return await cartaoCreditoController.InsertCartao(cartaoData);
+                
             } else {
-                //INSERT Cartão de Débito
-                insertCartao = await cartaoDebitoController.InsertCartao(cartaoData); // mudar para o controller
-
-                if (insertCartao) {
-                    //redenrizar TELA DE CARTAO DE DEBITO
-                    return true;
-                } else {
-                    //redenrizar TELA DE CADASTRO DE CARTAO DEBITO COM ALERTA DE ERRO
-                    console.log("ERRO NO CADASTRO");
-                    return false;
-                }
+                
+                return await cartaoDebitoController.InsertCartao(cartaoData);
+                
             }
 
         } catch (e) {

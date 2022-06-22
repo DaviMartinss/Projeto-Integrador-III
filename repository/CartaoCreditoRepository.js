@@ -92,7 +92,7 @@ class CartaoCreditoRepository{
 
       if(db != undefined)
       {
-        console.log("numCartao: "+ cartao.cartaoData.NumCartao);
+        
         const sql = 'INSERT INTO "CartaoCredito"'
                   + '('
                       + '"UserId",'

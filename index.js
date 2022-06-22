@@ -561,17 +561,17 @@ server.get("/cartaoListByType", async (req, res) => {
 //cadastra cartaão
 server.post("/cartao", async (req, res) => {
 
-	var cartaoData = req.body
+	var type = req.query.Type;
 
-	var Insertdados = {UserId: user.UserId, cartaoData}
+	var cartaoData = req.body
+	var Insertdados = {UserId: user.UserId, cartaoData, Type: type}
 	var insertCartao = await cartaoController.InsertCartao(Insertdados);
 
-
-	if(insertCartao && Insertdados.cartaoData.Type == 'CC')
+	if(insertCartao && type == 'CC')
 	{
 		res.redirect('/ccredito');
 
-	}else if (insertCartao && Insertdados.cartaoData.Type == 'CD'){
+	}else if (insertCartao && type == 'CD'){
 		res.redirect('/cdebito');
 	}
 	else

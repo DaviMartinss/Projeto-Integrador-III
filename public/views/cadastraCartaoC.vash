@@ -202,9 +202,9 @@
 
 	                <div class="col-12 col-lg-6">
 
-					<form action="/cartao" method="post">
+					<form action="/cartao?Type=CC" method="post">
 						<div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-						    <input name="Type" id="Type" type="text" value="CC">
+						   
 							<div class="app-card-header p-3 border-bottom-0">
 						        <div class="row align-items-center gx-3">
 							        <div class="col-auto">
