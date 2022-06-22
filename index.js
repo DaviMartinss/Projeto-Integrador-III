@@ -495,8 +495,6 @@ server.get("/categoriaDEL", async (req, res) => {
 
 	if(deleteCategoria)
 	{
-		//deve redirecionar para página de categoria
-		console.log("CATEGORIA DELETADA");
 		res.redirect("/categorias")
 	}
 	else

@@ -13,7 +13,8 @@
       <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
       <!-- App CSS -->
       <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
-      <script defer src="../scripts/categorias.js"></script>
+      <script defer src="../scripts/categoria.js"></script>
+
       <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
    </head>
    <body class="app">
@@ -299,7 +300,8 @@
                                            <td class="cell">@categoria.Categoria</td>
                                            <td class="cell">
                                               <a class="btn-sm app-btn-secondary" onclick="atualizar(@cat)">Editar</a>
-                                              <a class="btn-sm app-btn-secondary" href="/categoriaDEL?CategoriaId=@categoria.CategoriaId">Deletar</a>
+                                              <a class="btn-sm app-btn-secondary"  onClick="confirmar(@cat)">Deletar</a>
+                                              
                                            </td>
                                         </tr>
                                       });
