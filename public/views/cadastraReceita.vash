@@ -318,48 +318,144 @@
 							        </div><!--//col-->
 						        </div><!--//row-->
 						    </div><!--//app-card-header-->
-						    <div class="app-card-body px-4 w-100">
+                <div class="app-card-body px-4 w-100">
 
                   <form action="/receitaCAD" method="post">
 
-                    <label>Data:</label>
-                      <input type="date" id="data" name="Data"/ value="" /> <br>
+                  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab fa-cc-visa me-2"></i
+                          ><strong>Data</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
+                    <div class="col text-end">
+                      <!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
+                      <input
+                        name="Data"
+                        type="date"
+                        class="form-control"
+                        id="data"
+                      />
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
 
-                    <label>Forma de Locação:</label>
-                      <input type="text" id="FormaLocacao" name="FormaAlocacao"/ value="" /> <br>
+                  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>Forma de Locação</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
 
-                    <label>Valor:</label>
-                      <input type="number" id="Valor" name="Valor" value=""/> <br>
+                    <div class="col text-end">
+                      <input
+                        name="FormaAlocacao"
+                        type="text"
+                        id="FormaLocacao"
+                        class="form-control"
+                        placeholder="Forma de Locação"
+                      />
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
 
-                    <label>Se Repete:</label>
-                      <input type="checkbox" id="Se Repete" name="SeRepete" value=""/> <br>
+                  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>Valor</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
 
-                    <label>Categoria:</label>
-                    <select id="categorias" name="CategoriaId">
+                    <div class="col text-end">
+                      <input
+                        type="number"
+                        id="Valor"
+                        name="Valor"
+                        value=""
+                        class="form-control"
+                        placeholder="Valor"
+                      />
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
 
-                        @{
+                  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>Se Repete</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
+                    <div class="col text-end">
+                      <input
+                        type="checkbox"
+                        id="Se Repete"
+                        name="SeRepete"
+                      />
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
 
-                          if(model.listaCategoria != undefined)
-                          {
-                            @model.listaCategoria.forEach(categoria => {
-                                 <option value="@categoria.CategoriaId">@categoria.Categoria</option>
-                            });
+                  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>Categoria</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
+
+                    <div class="col text-end">
+                      <select id="categorias" name="CategoriaId">
+
+                          @{
+
+                            if(model.listaCategoria != undefined)
+                            {
+                              @model.listaCategoria.forEach(categoria => {
+                                   <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                              });
+                            }
                           }
-                        }
 
-                    </select>
+                      </select>
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
 
-                    <button type="submit" id="btCadastrar" class="btn app-btn-secondary">
+                  <div class="item border-bottom py-3">
+                    <button type="submit" class="btn-sm app-btn-secondary">
                       Cadastrar
                     </button>
-                  </form>
-
-
+                  </div>
+                </form>
+                </div>
+						    <div class="app-card-body px-4 w-100">
 						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
-
-
-
 
 	                </div>
 
