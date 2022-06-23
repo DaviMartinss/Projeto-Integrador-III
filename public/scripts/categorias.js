@@ -29,6 +29,7 @@ function atualizar(categoriaDATA){
     inputCategoria.value = "";
     inputCategoriaId.value = "";
   }
+}
 
   function cadastrar(){
 
@@ -36,13 +37,11 @@ function atualizar(categoriaDATA){
   var butaoCadastrar = document.getElementById("btCadastrar");
 
   if(div.style.display == "none")
-      div.style.display = 'block';
   {
     div.style.display = 'block';
     butaoCadastrar.style.display = 'block';
   }
   else
-      div.style.display = 'none';
   {
     div.style.display = 'none';
     butaoCadastrar.style.display = 'none';
