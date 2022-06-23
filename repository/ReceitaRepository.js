@@ -118,7 +118,7 @@ class ReceitaRepository {
 
          const values = [receita.CategoriaId,
                          receita.Data,
-                         receita.FormaLocacao,
+                         receita.FormaAlocacao,
                          receita.Valor,
                          receita.SeRepete,
                          receita.ReceitaId];

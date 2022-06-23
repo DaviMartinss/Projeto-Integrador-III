@@ -38,13 +38,13 @@ class CartaoCreditoController {
 
         try {
 
-            var ListCartaoCredito = await cartaoCreditoRepository.getCartaoList(userId);
+            var listCartaoCredito = await cartaoCreditoRepository.getCartaoList(userId);
 
-            if (ListCartaoCredito != undefined) {
-                return ListCartaoCredito;
+            if (!!listCartaoCredito.length) {
+                return listCartaoCredito;
             }
             else {
-                console.log("Não existe cartão de crédito cadastrado para esse usuário");
+                //console.log("Não existe cartão de crédito cadastrado para esse usuário");
                 return undefined;
             }
 

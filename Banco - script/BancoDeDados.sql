@@ -79,23 +79,15 @@ CREATE TABLE "Despesa" (
 	"Valor" FLOAT NOT NULL,
 	"Data" DATE NOT NULL,
 	"Descricao" VARCHAR(60) NOT NULL,
-	"FormaDePagamento" SMALLINT NOT NULL,
-	"NumParcelas" INT NULL,
+	"FormaPagamento" SMALLINT NOT NULL,
+	"NumParcelas" INT DEFAULT NULL,
 	"Status" BOOLEAN NOT NULL,
 	"NumCC" BIGINT DEFAULT NULL,
 	"NumCD" BIGINT DEFAULT NULL,
 	"CategoriaId" INTEGER NOT NULL,
 	"UserId" INTEGER NOT NULL,
-	"ReceitaId" INTEGER NOT NULL,
 	CONSTRAINT FK_USER FOREIGN kEY("UserId") REFERENCES "User" ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_CATEGORIA FOREIGN kEY("CategoriaId") REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE,
-	CONSTRAINT FK_RECEITA FOREIGN kEY("ReceitaId") REFERENCES "Receita" ON DELETE CASCADE ON UPDATE CASCADE
-
-  	--caso seja alterado/deletado o valor do id_user, também será alterado/deletado a tupla da despesa que
-  	-- possui o id_user do usuário
-
-	--caso seja alterado/deletado o valor do id_categoria, também será alterado/deletado a tupla da despesa que
-  	-- possui o id_categoria de categoria
+	CONSTRAINT FK_CATEGORIA FOREIGN kEY("CategoriaId") REFERENCES "Categoria" ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE "Total" (
@@ -124,7 +116,7 @@ CREATE TABLE "SendEmail" (
 	"SendEmailId" SERIAL PRIMARY KEY NOT NULL,
 	"Password" VARCHAR(60) NOT NULL,
 	"UserId" INTEGER NOT NULL,
-	CONSTRAINT FK_USER FOREIGN kEY("UserId") REFERENCES "User" 
+	CONSTRAINT FK_USER FOREIGN kEY("UserId") REFERENCES "User"
 );
 
 

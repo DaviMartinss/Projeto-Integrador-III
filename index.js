@@ -20,6 +20,7 @@ import { cartaoCreditoController } from "./controllers/CartaoCreditoController.j
 import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js";
 import { sendEmailController} from "./controllers/SendEmailController.js";
 import { receitaController } from "./controllers/ReceitaController.js";
+import { despesaController} from "./controllers/DespesaController.js"
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
@@ -184,13 +185,11 @@ server.get("/categorias", async (req, res) => {
 });
 
 
-server.get("/despesas", (req, res) => {
-	res.render("despesas", {user});
-});
+
 
 
 server.get("/cdebito", async (req, res) => {
-	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoByUserId(user.UserId);
+	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 	res.render("debito", {listCartaoDebito, user});
 });
 
@@ -201,9 +200,9 @@ server.get("/ccredito", async (req, res) => {
 });
 
 server.get("/debitoCadastra", async (req, res) => {
-	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 
-	res.render("credito", { listCartaoCredito, user });
+	res.render("debito", { listCartaoDebito, user });
 });
 
 
@@ -701,34 +700,6 @@ server.post("/receitaCAD", async (req, res) => {
 
 });
 
-server.get("/receitaDEL", async (req, res) => {
-
-	var receitaData = req.query
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(receitaData.UserId == undefined){
-		receitaData = {UserId: user.UserId, ReceitaId:req.query.ReceitaId}
-	}
-
-	//verifica se o delete ocorreu com sucesso!
-	var deleteReceita = await receitaController.DeleteReceita(receitaData);
-
-	if(deleteReceita)
-	{
-		//deve redirecionar para página de RECEITA
-		console.log("RECEITA DELETADA");
-		res.redirect("/receitas")
-	}
-	else
-	{
-		//deve redirecionar para página de RECEITA com alerta de erro
-		console.log("RECEITA NÃO FOI DELETADA");
-	}
-
-});
-
-
 server.get('/receitaUP', async(req, res) => {
 
 	var receitaId = req.query.ReceitaId;
@@ -751,6 +722,7 @@ server.post("/receitaUP", async (req, res) => {
 	if(receitaData.UserId == undefined){
 		receitaData = {
 									 UserId: user.UserId,
+									 ReceitaId: parseInt(req.body.ReceitaId),
 									 Data: new Date(req.body.Data),
 									 FormaAlocacao: req.body.FormaAlocacao,
 									 CategoriaId: parseInt(req.body.CategoriaId),
@@ -759,7 +731,7 @@ server.post("/receitaUP", async (req, res) => {
 								  }
 	}
 
-	//console.log(req.body);
+	console.log(receitaData);
 
 	//verifica se o update ocorreu com sucesso!
 	var updateReceita = await receitaController.UpdateReceita(receitaData);
@@ -777,9 +749,173 @@ server.post("/receitaUP", async (req, res) => {
 	}
 });
 
+server.get("/receitaDEL", async (req, res) => {
 
+	var receitaData = req.query
 
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData = {UserId: user.UserId, ReceitaId:parseInt(req.query.ReceitaId)}
+	}
 
+	//verifica se o delete ocorreu com sucesso!
+	var deleteReceita = await receitaController.DeleteReceita(receitaData);
+
+	if(deleteReceita)
+	{
+		//deve redirecionar para página de RECEITA
+		console.log("RECEITA DELETADA");
+		res.redirect("/receitas")
+	}
+	else
+	{
+		//deve redirecionar para página de RECEITA com alerta de erro
+		console.log("RECEITA NÃO FOI DELETADA");
+	}
+
+});
+
+// ========================== CRUD DE DESPESAS =====================================================================
+
+server.get("/despesas", async (req, res) => {
+
+	var listaDespesa = await despesaController.GetDespesaList(user);
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	res.render("despesas", {user, listaDespesa, listaCategoria});
+});
+
+server.get('/despesaCAD', async (req, res) => {
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	var listaCC = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+	var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+
+	res.render("cadastraDespesa", { user, listaCategoria, listaCC, listaCD });
+});
+
+server.post("/despesaCAD", async (req, res) => {
+
+	var despesaData = req.body;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(despesaData.UserId == undefined){
+		despesaData = {
+										 UserId: user.UserId,
+										 CategoriaId: parseInt(req.body.CategoriaId),
+										 Data: new Date(req.body.Data),
+										 Valor: parseFloat(req.body.Valor),
+										 FormaPagamento: parseInt(req.body.FormaPagamento),
+										 Status: (req.body.Status == 'true' ? true : false),
+										 NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
+										 NumCC: ( req.body.NumCC != undefined ? Long.parseLong(req.body.NumCC) : undefined),
+										 NumCD: ( req.body.NumCD != undefined ? Long.parseLong(req.body.NumCD) : undefined),
+										 Descricao: req.body.Descricao
+								  }
+	}
+
+	//console.log(despesaData);
+
+	//verifica se o insert ocorreu com sucesso!
+	var insertDespesa = await despesaController.GenerateDespesa(despesaData); //cadastrando despesa
+
+	if(insertDespesa)
+	{
+		res.redirect('/despesas');
+
+		console.log("DESPESA CADASTRADA");
+	}
+	else
+	{
+
+		console.log("DESPESA NÃO FOI CADASTRADA");
+	}
+
+});
+
+server.get('/despesaUP', async(req, res) => {
+
+	var despesaId = req.query.DespesaId;
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	var despesa = await despesaController.GetDespesaById(despesaId);
+
+	var listaCC = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+	var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+
+	//console.log(receita);
+
+	res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD});
+});
+
+server.post("/despesaUP", async (req, res) => {
+
+	var despesaData = req.body;
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(despesaData.UserId == undefined){
+		despesaData = {
+										 UserId: user.UserId,
+										 DespesaId:  parseInt(req.body.DespesaId),
+										 CategoriaId: parseInt(req.body.CategoriaId),
+										 Data: new Date(req.body.Data),
+										 Valor: parseFloat(req.body.Valor),
+										 FormaPagamento: parseInt(req.body.FormaPagamento),
+										 Status: (req.body.Status == 'true' ? true : false),
+										 NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
+										 NumCC: ( req.body.NumCC != undefined ? parseInt(req.body.NumCC) : undefined),
+										 NumCD: ( req.body.NumCD != undefined ? parseInt(req.body.NumCD) : undefined),
+										 Descricao: req.body.Descricao
+									}
+	}
+
+	//console.log(despesaData);
+
+	var updateDespesa = await despesaController.UpdateDespesa(despesaData);
+
+	if(updateDespesa)
+	{
+		res.redirect('/despesas');
+		console.log("DESPESA ATUALIZADA");
+	}
+	else
+	{
+		console.log("DESPESA NÃO FOI ATUALIZADA");
+	}
+});
+
+server.get("/despesaDEL", async (req, res) => {
+
+	var despesaData = req.query
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(despesaData.UserId == undefined){
+		despesaData = {UserId: user.UserId, DespesaId:parseInt(req.query.DespesaId)}
+	}
+
+	//verifica se o delete ocorreu com sucesso!
+	var deleteDespesa = await despesaController.DeleteDespesa(despesaData);
+
+	if(deleteDespesa)
+	{
+		console.log("DESPESA DELETADA");
+		res.redirect("/despesas")
+	}
+	else
+	{
+		console.log("DESPESA NÃO FOI DELETADA");
+	}
+
+});
 
 
 server.listen(3000, () => {

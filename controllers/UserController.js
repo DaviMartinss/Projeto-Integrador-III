@@ -72,7 +72,7 @@ class UserController {
 
       var userList = await userRepository.getUserList();
 
-      if(userList != undefined)
+      if(!!userList.length)
       {
         return userList;
       }
@@ -180,7 +180,7 @@ class UserController {
           case 'Avatar':
 
             updateUser = await userRepository.updateUserAvatar(userData);
-  
+
             //IMPLEMENTAR
             break;
 
@@ -254,9 +254,9 @@ class UserController {
   async UpdatePassword(dados) {
 
     try{
-      
+
       dados.newPassword = cipher.encrypt(dados.newPassword + '');
-      
+
       var userChangePassword = await userRepository.updatePassword(dados);
 
     	if(userChangePassword){

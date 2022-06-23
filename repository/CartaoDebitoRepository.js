@@ -62,7 +62,7 @@ class CartaoDebitoRepository{
       try
       {
         const db = await database.connect();
-        
+
         if(db != undefined )
         {
           const sql = 'select * from "CartaoDebito" WHERE "UserId"=$1;';
@@ -70,7 +70,6 @@ class CartaoDebitoRepository{
           const res = await db.query(sql,values);
           db.release();
           return res.rows;
-          
         }
         else
         {

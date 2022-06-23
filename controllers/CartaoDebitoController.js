@@ -3,13 +3,13 @@ import { cartaoDebitoRepository } from "../repository/CartaoDebitoRepository.js"
 class CartaoDebitoController {
 
     constructor() { }
-    
+
     //Retorna apenas um cartão de Débito pelo o número
 
     async GetCartaoDebitoByNum(numCartao) {
 
         try {
-            
+
             return await cartaoDebitoRepository.getCartaoByNum(numCartao);
 
         } catch (e) {
@@ -34,17 +34,18 @@ class CartaoDebitoController {
     }
 
     //Retorna todos os cartões de débito do usuário
-    async GetCartaoDebitoByUserId(userId) {
+    async GetCartaoDebitoListByUserId(userId) {
 
         try {
 
             var listCartaoDebito = await cartaoDebitoRepository.getCartaoList(userId);
 
-            if (listCartaoDebito != undefined) {
+            //verifica se a lista vem NULL
+            if (!!listCartaoDebito.length) {
                 return listCartaoDebito;
             }
             else {
-                console.log("Não existe cartão de crédito cadastrado para esse usuário");
+                //console.log("Não existe cartão de débito cadastrado para esse usuário");
                 return undefined;
             }
 

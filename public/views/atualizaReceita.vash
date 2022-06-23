@@ -363,7 +363,10 @@
                      </div>
                      <!--//app-card-header-->
                      <div class="app-card-body px-4 w-100">
-                        <form action="/receitaCAD" method="post">
+                        <form action="/receitaUP" method="post">
+
+                          <input type="number" name="ReceitaId" value="@model.receita.ReceitaId" hidden/>
+
                            <label>Data:</label>
                            @{
                              data = model.receita.Data.getFullYear() + "-" +

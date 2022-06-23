@@ -13,7 +13,7 @@ class CategoriaController {
 
     	var categoriaList = await categoriaRepository.getCategoriaList(user);
 
-      if(categoriaList != undefined)
+      if(!!categoriaList.length)
       {
         return categoriaList;
       }

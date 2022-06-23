@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <title>Pé de meia - Ped1/2</title>
+      <title>Pé de meia - Ped1/21</title>
       <!-- Meta -->
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,8 +13,10 @@
       <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
       <!-- App CSS -->
       <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
-      <script defer src="../scripts/categorias.js"></script>
       <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+
+      <script src="../scripts/despesas.js"></script>
+
    </head>
    <body class="app">
       <header class="app-header fixed-top">
@@ -51,7 +53,7 @@
                               <li>
                                  <hr class="dropdown-divider">
                               </li>
-                              <li><a class="dropdown-item" href="/">Log Out</a></li>
+                              <li><a class="dropdown-item" href="login">Log Out</a></li>
                            </ul>
                         </div>
                         <!--//app-user-dropdown-->
@@ -70,7 +72,7 @@
             <div class="sidepanel-inner d-flex flex-column">
                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
                <div class="app-branding">
-                  <a class="app-logo" href="home"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">Ped1/2</span></a>
+                  <a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"><span class="logo-text">Ped1/2</span></a>
                </div>
                <!--//app-branding-->
                <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
@@ -224,201 +226,207 @@
       <div class="app-wrapper">
          <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-               <h1 class="app-page-title">Despesas</h1>
-               <div class="row gy-4">
-                  <!--Colocar aqui os dados da parte de categoria - podemser copiados de outras telas-->
-               </div>
-               <!--//row-->
-            </div>
-            <!--//container-fluid-->
-         </div>
-         <!--//app-content-->
-         <div class="app-content pt-3 p-md-3 p-lg-4">
-            <div class="container-xl">
-               <div class="row g-3 mb-4 align-items-center justify-content-between">
-                  <div class="col-auto">
-                     <h1 class="app-page-title mb-0">Despesas</h1>
-                  </div>
-                  <div class="col-auto">
-                     <div class="page-utilities">
-                        <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+               <h1 class="app-page-title">Cadastrar Despesa</h1>
+               <div class="col-12 col-lg-6">
+                  <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
+                     <div class="app-card-header p-3 border-bottom-0">
+                        <div class="row align-items-center gx-3">
                            <div class="col-auto">
-                              <form class="table-search-form row gx-1 align-items-center">
-                                 <div class="col-auto">
-                                    <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
-                                 </div>
-                                 <div class="col-auto">
-                                    <button type="submit" class="btn app-btn-secondary">Search</button>
-                                 </div>
-                              </form>
+                              <div class="app-icon-holder">
+                                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-credit-card" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                    <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                 </svg>
+                              </div>
+                              <!--//icon-holder-->
                            </div>
                            <!--//col-->
                            <div class="col-auto">
-                              <select class="form-select w-auto" >
-                                 <option selected value="option-1">All</option>
-                                 <option value="option-2">This week</option>
-                                 <option value="option-3">This month</option>
-                                 <option value="option-4">Last 3 months</option>
-                              </select>
-
+                              <h4 class="app-card-title">Dados da Despesa</h4>
                            </div>
-                           <div class="col-auto">
-                              <a class="btn app-btn-secondary" href="/despesaCAD">
-                              Nova Despesa
-                              </a>
-                           </div>
+                           <!--//col-->
                         </div>
                         <!--//row-->
                      </div>
-                     <!--//table-utilities-->
-                  </div>
-                  <!--//col-auto-->
-               </div>
-               <!--//row-->
-               <div class="tab-content" id="orders-table-tab-content">
-                  <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
-                     <div class="app-card app-card-orders-table shadow-sm mb-5">
-                        <div class="app-card-body">
-                           <div class="table-responsive">
-                              <table class="table app-table-hover mb-0 text-left">
-                                 <thead>
-                                    <tr>
-                                       <th class="cell">Data</th>
-                                       <th class="cell">Forma de Pagamento</th>
-                                       <th class="cell">Nº Parcelas</th>
-                                       <th class="cell">Status</th>
-                                       <th class="cell">Valor</th>
-                                       <th class="cell">Nº Cartão</th>
-                                       <th class="cell">Categoria</th>
-                                       <th class="cell">Descrição</th>
-                                       <th class="cell">Ações</th>
-                                       <!-- <th class="cell">Se Repete</th> -->
-                                       <th class="cell"></th>
-                                    </tr>
-                                 </thead>
-                                 <tbody>
+                     <!--//app-card-header-->
+                     <div class="app-card-body px-4 w-100">
 
-                                      @if(model.listaDespesa != undefined && model.listaCategoria != undefined)
+                       <form action="/despesaUP" method="post">
+
+                         <input type="number" name="DespesaId" value="@model.despesa.DespesaId" hidden/>
+
+                         <label>Data</label>
+                         @{
+                           data = model.despesa.Data.getFullYear() + "-" +
+                                 (model.despesa.Data.getMonth()+1).toString().padStart(2, '0') + "-" +
+                                 (model.despesa.Data.getDate()+1).toString().padStart(2, '0');
+                         }
+                         <input type="date" name="Data" value="@data"/> <br><br>
+
+                         <label>Valor</label>
+                         <input type="number" name="Valor" value="@model.despesa.Valor"/> <br><br>
+
+                         <label>Categoria</label>
+
+                         <select id="categorias" name="CategoriaId">
+
+                               @if(model.listaCategoria != undefined)
+                               {
+                                 @model.listaCategoria.forEach(categoria => {
+
+                                      if(model.despesa.CategoriaId == categoria.CategoriaId)
                                       {
-                                        var listaCategoria = model.listaCategoria;
-
-                                        @model.listaDespesa.forEach(despesaItem => {
-
-                                          var despesa = JSON.stringify(@despesaItem);
-
-                                          let data = (despesaItem.Data.getDate()+1).toString().padStart(2, '0') + "/" +
-                                                     (despesaItem.Data.getMonth()+1).toString().padStart(2, '0') + "/" +
-                                                      despesaItem.Data.getFullYear();
-
-                                          let status = (despesaItem.Status == true ? "PAGO" : "NÃO PAGO");
-
-                                          let numCartao = (despesaItem.NumCC != undefined ? despesaItem.NumCC : despesaItem.NumCD);
-
-                                          if(numCartao == undefined)
-                                          {
-                                            numCartao = "---";
-                                          }
-
-                                          let numParcelas = (despesaItem.NumParcelas != undefined ? despesaItem.NumParcelas : "---");
-
-                                          let formaPagamento;
-
-                                          switch(despesaItem.FormaPagamento)
-                                          {
-                                            case 1:
-                                              formaPagamento = "CRÉDITO";
-                                              break;
-                                            case 2:
-                                              formaPagamento = "DÉDITO";
-                                              break;
-                                            case 3:
-                                              formaPagamento = "DINHEIRO";
-                                              break;
-
-                                            default:
-                                              formaPagamento = undefined;
-                                          }
-
-
-                                          <tr>
-                                             <td class="cell">@data</td>
-                                             <td class="cell">@formaPagamento</td>
-                                             <td class="cell">@numParcelas</td>
-                                             <td class="cell">@status</td>
-                                             <td class="cell">R$ @despesaItem.Valor</td>
-                                             <td class="cell">@numCartao</td>
-
-                                             @listaCategoria.forEach(categoria => {
-                                               if(categoria.CategoriaId == despesaItem.CategoriaId)
-                                               {
-                                                 <td class="cell">@categoria.Categoria</td>
-                                               }
-                                             })
-
-                                             <td class="cell">@despesaItem.Descricao</td>
-
-                                             <td class="cell">
-                                                <a class="btn-sm app-btn-secondary" href="/despesaUP?DespesaId=@despesaItem.DespesaId">
-                                                Editar
-                                                </a>
-                                                <a class="btn-sm app-btn-secondary" href="/despesaDEL?DespesaId=@despesaItem.DespesaId">
-                                                Deletar</a>
-                                             </td>
-                                          </tr>
-                                        })
+                                        <option value="@categoria.CategoriaId" selected>@categoria.Categoria</option>
                                       }
+                                      else
+                                      {
+                                        <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                                      }
+                                 });
+                               }
 
-                                 </tbody>
-                              </table>
+                         </select> <br><br>
+
+                         <label>Status</label>
+                         <select name="Status">
+
+                           @if(model.despesa.Status == true)
+                           {
+                              <option value="true" selected>PAGO</option>
+                           }
+                           else
+                           {
+                               <option value="true">PAGO</option>
+                           }
+
+                           @if(model.despesa.Status == false)
+                           {
+                              <option value="false" selected>NÃO PAGO</option>
+                           }
+                           else
+                           {
+                               <option value="false">NÃO PAGO</option>
+                           }
+
+                         </select> <br><br>
+
+                         @{
+                             var listaCartaoC = "undefined";
+                             var listaCartaoD = "undefined";
+
+                             if(model.listaCC != undefined)
+                             {
+                               listaCartaoC = JSON.stringify(model.listaCC);
+                             }
+
+                             if(model.listaCD != undefined)
+                             {
+                               listaCartaoD = JSON.stringify(model.listaCD);
+                             }
+
+                           <label>Forma de Pagamento</label>
+                           <select id="FormaDePagamento" name="FormaPagamento" onchange="showINPUT(@listaCartaoC, @listaCartaoD)">
+
+                             @if(model.despesa.FormaPagamento == 1)
+                             {
+                               <option value="1" selected>CRÉDITO</option>
+                             }
+                             else
+                             {
+                               <option value="1">CRÉDITO</option>
+                             }
+
+                             @if(model.despesa.FormaPagamento == 2)
+                             {
+                               <option value="2" selected>DÉBITO</option>
+                             }
+                             else
+                             {
+                               <option value="2">DÉBITO</option>
+                             }
+
+                             @if(model.despesa.FormaPagamento == 3)
+                             {
+                               <option value="3" selected>DINHEIRO</option>
+                             }
+                             else
+                             {
+                               <option value="3">DINHEIRO</option>
+                             }
+
+                           </select> <br><br>
+
+                          }
+
+                           <div id="FormaPagamento">
+                             <!-- COMO PRIMEIRO ITEM DO SELECT É CREDITO, ENTAO JA CARREGA LOGO OS CAMPOS  -->
+                             <!-- FICA PARECENDO COMO SE JA TIVESSE SELECIONADO -->
+
+                             @if(model.despesa.NumCC != undefined)
+                             {
+                               <label>Nº do Cartão</label>
+                               <select name="NumCC">
+
+                                 @model.listaCC.forEach(cartao => {
+
+                                   if(cartao.NumCC == model.despesa.NumCC)
+                                   {
+                                     <option value="@cartao.NumCC" selected> @cartao.NumCC </option>
+                                   }
+                                   else
+                                   {
+                                      <option value="@cartao.NumCC"> @cartao.NumCC </option>
+                                   }
+
+                                 });
+
+                               </select> <br><br>
+
+                               <label>Nº Parcelas</label>
+                               <input type="number" name="NumParcelas" value="@model.despesa.NumParcelas"/> <br><br>
+                             }
+                             else if(model.despesa.NumCD != undefined)
+                             {
+                               <label>Nº do Cartão</label>
+                               <select name="NumCD">
+
+                                 @model.listaCC.forEach(cartao => {
+
+                                   if(cartao.NumCD == model.despesa.NumCD)
+                                   {
+                                     <option value="@cartao.NumCD" selected> @cartao.NumCD </option>
+                                   }
+                                   else
+                                   {
+                                      <option value="@cartao.NumCD"> @cartao.NumCD </option>
+                                   }
+
+                                 });
+
+                               </select> <br><br>
+                             }
+                             else
+                             {
+
+                             }
                            </div>
-                           <!--//table-responsive-->
-                        </div>
-                        <!--//app-card-body-->
+
+                         <textarea  name="Descricao" rows="5" cols="33">@model.despesa.Descricao</textarea> <br><br>
+
+                         <input type="submit" value="Atualizar"/>
+
+                       </form>
+
+
                      </div>
-                     <!--//app-card-->
-                     <nav class="app-pagination">
-                        <ul class="pagination justify-content-center">
-                           <li class="page-item disabled">
-                              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                           </li>
-                           <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                           <li class="page-item"><a class="page-link" href="#">2</a></li>
-                           <li class="page-item"><a class="page-link" href="#">3</a></li>
-                           <li class="page-item">
-                              <a class="page-link" href="#">Next</a>
-                           </li>
-                        </ul>
-                     </nav>
-                     <!--//app-pagination-->
+                     <!--//app-card-body-->
                   </div>
-                  <!--//tab-pane-->
+                  <!--//app-card-->
                </div>
-               <!--//tab-content-->
             </div>
             <!--//container-fluid-->
          </div>
          <!--//app-content-->
-         <div class="col-12 col-lg-4">
-            <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
-               <div class="app-card-header p-3 border-bottom-0">
-                  <div class="row align-items-center gx-3">
-                  </div>
-                  <!--//row-->
-               </div>
-               <!--//app-card-header-->
-               <div class="app-card-body px-4">
-               </div>
-               <!--//app-card-body-->
-               <div class="app-card-footer p-4 mt-auto">
-               </div>
-               <!--//app-card-footer-->
-               <div class="app-card-footer p-4 mt-auto">
-               </div>
-               <!--//app-card-footer-->
-            </div>
-            <!--//app-card-->
-         </div>
-         <!--//col-->
          <footer class="app-footer">
             <div class="container text-center py-3">
                <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->

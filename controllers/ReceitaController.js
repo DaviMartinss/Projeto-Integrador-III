@@ -12,7 +12,7 @@ class ReceitaController {
 
       var receitaList = await receitaRepository.getReceitaList(user);
 
-      if(receitaList != undefined)
+      if(!!receitaList.length)
       {
         return receitaList;
       }
@@ -86,7 +86,7 @@ class ReceitaController {
     try{
 
       //verifica se o update ocorreu com sucesso!
-    	var updateReceita = await receitaRepository.updateUser(receitaData);
+    	var updateReceita = await receitaRepository.updateReceita(receitaData);
 
     	if(updateReceita)
         return true;
