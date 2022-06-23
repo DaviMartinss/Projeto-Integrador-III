@@ -124,6 +124,12 @@ server.get('/categoria', (req, res) => {
 	res.render("categoria", { erroLogin: false, user });
 });
 
+
+server.get('/cadastraCategoria', async(req, res) => {
+	res.render("cadastraCategoria2", {user});
+});
+
+
 server.get('/forms', (req, res) => {
 
 	res.render("forms", { erroLogin: false, user });
