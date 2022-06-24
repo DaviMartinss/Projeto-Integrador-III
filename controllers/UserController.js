@@ -230,6 +230,28 @@ class UserController {
     }
   }
 
+  //ATUALIZA O USUARIO
+  async updateUserNickNameAndEmail(userData) {
+
+    try{
+
+      //verifica se o update ocorreu com sucesso!
+    	var updateUser;
+
+    	updateUser = await userRepository.updateUserNickNameAndEmail(userData);
+
+    	if(updateUser)
+        return true;
+    	else
+        return false;
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
   //DELETA O USUARIO
   async DeleteUser(userId) {
 

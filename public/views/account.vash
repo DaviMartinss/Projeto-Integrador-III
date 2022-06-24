@@ -16,7 +16,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="../scripts/account.js"></script>
+      <script src="/scripts/account.js"></script>
       <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
    </head>
    <body class="app">
@@ -227,7 +227,7 @@
       <div class="app-wrapper">
          <div class="app-content pt-3 p-md-3 p-lg-4">
             <div class="container-xl">
-               <h1 class="app-page-title">My Account</h1>
+               <h1 class="app-page-title">Minha Conta</h1>
                <div class="@model.userData.class" role="alert">
                   @model.userData.alert
                </div>
@@ -254,49 +254,49 @@
                         </div>
                         <!--//app-card-header-->
                         <div class="app-card-body px-4 w-100">
+
+
                            <div class="item border-bottom py-3">
                               <div class="row justify-content-between align-items-center">
                                  <div class="col-auto">
-                                    <div class="item-label mb-2"><strong>Photo</strong></div>
+                                    <div class="item-label mb-2"><strong>Foto</strong></div>
                                     <div class="item-data"><img class="profile-image" src="@model.userData.Avatar" alt=""></div>
                                  </div>
-                                 <!--//col-->
                                  <div class="col text-end">
                                     <form action="/alterAvatar" method="post" enctype="multipart/form-data">
                                        <div >
-                                          <!--class="form-group"-->
                                           <label class="form-label" for="formFile">Alterar Imagem</label>
                                           <input name="image" type="file" class="form-control" id="exampleFormControlFile1">
-                                          <button class="btn-sm app-btn-secondary">Change</button>
+                                          <button class="btn-sm app-btn-secondary">Atualizar Perfil</button>
                                        </div>
                                     </form>
                                  </div>
-                                 <!--//col-->
                               </div>
-                              <!--//row-->
                            </div>
-                           <!--//item-->
+
+                           <form action="/accountUP" method="post" >
+
                            <div class="item border-bottom py-3">
                               <div class="row justify-content-between align-items-center">
-                                 <form action="/account" method="post">
+                                 <!-- <form action="/account" method="post"> -->
                                     <div class="col-auto">
-                                       <div class="item-label"><strong>Name</strong></div>
+                                       <div class="item-label"><strong>Nome</strong></div>
                                     </div>
                                     <!--//col-->
                                     <input type="text" class="form-control" name="NickName" placeholder="colocar dado do index.js" value="@model.userData.NickName">
                                     <div class="col text-end">
                                        <!--<a type="submit" class="btn-sm app-btn-secondary" href="/account">Change</a>-->
-                                       <button type="submit" class="btn-sm app-btn-secondary">Submit</button>
+                                       <!-- <button type="submit" class="btn-sm app-btn-secondary">Submit</button> -->
                                     </div>
                                     <!--//col-->
-                                 </form>
+                                 <!-- </form> -->
                               </div>
                               <!--//row-->
                            </div>
                            <!--//item-->
                            <div class="item border-bottom py-3">
                               <div class="row justify-content-between align-items-center">
-                                 <form action="/account" method="post">
+                                 <!-- <form action="/account" method="post"> -->
                                     <div class="col-auto">
                                        <div class="item-label"><strong>Email</strong></div>
                                     </div>
@@ -304,14 +304,17 @@
                                     <input type="text" class="form-control" name="Email" placeholder="colocar dado do index.js" value="@model.userData.Email">
                                     <div class="col text-end">
                                        <!--<a class="btn-sm app-btn-secondary" href="#">Change</a>-->
-                                       <button type="submit" class="btn-sm app-btn-secondary">Submit</button>
+                                       <!-- <button type="submit" class="btn-sm app-btn-secondary">Submit</button> -->
                                     </div>
                                     <!--//col-->
-                                 </form>
+                                 <!-- </form> -->
                               </div>
                               <!--//row-->
                            </div>
-                           <!--//item-->
+
+                           <button type="submit" class="btn-sm app-btn-secondary">Atualizar</button>
+
+                         </form>
                         </div>
                         <!--//app-card-body-->
                      </div>
@@ -333,7 +336,7 @@
                               </div>
                               <!--//col-->
                               <div class="col-auto">
-                                 <h4 class="app-card-title">Security</h4>
+                                 <h4 class="app-card-title">Segurança</h4>
                               </div>
                               <!--//col-->
                            </div>
@@ -341,12 +344,12 @@
                         </div>
                         <!--//app-card-header-->
                         <div class="app-card-body px-4 w-100">
-                           <form action="/account" method="post">
+                           <form action="/account" method="post" id="formPASS">
                               <div class="item border-bottom py-3">
                                  <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                        <div class="item-label"><strong>Senha Atual</strong></div>
-                                       <input type="text" class="form-control" value="@model.userData.PassWord" disabled>
+                                       <input type="text" class="form-control"  value="@model.userData.PassWord" disabled>
                                     </div>
                                     <!--//col-->
                                     <div class="col text-end">
@@ -360,7 +363,7 @@
                                  <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                        <div class="item-label"><strong>Nova senha</strong></div>
-                                       <input type="password" name="Password" class="form-control" >
+                                       <input type="password" id="Pass" name="Password" class="form-control" >
                                     </div>
                                     <!--//col-->
                                     <div class="col text-end">
@@ -374,14 +377,14 @@
                                  <div class="row justify-content-between align-items-center">
                                     <div class="col-auto">
                                        <div class="item-label"><strong>Repita a senha</strong></div>
-                                       <input type="password" class="form-control" >
+                                       <input type="password" id="confirm" class="form-control" >
                                     </div>
                                     <!--//col-->
                                  </div>
                                  <!--//row-->
                               </div>
                               <!--//item-->
-                              <button type="submit" class="btn-sm app-btn-secondary">Atualizar</button>
+                              <button type="button" onclick="EqualsPassword()" class="btn-sm app-btn-secondary">Atualizar</button>
                            </form>
                         </div>
                         <!--//app-card-body-->
@@ -390,7 +393,7 @@
                   </div>
                   <!--//col-->
                   <div class="app-card-body px-4 w-100">
-                     <button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="alert()" >Deletar Conta</button>
+                     <!-- <button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="alert()" >Deletar Conta</button> -->
                      <script>
                         function alert() {
                         	var teste = window.confirm();

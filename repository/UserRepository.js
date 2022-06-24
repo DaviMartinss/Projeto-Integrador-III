@@ -167,6 +167,34 @@ class UserRepository {
      }
   }
 
+  async updateUserNickNameAndEmail(user){
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined)
+      {
+        const sql = 'UPDATE "User" SET "NickName"=$1, "Email"=$2 WHERE "UserId"=$3';
+        const values = [user.NickName, user.Email, user.UserId];
+        await db.query(sql, values);
+        db.release();
+        return true;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return false;
+      }
+
+    } catch (ex) {
+
+      console.log(ex);
+      return false;
+    }
+ }
+
+
 //UPDATE INPUT USER ============================================================================
 
   //update do nome do user
@@ -284,7 +312,7 @@ class UserRepository {
 
 //Update senha
 async updatePassword(dados){
-  
+
   try {
 
     const db = await database.connect();

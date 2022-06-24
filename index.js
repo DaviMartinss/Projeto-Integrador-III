@@ -21,6 +21,7 @@ import { cartaoDebitoController } from "./controllers/CartaoDebitoController.js"
 import { sendEmailController} from "./controllers/SendEmailController.js";
 import { receitaController } from "./controllers/ReceitaController.js";
 import { despesaController} from "./controllers/DespesaController.js"
+import { homeController} from "./controllers/HomeController.js"
 
 //Services IMPORTS
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
@@ -73,8 +74,10 @@ const upload = multer({
 //Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
 
 
-server.get('/home', (req, res) => {
-	res.render("home", { erroLogin: false, user });
+server.get('/home',  (req, res) => {
+
+
+	res.render("home", { erroLogin: false, user, home});
 });
 
 server.get('/receita', (req, res) => {
@@ -100,9 +103,9 @@ server.get('/cadastraCartaoC', async(req, res) => {
 
 server.get('/atualizaCartaoC', async (req, res) => {
 
-	
+
 	var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
-	
+
 	res.render("atualizaCartaoC", {cartaoCredito, user});
 });
 
@@ -164,7 +167,20 @@ server.post("/", async (req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("home", { erroLogin: false , user});
+		let totalReceitas = await homeController.GetTotalReceitas(user);
+		let totalDespesas = await homeController.GetTotalDespesas(user);
+		let lucro = (totalReceitas - totalDespesas) > 0 ? (totalReceitas - totalDespesas) : 0 ;
+		let divida = lucro < 0 ? lucro : 0 ;
+
+		//Adicione mais propriedades nesse OBJ caso tenha mais informações para repassar ao HOME
+		var home = {
+								 TotalReceitas: totalReceitas,
+								 TotalDespesas: totalDespesas,
+								 Lucro: lucro ,
+								 Divida: divida
+							 }
+
+		res.render("home", { erroLogin: false , user, home});
 	}
 	else
 	{
@@ -253,7 +269,7 @@ server.post("/reset-password", async(req, res) => {
 			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
 			userController.UpdatePassword(Novosdados);
 
-			sendMail.run(novaSenha, req.body.Email);
+			//sendMail.run(novaSenha, req.body.Email);
 			res.redirect('/');
 		}else{
 			console.log("Erro ao salvar nova senha");
@@ -286,6 +302,49 @@ server.get("/account", async (req, res) => {
 
 });
 
+server.post("/accountUP", async (req, res) => {
+
+	var userData = req.body
+
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(userData.UserId == undefined){
+		userData = {
+								UserId:user.UserId,
+								NickName: req.body.NickName,
+								Email: req.body.Email
+							 }
+	}
+
+	var updateUser = false;
+
+  var userEmailExists = await userController.GetUserByEmail(userData.Email);
+
+	if(userEmailExists == undefined)
+	{
+		updateUser = await userController.updateUserNickNameAndEmail(userData);
+	}
+  else {
+  	console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
+  }
+
+	if(updateUser)
+	{
+		//console.log(user.UserId);
+		//ATT CONSTANTE GLOBAL COM DADOS ATT
+		user = await userController.GetUserById(user.UserId);
+
+		res.redirect('/account');
+		//deve redirecionar para página de informações do usuário
+		//console.log("USUÁRIO ATUALIZADO");
+	}
+	else
+	{
+		//deve redirecionar para página de informações do usuário com o alerta ERRO
+		//console.log("ERRO NA ATUALIZAÇÃO");
+	}
+
+});
 
 //ATT INFOS DO USER
 server.post("/account", async (req, res) => {
@@ -585,7 +644,7 @@ server.post("/cartao", async (req, res) => {
 
 });
 
-//atualiza Cartão 
+//atualiza Cartão
 server.post("/Updatecartao", async(req, res) => {
 
 	// pega o id do cartão
