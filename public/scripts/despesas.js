@@ -20,9 +20,18 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
 
           if(listaCC != undefined)
           {
-            div.innerHTML= '<label>Nº do Cartão</label> <br>' +
-                           '<select id="NumCC" name="NumCC" required>';
+            div.innerHTML =  '<div class="item border-bottom py-3">' +
+                           ' <div class="row justify-content-between align-items-center">' +
+                              '<div class="col-auto">' +
+                                '<div class="item-label">' +
+                                  '<i class="fab me-2"></i><strong>N° do Cartão</strong>' +
+                               ' </div>' +
+                             ' </div>' +
+                           ' </div>' +
 
+                           '<div class="col text-end">' +
+                           '<select id="NumCC" name="NumCC">';
+          
                            var selectCC = document.getElementById("NumCC");
 
                            listaCC.forEach(cartao => {
@@ -30,9 +39,21 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
                               selectCC.innerHTML += '<option value="'+ cartao.NumCC +'"> ' + cartao.NumCC + '</option>'
                            });
 
-            div.innerHTML +='</select> <br><br>' +
-                            '<label>Nº Parcelas</label>' +
-                            '<input type="number" name="NumParcelas" required/> <br><br>';
+            div.innerHTML +='</select>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="item border-bottom py-3">' +
+                            '<div class="row justify-content-between align-items-center">' +
+                            '<div class="col-auto">' +
+                            '<div class="item-label">' +
+                                '<i class="fab me-2"></i><strong>N° de parcelas</strong>' +
+                            '</div>' +
+                            '</div>' +
+                            '</div>' +
+                            '<div class="col text-end">' +
+                                '<input name="NumParcelas" type="number" id="NumParcelas" class="form-control" placeholder="Informe o N° de parcela" />'
+                            '</div>' +
+                            '</div>';
           }
           else {
             alert("Nenhum cartão cadastrado!")

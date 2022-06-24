@@ -795,7 +795,7 @@ server.get('/despesaCAD', async (req, res) => {
 
 	var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 
-	res.render("cadastraDespesa", { user, listaCategoria, listaCC, listaCD });
+	res.render("cadastraDespesa2", { user, listaCategoria, listaCC, listaCD });
 });
 
 server.post("/despesaCAD", async (req, res) => {

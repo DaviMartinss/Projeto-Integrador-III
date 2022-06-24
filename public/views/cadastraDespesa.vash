@@ -312,6 +312,36 @@
                              @if(model.listaCC != undefined)
                              {
                                <label>Nº do Cartão</label>
+
+
+                     <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>N° do Cartão</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
+
+                    <div class="col text-end">
+                     <select name="NumCC">
+
+                                 @model.listaCC.forEach(cartao => {
+
+                                    <option value="@cartao.NumCC" > @cartao.NumCC </option>
+                                 });
+
+                               </select> 
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
+
+
+
+
                                <select name="NumCC">
 
                                  @model.listaCC.forEach(cartao => {
@@ -320,6 +350,32 @@
                                  });
 
                                </select> <br><br>
+
+
+  <div class="item border-bottom py-3">
+                    <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                        <div class="item-label">
+                          <i class="fab me-2"></i><strong>N° de parcelas</strong>
+                        </div>
+                      </div>
+                      <!--//col-->
+                    </div>
+                    <!--//row-->
+
+                    <div class="col text-end">
+                      <input
+                        name="NumParcelas"
+                        type="number"
+                        id="NumParcelas"
+                        class="form-control"
+                        placeholder="Informe o N° de parcela"
+                      />
+                    </div>
+                    <!--//col-->
+                  </div>
+                  <!--//item-->
+
 
                                <label>Nº Parcelas</label>
                                <input type="number" name="NumParcelas" /> <br><br>
