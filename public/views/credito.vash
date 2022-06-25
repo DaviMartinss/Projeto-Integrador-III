@@ -93,7 +93,7 @@
                     aria-labelledby="user-dropdown-toggle"
                   >
                     <li>
-                      <a class="dropdown-item" href="account.html">Conta</a>
+                      <a class="dropdown-item" href="account">Conta</a>
                     </li>
                   
                     <li><hr class="dropdown-divider" /></li>
@@ -414,7 +414,7 @@
               role="tab"
               aria-controls="orders-all"
               aria-selected="true"
-              >Todos os cartões</a
+              >Todos os cartões de Crédito</a
             >
           </nav>
 
