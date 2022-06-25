@@ -12,6 +12,25 @@ class HomeController {
 
   }
 
+  //AQUI ADICIONE AS INFOS PASSADAS NO HOME
+  async GetInfosHome(user){
+
+    let totalReceitas =  await this.GetTotalReceitas(user);
+		let totalDespesas =  await this.GetTotalDespesas(user);
+		let lucro = (totalReceitas - totalDespesas) > 0 ? (totalReceitas - totalDespesas) : 0 ;
+		let divida = lucro < 0 ? lucro : 0 ;
+
+		//Adicione mais propriedades nesse OBJ caso tenha mais informações para repassar ao HOME
+		var home = {
+								 TotalReceitas: totalReceitas,
+								 TotalDespesas: totalDespesas,
+								 Lucro: lucro ,
+								 Divida: divida
+							 }
+
+    return home;
+  }
+
   //Pega o valor de todas as receitas
   async GetTotalReceitas(user){
 

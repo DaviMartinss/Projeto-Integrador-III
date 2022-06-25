@@ -4,15 +4,17 @@ import path from "path";
 import { fileURLToPath } from "url";
 import aes256 from "aes256";
 
-
 //Repository IMPORTS - SERA REMOVIDO AO IMPLEMENTAR OS CONTROLLERS
+//#region Repositorys
 import { database } from "./repository/db.js";
 import { receitaRepository } from "./repository/ReceitaRepository.js";
 import { cartaoDebitoRepository } from "./repository/CartaoDebitoRepository.js";
 import { cartaoCreditoRepository } from "./repository/CartaoCreditoRepository.js";
 import { userRepository } from "./repository/UserRepository.js";
+//#endregion
 
 //Controlers IMPORTS
+//#region Controllers
 import { userController } from "./controllers/UserController.js";
 import { categoriaController } from "./controllers/CategoriaController.js";
 import { cartaoController} from "./controllers/CartaoController.js";
@@ -22,13 +24,17 @@ import { sendEmailController} from "./controllers/SendEmailController.js";
 import { receitaController } from "./controllers/ReceitaController.js";
 import { despesaController} from "./controllers/DespesaController.js"
 import { homeController} from "./controllers/HomeController.js"
+//#endregion
 
 //Services IMPORTS
+//#region Services
 import { sendMail, sendMailBemVindo } from "./microservice/Email/sendEmail.js";
+import multer from "multer"; //Upload de arquivos
+import { Console } from "console"; //Upload de arquivos
+//#endregion
 
-//Upload de arquivos
-import multer from "multer";
-import { Console } from "console";
+//Configurações Globais da Aplicação
+//#region Configurações
 
 //Variavel global responsável pela seção do usuário
 var user = undefined;
@@ -53,6 +59,11 @@ server.use(express.static(path.join(__dirname + "/public"))); //habilita o uso d
 server.set("views", path.join(__dirname + "/public/views")); //define a pasta de views
 server.set("view engine","vash");
 
+//#endregion
+
+// -> SERVICE usado para salvar imagens na pasta do servidor
+//#region SERVICE SAVE IMAGENS
+
 const storage = multer.diskStorage({
 	destination: function(req, file, cb){
 		cb(null, "public/avatar/");
@@ -71,80 +82,34 @@ const upload = multer({
 		}
 });
 
-//Para testes e n ter que ficar logando no sistema direto essas rotas mandam direto para TELAS OBJETIVAS
+// #endregion
 
+async function teste(avatar){
+	var userData = avatar;
 
-server.get('/home',  (req, res) => {
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(userData.UserId == undefined){
+		userData.UserId = user.UserId
+	}
 
+	//verifica se o update ocorreu com sucesso!
+	var updateUser = await userController.UpdateUserByInput(userData);
 
-	res.render("home", { erroLogin: false, user, home});
-});
+	if(updateUser){
+		//console.log(user.UserId);
+		//ATT CONSTANTE GLOBAL COM DADOS ATT
+		user = await userController.GetUserById(user.UserId);
+		return true;
+		//deve redirecionar para página de informações do usuário
+		//console.log("USUÁRIO ATUALIZADO");
+	}
+	else{
+		return false;
+	}
+}
 
-server.get('/receita', (req, res) => {
-	res.render("receita", { erroLogin: false, user });
-});
-
-server.get('/despesa', (req, res) => {
-
-	res.render("despesa", { erroLogin: false, user });
-});
-
-server.get('/cartaoCredito', async (req, res) => {
-
-	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
-
-	res.render("credito", { listCartaoCredito, user });
-
-});
-
-server.get('/cadastraCartaoC', async(req, res) => {
-	res.render("cadastraCartaoC", {user});
-});
-
-server.get('/atualizaCartaoC', async (req, res) => {
-
-
-	var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
-
-	res.render("atualizaCartaoC", {cartaoCredito, user});
-});
-
-server.get('/cadastraCartaoD', async(req, res) => {
-	res.render("cadastraCartaoD", {user});
-});
-
-server.get('/atuatizaCartaoD', async(req, res) => {
-	var cartaoDebito = await cartaoDebitoController.GetCartaoDebitoById(req.query.CartaoDebito);
-	res.render("atualizaCartaoD", {cartaoDebito, user});
-});
-
-server.get('/cartaoDebito', (req, res) => {
-
-	res.render("cartaoDebito", { erroLogin: false, user });
-});
-
-server.get('/categoria', (req, res) => {
-
-	res.render("categoria", { erroLogin: false, user });
-});
-
-
-server.get('/cadastraCategoria', async(req, res) => {
-	res.render("cadastraCategoria2", {user});
-});
-
-
-server.get('/forms', (req, res) => {
-
-	res.render("forms", { erroLogin: false, user });
-});
-
-server.get('/tables', (req, res) => {
-
-	res.render("tables", { erroLogin: false, user });
-});
-
-// ========================== ÁREA DE LOGIN E CRUD USUÁRIO ========================================================
+// ========================== ROTAS LOGIN ========================================================
 
 //ROTA DE LOGIN DO USUÁRIO
 server.get('/', (req, res) => {
@@ -167,20 +132,9 @@ server.post("/", async (req, res) => {
 
 	if(user != undefined)
 	{
-		let totalReceitas = await homeController.GetTotalReceitas(user);
-		let totalDespesas = await homeController.GetTotalDespesas(user);
-		let lucro = (totalReceitas - totalDespesas) > 0 ? (totalReceitas - totalDespesas) : 0 ;
-		let divida = lucro < 0 ? lucro : 0 ;
+		// var home = await homeController.GetInfosHome(user);
 
-		//Adicione mais propriedades nesse OBJ caso tenha mais informações para repassar ao HOME
-		var home = {
-								 TotalReceitas: totalReceitas,
-								 TotalDespesas: totalDespesas,
-								 Lucro: lucro ,
-								 Divida: divida
-							 }
-
-		res.render("home", { erroLogin: false , user, home});
+		res.redirect("/home");
 	}
 	else
 	{
@@ -188,39 +142,28 @@ server.post("/", async (req, res) => {
 	}
 });
 
+server.get('/home', async (req, res) => {
+
+	var home = await homeController.GetInfosHome(user);
+
+	if(user != undefined)
+	{
+		res.render("home", { erroLogin: false, user, home});
+	}
+	else
+	{
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
+	}
+
+});
+
+// ========================== ROTAS CRUD USUÁRIO ========================================================
+
 //ROTA DE CADASTRO DO USUÁRIO
 server.get("/signup", (req, res) => {
 	res.render("signup");
 });
-
-server.get("/categorias", async (req, res) => {
-
-	var listaCategoria = await categoriaController.GetCategoriaList(user);
-
-	res.render("categorias", {listaCategoria, user});
-});
-
-
-
-
-
-server.get("/cdebito", async (req, res) => {
-	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
-	res.render("debito", {listCartaoDebito, user});
-});
-
-server.get("/ccredito", async (req, res) => {
-	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
-
-	res.render("credito", { listCartaoCredito, user });
-});
-
-server.get("/debitoCadastra", async (req, res) => {
-	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
-
-	res.render("debito", { listCartaoDebito, user });
-});
-
 
 //ROTA DE CADASTRO DO USUÁRIO
 server.post("/signup",  async(req, res) => {
@@ -241,47 +184,6 @@ server.post("/signup",  async(req, res) => {
 	}
 
 });
-
-server.get("/reset-password", (req, res) => {
-	res.render("reset-password");
-});
-
-server.post("/reset-password", async(req, res) => {
-
-
-	var userExiste = await userRepository.getUserByEmail(req.body.Email);
-
-	if(userExiste != undefined)
-	{
-
-		// gerando senha aleatória
-		var min = Math.ceil(10000000);
-		var max = Math.floor(99999999);
-		var novaSenha = Math.floor(Math.random() * (max - min + 1)) + min;
-		// fim da função
-
-		var dados = {newPassword: novaSenha, userId: userExiste.UserId}
-
-		var salvaSenha = await sendEmailController.SavePassword(dados);
-
-		if(salvaSenha){
-
-			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
-			userController.UpdatePassword(Novosdados);
-
-			//sendMail.run(novaSenha, req.body.Email);
-			res.redirect('/');
-		}else{
-			console.log("Erro ao salvar nova senha");
-		}
-
-	}
-	else {
-		console.log("Email não foi cadastrado por um usuário no sistema!");
-	}
-});
-
-
 
 //verifica usuários no banco , essa rota e para auxilio de testes
 server.get("/usuarioList", async (req, res) => {
@@ -346,38 +248,6 @@ server.post("/accountUP", async (req, res) => {
 
 });
 
-//ATT INFOS DO USER
-server.post("/account", async (req, res) => {
-
-		var userData = req.body
-
-		//Assim irá funcionar passando UserId via JSON ou usando a interface
-		//Via interface irá entrar e passar o UserId
-		if(userData.UserId == undefined){
-			userData.UserId = user.UserId
-		}
-
-		//verifica se o update ocorreu com sucesso!
-		var updateUser = await userController.UpdateUserByInput(userData);
-
-		if(updateUser)
-		{
-			//console.log(user.UserId);
-			//ATT CONSTANTE GLOBAL COM DADOS ATT
-			user = await userController.GetUserById(user.UserId);
-
-			res.redirect('/account');
-			//deve redirecionar para página de informações do usuário
-			//console.log("USUÁRIO ATUALIZADO");
-		}
-		else
-		{
-			//deve redirecionar para página de informações do usuário com o alerta ERRO
-			//console.log("ERRO NA ATUALIZAÇÃO");
-		}
-
-});
-
 //ROTA DELETA O USUÁRIO
 server.get("/deleteUser", async (req, res) => {
 
@@ -432,51 +302,6 @@ server.post("/changePassword", async (req, res) => {
 	}
 });
 
-//ROTA DE CADASTRO DO USUÁRIO
-server.post("/signup",  async(req, res) => {
-
-	var userData = req.body
-
-	//verifica se o insert ocorreu com sucesso!
-	var insertUser = await userController.GenerateUser(userData);
-
-	if(insertUser)
-	{
-		//sendMailBemVindo.run(userData.NickName, userData.Email);
-		res.redirect("/");
-	}
-	else
-	{
-		res.render("login", { erroLogin: true });
-	}
-
-});
-
-async function teste(avatar){
-	var userData = avatar;
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(userData.UserId == undefined){
-		userData.UserId = user.UserId
-	}
-
-	//verifica se o update ocorreu com sucesso!
-	var updateUser = await userController.UpdateUserByInput(userData);
-
-	if(updateUser){
-		//console.log(user.UserId);
-		//ATT CONSTANTE GLOBAL COM DADOS ATT
-		user = await userController.GetUserById(user.UserId);
-		return true;
-		//deve redirecionar para página de informações do usuário
-		//console.log("USUÁRIO ATUALIZADO");
-	}
-	else{
-		return false;
-	}
-}
-
 //Alteração de avatar.
 server.post("/alterAvatar", upload.single("image"), (req, res) => {
 
@@ -513,7 +338,120 @@ server.post("/alterAvatar", upload.single("image"), (req, res) => {
 
 });
 
-// ========================== CRUD DE CATEGORIA =====================================================================
+server.get("/reset-password", (req, res) => {
+	res.render("reset-password");
+});
+
+server.post("/reset-password", async(req, res) => {
+
+	var userExiste = await userRepository.getUserByEmail(req.body.Email);
+
+	if(userExiste != undefined)
+	{
+
+		// gerando senha aleatória
+		var min = Math.ceil(10000000);
+		var max = Math.floor(99999999);
+		var novaSenha = Math.floor(Math.random() * (max - min + 1)) + min;
+		// fim da função
+
+		var dados = {newPassword: novaSenha, userId: userExiste.UserId}
+
+		var salvaSenha = await sendEmailController.SavePassword(dados);
+
+		if(salvaSenha){
+
+			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
+			userController.UpdatePassword(Novosdados);
+
+			//sendMail.run(novaSenha, req.body.Email);
+			res.redirect('/');
+		}else{
+			console.log("Erro ao salvar nova senha");
+		}
+
+	}
+	else {
+		console.log("Email não foi cadastrado por um usuário no sistema!");
+	}
+});
+
+// !!!!!!!!!!!!!!!!!!!!!  TEST ESSAS FUNCIONALIDADES ATUAIS ANTES DE DELETAR ESSE METODOS ABAIXO
+
+//#region LEGADO USER
+// LEGADO
+// //ROTA DE CADASTRO DO USUÁRIO
+// server.post("/signup",  async(req, res) => {
+//
+// 	var userData = req.body
+//
+// 	//verifica se o insert ocorreu com sucesso!
+// 	var insertUser = await userController.GenerateUser(userData);
+//
+// 	if(insertUser)
+// 	{
+// 		//sendMailBemVindo.run(userData.NickName, userData.Email);
+// 		res.redirect("/");
+// 	}
+// 	else
+// 	{
+// 		res.render("login", { erroLogin: true });
+// 	}
+//
+// });
+
+// LEGADO
+// //ATT INFOS DO USER
+// server.post("/account", async (req, res) => {
+//
+// 		var userData = req.body
+//
+// 		//Assim irá funcionar passando UserId via JSON ou usando a interface
+// 		//Via interface irá entrar e passar o UserId
+// 		if(userData.UserId == undefined){
+// 			userData.UserId = user.UserId
+// 		}
+//
+// 		//verifica se o update ocorreu com sucesso!
+// 		var updateUser = await userController.UpdateUserByInput(userData);
+//
+// 		if(updateUser)
+// 		{
+// 			//console.log(user.UserId);
+// 			//ATT CONSTANTE GLOBAL COM DADOS ATT
+// 			user = await userController.GetUserById(user.UserId);
+//
+// 			res.redirect('/account');
+// 			//deve redirecionar para página de informações do usuário
+// 			//console.log("USUÁRIO ATUALIZADO");
+// 		}
+// 		else
+// 		{
+// 			//deve redirecionar para página de informações do usuário com o alerta ERRO
+// 			//console.log("ERRO NA ATUALIZAÇÃO");
+// 		}
+//
+// });
+
+//#endregion
+
+// ========================== ROTAS CRUD DE CATEGORIA =====================================================================
+
+server.get('/categoria', (req, res) => {
+
+	res.render("categoria", { erroLogin: false, user });
+});
+
+server.get('/cadastraCategoria', async(req, res) => {
+	res.render("cadastraCategoria2", {user});
+});
+
+server.get("/categorias", async (req, res) => {
+
+	var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+	res.render("categorias", {listaCategoria, user});
+});
 
 server.post("/categoriaCAD", async (req, res) => {
 
@@ -603,9 +541,70 @@ server.post("/categoriaUP", async (req, res) => {
 
 });
 
+// ========================== ROTAS CRUD DE CARTÕES =====================================================================
 
-// ========================== CRUD DE CARTÕES =====================================================================
+//#region Cartão de Crédito
 
+server.get('/cartaoCredito', async (req, res) => {
+
+	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
+
+	res.render("credito", { listCartaoCredito, user });
+
+});
+
+server.get("/ccredito", async (req, res) => {
+	var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+	res.render("credito", { listCartaoCredito, user });
+});
+
+server.get('/cadastraCartaoC', async(req, res) => {
+	res.render("cadastraCartaoC", {user});
+});
+
+server.get('/atualizaCartaoC', async (req, res) => {
+
+	var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
+
+	res.render("atualizaCartaoC", {cartaoCredito, user});
+});
+
+//#endregion
+
+
+//#region Cartão de Débito
+
+server.get('/cartaoDebito', (req, res) => {
+
+	res.render("cartaoDebito", { erroLogin: false, user });
+});
+
+server.get("/cdebito", async (req, res) => {
+	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+	res.render("debito", {listCartaoDebito, user});
+});
+
+server.get("/debitoCadastra", async (req, res) => {
+	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+
+	res.render("debito", { listCartaoDebito, user });
+});
+
+//VIEW PARA CADASTRAR CARTÃO
+server.get('/cadastraCartaoD', async(req, res) => {
+	res.render("cadastraCartaoD", {user});
+});
+
+//VIEW PARA ATUALIZAR CARTÃO
+server.get('/atuatizaCartaoD', async(req, res) => {
+	var cartaoDebito = await cartaoDebitoController.GetCartaoDebitoById(req.query.CartaoDebito);
+	res.render("atualizaCartaoD", {cartaoDebito, user});
+});
+
+//#endregion
+
+//Lista Cartões Dependendo do Typo
 server.get("/cartaoListByType", async (req, res) => {
 
 	var cartaoData = req.query
@@ -671,6 +670,7 @@ server.post("/Updatecartao", async(req, res) => {
 
 });
 
+//deleta Cartão
 server.get("/deleteCartao", async (req, res) => {
 
 	var cartao = req.query;
@@ -700,7 +700,11 @@ server.get("/deleteCartao", async (req, res) => {
 
 });
 
-// ========================== CRUD DE RECEITAS =====================================================================
+// ========================== ROTAS CRUD DE RECEITAS =====================================================================
+
+server.get('/receita', (req, res) => {
+	res.render("receita", { erroLogin: false, user });
+});
 
 server.get("/receitas", async (req, res) => {
 
@@ -710,7 +714,7 @@ server.get("/receitas", async (req, res) => {
 	res.render("receitas", {listaReceita, listaCategoria, user});
 });
 
-
+//VIEW PARA CADASTRAR RECEITA
 server.get('/receitaCAD', async(req, res) => {
 
 	var listaCategoria = await categoriaController.GetCategoriaList(user);
@@ -759,6 +763,7 @@ server.post("/receitaCAD", async (req, res) => {
 
 });
 
+//VIEW PARA ATUALIZAR RECEITA
 server.get('/receitaUP', async(req, res) => {
 
 	var receitaId = req.query.ReceitaId;
@@ -835,7 +840,12 @@ server.get("/receitaDEL", async (req, res) => {
 
 });
 
-// ========================== CRUD DE DESPESAS =====================================================================
+// ========================== ROTAS CRUD DE DESPESAS =====================================================================
+
+server.get('/despesa', (req, res) => {
+
+	res.render("despesa", { erroLogin: false, user });
+});
 
 server.get("/despesas", async (req, res) => {
 
@@ -846,6 +856,7 @@ server.get("/despesas", async (req, res) => {
 	res.render("despesas", {user, listaDespesa, listaCategoria});
 });
 
+//VIEW PARA CADASTRAR DESPESA
 server.get('/despesaCAD', async (req, res) => {
 
 	var listaCategoria = await categoriaController.GetCategoriaList(user);
@@ -897,6 +908,7 @@ server.post("/despesaCAD", async (req, res) => {
 
 });
 
+//VIEW PARA ATUALIZAR DESPESA
 server.get('/despesaUP', async(req, res) => {
 
 	var despesaId = req.query.DespesaId;
