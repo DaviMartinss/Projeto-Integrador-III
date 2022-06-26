@@ -485,6 +485,8 @@ server.get("/categorias", async (req, res) => {
 	{
 		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
+		// console.log(listaCategoria);
+
 		res.render("categorias", {listaCategoria, user});
 	}
 	else
@@ -1035,6 +1037,8 @@ server.post("/despesaCAD", async (req, res) => {
 
 	var despesaData = req.body;
 
+	// console.log(despesaData);
+
 	//Assim irá funcionar passando UserId via JSON ou usando a interface
 	//Via interface irá entrar e passar o UserId
 	if(despesaData.UserId == undefined){
@@ -1052,8 +1056,6 @@ server.post("/despesaCAD", async (req, res) => {
 								  }
 	}
 
-	//console.log(despesaData);
-
 	//verifica se o insert ocorreu com sucesso!
 	var insertDespesa = await despesaController.GenerateDespesa(despesaData); //cadastrando despesa
 
@@ -1065,7 +1067,6 @@ server.post("/despesaCAD", async (req, res) => {
 	}
 	else
 	{
-
 		console.log("DESPESA NÃO FOI CADASTRADA");
 	}
 

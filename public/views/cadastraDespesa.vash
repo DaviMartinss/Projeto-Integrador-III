@@ -261,7 +261,7 @@
 
                          <label>Categoria</label>
 
-                         <select id="categorias" name="CategoriaId">
+                         <select name="CategoriaId">
 
                                @if(model.listaCategoria != undefined)
                                {
@@ -333,7 +333,7 @@
                                     <option value="@cartao.NumCC" > @cartao.NumCC </option>
                                  });
 
-                               </select> 
+                               </select>
                     </div>
                     <!--//col-->
                   </div>

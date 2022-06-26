@@ -172,7 +172,7 @@
 					    </li><!--//nav-item-->
 				    </ul><!--//app-menu-->
 			    </nav><!--//app-nav-->
-			  
+
 	        </div><!--//sidepanel-inner-->
 	    </div><!--//app-sidepanel-->
     </header><!--//app-header-->
@@ -237,7 +237,7 @@
 
 			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
 				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Todas as Categorias</a>
-				    
+
 				</nav>
 
 
@@ -255,8 +255,9 @@
 										</thead>
 										<tbody>
 
-                      @{
 
+                      @if(model.listaCategoria != undefined)
+                      {
                         model.listaCategoria.forEach(categoria => {
 
                           var cat = JSON.stringify(@categoria);
@@ -275,15 +276,13 @@
                        });
                       }
 
-
-
 										</tbody>
 									</table>
 						        </div><!--//table-responsive-->
 
 						    </div><!--//app-card-body-->
 						</div><!--//app-card-->
-						
+
 
 			        </div><!--//tab-pane-->
 
