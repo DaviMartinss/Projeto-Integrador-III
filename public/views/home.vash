@@ -442,14 +442,58 @@
                       <h4 class="app-card-title">Despesas</h4>
                     </div>
                     <!--//col-->
-                   
                   </div>
                   <!--//row-->
                 </div>
                 <!--//app-card-header-->
                 <div class="app-card-body p-3 p-lg-4">
                   <div class="chart-container">
-                    <canvas id="canvas-linechart"></canvas>
+                    <canvas class="line-chart"> </canvas>
+
+                    <script
+                      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"
+                      integrity="sha512-Xi9hntzKnjRajIIkbxU5XFCnY4fXApOTc/uf4TkJRE/kv5k9jAaK+CWLHJnpcGdWJsxNColUdRESQQPL+dSR9A=="
+                      crossorigin="anonymous"
+                      referrerpolicy="no-referrer"
+                    ></script>
+
+                    <script>
+                      //contexto
+                      var ctx = document.getElementsByClassName("line-chart"); // pega todos os elementos que tem o nome de classe igual a
+
+                      //type(tipo de gráfico), Data(dado que vamos passar) e options(config globais)
+                      var chartGraph = new Chart(ctx, {
+                        type: "line",
+                        data: {
+                          labels: [
+                            "Jan",
+                            "Fev",
+                            "Mar",
+                            "Abr",
+                            "Mai",
+                            "Jun",
+                            "Jul",
+                            "Ago",
+                            "Set",
+                            "Out",
+                            "Nov",
+                            "Dez",
+                          ],
+                          datasets: [
+                            {
+                              label: "Despesas",
+                              data: [
+                                5, 10, 5, 14, 20, 100, 6, 14, 8, 12, 15, -10,
+                              ],
+                              //define a borda da linha
+                              borderWidth: 4,
+                              borderColor: "rgba(77, 166, 253, 0.85)",
+                              backgroundColor: "transparent",
+                            },
+                          ],
+                        },
+                      });
+                    </script>
                   </div>
                 </div>
                 <!--//app-card-body-->
@@ -546,12 +590,10 @@
             <!--//col-->
           </div>
           <!--//row-->
-
         </div>
         <!--//container-fluid-->
       </div>
       <!--//app-content-->
-   
     </div>
     <!--//app-wrapper-->
     <!-- Javascript -->
