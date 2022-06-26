@@ -17,6 +17,10 @@ class HomeController {
 
     let totalReceitas =  await this.GetTotalReceitas(user);
 		let totalDespesas =  await this.GetTotalDespesas(user);
+    let totalReceitaMes = await receitaController.GetReceitaTotalMes(user);
+
+    console.log("receita dos mês: "+totalReceitaMes);
+
 		let lucro = (totalReceitas - totalDespesas) > 0 ? (totalReceitas - totalDespesas) : 0 ;
 		let divida = lucro < 0 ? lucro : 0 ;
 
@@ -25,11 +29,13 @@ class HomeController {
 								 TotalReceitas: totalReceitas,
 								 TotalDespesas: totalDespesas,
 								 Lucro: lucro ,
-								 Divida: divida
+								 Divida: divida,
+                 TotalReceitaMes: totalReceitaMes
 							 }
 
     return home;
   }
+
 
   //Pega o valor de todas as receitas
   async GetTotalReceitas(user){

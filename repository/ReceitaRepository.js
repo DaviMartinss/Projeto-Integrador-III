@@ -28,6 +28,40 @@ class ReceitaRepository {
       }
   }
 
+  //pega o total de receita por mês
+  //pega uma lista de receitas
+  async getReceitaTotalMes(user) {
+
+    try {
+
+      const db = await database.connect();
+      var res = [];
+      let list = [];
+      if(db != undefined )
+      {
+
+        for(var i = 1; i <= 12; i++){
+          const sql = 'SELECT sum("Valor") FROM "Receita" WHERE Extract ("Month" From "Data")=$1 and "UserId"=$2;';
+          res[i] = await db.query(sql, [i, user.UserId]);
+          list.push(res[i].rows[0].sum);
+        }
+
+        db.release();
+        return list;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+
+    } catch (e) {
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   //pega uma lista de receitas
   async getReceitaList(user) {
 

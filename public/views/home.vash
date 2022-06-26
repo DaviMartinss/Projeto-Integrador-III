@@ -547,7 +547,22 @@
                             datasets: [
                               {
                                 label: "Receita",
-                                data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                                data: [
+                                    @model.home.TotalReceitaMes[0],
+                                    @model.home.TotalReceitaMes[1],
+                                    @model.home.TotalReceitaMes[2],
+                                    @model.home.TotalReceitaMes[3],
+                                    @model.home.TotalReceitaMes[4],
+                                    @model.home.TotalReceitaMes[5],
+                                    @model.home.TotalReceitaMes[6],
+                                    @model.home.TotalReceitaMes[7],
+                                    @model.home.TotalReceitaMes[8],
+                                    @model.home.TotalReceitaMes[9],
+                                    @model.home.TotalReceitaMes[10],
+                                    @model.home.TotalReceitaMes[11],
+                                    @model.home.TotalReceitaMes[12]
+                                ],
+                                 
                                 backgroundColor: [
                                   "rgba(47, 79, 79, 0.7)",
                                   "rgba(255, 159, 64, 0.2)",

@@ -5,6 +5,33 @@ class ReceitaController {
 
   }
 
+
+  // pega o total de receita de um mês
+  async GetReceitaTotalMes(user) {
+
+    try{
+
+      var receitaTotalMes = [];
+
+      receitaTotalMes = await receitaRepository.getReceitaTotalMes(user);
+      
+      
+      if(!!receitaTotalMes.length)
+      {
+        return receitaTotalMes;
+      }
+      else {
+        console.log("NENHUMA RECEITA CADASTRADA!");
+        return undefined;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   //PEGA TODOS AS RECEITAS E TRAS NA LISTA
   async GetReceitaList(user) {
 
