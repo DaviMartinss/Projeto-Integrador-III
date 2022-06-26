@@ -31,7 +31,7 @@ function atualizar(categoriaDATA){
   }
 }
 
-  function cadastrar(){
+function cadastrar(){
 
   var div = document.getElementById("cadastro");
   var butaoCadastrar = document.getElementById("btCadastrar");

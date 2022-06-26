@@ -393,16 +393,14 @@
                   </div>
                   <!--//col-->
                   <div class="app-card-body px-4 w-100">
-                     <!-- <button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="alert()" >Deletar Conta</button> -->
-                     <script>
-                        function alert() {
-                        	var teste = window.confirm();
-                        	console.log(teste);
-                        	if (teste == true){
-                        		window.location.href = "http://localhost:3000/deleteUser";
-                        	}
-                        }
-                     </script>
+
+                     @{
+                        let user = JSON.stringify(model.userData);
+
+                        <button type="button" class="btn-sm app-btn-secondary btn btn-danger" style="background-color:  #ffb2ff" onClick="confirm(@user)">
+                          Deletar Conta</button>
+                     }
+
                   </div>
                </div>
                <!--//row-->

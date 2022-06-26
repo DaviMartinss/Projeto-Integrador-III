@@ -46,8 +46,8 @@ var avatarName = '';
 var key = 'bf3c199c2470cb477d907b1e0917c17b';
 var cipher = aes256.createCipher(key);
 //Ex:
-	//	cipher.encrypt("senha")
-	//	cipher.decrypt("senha");
+//	cipher.encrypt("senha")
+//	cipher.decrypt("senha");
 
 const server = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -79,7 +79,7 @@ const upload = multer({
 	fileFilter: (req, file, cb) => {
 		const aceito = ['image/jpg', 'image/jpeg', 'image/png'];
 		cb(null, aceito.includes(file.mimetype));
-		}
+	}
 });
 
 // #endregion
@@ -126,7 +126,7 @@ server.post("/", async (req, res) => {
 	console.log("Senha que chega: "+req.body.logpass);
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
-  	user = await userController.GetUserByEmailAndSenha(userData);
+	user = await userController.GetUserByEmailAndSenha(userData);
 
 	//console.log("Senha do usuário: "+userData.Password);
 
@@ -196,63 +196,63 @@ server.get("/usuarioList", async (req, res) => {
 
 server.get("/account", async (req, res) => {
 
-		if(user != undefined)
-		{
-				var userData = await userController.GetUserById(user.UserId);
+	if(user != undefined)
+	{
+		var userData = await userController.GetUserById(user.UserId);
 
-				userData.PassWord = cipher.decrypt(user.PassWord);
+		userData.PassWord = cipher.decrypt(user.PassWord);
 
-				res.render("account", {userData});
-		}
-		else
-		{
-			console.log("LOGUE NO SISTEMA PRIMEIRO");
-			res.redirect("/");
-		}
+		res.render("account", {userData});
+	}
+	else
+	{
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
+	}
 
 });
 
 server.post("/accountUP", async (req, res) => {
 
-			var userData = req.body
+	var userData = req.body
 
-			//Assim irá funcionar passando UserId via JSON ou usando a interface
-			//Via interface irá entrar e passar o UserId
-			if(userData.UserId == undefined){
-				userData = {
-										UserId:user.UserId,
-										NickName: req.body.NickName,
-										Email: req.body.Email
-									 }
-			}
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(userData.UserId == undefined){
+		userData = {
+			UserId:user.UserId,
+			NickName: req.body.NickName,
+			Email: req.body.Email
+		}
+	}
 
-			var updateUser = false;
+	var updateUser = false;
 
-		  var userEmailExists = await userController.GetUserByEmail(userData.Email);
+	var userEmailExists = await userController.GetUserByEmail(userData.Email);
 
-			if(userEmailExists == undefined)
-			{
-				updateUser = await userController.updateUserNickNameAndEmail(userData);
-			}
-		  else {
-		  	console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
-		  }
+	if(userEmailExists == undefined)
+	{
+		updateUser = await userController.updateUserNickNameAndEmail(userData);
+	}
+	else {
+		console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
+	}
 
-			if(updateUser)
-			{
-				//console.log(user.UserId);
-				//ATT CONSTANTE GLOBAL COM DADOS ATT
-				user = await userController.GetUserById(user.UserId);
+	if(updateUser)
+	{
+		//console.log(user.UserId);
+		//ATT CONSTANTE GLOBAL COM DADOS ATT
+		user = await userController.GetUserById(user.UserId);
 
-				res.redirect('/account');
-				//deve redirecionar para página de informações do usuário
-				//console.log("USUÁRIO ATUALIZADO");
-			}
-			else
-			{
-				//deve redirecionar para página de informações do usuário com o alerta ERRO
-				//console.log("ERRO NA ATUALIZAÇÃO");
-			}
+		res.redirect('/account');
+		//deve redirecionar para página de informações do usuário
+		//console.log("USUÁRIO ATUALIZADO");
+	}
+	else
+	{
+		//deve redirecionar para página de informações do usuário com o alerta ERRO
+		//console.log("ERRO NA ATUALIZAÇÃO");
+	}
 
 });
 
@@ -262,7 +262,7 @@ server.get("/deleteUser", async (req, res) => {
 	if(user != undefined)
 	{
 		if(req.body.UserId != undefined)
-			user = req.body
+		user = req.body
 
 		//verifica se o delete ocorreu com sucesso!
 		var deleteUser = await userController.DeleteUser(user.UserId);
@@ -280,76 +280,76 @@ server.get("/deleteUser", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 
 //ROTA ATUALIZA SENHA DO USUÁRIO
 server.post("/changePassword", async (req, res) => {
 
-		//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
+	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
 
-		//Esse if serve para caso for usar JSON
-		if(req.body.UserId != undefined)
-		{
-			user = {UserId: req.body.UserId, Password:cipher.encrypt(req.body.Password) };
-		}
-		else
-		{
-			user = {UserId: user.UserId, Password:cipher.encrypt(req.body.Password) };
-		}
+	//Esse if serve para caso for usar JSON
+	if(req.body.UserId != undefined)
+	{
+		user = {UserId: req.body.UserId, Password:cipher.encrypt(req.body.Password) };
+	}
+	else
+	{
+		user = {UserId: user.UserId, Password:cipher.encrypt(req.body.Password) };
+	}
 
-		//Caso não tenha o UserId, usar o da variável global
-		var userChangePassword = await userController.UpdatePassword(user);
+	//Caso não tenha o UserId, usar o da variável global
+	var userChangePassword = await userController.UpdatePassword(user);
 
-		//console.log(userChangePassword);
+	//console.log(userChangePassword);
 
-		if(userChangePassword != undefined){
+	if(userChangePassword != undefined){
 
-			sendMail.run(userChangePassword.NickName, userChangePassword.Email);
-			res.redirect("/");
+		sendMail.run(userChangePassword.NickName, userChangePassword.Email);
+		res.redirect("/");
 
-			//redefina para a pagina desejada
-		}else{
-			console.log("Falha ao atualizar a senha");
-			//redefina para a pagina desejada
-		}
+		//redefina para a pagina desejada
+	}else{
+		console.log("Falha ao atualizar a senha");
+		//redefina para a pagina desejada
+	}
 });
 
 //Alteração de avatar.
 server.post("/alterAvatar", upload.single("image"), (req, res) => {
 
-		var tipos = ['jpeg', 'jpg', 'png'];
+	var tipos = ['jpeg', 'jpg', 'png'];
 
-		//avatarName definido na linha 52
-		var avaName = {"Avatar": "avatar/" + avatarName};
+	//avatarName definido na linha 52
+	var avaName = {"Avatar": "avatar/" + avatarName};
 
-		var userData = avaName;
+	var userData = avaName;
 
-		console.log(userData);
+	console.log(userData);
 
-		if ((avatarName.includes(tipos[0])) || (avatarName.includes(tipos[1])) || (avatarName.includes(tipos[2]))){
-			console.log("imagem valida");
+	if ((avatarName.includes(tipos[0])) || (avatarName.includes(tipos[1])) || (avatarName.includes(tipos[2]))){
+		console.log("imagem valida");
 
-			//chamar a funcao aqui
-			let confirmacao = teste(userData);
+		//chamar a funcao aqui
+		let confirmacao = teste(userData);
 
-			if (confirmacao){
-				console.log(userData);
-				res.redirect("/account");
-			}
-		} else {
-			var userData = user;
-			//userData.PassWord = cipher.decrypt(user.PassWord);
-			userData.class = "alert alert-danger";
-			userData.alert = "Apenas arquivos no formato JPG, JPEG ou PNG!"
-			res.render("account", {userData});
+		if (confirmacao){
+			console.log(userData);
+			res.redirect("/account");
 		}
+	} else {
+		var userData = user;
+		//userData.PassWord = cipher.decrypt(user.PassWord);
+		userData.class = "alert alert-danger";
+		userData.alert = "Apenas arquivos no formato JPG, JPEG ou PNG!"
+		res.render("account", {userData});
+	}
 
-		res.redirect("/home");
+	res.redirect("/home");
 
-		avatarName = ''
+	avatarName = ''
 });
 
 server.get("/reset-password", (req, res) => {
@@ -455,12 +455,12 @@ server.get('/categoria', (req, res) => {
 
 	if(user != undefined)
 	{
-	  res.render("categoria", { erroLogin: false, user });
+		res.render("categoria", { erroLogin: false, user });
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -473,8 +473,8 @@ server.get('/cadastraCategoria', async(req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -491,8 +491,8 @@ server.get("/categorias", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -500,30 +500,30 @@ server.get("/categorias", async (req, res) => {
 server.post("/categoriaCAD", async (req, res) => {
 
 
-		var categoriaData = req.body;
+	var categoriaData = req.body;
 
-		//Assim irá funcionar passando UserId via JSON ou usando a interface
-		//Via interface irá entrar e passar o UserId
-		if(categoriaData.UserId == undefined){
-			categoriaData = {UserId: user.UserId, Categoria:req.body.Categoria}
-		}
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(categoriaData.UserId == undefined){
+		categoriaData = {UserId: user.UserId, Categoria:req.body.Categoria}
+	}
 
-		//console.log(req.body);
+	//console.log(req.body);
 
-		//verifica se o insert ocorreu com sucesso!
-		var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
+	//verifica se o insert ocorreu com sucesso!
+	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
 
-		if(insertCategoria)
-		{
-			res.redirect('/categorias');
-			//deve redirecionar para página de categoria
-			console.log("CATEGORIA CADASTRADA");
-		}
-		else
-		{
-			//deve redirecionar para página de cadastro de categoria com alerta de erro
-			console.log("CATEGORIA NÃO FOI CADASTRADA");
-		}
+	if(insertCategoria)
+	{
+		res.redirect('/categorias');
+		//deve redirecionar para página de categoria
+		console.log("CATEGORIA CADASTRADA");
+	}
+	else
+	{
+		//deve redirecionar para página de cadastro de categoria com alerta de erro
+		console.log("CATEGORIA NÃO FOI CADASTRADA");
+	}
 });
 
 server.get("/categoriaDEL", async (req, res) => {
@@ -554,8 +554,8 @@ server.get("/categoriaDEL", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 
@@ -567,10 +567,10 @@ server.post("/categoriaUP", async (req, res) => {
 	//Via interface irá entrar e passar o UserId
 	if(categoriaData.UserId == undefined){
 		categoriaData = {
-										 	UserId: user.UserId,
-										 	Categoria:req.body.Categoria,
-										 	CategoriaId:req.body.CategoriaId
-									   }
+			UserId: user.UserId,
+			Categoria:req.body.Categoria,
+			CategoriaId:req.body.CategoriaId
+		}
 	}
 
 	//console.log(req.body);
@@ -608,8 +608,8 @@ server.get('/cartaoCredito', async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 
@@ -624,8 +624,8 @@ server.get("/ccredito", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -635,12 +635,12 @@ server.get('/cadastraCartaoC', async(req, res) => {
 
 	if(user != undefined)
 	{
-	  res.render("cadastraCartaoC", {user});
+		res.render("cadastraCartaoC", {user});
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 
@@ -649,14 +649,14 @@ server.get('/atualizaCartaoC', async (req, res) => {
 
 	if(user != undefined)
 	{
-			var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
+		var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
 
-			res.render("atualizaCartaoC", {cartaoCredito, user});
+		res.render("atualizaCartaoC", {cartaoCredito, user});
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -667,7 +667,6 @@ server.get('/atualizaCartaoC', async (req, res) => {
 //#region Cartão de Débito
 
 server.get('/cartaoDebito', (req, res) => {
-
 	res.render("cartaoDebito", { erroLogin: false, user });
 });
 
@@ -713,8 +712,8 @@ server.get("/cartaoListByType", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -799,12 +798,11 @@ server.get("/deleteCartao", async (req, res) => {
 			console.log("Falha ao deletar o cartão de Débito");
 			res.redirect('/cdebito');
 		}
-
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -820,15 +818,15 @@ server.get("/receitas", async (req, res) => {
 	if(user != undefined)
 	{
 
-			var listaReceita = await receitaController.GetReceitaList(user);
-			var listaCategoria = await categoriaController.GetCategoriaList(user);
+		var listaReceita = await receitaController.GetReceitaList(user);
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-			res.render("receitas", {listaReceita, listaCategoria, user});
+		res.render("receitas", {listaReceita, listaCategoria, user});
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -838,14 +836,14 @@ server.get('/receitaCAD', async(req, res) => {
 
 	if(user != undefined)
 	{
-			var listaCategoria = await categoriaController.GetCategoriaList(user);
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-			res.render("cadastraReceita", {user, listaCategoria});
+		res.render("cadastraReceita", {user, listaCategoria});
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -853,42 +851,42 @@ server.get('/receitaCAD', async(req, res) => {
 server.post("/receitaCAD", async (req, res) => {
 
 
-		var receitaData = req.body;
+	var receitaData = req.body;
 
-		//Assim irá funcionar passando UserId via JSON ou usando a interface
-		//Via interface irá entrar e passar o UserId
-		if(receitaData.UserId == undefined){
-			receitaData = {
-										 UserId: user.UserId,
-										 Data: new Date(req.body.Data),
-										 FormaAlocacao: req.body.FormaAlocacao,
-										 CategoriaId: parseInt(req.body.CategoriaId),
-										 Valor: parseFloat(req.body.Valor),
-										 SeRepete: (req.body.SeRepete == 'on' ? true : false)
-									  }
+	//Assim irá funcionar passando UserId via JSON ou usando a interface
+	//Via interface irá entrar e passar o UserId
+	if(receitaData.UserId == undefined){
+		receitaData = {
+			UserId: user.UserId,
+			Data: new Date(req.body.Data),
+			FormaAlocacao: req.body.FormaAlocacao,
+			CategoriaId: parseInt(req.body.CategoriaId),
+			Valor: parseFloat(req.body.Valor),
+			SeRepete: (req.body.SeRepete == 'on' ? true : false)
 		}
+	}
 
-		//console.log(receitaData);
+	//console.log(receitaData);
 
-		//verifica se o insert ocorreu com sucesso!
-		var insertReceita = await receitaController.GenerateReceita(receitaData); //cadastrando receita
+	//verifica se o insert ocorreu com sucesso!
+	var insertReceita = await receitaController.GenerateReceita(receitaData); //cadastrando receita
 
-		if(insertReceita)
-		{
-			// var listaReceita = await receitaController.GetReceitaList(user);
-			// var listaCategoria = await categoriaController.GetCategoriaList(user);
-			//
-			// res.render("receitas", {listaReceita, listaCategoria});
+	if(insertReceita)
+	{
+		// var listaReceita = await receitaController.GetReceitaList(user);
+		// var listaCategoria = await categoriaController.GetCategoriaList(user);
+		//
+		// res.render("receitas", {listaReceita, listaCategoria});
 
-			res.redirect('/receitas');
+		res.redirect('/receitas');
 
-			console.log("RECEITA CADASTRADA");
-		}
-		else
-		{
+		console.log("RECEITA CADASTRADA");
+	}
+	else
+	{
 
-			console.log("RECEITA NÃO FOI CADASTRADA");
-		}
+		console.log("RECEITA NÃO FOI CADASTRADA");
+	}
 
 });
 
@@ -909,8 +907,8 @@ server.get('/receitaUP', async(req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -923,14 +921,14 @@ server.post("/receitaUP", async (req, res) => {
 	//Via interface irá entrar e passar o UserId
 	if(receitaData.UserId == undefined){
 		receitaData = {
-									 UserId: user.UserId,
-									 ReceitaId: parseInt(req.body.ReceitaId),
-									 Data: new Date(req.body.Data),
-									 FormaAlocacao: req.body.FormaAlocacao,
-									 CategoriaId: parseInt(req.body.CategoriaId),
-									 Valor: parseFloat(req.body.Valor),
-									 SeRepete: (req.body.SeRepete == 'on' ? true : false)
-								  }
+			UserId: user.UserId,
+			ReceitaId: parseInt(req.body.ReceitaId),
+			Data: new Date(req.body.Data),
+			FormaAlocacao: req.body.FormaAlocacao,
+			CategoriaId: parseInt(req.body.CategoriaId),
+			Valor: parseFloat(req.body.Valor),
+			SeRepete: (req.body.SeRepete == 'on' ? true : false)
+		}
 	}
 
 	console.log(receitaData);
@@ -980,8 +978,8 @@ server.get("/receitaDEL", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -997,16 +995,16 @@ server.get("/despesas", async (req, res) => {
 
 	if(user != undefined)
 	{
-			var listaDespesa = await despesaController.GetDespesaList(user);
+		var listaDespesa = await despesaController.GetDespesaList(user);
 
-			var listaCategoria = await categoriaController.GetCategoriaList(user);
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-			res.render("despesas", {user, listaDespesa, listaCategoria});
+		res.render("despesas", {user, listaDespesa, listaCategoria});
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -1027,8 +1025,8 @@ server.get('/despesaCAD', async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 
 });
@@ -1043,17 +1041,17 @@ server.post("/despesaCAD", async (req, res) => {
 	//Via interface irá entrar e passar o UserId
 	if(despesaData.UserId == undefined){
 		despesaData = {
-										 UserId: user.UserId,
-										 CategoriaId: parseInt(req.body.CategoriaId),
-										 Data: new Date(req.body.Data),
-										 Valor: parseFloat(req.body.Valor),
-										 FormaPagamento: parseInt(req.body.FormaPagamento),
-										 Status: (req.body.Status == 'true' ? true : false),
-										 NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
-										 NumCC: ( req.body.NumCC != undefined ? Long.parseLong(req.body.NumCC) : undefined),
-										 NumCD: ( req.body.NumCD != undefined ? Long.parseLong(req.body.NumCD) : undefined),
-										 Descricao: req.body.Descricao
-								  }
+			UserId: user.UserId,
+			CategoriaId: parseInt(req.body.CategoriaId),
+			Data: new Date(req.body.Data),
+			Valor: parseFloat(req.body.Valor),
+			FormaPagamento: parseInt(req.body.FormaPagamento),
+			Status: (req.body.Status == 'true' ? true : false),
+			NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
+			NumCC: ( req.body.NumCC != undefined ? parseInt(req.body.NumCC) : undefined),
+			NumCD: ( req.body.NumCD != undefined ? parseInt(req.body.NumCD) : undefined),
+			Descricao: req.body.Descricao
+		}
 	}
 
 	//verifica se o insert ocorreu com sucesso!
@@ -1093,8 +1091,8 @@ server.get('/despesaUP', async(req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 
@@ -1106,18 +1104,18 @@ server.post("/despesaUP", async (req, res) => {
 	//Via interface irá entrar e passar o UserId
 	if(despesaData.UserId == undefined){
 		despesaData = {
-										 UserId: user.UserId,
-										 DespesaId:  parseInt(req.body.DespesaId),
-										 CategoriaId: parseInt(req.body.CategoriaId),
-										 Data: new Date(req.body.Data),
-										 Valor: parseFloat(req.body.Valor),
-										 FormaPagamento: parseInt(req.body.FormaPagamento),
-										 Status: (req.body.Status == 'true' ? true : false),
-										 NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
-										 NumCC: ( req.body.NumCC != undefined ? parseInt(req.body.NumCC) : undefined),
-										 NumCD: ( req.body.NumCD != undefined ? parseInt(req.body.NumCD) : undefined),
-										 Descricao: req.body.Descricao
-									}
+			UserId: user.UserId,
+			DespesaId:  parseInt(req.body.DespesaId),
+			CategoriaId: parseInt(req.body.CategoriaId),
+			Data: new Date(req.body.Data),
+			Valor: parseFloat(req.body.Valor),
+			FormaPagamento: parseInt(req.body.FormaPagamento),
+			Status: (req.body.Status == 'true' ? true : false),
+			NumParcelas: ( req.body.NumParcelas != undefined ? parseInt(req.body.NumParcelas) : undefined),
+			NumCC: ( req.body.NumCC != undefined ? parseInt(req.body.NumCC) : undefined),
+			NumCD: ( req.body.NumCD != undefined ? parseInt(req.body.NumCD) : undefined),
+			Descricao: req.body.Descricao
+		}
 	}
 
 	//console.log(despesaData);
@@ -1162,8 +1160,8 @@ server.get("/despesaDEL", async (req, res) => {
 	}
 	else
 	{
-	  console.log("LOGUE NO SISTEMA PRIMEIRO");
-	  res.redirect("/");
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
 	}
 });
 

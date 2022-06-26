@@ -31,7 +31,7 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
 
                            '<div class="col text-end">' +
                            '<select id="NumCC" name="NumCC">';
-          
+
                            var selectCC = document.getElementById("NumCC");
 
                            listaCC.forEach(cartao => {
@@ -94,4 +94,23 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
         console.log('Tipo invalido de Forma de Pagamento ou desconhecido');
   }
 
+}
+
+function confirm(despesaData){
+
+  let id = despesaData.DespesaId;
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = `/despesaDEL?DespesaId=${id}`;
+    }
+  })
 }

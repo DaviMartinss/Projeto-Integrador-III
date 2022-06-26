@@ -14,6 +14,11 @@
       <!-- App CSS -->
       <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
       <script defer src="../scripts/categorias.js"></script>
+      <script src="../scripts/despesas.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
       <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
    </head>
    <body class="app">
@@ -47,7 +52,7 @@
                            <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="@model.user.Avatar" alt="user profile"></a>
                            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                               <li><a class="dropdown-item" href="account">Conta</a></li>
-                              
+
                               <li>
                                  <hr class="dropdown-divider">
                               </li>
@@ -193,7 +198,7 @@
                   <!--//app-menu-->
                </nav>
                <!--//app-nav-->
-               
+
             </div>
             <!--//sidepanel-inner-->
          </div>
@@ -342,10 +347,10 @@
                                              <td class="cell">@despesaItem.Descricao</td>
 
                                              <td class="cell">
-                                                <a class="btn-sm app-btn-secondary" href="/despesaUP?DespesaId=@despesaItem.DespesaId">
+                                                <a class="btn-sm app-btn-secondary" >
                                                 Editar
                                                 </a>
-                                                <a class="btn-sm app-btn-secondary" href="/despesaDEL?DespesaId=@despesaItem.DespesaId">
+                                                <a class="btn-sm app-btn-secondary" onclick="confirm(@despesa)">
                                                 Deletar</a>
                                              </td>
                                           </tr>
@@ -360,7 +365,7 @@
                         <!--//app-card-body-->
                      </div>
                      <!--//app-card-->
-                     
+
                      <!--//app-pagination-->
                   </div>
                   <!--//tab-pane-->
@@ -371,7 +376,7 @@
          </div>
          <!--//app-content-->
          <div class="col-12 col-lg-4">
-          
+
          </div>
          <!--//col-->
          <footer class="app-footer">
