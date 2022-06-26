@@ -18,6 +18,7 @@ class HomeController {
     let totalReceitas =  await this.GetTotalReceitas(user);
 		let totalDespesas =  await this.GetTotalDespesas(user);
     let totalReceitaMes = await receitaController.GetReceitaTotalMes(user);
+    let totalDespesaMes = await despesaController.GetDespesaTotalMes(user);
 
     console.log("receita dos mês: "+totalReceitaMes);
 
@@ -30,7 +31,8 @@ class HomeController {
 								 TotalDespesas: totalDespesas,
 								 Lucro: lucro ,
 								 Divida: divida,
-                 TotalReceitaMes: totalReceitaMes
+                 TotalReceitaMes: totalReceitaMes,
+                 TotalDespesaMes: totalDespesaMes,
 							 }
 
     return home;

@@ -28,6 +28,32 @@ class DespesaController {
     }
   }
 
+  // pega o total de Despesa de um mês
+  async GetDespesaTotalMes(user) {
+
+    try{
+
+      var despesaTotalMes = [];
+
+      despesaTotalMes = await despesaRepository.getDespesaTotalMes(user);
+      
+      
+      if(!!despesaTotalMes.length)
+      {
+        return despesaTotalMes;
+      }
+      else {
+        console.log("NENHUMA DESPESA CADASTRADA!");
+        return undefined;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   //PEGA UMA LISTA DE DESPESAS DE UM DETERMINADO USER
   async GetDespesaList(user) {
 

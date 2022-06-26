@@ -2,6 +2,39 @@ import { database } from "./db.js";
 
 class DespesaRepository {
 
+  //pega as despesas dos mês
+  async getDespesaTotalMes(user) {
+
+    try {
+
+      const db = await database.connect();
+      var res = [];
+      let list = [];
+      if(db != undefined )
+      {
+
+        for(var i = 1; i <= 12; i++){
+          const sql = 'SELECT sum("Valor") FROM "Despesa" WHERE Extract ("Month" From "Data")=$1 and "UserId"=$2;';
+          res[i] = await db.query(sql, [i, user.UserId]);
+          list.push(res[i].rows[0].sum);
+        }
+
+        db.release();
+        return list;
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+
+    } catch (e) {
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   async getDespesaById(despesaId) {
 
     try {

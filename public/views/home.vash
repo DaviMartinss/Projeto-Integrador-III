@@ -483,7 +483,19 @@
                             {
                               label: "Despesas",
                               data: [
-                                5, 10, 5, 14, 20, 100, 6, 14, 8, 12, 15, -10,
+                                @model.home.TotalDespesaMes[0],
+                                    @model.home.TotalDespesaMes[1],
+                                    @model.home.TotalDespesaMes[2],
+                                    @model.home.TotalDespesaMes[3],
+                                    @model.home.TotalDespesaMes[4],
+                                    @model.home.TotalDespesaMes[5],
+                                    @model.home.TotalDespesaMes[6],
+                                    @model.home.TotalDespesaMes[7],
+                                    @model.home.TotalDespesaMes[8],
+                                    @model.home.TotalDespesaMes[9],
+                                    @model.home.TotalDespesaMes[10],
+                                    @model.home.TotalDespesaMes[11],
+                                    @model.home.TotalDespesaMes[12],
                               ],
                               //define a borda da linha
                               borderWidth: 4,
