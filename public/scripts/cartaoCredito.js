@@ -11,13 +11,15 @@ function confirm(cartaoData){
   let numCC = cartaoData.NumCC;
 
   Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Você tem certeza que deseja apagar o Cartão de Crédito ' + numCC +' ?',
+    text: "Você não poderá reverter isso!!",
     icon: 'warning',
     showCancelButton: true,
+    cancelButtonText: 'Cancelar',
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Sim, Apagar!',
+  
   }).then((result) => {
     if (result.isConfirmed) {
       window.location.href = `/deleteCartao?NumCartao=${numCC}&&Type=CC`;
