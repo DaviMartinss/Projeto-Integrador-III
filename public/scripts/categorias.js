@@ -1,10 +1,10 @@
-function confirmar(categoria){
-    console.log("A categoria é "+categoria);
-    var alert = window.confirm("Tem certeza que deseja Apagar " + categoria.Categoria +" da sua lista de Categorias?");
-    if(alert){
-        window.location.href = "http://localhost:3000/categoriaDEL?CategoriaId="+categoria.CategoriaId;
-    }
-}
+// function confirmar(categoria){
+//     console.log("A categoria é "+categoria);
+//     var alert = window.confirm("Tem certeza que deseja Apagar " + categoria.Categoria +" da sua lista de Categorias?");
+//     if(alert){
+//         window.location.href = "http://localhost:3000/categoriaDEL?CategoriaId="+categoria.CategoriaId;
+//     }
+// }
 
 function atualizar(categoriaDATA){
 
@@ -46,4 +46,24 @@ function cadastrar(){
     div.style.display = 'none';
     butaoCadastrar.style.display = 'none';
   }
+}
+
+
+function confirm(categoriaData){
+
+  let id = categoriaData.CategoriaId;
+
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You won't be able to revert this!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = `/categoriaDEL?CategoriaId=${id}`;
+    }
+  })
 }
