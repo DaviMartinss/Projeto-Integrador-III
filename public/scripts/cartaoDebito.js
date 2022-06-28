@@ -1,26 +1,20 @@
-// function confirmar(numCD){
-//     var alert = window.confirm("Tem certeza que deseja Apagar o Cartão de Débito de número "+numCD+ " ?");
-//     if(alert){
-//         window.location.href = "http://localhost:3000/deleteCartao?NumCartao="+numCD+"&Type=CD";
-//     }
-// }
+function confirm(numCD){
 
-
-function confirm(cartaoData){
-
-  let numCD = cartaoData.NumCD;
-
+  //let numCD = cartaoData.NumCD;
+  console.log("chegou: "+numCD);
   Swal.fire({
-    title: 'Are you sure?',
-    text: "You won't be able to revert this!",
+    title: 'Você tem certeza que deseja apagar o Cartão de Débito ' + numCD +' ?',
+    text: "Você não poderá reverter isso!",
     icon: 'warning',
     showCancelButton: true,
+    cancelButtonText: 'Cancelar',
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!'
+    confirmButtonText: 'Sim, Apagar!'
   }).then((result) => {
     if (result.isConfirmed) {
-      window.location.href = `/cartaoDEL?NumCartao=${numCD}&&Type=CD`;
+      window.location.href = `/deleteCartao?NumCartao=${numCD}&&Type=CD`;
+      
     }
   })
 }
