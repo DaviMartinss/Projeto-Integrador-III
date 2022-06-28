@@ -12,7 +12,7 @@ function confirm(cartaoData){
 
   Swal.fire({
     title: 'Você tem certeza que deseja apagar o Cartão de Crédito ' + numCC +' ?',
-    text: "Você não poderá reverter isso!!",
+    text: "Você não poderá reverter isso!",
     icon: 'warning',
     showCancelButton: true,
     cancelButtonText: 'Cancelar',
