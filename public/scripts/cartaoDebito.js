@@ -1,7 +1,5 @@
 function confirm(numCD){
 
-  //let numCD = cartaoData.NumCD;
-  console.log("chegou: "+numCD);
   Swal.fire({
     title: 'Você tem certeza que deseja apagar o Cartão de Débito ' + numCD +' ?',
     text: "Você não poderá reverter isso!",

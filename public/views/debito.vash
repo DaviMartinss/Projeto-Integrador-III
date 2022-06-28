@@ -440,6 +440,7 @@
                       </thead>
                       <tbody>
                         @{ model.listCartaoDebito.forEach( cartaoDebito => {
+
                         <tr>
                           <td class="cell">@cartaoDebito.NumCD</td>
                           <td class="cell">@cartaoDebito.Bandeira</td>
@@ -454,7 +455,7 @@
                               type="button"
                               class="btn-sm app-btn-secondary btn btn-danger"
                               style="background-color: #ffb2ff"
-                              onClick="confirmar(@cartaoDebito.NumCD)"
+                              onClick="confirm(@cartaoDebito.NumCD)"
                             >
                               Deletar
                             </button>
