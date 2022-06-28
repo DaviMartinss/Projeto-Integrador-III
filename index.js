@@ -858,7 +858,7 @@ server.post("/receitaCAD", async (req, res) => {
 	if(receitaData.UserId == undefined){
 		receitaData = {
 			UserId: user.UserId,
-			Data: new Date(req.body.Data),
+			Data: req.body.Data,
 			FormaAlocacao: req.body.FormaAlocacao,
 			CategoriaId: parseInt(req.body.CategoriaId),
 			Valor: parseFloat(req.body.Valor),
@@ -866,17 +866,13 @@ server.post("/receitaCAD", async (req, res) => {
 		}
 	}
 
-	//console.log(receitaData);
+	console.log(req.body.Data);
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertReceita = await receitaController.GenerateReceita(receitaData); //cadastrando receita
 
 	if(insertReceita)
 	{
-		// var listaReceita = await receitaController.GetReceitaList(user);
-		// var listaCategoria = await categoriaController.GetCategoriaList(user);
-		//
-		// res.render("receitas", {listaReceita, listaCategoria});
 
 		res.redirect('/receitas');
 
@@ -923,7 +919,7 @@ server.post("/receitaUP", async (req, res) => {
 		receitaData = {
 			UserId: user.UserId,
 			ReceitaId: parseInt(req.body.ReceitaId),
-			Data: new Date(req.body.Data),
+			Data: req.body.Data,
 			FormaAlocacao: req.body.FormaAlocacao,
 			CategoriaId: parseInt(req.body.CategoriaId),
 			Valor: parseFloat(req.body.Valor),
@@ -1043,7 +1039,7 @@ server.post("/despesaCAD", async (req, res) => {
 		despesaData = {
 			UserId: user.UserId,
 			CategoriaId: parseInt(req.body.CategoriaId),
-			Data: new Date(req.body.Data),
+			Data: req.body.Data,
 			Valor: parseFloat(req.body.Valor),
 			FormaPagamento: parseInt(req.body.FormaPagamento),
 			Status: (req.body.Status == 'true' ? true : false),
@@ -1107,7 +1103,7 @@ server.post("/despesaUP", async (req, res) => {
 			UserId: user.UserId,
 			DespesaId:  parseInt(req.body.DespesaId),
 			CategoriaId: parseInt(req.body.CategoriaId),
-			Data: new Date(req.body.Data),
+			Data: req.body.Data,
 			Valor: parseFloat(req.body.Valor),
 			FormaPagamento: parseInt(req.body.FormaPagamento),
 			Status: (req.body.Status == 'true' ? true : false),

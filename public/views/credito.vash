@@ -457,7 +457,7 @@
 
                         var cartaoData = JSON.stringify(cartao)
 
-                        let data = (cartao.DataFatura.getDate()+1).toString().padStart(2,'0') + "/" +
+                        let data = (cartao.DataFatura.getDate()).toString().padStart(2,'0') + "/" +
                                    (cartao.DataFatura.getMonth()+1).toString().padStart(2,'0') + "/" +
                                    cartao.DataFatura.getFullYear();
 

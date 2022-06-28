@@ -295,7 +295,7 @@
 
                                           var despesa = JSON.stringify(@despesaItem);
 
-                                          let data = (despesaItem.Data.getDate()+1).toString().padStart(2, '0') + "/" +
+                                          let data = (despesaItem.Data.getDate()).toString().padStart(2, '0') + "/" +
                                                      (despesaItem.Data.getMonth()+1).toString().padStart(2, '0') + "/" +
                                                       despesaItem.Data.getFullYear();
 
