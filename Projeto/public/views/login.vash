@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>Pé de meia - Ped1/2</title>
+      <!-- Meta -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+      <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+      <link rel="shortcut icon" href="favicon.ico">
+      <!-- FontAwesome JS-->
+      <script defer src="public/views/assets/plugins/fontawesome/js/all.min.js"></script>
+      <!-- App CSS -->
+      <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+      <!-- ALERTS ESTILIZADOS E BONITOS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" integrity="sha512-c42qTSw/wPZ3/5LBzD+Bw5f7bSF2oxou6wEb+I/lqeaKV5FDIfMvvRp772y4jcJLKuGUOpbJMdg/BTl50fJYAw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.min.css" integrity="sha512-cyIcYOviYhF0bHIhzXWJQ/7xnaBuIIOecYoPZBgJHQKFPo+TOBA+BY1EnTpmM8yKDU4ZdI3UGccNGCEUdfbBqw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.1.9/sweetalert2.all.min.js" integrity="sha512-IZ95TbsPTDl3eT5GwqTJH/14xZ2feLEGJRbII6bRKtE/HC6x3N4cHye7yyikadgAsuiddCY2+6gMntpVHL1gHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <script src="../scripts/login.js"></script>
+
+      <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
+
+   </head>
+   <body class="app app-login p-0">
+      <div class="row g-0 app-auth-wrapper">
+         <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+            <div class="d-flex flex-column align-content-end">
+               <div class="app-auth-body mx-auto">
+                  <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon me-2" src="assets/images/app-logo.svg" alt="logo"></a></div>
+                  <h2 class="auth-heading text-center mb-5">Fazer login no Ped1/2</h2>
+                  <div class="auth-form-container text-start">
+                     <form class="auth-form login-form" method="post">
+                        <div class="email mb-3">
+                           <label class="sr-only" for="signin-email">Email</label>
+                           <input id="signin-email" name="logemail" type="email" class="form-control signin-email" placeholder="Email address" required="required">
+                        </div>
+                        <!--//form-group-->
+                        <div class="password mb-3">
+                           <label class="sr-only" for="signin-password">Password</label>
+                           <input id="signin-password" name="logpass" type="password" class="form-control signin-password" placeholder="Password" required="required">
+                           <div class="extra mt-3 row justify-content-between">
+                              <div class="col-6">
+                                 <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="RememberPassword">
+                                    <label class="form-check-label" for="RememberPassword">
+                                    Lembre de mim
+                                    </label>
+                                 </div>
+                              </div>
+                              <!--//col-6-->
+                              <div class="col-6">
+                                 <div class="forgot-password text-end">
+                                    <a href="reset-password">Recuperar senha?</a>
+                                 </div>
+                              </div>
+                              <!--//col-6-->
+                           </div>
+                           <!--//extra-->
+                        </div>
+                        <!--//form-group-->
+                        <div class="text-center">
+                           <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Login</button>
+                        </div>
+                     </form>
+                     <div class="auth-option text-center pt-5">Novo aqui? <a class="text-link" href="signup" >Cadastre-se</a>.</div>
+                  </div>
+                  <!--//auth-form-container-->
+               </div>
+               <!--//auth-body-->
+               <footer class="app-auth-footer">
+                  <div class="container text-center py-3">
+                     <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+                     <small class="copyright"><i style="color: #fb866a;"></i><a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank"></a></small>
+                  </div>
+               </footer>
+               <!--//app-auth-footer-->
+            </div>
+            <!--//flex-column-->
+         </div>
+         <!--//auth-main-col-->
+         <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+            <div class="auth-background-holder">
+            </div>
+            <div class="auth-background-mask"></div>
+            <div class="auth-background-overlay p-3 p-lg-5">
+               <div class="d-flex flex-column align-content-end h-100">
+                  <div class="h-100"></div>
+                  <!--<div class="overlay-content p-3 p-lg-4 rounded">
+                     <h5 class="mb-3 overlay-title">Explore Portal Admin Template</h5>
+                     <div>Portal is a free Bootstrap 5 admin dashboard template. You can download and view the template license <a href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">here</a>.</div>
+                     </div>-->
+               </div>
+            </div>
+            <!--//auth-background-overlay-->
+         </div>
+         <!--//auth-background-col-->
+      </div>
+      <!--//row-->
+      <!--Exibe mensagem de erro do Login-->
+      @{
+        if(model.erroLogin)
+        {
+        <script>
+           erroLogin();
+        </script>
+        }
+      }
+   </body>
+</html>
