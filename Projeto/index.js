@@ -469,7 +469,7 @@ server.get('/cadastraCategoria', async(req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("cadastraCategoria2", {user});
+		res.render("cadastraCategoria", {user});
 	}
 	else
 	{
@@ -559,21 +559,29 @@ server.get("/categoriaDEL", async (req, res) => {
 	}
 });
 
+
+server.get("/atualizaCategoria", async(req, res) => {
+	if(user != undefined)
+	{	
+		var categoria = await categoriaController.GetCategoriaById(req.query.categoria);
+		res.render("atualizaCategoria", {categoria, user});
+	}
+	else
+	{
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
+	}
+
+});
+
 server.post("/categoriaUP", async (req, res) => {
 
 	var categoriaData = req.body;
-
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
-	if(categoriaData.UserId == undefined){
 		categoriaData = {
 			UserId: user.UserId,
 			Categoria:req.body.Categoria,
-			CategoriaId:req.body.CategoriaId
+			CategoriaId:req.query.categoria
 		}
-	}
-
-	//console.log(req.body);
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCategoria = await categoriaController.UpdateCategoria(categoriaData); //cadastrando categoria
@@ -581,7 +589,6 @@ server.post("/categoriaUP", async (req, res) => {
 	if(insertCategoria)
 	{
 		res.redirect('/categorias');
-		//deve redirecionar para página de categoria
 		console.log("CATEGORIA ATUALIZADA");
 	}
 	else

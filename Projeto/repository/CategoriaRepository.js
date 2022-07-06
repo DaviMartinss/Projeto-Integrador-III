@@ -2,6 +2,33 @@ import { database } from "./db.js";
 
 class CategoriaRepository {
 
+  //retorna a categoria pelo o id
+  async GetCategoriaById(categoriaId) {
+
+    try {
+
+      const db = await database.connect();
+
+      if(db != undefined )
+      {
+        const sql = 'select * from "Categoria" WHERE "CategoriaId"=$1;';
+        const res = await db.query(sql,[categoriaId]);
+        db.release();
+        return res.rows[0];
+      }
+      else
+      {
+        console.log("ERRO NA CONEXÃO COM POSTGREESQL");
+        return undefined;
+      }
+
+    } catch (e) {
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   async getCategoriaList(user) {
 
     try {
@@ -39,9 +66,10 @@ class CategoriaRepository {
       if(db != undefined )
       {
         const sql = 'select * from "Categoria" WHERE "Categoria"=$1;';
-        const res = await db.query(sql,[categoria.Categoria]);
+        const res = await db.query(sql,[categoria]);
         db.release();
-        return res.rows;
+        console.log("res.rows[0]:"+ res.rows[0]);
+        return res.rows[0];
       }
       else
       {

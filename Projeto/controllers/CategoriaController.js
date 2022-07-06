@@ -6,6 +6,53 @@ class CategoriaController {
 
   }
 
+  //retorna uma categoria pelo o id
+  async GetCategoriaById(categoriaId) {
+
+    try{
+
+    	var categoria = await categoriaRepository.GetCategoriaById(categoriaId);
+      
+      if(categoria != undefined)
+      {
+        return categoria; 
+      }
+      else {
+        console.log("NÃO EXISTE ESSA CATEGORIA");
+        return undefined;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
+  
+  //pega a categoria pelo o nome 
+  async getCategoriaByName(categoriaNome) {
+
+    try{
+
+    	var categoria = await categoriaRepository.getCategoriaByName(categoriaNome);
+      
+      if(categoria != undefined)
+      {
+        return categoria; 
+      }
+      else {
+        console.log("NÃO EXISTE ESSA CATEGORIA");
+        return undefined;
+      }
+
+    }catch(e){
+
+      console.log(e);
+      return undefined;
+    }
+  }
+
   //PEGA UMA LISTA DE CATEGORIAS DE UM DETERMINADO USER
   async GetCategoriaList(user) {
 
