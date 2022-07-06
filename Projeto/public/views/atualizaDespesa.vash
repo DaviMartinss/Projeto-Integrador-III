@@ -255,20 +255,74 @@
 
                          <input type="number" name="DespesaId" value="@model.despesa.DespesaId" hidden/>
 
-                         <label>Data</label>
-                         @{
-                           data = model.despesa.Data.getFullYear() + "-" +
-                                 (model.despesa.Data.getMonth()+1).toString().padStart(2, '0') + "-" +
-                                 (model.despesa.Data.getDate()+1).toString().padStart(2, '0');
-                         }
-                         <input type="date" name="Data" value="@data"/> <br><br>
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab fa-cc-visa me-2"></i
+                                 ><strong>Data</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+                           <div class="col text-end">
+                             @{
+                               data = model.despesa.Data.getFullYear() + "-" +
+                                     (model.despesa.Data.getMonth()+1).toString().padStart(2, '0') + "-" +
+                                     (model.despesa.Data.getDate()).toString().padStart(2, '0');
 
-                         <label>Valor</label>
-                         <input type="number" name="Valor" value="@model.despesa.Valor"/> <br><br>
+                               <input
+                                 name="Data"
+                                 type="date"
+                                 value="@data"
+                                 class="form-control"
+                                 id="data"
+                               />
+                             }
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
 
-                         <label>Categoria</label>
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Valor</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
 
-                         <select id="categorias" name="CategoriaId">
+                           <div class="col text-end">
+                             <input
+                               name="Valor"
+                               type="text"
+                               value="@model.despesa.Valor"
+                               id="Valor"
+                               class="form-control"
+                               placeholder="Informe o Valor da despesa"
+                             />
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Categoria</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             <select id="categoriaId" name="CategoriaId">
 
                                @if(model.listaCategoria != undefined)
                                {
@@ -285,135 +339,197 @@
                                  });
                                }
 
-                         </select> <br><br>
-
-                         <label>Status</label>
-                         <select name="Status">
-
-                           @if(model.despesa.Status == true)
-                           {
-                              <option value="true" selected>PAGO</option>
-                           }
-                           else
-                           {
-                               <option value="true">PAGO</option>
-                           }
-
-                           @if(model.despesa.Status == false)
-                           {
-                              <option value="false" selected>NÃO PAGO</option>
-                           }
-                           else
-                           {
-                               <option value="false">NÃO PAGO</option>
-                           }
-
-                         </select> <br><br>
-
-                         @{
-                             var listaCartaoC = "undefined";
-                             var listaCartaoD = "undefined";
-
-                             if(model.listaCC != undefined)
-                             {
-                               listaCartaoC = JSON.stringify(model.listaCC);
-                             }
-
-                             if(model.listaCD != undefined)
-                             {
-                               listaCartaoD = JSON.stringify(model.listaCD);
-                             }
-
-                           <label>Forma de Pagamento</label>
-                           <select id="FormaDePagamento" name="FormaPagamento" onchange="showINPUT(@listaCartaoC, @listaCartaoD)">
-
-                             @if(model.despesa.FormaPagamento == 1)
-                             {
-                               <option value="1" selected>CRÉDITO</option>
-                             }
-                             else
-                             {
-                               <option value="1">CRÉDITO</option>
-                             }
-
-                             @if(model.despesa.FormaPagamento == 2)
-                             {
-                               <option value="2" selected>DÉBITO</option>
-                             }
-                             else
-                             {
-                               <option value="2">DÉBITO</option>
-                             }
-
-                             @if(model.despesa.FormaPagamento == 3)
-                             {
-                               <option value="3" selected>DINHEIRO</option>
-                             }
-                             else
-                             {
-                               <option value="3">DINHEIRO</option>
-                             }
-
-                           </select> <br><br>
-
-                          }
-
-                           <div id="FormaPagamento">
-                             <!-- COMO PRIMEIRO ITEM DO SELECT É CREDITO, ENTAO JA CARREGA LOGO OS CAMPOS  -->
-                             <!-- FICA PARECENDO COMO SE JA TIVESSE SELECIONADO -->
-
-                             @if(model.despesa.NumCC != undefined)
-                             {
-                               <label>Nº do Cartão</label>
-                               <select name="NumCC">
-
-                                 @model.listaCC.forEach(cartao => {
-
-                                   if(cartao.NumCC == model.despesa.NumCC)
-                                   {
-                                     <option value="@cartao.NumCC" selected> @cartao.NumCC </option>
-                                   }
-                                   else
-                                   {
-                                      <option value="@cartao.NumCC"> @cartao.NumCC </option>
-                                   }
-
-                                 });
-
-                               </select> <br><br>
-
-                               <label>Nº Parcelas</label>
-                               <input type="number" name="NumParcelas" value="@model.despesa.NumParcelas"/> <br><br>
-                             }
-                             else if(model.despesa.NumCD != undefined)
-                             {
-                               <label>Nº do Cartão</label>
-                               <select name="NumCD">
-
-                                 @model.listaCC.forEach(cartao => {
-
-                                   if(cartao.NumCD == model.despesa.NumCD)
-                                   {
-                                     <option value="@cartao.NumCD" selected> @cartao.NumCD </option>
-                                   }
-                                   else
-                                   {
-                                      <option value="@cartao.NumCD"> @cartao.NumCD </option>
-                                   }
-
-                                 });
-
-                               </select> <br><br>
-                             }
-                             else
-                             {
-
-                             }
+                             </select>
                            </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
 
-                         <textarea  name="Descricao" rows="5" cols="33">@model.despesa.Descricao</textarea> <br><br>
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Status</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
 
-                         <input type="submit" value="Atualizar"/>
+                           <div class="col text-end">
+                             <select name="Status">
+
+                               @if(model.despesa.Status == true)
+                               {
+                                  <option value="true" selected>PAGO</option>
+                               }
+                               else
+                               {
+                                   <option value="true">PAGO</option>
+                               }
+
+                               @if(model.despesa.Status == false)
+                               {
+                                  <option value="false" selected>NÃO PAGO</option>
+                               }
+                               else
+                               {
+                                   <option value="false">NÃO PAGO</option>
+                               }
+
+                             </select>
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i
+                                 ><strong>Forma de Pagamento</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             @{
+                                 var listaCartaoC = "undefined";
+                                 var listaCartaoD = "undefined";
+
+                                 if(model.listaCC != undefined)
+                                 {
+                                   listaCartaoC = JSON.stringify(model.listaCC);
+                                 }
+
+                                 if(model.listaCD != undefined)
+                                 {
+                                   listaCartaoD = JSON.stringify(model.listaCD);
+                                 }
+
+
+                               <select id="FormaDePagamento" name="FormaPagamento" onchange="showINPUT(@listaCartaoC, @listaCartaoD)">
+
+                                 @if(model.despesa.FormaPagamento == 1)
+                                 {
+                                   <option value="1" selected>CRÉDITO</option>
+                                 }
+                                 else
+                                 {
+                                   <option value="1">CRÉDITO</option>
+                                 }
+
+                                 @if(model.despesa.FormaPagamento == 2)
+                                 {
+                                   <option value="2" selected>DÉBITO</option>
+                                 }
+                                 else
+                                 {
+                                   <option value="2">DÉBITO</option>
+                                 }
+
+                                 @if(model.despesa.FormaPagamento == 3)
+                                 {
+                                   <option value="3" selected>DINHEIRO</option>
+                                 }
+                                 else
+                                 {
+                                   <option value="3">DINHEIRO</option>
+                                 }
+
+                               </select> <br><br>
+
+                              }
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div id="FormaPagamento">
+                           <!-- COMO PRIMEIRO ITEM DO SELECT É CREDITO, ENTAO JA CARREGA LOGO OS CAMPOS  -->
+                           <!-- FICA PARECENDO COMO SE JA TIVESSE SELECIONADO -->
+
+                           @if(model.despesa.NumCC != undefined)
+                           {
+                             <label>Nº do Cartão</label>
+                             <select name="NumCC">
+
+                               @model.listaCC.forEach(cartao => {
+
+                                 if(cartao.NumCC == model.despesa.NumCC)
+                                 {
+                                   <option value="@cartao.NumCC" selected> @cartao.NumCC </option>
+                                 }
+                                 else
+                                 {
+                                    <option value="@cartao.NumCC"> @cartao.NumCC </option>
+                                 }
+
+                               });
+
+                             </select> <br><br>
+
+                             <label>Nº Parcelas</label>
+                             <input type="number" name="NumParcelas" value="@model.despesa.NumParcelas"/> <br><br>
+                           }
+                           else if(model.despesa.NumCD != undefined)
+                           {
+                             <label>Nº do Cartão</label>
+                             <select name="NumCD">
+
+                               @model.listaCC.forEach(cartao => {
+
+                                 if(cartao.NumCD == model.despesa.NumCD)
+                                 {
+                                   <option value="@cartao.NumCD" selected> @cartao.NumCD </option>
+                                 }
+                                 else
+                                 {
+                                    <option value="@cartao.NumCD"> @cartao.NumCD </option>
+                                 }
+
+                               });
+
+                             </select> <br><br>
+                           }
+                           else
+                           {
+
+                           }
+                         </div>
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Descrição</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             <textarea
+                               name="Descricao"
+                               rows="4"
+                               cols="55"
+                               value="@model.despesa.Descricao"
+                               style="display: block"
+                             >@model.despesa.Descricao</textarea>
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <button type="submit" class="btn-sm app-btn-secondary">
+                             Atualizar
+                           </button>
+                         </div>
 
                        </form>
 

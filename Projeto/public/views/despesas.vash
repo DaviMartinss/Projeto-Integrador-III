@@ -347,7 +347,7 @@
                                              <td class="cell">@despesaItem.Descricao</td>
 
                                              <td class="cell">
-                                                <a class="btn-sm app-btn-secondary" >
+                                                <a class="btn-sm app-btn-secondary" href="/despesaUP?DespesaId=@despesaItem.DespesaId">
                                                 Editar
                                                 </a>
                                                 <a class="btn-sm app-btn-secondary" onclick="confirm(@despesa)">

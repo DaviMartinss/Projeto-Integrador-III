@@ -931,6 +931,10 @@ server.post("/receitaUP", async (req, res) => {
 
 	console.log(receitaData);
 
+	console.log("--");
+
+	console.log(req.body);
+
 	//verifica se o update ocorreu com sucesso!
 	var updateReceita = await receitaController.UpdateReceita(receitaData);
 
@@ -1075,6 +1079,8 @@ server.get('/despesaUP', async(req, res) => {
 	{
 		var despesaId = req.query.DespesaId;
 
+		// console.log(despesaId);
+
 		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
 		var despesa = await despesaController.GetDespesaById(despesaId);
@@ -1083,7 +1089,7 @@ server.get('/despesaUP', async(req, res) => {
 
 		var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 
-		//console.log(receita);
+		// console.log(despesa);
 
 		res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD});
 	}
