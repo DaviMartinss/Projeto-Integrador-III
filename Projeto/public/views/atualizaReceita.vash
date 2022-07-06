@@ -363,51 +363,160 @@
                      </div>
                      <!--//app-card-header-->
                      <div class="app-card-body px-4 w-100">
-                        <form action="/receitaUP" method="post">
 
-                          <input type="number" name="ReceitaId" value="@model.receita.ReceitaId" hidden/>
+                       <form action="/receitaUP" method="post">
 
-                           <label>Data:</label>
-                           @{
-                             data = model.receita.Data.getFullYear() + "-" +
-                                   (model.receita.Data.getMonth()+1).toString().padStart(2, '0') + "-" +
-                                   (model.receita.Data.getDate()+1).toString().padStart(2, '0');
-                           }
-                           <input type="date" id="data" name="Data" value="@data" /> <br>
-                           <label>Forma de Locação:</label>
-                           <input type="text" id="FormaLocacao" name="FormaAlocacao" value="@model.receita.FormaAlocacao" /> <br>
-                           <label>Valor:</label>
-                           <input type="number" id="Valor" name="Valor" value="@model.receita.Valor"/> <br>
-                           <label>Se Repete:</label>
-                           @if(model.receita.SeRepete == true)
-                           {
-                           <input type="checkbox" id="Se Repete" name="SeRepete" value="" checked/> <br>
-                           }
-                           else
-                           {
-                           <input type="checkbox" id="Se Repete" name="SeRepete" value=""/> <br>
-                           }
-                           <label>Categoria:</label>
-                           <select id="categorias" name="CategoriaId">
-                              @{
-                              if(model.listaCategoria != undefined)
-                              {
-                              @model.listaCategoria.forEach(categoria => {
-                              if(categoria.CategoriaId == model.receita.CategoriaId)
-                              {
-                              <option value="@categoria.CategoriaId" selected>@categoria.Categoria</option>
-                              }
-                              else{
-                              <option value="@categoria.CategoriaId">@categoria.Categoria</option>
-                              }
-                              });
-                              }
-                              }
-                           </select>
-                           <button type="submit" id="btAtualizar" class="btn app-btn-secondary">
+                         <input type="number" name="ReceitaId" value="@model.receita.ReceitaId" hidden/>
+
+                       <div class="item border-bottom py-3">
+                         <div class="row justify-content-between align-items-center">
+                           <div class="col-auto">
+                             <div class="item-label">
+                               <i class="fab fa-cc-visa me-2"></i
+                                 ><strong>Data</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+                           <div class="col text-end">
+
+                             @{
+                               data = model.receita.Data.getFullYear() + "-" +
+                                     (model.receita.Data.getMonth()+1).toString().padStart(2, '0') + "-" +
+                                     (model.receita.Data.getDate()).toString().padStart(2, '0');
+
+                             <input
+                             name="Data"
+                             type="date"
+                             value="@data"
+                             class="form-control"
+                             id="data"
+                             />
+
+                             }
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Forma de Locação</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             <input
+                             name="FormaAlocacao"
+                             type="text"
+                             value="@model.receita.FormaAlocacao"
+                             id="FormaLocacao"
+                             class="form-control"
+                             placeholder="Forma de Locação"
+                             />
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Valor</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             <input
+                             type="number"
+                             id="Valor"
+                             name="Valor"
+                             value="@model.receita.Valor"
+                             class="form-control"
+                             placeholder="Valor"
+                             />
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Se Repete</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+                           <div class="col text-end">
+
+                             @if(model.receita.SeRepete != false)
+                             {
+                               <input type="checkbox" id="Se Repete" name="SeRepete" checked/> <br>
+                             }
+                             else
+                             {
+                               <input type="checkbox" id="Se Repete" name="SeRepete"/> <br>
+                             }
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <div class="item border-bottom py-3">
+                           <div class="row justify-content-between align-items-center">
+                             <div class="col-auto">
+                               <div class="item-label">
+                                 <i class="fab me-2"></i><strong>Categoria</strong>
+                               </div>
+                             </div>
+                             <!--//col-->
+                           </div>
+                           <!--//row-->
+
+                           <div class="col text-end">
+                             <select id="categorias" name="CategoriaId">
+
+                               @{
+                                 if(model.listaCategoria != undefined)
+                                 {
+                                   @model.listaCategoria.forEach(categoria => {
+
+                                     if(categoria.CategoriaId == model.receita.CategoriaId)
+                                     {
+                                       <option value="@categoria.CategoriaId" selected>@categoria.Categoria</option>
+                                     }
+                                     else
+                                     {
+                                       <option value="@categoria.CategoriaId">@categoria.Categoria</option>
+                                     }
+                                   });
+                                 }
+                               }
+
+                             </select>
+                           </div>
+                           <!--//col-->
+                         </div>
+                         <!--//item-->
+
+                         <button type="submit" class="btn-sm app-btn-secondary">
                            Atualizar
-                           </button>
-                        </form>
+                         </button>
+
+                       </form>
                      </div>
                      <!--//app-card-body-->
                   </div>

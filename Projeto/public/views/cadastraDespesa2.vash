@@ -590,7 +590,7 @@
     <div class="app-wrapper">
       <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
-          <h1 class="app-page-title">Cadastrar Receita</h1>
+          <h1 class="app-page-title">Cadastrar Despesa</h1>
 
           <div class="col-12 col-lg-6">
             <div
@@ -821,7 +821,7 @@
                       <textarea
                         name="Descricao"
                         rows="4"
-                        cols="65"
+                        cols="55"
                         style="display: block"
                         placeholder="Informe a descrição da Despesa..."
                       ></textarea>
