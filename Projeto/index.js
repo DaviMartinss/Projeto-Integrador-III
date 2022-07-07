@@ -122,17 +122,12 @@ server.get('/', (req, res) => {
 //ROTA DE LOGIN DO USUÁRIO
 server.post("/", async (req, res) => {
 
-	//verificar se o usuario é válido
-	console.log("Senha que chega: "+req.body.logpass);
 	var userData = {Email:req.body.logemail, Password: req.body.logpass}
 
 	user = await userController.GetUserByEmailAndSenha(userData);
 
-	//console.log("Senha do usuário: "+userData.Password);
-
 	if(user != undefined)
 	{
-		// var home = await homeController.GetInfosHome(user);
 
 		res.redirect("/home");
 	}
@@ -176,6 +171,7 @@ server.post("/signup",  async(req, res) => {
 
 	if(insertUser)
 	{
+		sendMailBemVindo.run(userData.NickName, userData.Email);
 		res.redirect("/");
 	}
 	else
@@ -288,8 +284,6 @@ server.get("/deleteUser", async (req, res) => {
 //ROTA ATUALIZA SENHA DO USUÁRIO
 server.post("/changePassword", async (req, res) => {
 
-	//verifiacar se as duas senhas informadas pelo o usuário são iguais e válidas
-
 	//Esse if serve para caso for usar JSON
 	if(req.body.UserId != undefined)
 	{
@@ -389,66 +383,6 @@ server.post("/reset-password", async(req, res) => {
 		console.log("Email não foi cadastrado por um usuário no sistema!");
 	}
 });
-
-// !!!!!!!!!!!!!!!!!!!!!  TEST ESSAS FUNCIONALIDADES ATUAIS ANTES DE DELETAR ESSE METODOS ABAIXO
-
-//#region LEGADO USER
-// LEGADO
-// //ROTA DE CADASTRO DO USUÁRIO
-// server.post("/signup",  async(req, res) => {
-//
-// 	var userData = req.body
-//
-// 	//verifica se o insert ocorreu com sucesso!
-// 	var insertUser = await userController.GenerateUser(userData);
-//
-// 	if(insertUser)
-// 	{
-// 		//sendMailBemVindo.run(userData.NickName, userData.Email);
-// 		res.redirect("/");
-// 	}
-// 	else
-// 	{
-// 		res.render("login", { erroLogin: true });
-// 	}
-//
-// });
-
-// LEGADO
-// //ATT INFOS DO USER
-// server.post("/account", async (req, res) => {
-//
-// 		var userData = req.body
-//
-// 		//Assim irá funcionar passando UserId via JSON ou usando a interface
-// 		//Via interface irá entrar e passar o UserId
-// 		if(userData.UserId == undefined){
-// 			userData.UserId = user.UserId
-// 		}
-//
-// 		//verifica se o update ocorreu com sucesso!
-// 		var updateUser = await userController.UpdateUserByInput(userData);
-//
-// 		if(updateUser)
-// 		{
-// 			//console.log(user.UserId);
-// 			//ATT CONSTANTE GLOBAL COM DADOS ATT
-// 			user = await userController.GetUserById(user.UserId);
-//
-// 			res.redirect('/account');
-// 			//deve redirecionar para página de informações do usuário
-// 			//console.log("USUÁRIO ATUALIZADO");
-// 		}
-// 		else
-// 		{
-// 			//deve redirecionar para página de informações do usuário com o alerta ERRO
-// 			//console.log("ERRO NA ATUALIZAÇÃO");
-// 		}
-//
-// });
-
-//#endregion
-
 // ========================== ROTAS CRUD DE CATEGORIA =====================================================================
 
 server.get('/categoria', (req, res) => {
@@ -507,8 +441,6 @@ server.post("/categoriaCAD", async (req, res) => {
 	if(categoriaData.UserId == undefined){
 		categoriaData = {UserId: user.UserId, Categoria:req.body.Categoria}
 	}
-
-	//console.log(req.body);
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
@@ -667,8 +599,6 @@ server.get('/atualizaCartaoC', async (req, res) => {
 	}
 
 });
-
-//#endregion
 
 
 //#region Cartão de Débito
