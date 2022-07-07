@@ -212,8 +212,6 @@ server.post("/accountUP", async (req, res) => {
 
 	var userData = req.body
 
-	//Assim irá funcionar passando UserId via JSON ou usando a interface
-	//Via interface irá entrar e passar o UserId
 	if(userData.UserId == undefined){
 		userData = {
 			UserId:user.UserId,
@@ -231,6 +229,8 @@ server.post("/accountUP", async (req, res) => {
 		updateUser = await userController.updateUserNickNameAndEmail(userData);
 	}
 	else {
+		//atualiza só o nome
+		updateUser = await userController.updateUserNickName(userData);
 		console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
 	}
 

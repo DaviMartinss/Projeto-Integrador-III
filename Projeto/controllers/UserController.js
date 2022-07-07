@@ -93,7 +93,7 @@ class UserController {
 
     try{
 
-      var user = await getUserByEmail(email);
+      var user = await userRepository.getUserByEmail(email);
 
       if(user != undefined)
       {
@@ -198,6 +198,28 @@ class UserController {
         console.log("ERRO ATT USER");
         return false;
       }
+
+    }catch(e){
+
+      console.log(e);
+      return false;
+    }
+  }
+
+  //atualiza apenas o nome do usuário
+  async updateUserNickName(userData) {
+
+    try{
+
+      //verifica se o update ocorreu com sucesso!
+    	var updateUser;
+
+    	updateUser = await userRepository.updateUserNickName(userData);
+
+    	if(updateUser)
+        return true;
+    	else
+        return false;
 
     }catch(e){
 
