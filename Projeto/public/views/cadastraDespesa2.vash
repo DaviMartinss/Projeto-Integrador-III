@@ -737,11 +737,18 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      @{ var listaCartaoC = "undefined"; var listaCartaoD =
-                      "undefined"; @if(model.listaCC != undefined) {
-                      listaCartaoC = JSON.stringify(model.listaCC); }
-                      @if(model.listaCD != undefined) { listaCartaoD =
-                      JSON.stringify(model.listaCD); }
+                      @{
+                        var listaCartaoC = "undefined";
+                        var listaCartaoD = "undefined";
+
+                        @if(model.listaCC != undefined) {
+                          listaCartaoC = JSON.stringify(model.listaCC);
+                        }
+
+                        @if(model.listaCD != undefined) {
+                          listaCartaoD =  JSON.stringify(model.listaCD);
+                        }
+                        
                       <select
                         id="FormaDePagamento"
                         name="FormaPagamento"

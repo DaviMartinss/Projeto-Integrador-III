@@ -71,7 +71,7 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
 
                            var selectCD = document.getElementById("NumCD");
 
-                           listaCC.forEach(cartao => {
+                           listaCD.forEach(cartao => {
 
                               selectCD.innerHTML += '<option value="'+ cartao.NumCD +'"> ' + cartao.NumCD + '</option>'
                            });

@@ -1096,7 +1096,7 @@ server.get('/despesaUP', async(req, res) => {
 
 		var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 
-		// console.log(despesa);
+	 // console.log(listaCD);
 
 		res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD});
 	}
