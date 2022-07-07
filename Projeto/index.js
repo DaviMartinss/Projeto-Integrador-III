@@ -356,7 +356,6 @@ server.post("/reset-password", async(req, res) => {
 
 	if(userExiste != undefined)
 	{
-
 		// gerando senha aleatória
 		var min = Math.ceil(10000000);
 		var max = Math.floor(99999999);
@@ -372,7 +371,7 @@ server.post("/reset-password", async(req, res) => {
 			var Novosdados = {newPassword: novaSenha, userId: userExiste.UserId}
 			userController.UpdatePassword(Novosdados);
 
-			//sendMail.run(novaSenha, req.body.Email);
+			sendMail.run(novaSenha, req.body.Email);
 			res.redirect('/');
 		}else{
 			console.log("Erro ao salvar nova senha");

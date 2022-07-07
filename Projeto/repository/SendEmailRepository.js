@@ -13,6 +13,7 @@ class SendEmailRepository {
         const sql = 'select * from "SendEmail" where "UserId"=$1 order by 1 desc;';
         const values = [userId];
         const SendEmail = await db.query(sql, values);
+        db.release();
         return SendEmail[0];
 
       } else {
@@ -34,13 +35,12 @@ class SendEmailRepository {
       const db = await database.connect();
 
       if (db != undefined) {
-        
-        console.log("Senha criptografada: "+dados.password);
+      
         const sql = 'INSERT INTO "SendEmail" ("Password", "UserId") VALUES ($1, $2);';
         const values = [dados.newPassword, dados.userId];
         
         await db.query(sql, values);
-
+        db.release();
         return true;
 
       } else {
