@@ -283,28 +283,15 @@ server.get("/deleteUser", async (req, res) => {
 
 //ROTA ATUALIZA SENHA DO USUÁRIO
 server.post("/changePassword", async (req, res) => {
-
-	//Esse if serve para caso for usar JSON
-	if(req.body.UserId != undefined)
-	{
-		user = {UserId: req.body.UserId, Password:cipher.encrypt(req.body.Password) };
-	}
-	else
-	{
-		user = {UserId: user.UserId, Password:cipher.encrypt(req.body.Password) };
-	}
-
-	//Caso não tenha o UserId, usar o da variável global
+	
+	user = {userId: user.UserId, newPassword:req.body.Password };
 	var userChangePassword = await userController.UpdatePassword(user);
-
-	//console.log(userChangePassword);
 
 	if(userChangePassword != undefined){
 
-		sendMail.run(userChangePassword.NickName, userChangePassword.Email);
+		sendMail.run(req.body.Password, userChangePassword.Email);
 		res.redirect("/");
 
-		//redefina para a pagina desejada
 	}else{
 		console.log("Falha ao atualizar a senha");
 		//redefina para a pagina desejada

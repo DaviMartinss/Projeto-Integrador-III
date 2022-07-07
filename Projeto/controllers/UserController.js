@@ -285,8 +285,7 @@ class UserController {
     		console.log("Atualizado a senha com sucesso!");
 
     		//pegar os dados do usuário logado pelo o Id
-    		const user = await userRepository.getUserById(dados.UserId);
-
+    		const user = await userRepository.getUserById(dados.userId);
         return user;
 
     	}else{
