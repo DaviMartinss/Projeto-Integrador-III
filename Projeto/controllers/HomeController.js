@@ -21,7 +21,7 @@ class HomeController {
     let totalDespesaMes = await despesaController.GetDespesaTotalMes(user);
     
 		let lucro = (totalReceitas - totalDespesas) > 0 ? (totalReceitas - totalDespesas) : 0 ;
-		let divida = lucro < 0 ? lucro : 0 ;
+		let divida = (totalDespesas > totalReceitas) ? (totalReceitas - totalDespesas) : 0 ;
 
 		//Adicione mais propriedades nesse OBJ caso tenha mais informações para repassar ao HOME
 		var home = {
