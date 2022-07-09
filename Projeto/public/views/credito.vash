@@ -426,13 +426,12 @@
                           <a
                           class="btn-sm app-btn-secondary"
                           href="atualizaCartaoC?CartaoCreditoId=@cartao.CartaoCreditoId"
-                          >Atualizar</a
+                          >Editar</a
                           >
 
                           <button
                           type="button"
-                          class="btn-sm app-btn-secondary btn btn-danger"
-                          style="background-color: #ffb2ff"
+                          class="btn-sm app-btn-secondary"
                           onClick="confirm(@cartaoData)"
                           >
                           Deletar
