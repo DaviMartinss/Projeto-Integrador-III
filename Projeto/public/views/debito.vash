@@ -64,25 +64,7 @@
                 <i class="search-mobile-trigger-icon fas fa-search"></i>
               </div>
               <!--//col-->
-              <div class="app-search-box col">
-                <form class="app-search-form">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    name="search"
-                    class="form-control search-input"
-                  />
-                  <button
-                    type="submit"
-                    class="btn search-btn btn-primary"
-                    value="Search"
-                  >
-                    <i class="fas fa-search"></i>
-                  </button>
-                </form>
-              </div>
-              <!--//app-search-box-->
-
+ 
               <div class="app-utilities col-auto">
                 <div class="app-utility-item app-user-dropdown dropdown">
                   <a
@@ -362,33 +344,7 @@
                 <div
                   class="row g-2 justify-content-start justify-content-md-end align-items-center"
                 >
-                  <div class="col-auto">
-                    <form class="table-search-form row gx-1 align-items-center">
-                      <div class="col-auto">
-                        <input
-                          type="text"
-                          id="search-orders"
-                          name="searchorders"
-                          class="form-control search-orders"
-                          placeholder="Search"
-                        />
-                      </div>
-                      <div class="col-auto">
-                        <button type="submit" class="btn app-btn-secondary">
-                          Pesquisar
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                  <!--//col-->
-                  <div class="col-auto">
-                    <select class="form-select w-auto">
-                      <option selected value="option-1">Todos</option>
-                      <option value="option-2">N° Cartão de Débito</option>
-                      <option value="option-3">Saldo</option>
-                      <option value="option-4">Bandeira</option>
-                    </select>
-                  </div>
+                  
                   <div class="col-auto">
                     <a class="btn app-btn-secondary" href="cadastraCartaoD">
                       Novo Cartão de Débito
