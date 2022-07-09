@@ -314,7 +314,7 @@
                                                 <a class="btn-sm app-btn-secondary" href="/despesaUP?DespesaId=@despesaItem.DespesaId">
                                                 Editar
                                                 </a>
-                                                <a class="btn-sm app-btn-secondary" onclick="confirm(@despesa)">
+                                                <a class="btn-sm app-btn-secondary" onclick="confirmDespesa(@despesa)">
                                                 Deletar</a>
                                              </td>
                                           </tr>
