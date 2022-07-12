@@ -115,7 +115,12 @@ class UserController {
   async GenerateUser(userData) {
 
     try{
-
+      //verifica se as senhas são diferentes
+      if(userData.Password != userData.confirmePassword){
+        console.log("AS senhas são diferentes");
+        return false;
+      }
+        
       userData.Password = cipher.encrypt(userData.Password); //criptografia aes256
 
       //verificar se o email já foi cadastrado

@@ -29,13 +29,19 @@
                            <input id="signup-name" name="NickName" type="text" class="form-control signup-name" placeholder="Nome completo" required="required">
                         </div>
                         <div class="email mb-3">
-                           <label class="sr-only" for="signup-email">Your Email</label>
+                           <label class="sr-only" for="signup-email">Seu Email</label>
                            <input id="signup-email" name="Email" type="email" class="form-control signup-email" placeholder="Email" required="required">
                         </div>
                         <div class="password mb-3">
                            <label class="sr-only" for="signup-password">Password</label>
                            <input id="signup-password" name="Password" type="password" class="form-control signup-password" placeholder="Sua senha" required="required">
                         </div>
+
+                            <div class="password mb-3">
+                           <label class="sr-only" for="signup-password">Password</label>
+                           <input id="signup-password" name="confirmePassword" type="password" class="form-control signup-password" placeholder="Confirme sua senha" required="required">
+                        </div>
+
                         <div class="text-center">
                            <button type="submit" class="btn app-btn-primary w-100 theme-btn mx-auto">Cadastrar</button>
                         </div>
