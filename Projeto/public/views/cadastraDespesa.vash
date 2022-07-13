@@ -388,7 +388,7 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      <select id="categoriaId" name="CategoriaId" required>
+                      <select id="categoriaId" name="CategoriaId" style="width: 200px;">
                         @{ if(model.listaCategoria != undefined) {
                         @model.listaCategoria.forEach(categoria => {
                         <option value="@categoria.CategoriaId">
@@ -525,13 +525,7 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      <textarea
-                        name="Descricao"
-                        rows="4"
-                        cols="55"
-                        style="display: block"
-                        placeholder="Informe a descrição da Despesa..."
-                      ></textarea>
+                      <textarea name="Descricao" rows="4" style="display: block; width: 80% ;" placeholder="Informe a descrição da Despesa" ></textarea>
                     </div>
                     <!--//col-->
                   </div>

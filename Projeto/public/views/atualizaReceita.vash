@@ -230,7 +230,7 @@
                            <div class="row justify-content-between align-items-center">
                              <div class="col-auto">
                                <div class="item-label">
-                                 <i class="fab me-2"></i><strong>Forma de Locação</strong>
+                                 <i class="fab me-2"></i><strong>Forma de Alocação</strong>
                                </div>
                              </div>
                              <!--//col-->
@@ -290,11 +290,11 @@
 
                              @if(model.receita.SeRepete != false)
                              {
-                               <input type="checkbox" id="Se Repete" name="SeRepete" checked/> <br>
+                               <input type="checkbox" id="Se Repete" name="SeRepete" style="min-width: 20px; min-height: 20px;" checked/> <br>
                              }
                              else
                              {
-                               <input type="checkbox" id="Se Repete" name="SeRepete"/> <br>
+                               <input type="checkbox" id="Se Repete" name="SeRepete" style="min-width: 20px; min-height: 20px;"/> <br>
                              }
                            </div>
                            <!--//col-->
@@ -313,7 +313,7 @@
                            <!--//row-->
 
                            <div class="col text-end">
-                             <select id="categorias" name="CategoriaId">
+                             <select id="categorias" name="CategoriaId" style="width: 200px;">
 
                                @{
                                  if(model.listaCategoria != undefined)
@@ -343,6 +343,7 @@
                          </button>
 
                        </form>
+                       &nbsp
                      </div>
                      <!--//app-card-body-->
                   </div>

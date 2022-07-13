@@ -245,11 +245,9 @@
                                              })
 
                                              <td class="cell">
-                                                <a class="btn-sm app-btn-secondary" href="/receitaUP?ReceitaId=@receitalItem.ReceitaId">
-                                                Editar
-                                                </a>
-                                                <a class="btn-sm app-btn-secondary" onClick="confirm(@receita)">
-                                                Deletar</a>
+                                                <a class="btn-sm app-btn-secondary" href="/receitaUP?ReceitaId=@receitalItem.ReceitaId">Editar</a>
+                                                &nbsp
+                                                <a class="btn-sm app-btn-secondary" onClick="confirm(@receita)">Deletar</a>
                                              </td>
                                           </tr>
                                         });
