@@ -411,7 +411,7 @@ server.post("/categoriaCAD", async (req, res) => {
 	}
 
 	//verifica se o insert ocorreu com sucesso!
-	var insertCategoria = false ;//await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
+	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
 
 	if(insertCategoria)
 	{
