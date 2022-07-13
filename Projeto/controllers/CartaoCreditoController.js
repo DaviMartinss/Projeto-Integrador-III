@@ -59,6 +59,10 @@ class CartaoCreditoController {
     async InsertCartao(cartaoCredito) {
 
         try {
+            //verifica se o cartão de crédito já existe
+             var cartaoExiste = await cartaoCreditoController.GetCartaoCreditoByNum(cartaoCredito.cartaoData.NumCartao);
+             if(cartaoExiste != undefined)
+                 return false;
 
             var insertCartaoCredito = await cartaoCreditoRepository.insertCartao(cartaoCredito);
 

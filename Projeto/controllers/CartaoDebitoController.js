@@ -61,6 +61,10 @@ class CartaoDebitoController {
 
         try {
 
+            var cartaoExiste = await cartaoDebitoController.GetCartaoDebitoByNum(cartaoDebito.cartaoData.NumCartao);
+            if(cartaoExiste != undefined)
+                return false;
+                
             var insertCartaoDebito;
 
             insertCartaoDebito = await cartaoDebitoRepository.insertCartao(cartaoDebito);

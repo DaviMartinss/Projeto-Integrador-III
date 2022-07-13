@@ -403,6 +403,9 @@ server.post("/categoriaCAD", async (req, res) => {
 
 
 	var categoriaData = req.body;
+	var categoriaExiste = await categoriaController.getCategoriaByName(categoriaData.Categoria);
+	if(categoriaExiste != undefined)
+		return false;
 
 	//Assim irá funcionar passando UserId via JSON ou usando a interface
 	//Via interface irá entrar e passar o UserId
@@ -496,7 +499,7 @@ server.get("/atualizaCategoria", async(req, res) => {
 });
 
 server.post("/categoriaUP", async (req, res) => {
-
+		
 	var categoriaData = req.body;
 		categoriaData = {
 			UserId: user.UserId,
@@ -504,6 +507,11 @@ server.post("/categoriaUP", async (req, res) => {
 			CategoriaId:req.query.categoria
 		}
 
+			//verifica se a categoria já existe 
+	var categoriaExiste = await categoriaController.getCategoriaByName(categoriaData.Categoria);
+	if(categoriaExiste != undefined)
+		return false;
+		
 	//verifica se o insert ocorreu com sucesso!
 	var insertCategoria = await categoriaController.UpdateCategoria(categoriaData); //cadastrando categoria
 
