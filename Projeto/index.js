@@ -417,13 +417,13 @@ server.post("/categoriaCAD", async (req, res) => {
 	{
 		res.redirect('/categorias');
 		//deve redirecionar para página de categoria
-		console.log("CATEGORIA CADASTRADA");
+		// console.log("CATEGORIA CADASTRADA");
 	}
 	else
 	{
 		res.render("cadastraCategoria", {user, erroTEXT:'Erro no cadastro!'});
 		//deve redirecionar para página de cadastro de categoria com alerta de erro
-		console.log("CATEGORIA NÃO FOI CADASTRADA");
+		// console.log("CATEGORIA NÃO FOI CADASTRADA");
 	}
 });
 
@@ -563,7 +563,7 @@ server.get('/cadastraCartaoC', async(req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("cadastraCartaoC", {user});
+		res.render("cadastraCartaoC", {user, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -609,7 +609,7 @@ server.get("/debitoCadastra", async (req, res) => {
 
 //VIEW PARA CADASTRAR CARTÃO
 server.get('/cadastraCartaoD', async(req, res) => {
-	res.render("cadastraCartaoD", {user});
+	res.render("cadastraCartaoD", {user, erroTEXT:'undefined'});
 });
 
 //VIEW PARA ATUALIZAR CARTÃO
@@ -651,14 +651,29 @@ server.post("/cartao", async (req, res) => {
 
 	var cartaoData = req.body
 	var Insertdados = {UserId: user.UserId, cartaoData, Type: type}
-	var insertCartao = await cartaoController.InsertCartao(Insertdados);
+	var insertCartao = false;//await cartaoController.InsertCartao(Insertdados);
 
-	if(insertCartao && type == 'CC')
+	if(type == 'CC')
 	{
-		res.redirect('/ccredito');
+		if(insertCartao)
+		{
+			res.redirect('/ccredito');
+		}
+		else
+		{
+		  res.render("cadastraCartaoC", {user, erroTEXT:'Erro no cadastro!'});
+		}
 
-	}else if (insertCartao && type == 'CD'){
-		res.redirect('/cdebito');
+	}else if (type == 'CD'){
+
+		if(insertCartao)
+		{
+			res.redirect('/cdebito');
+		}
+		else
+		{
+			res.render("cadastraCartaoD", {user, erroTEXT:'Erro no cadastro!'});
+		}
 	}
 	else
 	{
@@ -766,7 +781,7 @@ server.get('/receitaCAD', async(req, res) => {
 
 		// console.log(listaCategoria);
 
-		res.render("cadastraReceita", {user, listaCategoria});
+		res.render("cadastraReceita", {user, listaCategoria, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -794,7 +809,7 @@ server.post("/receitaCAD", async (req, res) => {
 		}
 	}
 
-	console.log(req.body);
+	// console.log(req.body);
 
 	//verifica se o insert ocorreu com sucesso!
 	var insertReceita = await receitaController.GenerateReceita(receitaData); //cadastrando receita
@@ -804,12 +819,16 @@ server.post("/receitaCAD", async (req, res) => {
 
 		res.redirect('/receitas');
 
-		console.log("RECEITA CADASTRADA");
+		// console.log("RECEITA CADASTRADA");
 	}
 	else
 	{
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
 
-		console.log("RECEITA NÃO FOI CADASTRADA");
+		// console.log(listaCategoria);
+
+		res.render("cadastraReceita", {user, listaCategoria, erroTEXT:'Erro no cadastro!'});
+		// console.log("RECEITA NÃO FOI CADASTRADA");
 	}
 
 });
@@ -948,7 +967,7 @@ server.get('/despesaCAD', async (req, res) => {
 
 		var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
 
-		res.render("cadastraDespesa", { user, listaCategoria, listaCC, listaCD });
+		res.render("cadastraDespesa", { user, listaCategoria, listaCC, listaCD , erroTEXT:'undefined'});
 
 	}
 	else
@@ -989,11 +1008,20 @@ server.post("/despesaCAD", async (req, res) => {
 	{
 		res.redirect('/despesas');
 
-		console.log("DESPESA CADASTRADA");
+		// console.log("DESPESA CADASTRADA");
 	}
 	else
 	{
-		console.log("DESPESA NÃO FOI CADASTRADA");
+
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+		var listaCC = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+		var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+
+		res.render("cadastraDespesa", { user, listaCategoria, listaCC, listaCD , erroTEXT:'Erro no cadastro!'});
+
+		// console.log("DESPESA NÃO FOI CADASTRADA");
 	}
 
 });
