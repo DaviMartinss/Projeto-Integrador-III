@@ -525,21 +525,21 @@ server.post("/categoriaUP", async (req, res) => {
 
 //#region Cartão de Crédito
 
-server.get('/cartaoCredito', async (req, res) => {
-
-	if(user != undefined)
-	{
-		var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
-
-		res.render("credito", { listCartaoCredito, user });
-
-	}
-	else
-	{
-		console.log("LOGUE NO SISTEMA PRIMEIRO");
-		res.redirect("/");
-	}
-});
+// server.get('/cartaoCredito', async (req, res) => {
+//
+// 	if(user != undefined)
+// 	{
+// 		var listCartaoCredito = await cartaoCreditoController.GetCartaoCreditoByUserId(user.UserId);
+//
+// 		res.render("credito", { listCartaoCredito, user });
+//
+// 	}
+// 	else
+// 	{
+// 		console.log("LOGUE NO SISTEMA PRIMEIRO");
+// 		res.redirect("/");
+// 	}
+// });
 
 server.get("/ccredito", async (req, res) => {
 
@@ -592,13 +592,23 @@ server.get('/atualizaCartaoC', async (req, res) => {
 
 //#region Cartão de Débito
 
-server.get('/cartaoDebito', (req, res) => {
-	res.render("cartaoDebito", { erroLogin: false, user });
-});
+// server.get('/cartaoDebito', (req, res) => {
+// 	res.render("cartaoDebito", { erroLogin: false, user });
+// });
 
 server.get("/cdebito", async (req, res) => {
-	var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
-	res.render("debito", {listCartaoDebito, user});
+
+	if(user != undefined)
+	{
+		var listCartaoDebito = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+		res.render("debito", {listCartaoDebito, user});
+	}
+	else
+	{
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
+	}
+
 });
 
 server.get("/debitoCadastra", async (req, res) => {
