@@ -283,7 +283,7 @@ server.get("/deleteUser", async (req, res) => {
 
 //ROTA ATUALIZA SENHA DO USUÁRIO
 server.post("/changePassword", async (req, res) => {
-	
+
 	user = {userId: user.UserId, newPassword:req.body.Password };
 	var userChangePassword = await userController.UpdatePassword(user);
 
@@ -389,25 +389,7 @@ server.get('/cadastraCategoria', async(req, res) => {
 
 	if(user != undefined)
 	{
-		res.render("cadastraCategoria", {user});
-	}
-	else
-	{
-		console.log("LOGUE NO SISTEMA PRIMEIRO");
-		res.redirect("/");
-	}
-
-});
-
-server.get("/categorias", async (req, res) => {
-
-	if(user != undefined)
-	{
-		var listaCategoria = await categoriaController.GetCategoriaList(user);
-
-		// console.log(listaCategoria);
-
-		res.render("categorias", {listaCategoria, user});
+		res.render("cadastraCategoria", {user, erroTEXT: 'undefined'});
 	}
 	else
 	{
@@ -429,7 +411,7 @@ server.post("/categoriaCAD", async (req, res) => {
 	}
 
 	//verifica se o insert ocorreu com sucesso!
-	var insertCategoria = await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
+	var insertCategoria = false ;//await categoriaController.GenerateCategoria(categoriaData); //cadastrando categoria
 
 	if(insertCategoria)
 	{
@@ -439,10 +421,31 @@ server.post("/categoriaCAD", async (req, res) => {
 	}
 	else
 	{
+		res.render("cadastraCategoria", {user, erroTEXT:'Erro no cadastro!'});
 		//deve redirecionar para página de cadastro de categoria com alerta de erro
 		console.log("CATEGORIA NÃO FOI CADASTRADA");
 	}
 });
+
+
+server.get("/categorias", async (req, res) => {
+
+	if(user != undefined)
+	{
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
+
+		// console.log(listaCategoria);
+
+		res.render("categorias", {listaCategoria, user});
+	}
+	else
+	{
+		console.log("LOGUE NO SISTEMA PRIMEIRO");
+		res.redirect("/");
+	}
+
+});
+
 
 server.get("/categoriaDEL", async (req, res) => {
 
@@ -480,7 +483,7 @@ server.get("/categoriaDEL", async (req, res) => {
 
 server.get("/atualizaCategoria", async(req, res) => {
 	if(user != undefined)
-	{	
+	{
 		var categoria = await categoriaController.GetCategoriaById(req.query.categoria);
 		res.render("atualizaCategoria", {categoria, user});
 	}
