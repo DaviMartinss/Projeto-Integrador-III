@@ -30,7 +30,7 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
                            ' </div>' +
 
                            '<div class="col text-end">' +
-                           '<select id="NumCC" name="NumCC">';
+                           '<select id="NumCC" name="NumCC required">';
 
                            var selectCC = document.getElementById("NumCC");
 
@@ -51,7 +51,7 @@ function showINPUT(listaCartaoCC, listaCartaoCD){
                             '</div>' +
                             '</div>' +
                             '<div class="col text-end">' +
-                                '<input name="NumParcelas" type="number" id="NumParcelas" class="form-control" placeholder="Informe o N° de parcela" />'
+                                '<input name="NumParcelas" type="number" id="NumParcelas" class="form-control" placeholder="Informe o N° de parcela" required/>'
                             '</div>' +
                             '</div>';
           }

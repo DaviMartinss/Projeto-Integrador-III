@@ -350,6 +350,7 @@
                   type="date"
                   class="form-control"
                   id="data"
+                  required
                   />
                 </div>
                 <!--//col-->
@@ -374,6 +375,7 @@
                   id="FormaLocacao"
                   class="form-control"
                   placeholder="Forma de Locação"
+                  required
                   />
                 </div>
                 <!--//col-->
@@ -399,6 +401,7 @@
                   value=""
                   class="form-control"
                   placeholder="Valor"
+                  required
                   />
                 </div>
                 <!--//col-->
@@ -438,7 +441,7 @@
                 <!--//row-->
 
                 <div class="col text-end">
-                  <select id="categorias" name="CategoriaId">
+                  <select id="categorias" name="CategoriaId" required>
 
                     @if(model.listaCategoria != undefined)
                     {

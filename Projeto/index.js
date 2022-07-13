@@ -661,7 +661,7 @@ server.post("/cartao", async (req, res) => {
 
 	var cartaoData = req.body
 	var Insertdados = {UserId: user.UserId, cartaoData, Type: type}
-	var insertCartao = false;//await cartaoController.InsertCartao(Insertdados);
+	var insertCartao = await cartaoController.InsertCartao(Insertdados);
 
 	if(type == 'CC')
 	{

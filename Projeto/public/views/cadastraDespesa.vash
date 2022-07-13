@@ -344,6 +344,7 @@
                         type="date"
                         class="form-control"
                         id="data"
+                        required
                       />
                     </div>
                     <!--//col-->
@@ -364,10 +365,11 @@
                     <div class="col text-end">
                       <input
                         name="Valor"
-                        type="text"
+                        type="number"
                         id="Valor"
                         class="form-control"
                         placeholder="Informe o Valor da despesa"
+                        required
                       />
                     </div>
                     <!--//col-->
@@ -386,7 +388,7 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      <select id="categoriaId" name="CategoriaId">
+                      <select id="categoriaId" name="CategoriaId" required>
                         @{ if(model.listaCategoria != undefined) {
                         @model.listaCategoria.forEach(categoria => {
                         <option value="@categoria.CategoriaId">
@@ -411,7 +413,7 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      <select name="Status">
+                      <select name="Status" required>
                         <option value="true">PAGO</option>
                         <option value="false">NÃO PAGO</option>
                       </select>
@@ -449,6 +451,7 @@
                         id="FormaDePagamento"
                         name="FormaPagamento"
                         onchange="showINPUT(@listaCartaoC, @listaCartaoD)"
+                        required
                       >
                         <option value="1">CRÉDITO</option>
                         <option value="2">DÉBITO</option>
@@ -477,7 +480,7 @@
                       <!--//row-->
 
                       <div class="col text-end">
-                        <select name="NumCC">
+                        <select name="NumCC" required>
                           @model.listaCC.forEach(cartao => {
 
                           <option value="@cartao.NumCC">@cartao.NumCC</option>
@@ -503,6 +506,7 @@
                         id="NumParcelas"
                         class="form-control"
                         placeholder="Informe o N° de parcela"
+                        required
                       />
                     </div>
                    </div>

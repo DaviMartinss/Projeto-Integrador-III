@@ -343,9 +343,10 @@
                       <!--<a class="btn-sm app-btn-secondary" href="#">Edit</a>-->
                       <input
                         name="NumCartao"
-                        type="text"
+                        type="number"
                         class="form-control"
                         placeholder="Número do Cartão de Débito"
+                        required
                       />
                     </div>
                     <!--//col-->
@@ -365,9 +366,10 @@
                     <div class="col text-end">
                       <input
                         name="Saldo"
-                        type="text"
+                        type="number"
                         class="form-control"
                         placeholder="Saldo"
+                        required
                       />
                     </div>
                     <!--//col-->
@@ -391,6 +393,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Bandeira"
+                        required
                       />
                     </div>
                     <!--//col-->
