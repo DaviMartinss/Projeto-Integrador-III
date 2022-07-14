@@ -198,7 +198,7 @@ server.get("/account", async (req, res) => {
 
 		userData.PassWord = cipher.decrypt(user.PassWord);
 
-		res.render("account", {userData});
+		res.render("account", {userData, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -231,7 +231,14 @@ server.post("/accountUP", async (req, res) => {
 	else {
 		//atualiza só o nome
 		updateUser = await userController.updateUserNickName(userData);
-		console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
+
+		var userData = await userController.GetUserById(user.UserId);
+
+		userData.PassWord = cipher.decrypt(user.PassWord);
+
+		res.render("account", {userData, erroTEXT:'JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO'});
+
+		// console.log("JÁ EXISTE USUÁRIO COM ESTE EMAIL CADASTRADO");
 	}
 
 	if(updateUser)
@@ -246,6 +253,9 @@ server.post("/accountUP", async (req, res) => {
 	}
 	else
 	{
+		var userData = await userController.GetUserById(user.UserId);
+
+		res.render("account", {userData, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
 		//deve redirecionar para página de informações do usuário com o alerta ERRO
 		//console.log("ERRO NA ATUALIZAÇÃO");
 	}
@@ -488,7 +498,7 @@ server.get("/atualizaCategoria", async(req, res) => {
 	if(user != undefined)
 	{
 		var categoria = await categoriaController.GetCategoriaById(req.query.categoria);
-		res.render("atualizaCategoria", {categoria, user});
+		res.render("atualizaCategoria", {categoria, user, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -522,6 +532,8 @@ server.post("/categoriaUP", async (req, res) => {
 	}
 	else
 	{
+		var categoria = await categoriaController.GetCategoriaById(req.query.categoria);
+		res.render("atualizaCategoria", {categoria, user, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
 		//deve redirecionar para página de cadastro de categoria com alerta de erro
 		console.log("CATEGORIA NÃO FOI ATUALIZADA");
 	}
@@ -580,14 +592,14 @@ server.get('/cadastraCartaoC', async(req, res) => {
 	}
 });
 
-//VIEW PARA CADASTRAR CARTÃO DE CRÉDITO
+//VIEW PARA ATUALIZAR CARTÃO DE CRÉDITO
 server.get('/atualizaCartaoC', async (req, res) => {
 
 	if(user != undefined)
 	{
 		var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(req.query.CartaoCreditoId);
 
-		res.render("atualizaCartaoC", {cartaoCredito, user});
+		res.render("atualizaCartaoC", {cartaoCredito, user, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -633,7 +645,7 @@ server.get('/cadastraCartaoD', async(req, res) => {
 //VIEW PARA ATUALIZAR CARTÃO
 server.get('/atuatizaCartaoD', async(req, res) => {
 	var cartaoDebito = await cartaoDebitoController.GetCartaoDebitoById(req.query.CartaoDebito);
-	res.render("atualizaCartaoD", {cartaoDebito, user});
+	res.render("atualizaCartaoD", {cartaoDebito, user, erroTEXT:'undefined'});
 });
 
 //#endregion
@@ -713,12 +725,28 @@ server.post("/Updatecartao", async(req, res) => {
 
 	var UpdateCartao = await cartaoController.UpdateCartao(cartao);
 
-	if(UpdateCartao && cartao.Type == 'CC')
+	if(cartao.Type == 'CC')
 	{
-		res.redirect('/ccredito');
+		if(UpdateCartao)
+		{
+			res.redirect('/ccredito');
+		}
+		else
+		{
+			var cartaoCredito = await cartaoCreditoController.GetCartaoCreditoById(cartaoId.CartaoId);
+			res.render("atualizaCartaoC", {cartaoCredito, user, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
+		}
+	}else if (cartao.Type == 'CD'){
 
-	}else if (UpdateCartao &&  cartao.Type == 'CD'){
-		res.redirect('/cdebito');
+		if(UpdateCartao)
+		{
+			res.redirect('/cdebito');
+		}
+		else
+		{
+			var cartaoDebito = await cartaoDebitoController.GetCartaoDebitoById(cartaoId.CartaoId);
+			res.render("atualizaCartaoD", {cartaoDebito, user, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
+		}
 	}
 	else
 	{
@@ -864,7 +892,7 @@ server.get('/receitaUP', async(req, res) => {
 
 		//console.log(receita);
 
-		res.render("atualizaReceita", {user, listaCategoria, receita});
+		res.render("atualizaReceita", {user, listaCategoria, receita, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -892,12 +920,6 @@ server.post("/receitaUP", async (req, res) => {
 		}
 	}
 
-	console.log(receitaData);
-
-	console.log("--");
-
-	console.log(req.body);
-
 	//verifica se o update ocorreu com sucesso!
 	var updateReceita = await receitaController.UpdateReceita(receitaData);
 
@@ -909,6 +931,11 @@ server.post("/receitaUP", async (req, res) => {
 	}
 	else
 	{
+		var receitaId = receitaData.ReceitaId;
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
+		var receita = await receitaController.GetReceitaById(receitaId)
+
+		res.render("atualizaReceita", {user, listaCategoria, receita, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
 		//deve redirecionar para página de cadastro de categoria com alerta de erro
 		console.log("RECEITA NÃO FOI ATUALIZADA");
 	}
@@ -1063,7 +1090,7 @@ server.get('/despesaUP', async(req, res) => {
 
 	 // console.log(listaCD);
 
-		res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD});
+		res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD, erroTEXT:'undefined'});
 	}
 	else
 	{
@@ -1101,11 +1128,19 @@ server.post("/despesaUP", async (req, res) => {
 	if(updateDespesa)
 	{
 		res.redirect('/despesas');
-		console.log("DESPESA ATUALIZADA");
+		// console.log("DESPESA ATUALIZADA");
 	}
 	else
 	{
-		console.log("DESPESA NÃO FOI ATUALIZADA");
+		var despesaId = despesaData.DespesaId;
+		var despesa = await despesaController.GetDespesaById(despesaId);
+		var listaCategoria = await categoriaController.GetCategoriaList(user);
+		var listaCD = await cartaoDebitoController.GetCartaoDebitoListByUserId(user.UserId);
+		var listaCC = await cartaoCreditoController.GetCartaoCreditoListByUserId(user.UserId);
+
+		res.render("atualizaDespesa", {user, listaCategoria, despesa, listaCC, listaCD, erroTEXT:'ERRO NA ATUALIZAÇÃO DOS DADOS'});
+
+		// console.log("DESPESA NÃO FOI ATUALIZADA");
 	}
 });
 
