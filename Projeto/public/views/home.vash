@@ -6,11 +6,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Portal - Bootstrap 5 Admin Dashboard Template For Developers"
-    />
-    <meta name="author" content="Xiaoying Riley at 3rd Wave Media" />
+    
     <link rel="shortcut icon" href="favicon.ico" />
     <!-- FontAwesome JS-->
     <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
@@ -299,7 +295,7 @@
             <div class="col-6 col-lg-3">
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
-                  <h4 class="stats-type mb-1">Despesas Total</h4>
+                  <h4 class="stats-type mb-1">Despesas Totais</h4>
                   <div class="stats-figure">R$ @model.home.TotalDespesas</div>
                   
                 </div>
@@ -313,7 +309,7 @@
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
                   <h4 class="stats-type mb-1">Saldo</h4>
-                  <div class="stats-figure">R$ @model.home.Lucro</div>
+                  <div class="stats-figure text-success">R$ @model.home.Lucro</div>
                   <div class="stats-meta"></div>
                 </div>
                 <!--//app-card-body-->
@@ -326,7 +322,7 @@
               <div class="app-card app-card-stat shadow-sm h-100">
                 <div class="app-card-body p-3 p-lg-4">
                   <h4 class="stats-type mb-1">Negativo (Dívida)</h4>
-                  <div class="stats-figure">R$ @model.home.Divida</div>
+                  <div class="stats-figure text-danger">R$ @model.home.Divida</div>
                   <div class="stats-meta"></div>
                 </div>
                 <!--//app-card-body-->

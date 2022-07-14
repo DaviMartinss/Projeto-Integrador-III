@@ -209,7 +209,7 @@
                                        <div >
                                           <label class="form-label" for="formFile">Alterar Imagem</label>
                                           <input name="image" type="file" class="form-control" id="exampleFormControlFile1">
-                                          <button class="btn-sm app-btn-secondary">Atualizar Perfil</button>
+                                          <button class="btn-sm app-btn-secondary">Atualizar Foto</button>
                                        </div>
                                     </form>
                                  </div>
@@ -255,8 +255,10 @@
                            </div>
 
                            <button type="submit" class="btn-sm app-btn-secondary">Atualizar</button>
+                           
 
                          </form>
+                         &nbsp
                         </div>
                         <!--//app-card-body-->
                      </div>

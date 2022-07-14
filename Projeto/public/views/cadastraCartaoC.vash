@@ -103,7 +103,7 @@
             >&times;</a
           >
           <div class="app-branding">
-            <a class="app-logo" href="index.html"
+            <a class="app-logo" href="home"
               ><img
                 class="logo-icon me-2"
                 src="assets/images/app-logo.svg"
@@ -454,7 +454,7 @@
                       <div class="col-auto">
                         <div class="item-label">
                           <i class="fab me-2"></i
-                          ><strong>Juros Adicional</strong>
+                          ><strong>Juros Adicionais por Atraso</strong>
                         </div>
                       </div>
                       <!--//col-->
@@ -462,12 +462,7 @@
                     <!--//row-->
 
                     <div class="col text-end">
-                      <input
-                        name="JurosAdicional"
-                        type="number"
-                        class="form-control"
-                        placeholder="Juros Adicional"
-                        required
+                      <input name="JurosAdicional" type="number" class="form-control" placeholder="0 caso não saiba (Cosulte a operadora)" value="0" required
                       />
                     </div>
                     <!--//col-->
